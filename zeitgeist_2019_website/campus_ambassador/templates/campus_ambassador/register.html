@@ -1,0 +1,42 @@
+{% extends "campus_ambassador/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<header>
+    <div class="container">
+        <div class="colorlib-navbar-brand">
+            <!-- updated href to the homepage of Zeitgeist -->
+            <a class="colorlib-logo" href="{% url 'main_page_home' %}" style="font-size: 20px;">Zeitgeist</a>
+        </div>
+
+        <!-- removed the unnecessary menu bar button and added the register button -->
+
+        <!-- no need of register link on register page -->
+        <!-- <div class="text-right">
+            <a href="{% url 'campus_ambassador_register' %}"
+                style="box-sizing: border-box; color:white; display: inline-block; font-family: 'Poppins', Arial, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 5px; line-height: 37.5px; margin-bottom: 0px; position: relative; text-align: right; text-decoration-style: solid; text-size-adjust: 100%; text-transform: uppercase; transition-delay: 0s; transition-duration: 0.3s; transition-property: all; transition-timing-function: ease;">REGISTER</a>
+        </div> -->
+
+        <!-- <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i>HEY</i></a> -->
+
+    </div>
+</header>
+
+<section class="hero-wrap js-fullheight">
+    <!-- <div class="container-fluid px-0">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            data-scrollax-parent="true">
+            <div class="col-md-12 ftco-animate text-center">
+                <div class="desc">
+                    <span class="subheading">Campus</span>
+                    <h1 style="background-image: url({% static 'campus_ambassador/images/bg_1.jpg' %});">CA</h1>
+                    <span class="subheading-2">Ambassador</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</section>
+
+{% endblock content %}

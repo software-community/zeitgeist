@@ -1,9 +1,33 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <h1>This is Zeitgeist 2019 homepage. This is the main page.</h1>
-    </body>
+
+<head>
+    <title>Zeitgeist</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("{% static 'campus_ambassador/images/coming_soon.png' %}");
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<div class="bg"></div>
+<body>
+    <h1>This is Zeitgeist 2019 homepage. This is the main page.</h1>
+</body>
+
 </html>
