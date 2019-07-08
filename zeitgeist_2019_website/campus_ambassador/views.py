@@ -6,4 +6,4 @@ def home(request):
     return render(request, 'campus_ambassador/index.html')
 
 def register(request):
-    return HttpResponse("Make the registration page")
+    return render(request, 'campus_ambassador/register.html')
