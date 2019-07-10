@@ -16,3 +16,8 @@ def register(request):
         return render(request, 'campus_ambassador/register.html')
     else:
         return HttpResponseRedirect('/accounts/login/')
+
+
+def submit_detail(request):
+    print(request)
+    #save data
