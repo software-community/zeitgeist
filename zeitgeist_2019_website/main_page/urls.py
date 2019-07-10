@@ -14,9 +14,43 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path('', views.home, name = "main_page_home"),
+
+    # path('', views.home, name = "main_page_home"),
+    path('', RedirectView.as_view(pattern_name='campus_ambassador_home', permanent=False), name="main_page_home"),
+
+    # define the login URLs
+    # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
+    path('accounts/', include('allauth.socialaccount.providers.google.urls')),
+
+    # just to define account_email, account_login, account_signup, socialaccount_login, socialaccount_signup
+    # to resolve internal server error issue
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="account_login"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="account_signup"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="socialaccount_login"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="socialaccount_signup"),
+
+    # define the logout URL
+    path('accounts/google/logout/', auth_views.LogoutView.as_view(), name = "google_logout"),
+
+    # just to define account_logout
+    # to resolve internal server error issue
+    path('accounts/google/logout/', auth_views.LogoutView.as_view(), name = "account_logout"),
+
+    # for account change, which logs the user out and then redirects to account_login
+    path('accounts/change_email/', views.change_email, name="account_email"),
+
+    # if somehow django redirects to accounts/logout
+    # due to internal failures
+    path('accounts/logout/', RedirectView.as_view(pattern_name='google_logout', permanent=True), name="go_to_google_logout"),
+
+    # if somehow django redirects to accounts/login
+    # due to internal failures
+    # it might occur when accounts/google/login fails and hence redirects to accounts/login
+    path('accounts/login/', RedirectView.as_view(pattern_name='google_login', permanent=False), name="go_to_google_login"),
 ]

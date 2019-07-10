@@ -3,22 +3,26 @@
 {% load static %}
 
 {% block content %}
+
 <header>
-	<div class="container">
-		<div class="colorlib-navbar-brand">
-			<!-- updated href to the homepage of Zeitgeist -->
-			<a class="colorlib-logo" href="{% url 'main_page_home' %}" style="font-size: 20px;">Zeitgeist</a>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-brand">
+				<a href="{% url 'main_page_home' %}" type="button" class="btn btn-light">Zeitgeist</a>
+			</div>
+			<div class="pull-right">
+				<a href="{% url 'campus_ambassador_register' %}" type="button" class="btn btn-light">Register</a>
+			</div>
 		</div>
-
-		<!-- removed the unnecessary menu bar button and added the register button -->
-
-		<div class="text-right">
-			<a href="{% url 'campus_ambassador_register' %}"
-				style="box-sizing: border-box; color:white; display: inline-block; font-family: 'Poppins', Arial, sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 5px; line-height: 37.5px; margin-bottom: 0px; position: relative; text-align: right; text-decoration-style: solid; text-size-adjust: 100%; text-transform: uppercase; transition-delay: 0s; transition-duration: 0.3s; transition-property: all; transition-timing-function: ease;">REGISTER</a>
+	</nav>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-brand"></div>
+			<div class="pull-right">
+				<p style="color: white">{% if request.user.is_authenticated %}{{ request.user.email }}{% endif %}</p>
+			</div>
 		</div>
-		<!-- <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i>HEY</i></a> -->
-
-	</div>
+	</nav>
 </header>
 
 <section class="hero-wrap js-fullheight">
@@ -51,13 +55,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text p-md-5 p-4 ftco-animate">
-							<div class="icon d-flex align-items-center mb-5">
-								<!-- <div class="img" style="background-image: url(images/person_2.jpg);"></div>
-								<div class="position pl-3">
-									<h4 class="mb-0">Jamie Jonson</h4>
-									<span>fashion.com</span>
-								</div> -->
-							</div>
 							<h2 class="mb-4"><a>About Us</a></h2>
 							<p>Zeitgeist is one of the biggest annual cultural festival of North India: A
 								fiesta
@@ -89,13 +86,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text p-md-5 p-4 ftco-animate">
-							<div class="icon d-flex align-items-center mb-5">
-								<!-- <div class="img" style="background-image: url(images/person_1.jpg);"></div>
-								<div class="position pl-3">
-									<h4 class="mb-0">Jamie Jonson</h4>
-									<span>fashion.com</span>
-								</div> -->
-							</div>
 							<h2 class="mb-4"><a>Why Become Campus Ambassador?</a></h2>
 							<ul>
 								<li style="font-weight: bold;">Leadership Skills :</li>
@@ -125,13 +115,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text p-md-5 p-4 ftco-animate">
-							<!-- <div class="icon d-flex align-items-center mb-5">
-								<div class="img" style="background-image: url(images/person_2.jpg);"></div>
-								<div class="position pl-3">
-									<h4 class="mb-0">Jamie Jonson</h4>
-									<span>fashion.com</span>
-								</div>
-							</div> -->
 							<h2 class="mb-4"><a>Incentives</a></h2>
 							<p>Top 50 CAs will get pro-night passes for free.</p>
 							<p>Top 10 CAs will get a certificate of excellence each, with their ranks
@@ -159,13 +142,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text p-md-5 p-4 ftco-animate">
-							<!-- <div class="icon d-flex align-items-center mb-5">
-								<div class="img" style="background-image: url(images/person_2.jpg);"></div>
-								<div class="position pl-3">
-									<h4 class="mb-0">Jamie Jonson</h4>
-									<span>fashion.com</span>
-								</div>
-							</div> -->
 							<h2 class="mb-4"><a>Responsibilities</a></h2>
 							<ul>
 								<li style="font-weight: bold;">Be a leader :</li>
@@ -197,13 +173,6 @@
 					</div>
 					<div class="col-md-6">
 						<div class="text p-md-5 p-4 ftco-animate">
-							<!-- <div class="icon d-flex align-items-center mb-5">
-								<div class="img" style="background-image: url(images/person_3.jpg);"></div>
-								<div class="position pl-3">
-									<h4 class="mb-0">Jamie Jonson</h4>
-									<span>fashion.com</span>
-								</div>
-							</div> -->
 							<h2 class="mb-4"><a>Frequently Asked Questions</a></h2>
 							<ul>
 								<li style="font-weight: bold;">What is Campus Ambassador?</li>
@@ -235,4 +204,5 @@
 
 	</div>
 </section>
+
 {% endblock content %}
