@@ -154,6 +154,6 @@ SITE_ID = 1
 # LOGIN_URL = '/accounts/google/login/'
 LOGIN_URL = 'google_login'
 
-LOGIN_REDIRECT_URL = 'main_page_home'
+LOGIN_REDIRECT_URL = 'campus_ambassador_register'
 
 LOGOUT_REDIRECT_URL = 'main_page_home'

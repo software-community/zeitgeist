@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import HttpResponse
 from allauth.socialaccount.models import SocialAccount
 
@@ -13,4 +13,6 @@ def register(request):
     if request.user.is_authenticated:
         request.user.email = SocialAccount.objects.get(user=request.user).extra_data.get("email")
         request.user.save()
-    return render(request, 'campus_ambassador/register.html')
+        return render(request, 'campus_ambassador/register.html')
+    else:
+        return HttpResponseRedirect('/accounts/login/')
