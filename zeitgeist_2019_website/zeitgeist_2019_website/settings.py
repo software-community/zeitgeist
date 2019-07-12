@@ -154,6 +154,13 @@ SITE_ID = 1
 # LOGIN_URL = '/accounts/google/login/'
 LOGIN_URL = 'google_login'
 
-LOGIN_REDIRECT_URL = 'campus_ambassador_register'
+LOGIN_REDIRECT_URL = 'main_page_home'
 
 LOGOUT_REDIRECT_URL = 'main_page_home'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "zeitgeist.pr@iitrpr.ac.in"
+EMAIL_HOST_PASSWORD = "letsdoitbetter"

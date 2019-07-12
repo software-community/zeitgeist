@@ -25,5 +25,4 @@ urlpatterns = [
     # which is possible by visiting the url named 'google_login'
     # exact url is /account/google/login/
     path('register/', views.register, name = "campus_ambassador_register"),
-    path('submit-detail/', views.submit_detail, name = "submit_form"),
 ]

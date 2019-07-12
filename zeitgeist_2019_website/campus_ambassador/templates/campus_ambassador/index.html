@@ -18,12 +18,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-brand"></div>
-			<div class="pull-right">
-				<p style="color: white">{% if request.user.is_authenticated %}{{ request.user.email }}
-					<a href="{% url 'google_logout' %}" type="button" class="btn btn-light">Logout</a>
-					{% endif %}
-				</p>
-			</div>
+			<div class="pull-right"></div>
 		</div>
 	</nav>
 </header>

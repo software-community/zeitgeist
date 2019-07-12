@@ -43,7 +43,7 @@ urlpatterns = [
     path('accounts/google/logout/', auth_views.LogoutView.as_view(), name = "account_logout"),
 
     # for account change, which logs the user out and then redirects to account_login
-    path('accounts/change_email/', views.change_email, name="account_email"),
+    path('accounts/change_account/', views.change_account, name="account_email"),
 
     # if somehow django redirects to accounts/logout
     # due to internal failures

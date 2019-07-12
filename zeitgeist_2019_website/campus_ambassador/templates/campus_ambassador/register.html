@@ -11,11 +11,7 @@
                 <a href="{% url 'main_page_home' %}" type="button" class="btn btn-light">Zeitgeist</a>
             </div>
             <div class="pull-right">
-                {% if request.user.is_authenticated %}
                 <a href="{% url 'account_email' %}" type="button" class="btn btn-light">Change Account</a>
-                {% else %}
-                <a href="{% url 'google_login' %}" type="button" class="btn btn-light">Login to Register</a>
-                {% endif %}
             </div>
         </div>
     </nav>
@@ -23,9 +19,9 @@
         <div class="container">
             <div class="navbar-brand"></div>
             <div class="pull-right">
-                <p style="color: white">{% if request.user.is_authenticated %}{{ request.user.email }}
-                        <a href="{% url 'google_logout' %}" type="button" class="btn btn-light">Logout</a>
-                    {% endif %}</p>
+                <p style="color: white;">{{ request.user.email }}
+                    <a href="{% url 'google_logout' %}" type="button" class="btn btn-light" style="margin-left: 0.6em;">Logout</a>
+                </p>
             </div>
         </div>
     </nav>
@@ -33,40 +29,43 @@
 
 <section class="hero-wrap" style="height: auto; padding-bottom: 30px">
     <!-- content goes here -->
-    <div class="container px-0" style="margin-top:180px;">
+    <div class="container px-0 form-group" style="margin-top:190px;">
         <div class="row">
-        <div class="card col-md-8 offset-md-2" style="padding: 3%">
-            <h2 class="text-center">Register</h2>
-            <form action="{% url 'submit_form' %}" method="post">
-                    {% csrf_token %}
-                <div class="form-group">
-                    <label for="exampleInputEmail1">College</label>
-                    <input name="college" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter college" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Mobile No.</label>
-                    <input name="mobile_number" type="number" class="form-control" id="exampleInputPassword1" placeholder="+91xxxxxxxxxx" required>
-                </div>
-                <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Why Interested</label>
-                        <textarea name="why_interested" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Past Experience</label>
-                        <textarea name="past_experience" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                    <label class="form-check-label" for="exampleCheck1">
-                        Accept <a href="#">Accept Campus Ambassador Policy</a>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="card col-md-8 offset-md-2" style="padding: 3%">
+                <style>
+                    input[type=text], select {
+                        width: 100%;
+                        padding: 12px 20px;
+                        margin: 8px 0;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        border-radius: 4px;
+                        box-sizing: border-box;
+                    }
+                    input[type=submit] {
+                        width: 100%;
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 14px 20px;
+                        margin: 8px 0;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                    }
+                    input[type=submit]:hover {
+                        background-color: #45a049;
+                    }
+                </style>
+                <h2 class="text-center">Registration Details</h2>
+                <form method="POST">
+                {% csrf_token %}
+                {{ registration_details_form }}<br>
+                <label for="id_accept_campus_ambassador_policy"><input name="accept_campus_ambassador_policy" id="id_accept_campus_ambassador_policy" required="" type="checkbox"> I have read and accept the <a href="{% static 'campus_ambassador/CA.pdf' %}" target="_blank">Campus Ambassador Policy</a></label>
+                <input type="submit" value="Register">
+                </form>
+            </div>
         </div>
     </div>
-    </div>
-    
 </section>
 
 {% endblock content %}
