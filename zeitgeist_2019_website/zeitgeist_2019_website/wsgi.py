@@ -17,7 +17,7 @@ try:
     shellscript = subprocess.Popen(["zeitgeist_2019/.env.production"])
     shellscript.wait()
 except:
-    print("aplying env variables error!")
+    print("applying env variables error!")
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zeitgeist_2019_website.settings')
 
