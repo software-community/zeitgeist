@@ -1,5 +1,5 @@
 [client]
-database = NAME
-user = USER
-password = PASSWORD
+database = zeitgeist_19_django
+user = zeitgeist_19_django_user
+password = ReturnHere@19
 default-character-set = utf8
