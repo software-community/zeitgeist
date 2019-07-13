@@ -11,13 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-import subprocess
+from dotenv import load_dotenv
 
-try:
-    shellscript = subprocess.Popen(["zeitgeist_2019/.env.production"])
-    shellscript.wait()
-except:
-    print("applying env variables error!")
+load_dotenv('zeitgeist_2019/.env.production')
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zeitgeist_2019_website.settings')
 
