@@ -11,6 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+from dotenv import load_dotenv
+
+load_dotenv('zeitgeist_2019/.env.production')
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zeitgeist_2019_website.settings')
 
 application = get_wsgi_application()
