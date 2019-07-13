@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
 
@@ -142,8 +142,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_FILES = os.getenv('STATIC_FILES')
+STATIC_ROOT = os.path.join(STATIC_FILES, 'static')
 
 AUTHENTICATION_BACKENDS = (
 
