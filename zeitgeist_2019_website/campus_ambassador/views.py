@@ -30,10 +30,13 @@ def register(request):
     request.user.save()
 
     if request.method == "POST":
-        # this also saves the associated user itself !
+        # edit: this is not saving the user itself
+        # but on my windows environment, it wasn't raising integrity error
         registration_details_form = RegistrationDetailsForm(request.POST)
         if registration_details_form.is_valid():
-            registration_details_form.save()
+            new_registration = registration_details_form.save(commit=False)
+            new_registration.user = request.user
+            new_registration.save()
             send_mail(
                 'Successful Registration for Campus Ambassador program for Zeitgeist 2k19',
                 'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nYou are successfully registered for Campus Ambassador program for Zeitgeist 2k19. We are excited for your journey with us.\n\nYour CAMPUS AMBASSADOR CODE is ' + str(request.user.id) + '. Please read the Campus Ambassador Policy here - https://' + request.get_host() + static('campus_ambassador/CA.pdf') + '.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
