@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
+ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
 
 
 # Application definition
