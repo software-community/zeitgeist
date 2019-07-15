@@ -8,10 +8,10 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-brand">
-                <a href="{% url 'main_page_home' %}" type="button" class="btn btn-light">Zeitgeist</a>
+                <a href="{% url 'main_page_home' %}" class="button">Zeitgeist</a>
             </div>
             <div class="pull-right">
-                <a href="{% url 'account_email' %}" type="button" class="btn btn-light">Change Account</a>
+                <a href="{% url 'account_email' %}" class="button" style="font-size: 1.1em">Change Account</a>
             </div>
         </div>
     </nav>
@@ -20,7 +20,7 @@
             <div class="navbar-brand"></div>
             <div class="pull-right">
                 <p style="color: white;">{{ request.user.email }}
-                    <a href="{% url 'google_logout' %}" type="button" class="btn btn-light" style="margin-left: 0.6em;">Logout</a>
+                    <a href="{% url 'google_logout' %}" class="button" style="margin-left: 0.6em; font-size: 1.1em;">Logout</a>
                 </p>
             </div>
         </div>
