@@ -5,39 +5,40 @@
 {% block content %}
 
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-brand">
-                <a href="{% url 'main_page_home' %}" type="button" class="btn btn-light">Zeitgeist</a>
-            </div>
-            <div class="pull-right">
-                    <a href="{% url 'account_email' %}" type="button" class="btn btn-light">Change Account</a>
-            </div>
-        </div>
-    </nav>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-brand"></div>
-            <div class="pull-right">
-                <p style="color: white;">{{ request.user.email }}
-                    <a href="{% url 'google_logout' %}" type="button" class="btn btn-light" style="margin-left: 0.6em;">Logout</a>
-                </p>
-            </div>
-        </div>
-    </nav>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-brand">
+				<a href="{% url 'main_page_home' %}" type="button" class="btn btn-light">Zeitgeist</a>
+			</div>
+			<div class="pull-right">
+				<a href="{% url 'account_email' %}" type="button" class="btn btn-light">Change Account</a>
+			</div>
+		</div>
+	</nav>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-brand"></div>
+			<div class="pull-right">
+				<p style="color: white;">{{ request.user.email }}
+					<a href="{% url 'google_logout' %}" type="button" class="btn btn-light"
+						style="margin-left: 0.6em;">Logout</a>
+				</p>
+			</div>
+		</div>
+	</nav>
 </header>
 
-<section class="hero-wrap js-fullheight">
-    <div class="container-fluid px-0">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
-            data-scrollax-parent="true">
-            <div class="col-md-12 ftco-animate text-center">
-                <div class="desc container">
-                    <h4 style="color: white">You have already registered. If you want to edit your response, please contact <a href="tel:7742522607" style="color: white">7742522607</a></h4>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="hero-wrap" style="height: auto; padding-bottom: 30px">
+	<!-- content goes here -->
+	<div class="container form-group" style="margin-top:190px;">
+		<div class="row">
+			<div class="card col-md-8 offset-md-2"
+				style="padding: 3%; background-color: transparent; border: transparent">
+				<h4 style="color: white">You have already registered. If you want to edit your response, please contact
+					<a href="tel:7742522607" style="color: rgb(237, 255, 253);">7742522607</a></h4>
+			</div>
+		</div>
+	</div>
 </section>
 
 {% endblock content %}
