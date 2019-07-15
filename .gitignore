@@ -1,4 +1,5 @@
 zeitgeist_2019_virtualenv
+.env.production
 .vscode
 *.pyc
 *.pyo
