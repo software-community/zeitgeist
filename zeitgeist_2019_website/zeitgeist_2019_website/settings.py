@@ -143,7 +143,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_FILES = os.getenv('STATIC_FILES')
+STATIC_FILES = "static"
 STATIC_ROOT = os.path.join(STATIC_FILES, 'static')
 
 AUTHENTICATION_BACKENDS = (
