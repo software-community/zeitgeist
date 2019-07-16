@@ -4,3 +4,4 @@ zeitgeist_2019_virtualenv
 .DS_Store
 **/*.pyc
 **/*.pyo
+zeitgeist_2019_website/db.sqlite3
