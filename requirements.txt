@@ -12,7 +12,6 @@ lazy-object-proxy==1.4.1
 mccabe==0.6.1
 oauthlib==3.0.2
 phonenumbers==8.10.14
-pkg-resources==0.0.0
 pylint==2.3.1
 python-dotenv==0.10.3
 python3-openid==3.1.0
