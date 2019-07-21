@@ -1,11 +1,11 @@
 $(document).ready(function(){
-    $(".button a").click(function(){
+    $(".buttona a").click(function(){
         $(".overlay").fadeToggle(200);
-       $(this).toggleClass('btn-open').toggleClass('btn-close');
+       $(this).toggleClass('btn-opena').toggleClass('btn-closea');
     });
 });
 $('.overlay').on('click', function(){
     $(".overlay").fadeToggle(200);
-    $(".button a").toggleClass('btn-open').toggleClass('btn-close');
+    $(".buttona a").toggleClass('btn-opena').toggleClass('btn-closea');
     open = false;
 });

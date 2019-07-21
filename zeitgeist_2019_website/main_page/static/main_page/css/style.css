@@ -1,3 +1,4 @@
+
 body {
 	margin:0;
 	padding:0;
@@ -44,8 +45,8 @@ nav ul li a {
 nav ul li a:hover {
 	color: #34B484;
 }
-/*styling open close button*/
-.button {
+/*styling open close buttona*/
+.buttona {
 	display:inline;
 	position:absolute;
 	right:50px;
@@ -53,10 +54,10 @@ nav ul li a:hover {
 	z-index:999;
 	font-size:30px;
 }
-.button a {
+.buttona a {
 	text-decoration:none;
 }
-.btn-open:after {
+.btn-opena:after {
 	color:#333;
 	content:"\f0c9";
 	font-family:"FontAwesome";
@@ -65,10 +66,10 @@ nav ul li a:hover {
 	-webkit-transition:all .2s linear 0s;
 	-o-transition:all .2s linear 0s;
 }
-.btn-open:hover:after {
+.btn-opena:hover:after {
 	color:#34B484;
 }
-.btn-close:after {
+.btn-closea:after {
 	color:#fff;
 	content:"\f00d";
 	font-family:"FontAwesome";
@@ -77,7 +78,7 @@ nav ul li a:hover {
 	-webkit-transition:all .2s linear 0s;
 	-o-transition:all .2s linear 0s;
 }
-.btn-close:hover:after {
+.btn-closea:hover:after {
 	color: #34B484;
 }
 /*overlay*/
@@ -206,3 +207,78 @@ nav ul li a:hover {
 	color#333;
 	text-align: center;
 }
+/* Footer */
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#footer {
+    background: black;
+}
+#footer h5{
+	padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+	padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+	font-size:30px;
+	margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+	color:#ffffff;
+}
+#footer ul.social li a:hover{
+	color:#eeeeee;
+}
+#footer ul.quick-links li{
+	padding: 3px 0;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+@media (max-width:767px){
+	#footer h5 {
+    padding-left: 0;
+    border-left: transparent;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+}
+/* Footer ends */
