@@ -1,20 +1,92 @@
 {% load static %}
 
 <!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'main_page/css/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>Zeitgeist</title>
+</head>
 
-    <head>
-        <title>Zeitgeist</title>
-        <link rel="stylesheet" href="{% static 'main_page/css/style.css' %}">
-    </head>
+<body>
+	<nav>
+		<ul>
+			<li><a href="#">Events</a></li>
+			<li><a href="#">Competitions</a></li>
+			<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
+			<li><a href="#">Sponsors</a></li>
+			<li><a href="#">About Us</a></li>
+		</ul>
+		<div class="button">
 
-    <body class="bg">
+			<a class="btn-open" href="#"></a>
+		</div>
+	</nav>
+	<div class="overlay">
+		<div class="wrap">
+			<ul class="wrap-nav">
+				<li><a href="#">Events</a>
+					<ul>
+						<li><a href="#">ProNights</a></li>
+						<li><a href="#">Talks</a></li>
+						<li><a href="#">Comedy Shows</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Competitions</a>
+					<ul>
+						<li><a href="https://www.google.hr/">Dance</a></li>
+						<li><a href="#">Fine Arts</a></li>
+						<li><a href="#">Gaming</a></li>
+						<li><a href="#">Music</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Sponsors</a>
+					<ul>
+						<li><a href="#">Title Sponsor</a></li>
+						<li><a href="#">Media Sponsor</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div class="social">
+				<a href="https://www.facebook.com/zeitgeist.iitrpr/">
+					<div class="social-icon">
+						<i class="fa fa-facebook"></i>
+					</div>
+				</a>
+				<a href="https://www.instagram.com/zeitgeist_iitrpr/?hl=en">
+					<div class="social-icon">
+						<i class="fa fa-instagram"></i>
+					</div>
+				</a>
 
-        <!-- mention the blocks here and define them in other files
-        for example you could define {% block content %} {% endblock %} here
-        and define the content block in other files such as index.html -->
+				<a href="#">
+					<div class="social-icon">
+						<i class="fa fa-globe"></i>
+					</div>
+				</a>
 
-    </body>
+				<p>
+					From: SoftCom, Software Community<br>
+					<a href="http://www.iitrpr.ac.in">Indian Institute of Technology, Ropar</a>
+				</p>
+			</div>
+		</div>
+    </div>
+
+    {% block content %} {% endblock %}
+
+	<div class="container">
+		<div class="menu-icon"><span></span></div>
+	</div>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'main_page/js/base.js' %}">
+
+	</script>
+</body>
 
 </html>

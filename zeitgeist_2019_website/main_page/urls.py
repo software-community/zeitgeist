@@ -22,7 +22,7 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
 
     # path('', views.home, name = "main_page_home"),
-    path('', RedirectView.as_view(pattern_name='campus_ambassador_home', permanent=False), name="main_page_home"),
+    path('', views.home, name="main_page_home"),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
