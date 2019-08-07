@@ -23,6 +23,7 @@ urlpatterns = [
 
     # path('', views.home, name = "main_page_home"),
     path('', views.home, name="main_page_home"),
+    path('events/', views.events, name="main_page_events"),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
