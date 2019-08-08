@@ -1,6 +1,9 @@
 from django.contrib import admin
-from campus_ambassador.models import RegistrationDetails
+from .models import RegistrationDetails
 
 # Register your models here.
 
-admin.site.register(RegistrationDetails)
+class RegistrationDetailsAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in RegistrationDetails._meta.get_fields()]
+
+admin.site.register(RegistrationDetails, RegistrationDetailsAdmin)
