@@ -17,4 +17,41 @@ def change_account(request):
     return redirect(reverse('google_login')+'?next='+_next)
 
 def events(request):
-    return render(request, 'main_page/events.html')
+    events=[
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+    ]
+    return render(request, 'main_page/events.html',{'events':events})
