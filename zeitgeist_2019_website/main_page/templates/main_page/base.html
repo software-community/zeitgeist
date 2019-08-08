@@ -1,20 +1,131 @@
 {% load static %}
 
 <!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'main_page/css/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Creepster&display=swap" rel="stylesheet"> 
+	<title>Zeitgeist</title>
+</head>
 
-    <head>
-        <title>Zeitgeist</title>
-        <link rel="stylesheet" href="{% static 'main_page/css/style.css' %}">
-    </head>
+<body>
+	<header>
+	<nav style="background-color:#edb287;">
+		<ul>
+			<li><a href="{% url 'main_page_events' %}">Events</a></li>
+			<li><a href="#">Competitions</a></li>
+			<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
+			<li><a href="#">Sponsors</a></li>
+			<li><a href="#">About Us</a></li>
+		</ul>
+		<div class="buttona">
 
-    <body class="bg">
+			<a class="btn-opena" href="#"></a>
+		</div>
+	</nav>
+	<div class="overlay">
+		<div class="wrap">
+			<ul class="wrap-nav">
+				<li><a href="#">Events</a>
+					<ul>
+						<li><a href="#">ProNights</a></li>
+						<li><a href="#">Talks</a></li>
+						<li><a href="#">Comedy Shows</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Competitions</a>
+					<ul>
+						<li><a href="https://www.google.hr/">Dance</a></li>
+						<li><a href="#">Fine Arts</a></li>
+						<li><a href="#">Gaming</a></li>
+						<li><a href="#">Music</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Sponsors</a>
+					<ul>
+						<li><a href="#">Title Sponsor</a></li>
+						<li><a href="#">Media Sponsor</a></li>
+						<li><a href="#">blabla</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div class="social">
+				<a href="https://www.facebook.com/zeitgeist.iitrpr/">
+					<div class="social-icon">
+						<i class="fa fa-facebook"></i>
+					</div>
+				</a>
+				<a href="https://www.instagram.com/zeitgeist_iitrpr/?hl=en">
+					<div class="social-icon">
+						<i class="fa fa-instagram"></i>
+					</div>
+				</a>
 
-        <!-- mention the blocks here and define them in other files
-        for example you could define {% block content %} {% endblock %} here
-        and define the content block in other files such as index.html -->
+				<a href="http://www.iitrpr.ac.in">
+					<div class="social-icon">
+						<i class="fa fa-globe"></i>
+					</div>
+				</a>
 
-    </body>
+				<p>
+					From: SoftCom, Software Community<br>
+					<a href="http://www.iitrpr.ac.in">Indian Institute of Technology, Ropar</a>
+				</p>
+			</div>
+		</div>
+    </div>
+</header>
+  <main>
+  	{% block content %}{% endblock %}
+  </main>
+	<!-- Footer -->
+	<section id="footer">
+		<div class="container">
+			<div class="row text-center text-xs-center text-sm-left text-md-left">
+				<div class="col-xs-12 col-sm-8 col-md-8">
+					<h5>Have a Question?</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="https://goo.gl/maps/aesiYVwj8tya7BKY8"><i class="fa fa-location-arrow"></i>Indian Institute of Technology, Ropar <br>   140001,Rupnagar,Punjab</a></li><br>
+						<li><a href="tel:7742522607"><i class="fa fa-phone"></i>7742522607</a></li>
+						<li><a href="tel:8264971809"><i class="fa fa-phone"></i>8264971809</a></li>
+						<li><a href="tel:8427012721"><i class="fa fa-phone"></i>8427012721</a></li><br>
+						<li><a href="mailto:zeitgeist.pr@gmail.com"><i class="fa fa-envelope"></i>zeitgeist.pr@iitrpr.ac.in</a></li>
+					</ul>
+				</div>
+	</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="https://www.facebook.com/zeitgeist.iitrpr/"><i class="fa fa-facebook"></i></a></li>
+						<li class="list-inline-item"><a href="https://twitter.com/Zeitgeist_rpr?s=09"><i class="fa fa-twitter"></i></a>
+						</li>
+						<li class="list-inline-item"><a href="https://www.instagram.com/zeitgeist_iitrpr/?hl=en"><i class="fa fa-instagram"></i></a></li>
+
+						<li class="list-inline-item"><a href="mailto:zeitgeist.pr@iitrpr.ac.in" target="_blank"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+				</div>
+				</hr>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+					<p>Zeitgiet is the annual cultural Fest of Indian Institute of Technology Ropar</p>
+				</div>
+				</hr>
+			</div>
+		</div>
+	</section>
+	<!-- ./Footer -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'main_page/js/base.js' %}"></script>
+</body>
 
 </html>

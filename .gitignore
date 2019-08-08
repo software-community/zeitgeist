@@ -1,4 +1,3 @@
-zeitgeist_2019_virtualenv
 zeitgeist_2019_website/db.sqlite3
 .env.production
 .vscode

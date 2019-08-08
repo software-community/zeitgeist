@@ -15,3 +15,43 @@ def change_account(request):
     _next = urlparse(prev_page).path
     logout(request)
     return redirect(reverse('google_login')+'?next='+_next)
+
+def events(request):
+    events=[
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+        {
+            'name':"Event1",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+
+        },
+    ]
+    return render(request, 'main_page/events.html',{'events':events})
