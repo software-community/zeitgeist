@@ -7,14 +7,16 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'main_page/css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Eater&display=swap" rel="stylesheet"> 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Creepster&display=swap" rel="stylesheet"> 
 	<title>Zeitgeist</title>
 </head>
 
 <body>
-	<header>
-	<nav style="background-color:#edb287;">
+	
+	<nav class="navbar fixed-top">
+		<div class='container'>
 		<ul>
 			<li><a href="{% url 'main_page_events' %}">Events</a></li>
 			<li><a href="#">Competitions</a></li>
@@ -26,6 +28,8 @@
 
 			<a class="btn-opena" href="#"></a>
 		</div>
+		</div>
+
 	</nav>
 	<div class="overlay">
 		<div class="wrap">
@@ -80,10 +84,10 @@
 			</div>
 		</div>
     </div>
-</header>
-  <main>
+<main>
+  
   	{% block content %}{% endblock %}
-  </main>
+</main>
 	<!-- Footer -->
 	<section id="footer">
 		<div class="container">

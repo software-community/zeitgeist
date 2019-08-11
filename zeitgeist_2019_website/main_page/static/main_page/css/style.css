@@ -2,9 +2,10 @@
 body {
 	margin:0;
 	padding:0;
-	background:#fff;
-	font-family:'Montserrat',sans-serif;
-	font-size:12px;
+	background:#42403d;
+	font-family:'Eater',cursive;
+	font-size:20px;
+
 }
 ul {
 	margin:0;
@@ -17,12 +18,13 @@ li {
 	margin:0;
 }
 nav {
+	background-color:transparent;
 	text-align:center;
 	width:100%;
-	position:relative;
-	height:auto;
-	overflow:hidden;
+	position: relative;
+	height:55px;
 	background:none;
+	overflow: hidden;
 }
 nav ul {
 	text-align:center;
@@ -43,8 +45,14 @@ nav ul li a {
 	font-size:16px;
 }
 nav ul li a:hover {
-	color: #34B484;
+	color: #d45f1c;
 }
+.navbar{
+	position:absolute;
+	width:100%;
+	z-index: 10;
+}
+
 /*styling open close buttona*/
 .buttona {
 	display:inline;
@@ -67,7 +75,7 @@ nav ul li a:hover {
 	-o-transition:all .2s linear 0s;
 }
 .btn-opena:hover:after {
-	color:#34B484;
+	color:#d45f1c;
 }
 .btn-closea:after {
 	color:#fff;
@@ -79,7 +87,7 @@ nav ul li a:hover {
 	-o-transition:all .2s linear 0s;
 }
 .btn-closea:hover:after {
-	color: #34B484;
+	color: #d45f1c;
 }
 /*overlay*/
 .overlay {
@@ -111,7 +119,7 @@ nav ul li a:hover {
 	position:relative;
 }
 .wrap ul.wrap-nav li a {
-	color:#34B484;
+	color:#d45f1c;
 	display:block;
 	padding:8px 0;
 	text-decoration:none;
@@ -136,7 +144,7 @@ nav ul li a:hover {
 	color:#f0f0f0;
 }
 .wrap ul.wrap-nav ul li a:hover {
-	color:#34B484;
+	color:#d45f1c;
 }
 .social {
 	font-size:25px;
@@ -149,7 +157,7 @@ nav ul li a:hover {
 	font-size:13px;
 }
 .social p a {
-	color:#34B484;
+	color:#d45f1c;
 	text-decoration:none;
 	margin:0;
 	padding:0;
@@ -167,7 +175,7 @@ nav ul li a:hover {
 	-o-transition:all .2s linear 0s;
 }
 .social-icon:hover {
-	background:#34B484;
+	background:#d45f1c;
 	color:#f0f0f0;
 }
 .social-icon i {

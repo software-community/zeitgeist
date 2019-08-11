@@ -21,35 +21,41 @@ def events(request):
         {
             'name':"Event1",
             'shorttext':'If you didn\'t understand it dont worry about it',
+            'code':'event1'
 
         },
         {
-            'name':"Event1",
+            'name':"Event2",
+            'shorttext':'If you didn\'t understand it dont worry about it',
+            'code':'event2'
+
+        },
+        {
+            'name':"Event3",
+            'code':'event3',
             'shorttext':'If you didn\'t understand it dont worry about it',
 
         },
         {
-            'name':"Event1",
+            'name':"Event4",
+            'code':'event4',
             'shorttext':'If you didn\'t understand it dont worry about it',
 
         },
         {
-            'name':"Event1",
+            'name':"Event5",
+            'code':'event5',
             'shorttext':'If you didn\'t understand it dont worry about it',
 
         },
         {
-            'name':"Event1",
+            'name':"Event6",
+            'code':'event6',
             'shorttext':'If you didn\'t understand it dont worry about it',
 
         },
         {
-            'name':"Event1",
-            'shorttext':'If you didn\'t understand it dont worry about it',
-
-        },
-        {
-            'name':"Event1",
+            'name':"Event7",
             'shorttext':'If you didn\'t understand it dont worry about it',
 
         },
