@@ -6,3 +6,8 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
         model = Participant
         fields = ['mobile_number']
         widgets = {'mobile_number' : forms.TextInput()}
+
+class TeamRegistrationDetailsForm(form.ModelForm):
+    class Meta:
+        model = Team
+        fields = ['name', 'captain']

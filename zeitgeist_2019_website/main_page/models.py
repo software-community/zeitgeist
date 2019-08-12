@@ -79,7 +79,9 @@ class Event(models.Model):
 class Participant(models.Model):
 
     participating_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    participant_code = models.CharField(max_length=15, verbose_name='Participant Code')
+    participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
+    # mobile number can be null if the user is not the captain and
+    # has only participated in team events
     mobile_number = PhoneNumberField(verbose_name='Mobile Number', region='IN')
 
     def __str__(self):
@@ -114,10 +116,9 @@ class ParticipantHasParticipated(models.Model):
 class Team(models.Model):
 
     name = models.CharField(max_length=40, null=False, blank=False)
+    team_code = models.CharField(max_length=15, verbose_name='Team Code', unique=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     captain = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    primary_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Primary Mobile Number', region='IN')
-    secondary_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Secondary Mobile Number', region='IN')
 
     def __str__(self):
         return str(self.name) + " - " + str(self.event) + " - " + str(self.captain)
