@@ -5,10 +5,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 
-class SubCategory(models.Model):
-
-    name = models.CharField(max_length=40, null=False, blank=False)
-
+class Category(models.Model):
+    
     CATEGORY_CHOICES = [
         ('Dance', 'Dance'),
         ('Dramatics', 'Dramatics'),
@@ -21,13 +19,23 @@ class SubCategory(models.Model):
         ('Quizzing', 'Quizzing'),
         ('Video Making', 'Video Making'),
     ]
-    category = models.CharField(
+    name = models.CharField(
         max_length=20,
         choices=CATEGORY_CHOICES,
         null=False,
         blank=False,
     )
 
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+class SubCategory(models.Model):
+
+    name = models.CharField(max_length=40, null=False, blank=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
     participation_fees_per_person = models.IntegerField(blank=False)
 
     def __str__(self):

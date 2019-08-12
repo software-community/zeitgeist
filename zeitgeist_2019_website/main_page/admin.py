@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import SubCategory, Event, Participant, ParticipantHasPaid, ParticipantHasParticipated, Team, TeamHasMember
+from .models import *
 
 # Register your models here.
 
@@ -31,7 +31,7 @@ from .models import SubCategory, Event, Participant, ParticipantHasPaid, Partici
 # admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
 # admin.site.register(Team, TeamAdmin)
 # admin.site.register(TeamHasMember, TeamHasMemberAdmin)
-
+admin.site.register(Category)
 admin.site.register(SubCategory)
 admin.site.register(Event)
 admin.site.register(Participant)

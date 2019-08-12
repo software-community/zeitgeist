@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.urls import reverse
 from urllib.parse import urlparse
+from main_page.models import *
 # Create your views here.
 
 def home(request):
@@ -17,47 +18,15 @@ def change_account(request):
     return redirect(reverse('google_login')+'?next='+_next)
 
 def events(request):
-    events=[
-        {
-            'name':"Event1",
-            'shorttext':'If you didn\'t understand it dont worry about it',
-            'code':'event1'
 
-        },
-        {
-            'name':"Event2",
-            'shorttext':'If you didn\'t understand it dont worry about it',
-            'code':'event2'
+    events_data = {}
+    categories = Category.objects.all()
+    for category in categories:
+        events_data[category] = {}
+        subcategories = category.subcategory_set.all()
+        for subcategory in subcategories:
+            events_data[category][subcategory] = subcategory.event_set.all()
 
-        },
-        {
-            'name':"Event3",
-            'code':'event3',
-            'shorttext':'If you didn\'t understand it dont worry about it',
+    print(events_data)
 
-        },
-        {
-            'name':"Event4",
-            'code':'event4',
-            'shorttext':'If you didn\'t understand it dont worry about it',
-
-        },
-        {
-            'name':"Event5",
-            'code':'event5',
-            'shorttext':'If you didn\'t understand it dont worry about it',
-
-        },
-        {
-            'name':"Event6",
-            'code':'event6',
-            'shorttext':'If you didn\'t understand it dont worry about it',
-
-        },
-        {
-            'name':"Event7",
-            'shorttext':'If you didn\'t understand it dont worry about it',
-
-        },
-    ]
-    return render(request, 'main_page/events.html',{'events':events})
+    return render(request, 'main_page/events.html', {'event_data' : events_data})

@@ -10,12 +10,12 @@
     <h1 class="display-4">ZeitGeist 2019</h1>
     <p class="lead">A Gothic Poltergeist</p>
     <hr class="my-4">
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    
+   
   </div>
   
 </div>
+
 <!-- <div class="container">
 <div class="row ">
     {% for event in events %}
@@ -33,78 +33,75 @@
     
   </div>
 </div> -->
+<ul>
+<!-- {% for category,subcats in event_data.items %}
+  <li><h1>{{ category.name }}</h1></li>
+  <ul>
+  {% for subcat,events in subcats.items %}
+      <li><h3>{{ subcat.name }}</h3></li>
+      <ul>
+        {% for event in events %}
+        <li>{{ event.name }}</li>
+        {% endfor %}
+      </ul>
+  {% endfor %}
+  </ul>
+{% endfor %}
+</ul> -->
 
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Launch demo modal
-</button>
-
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <div class="container" >
-  <p style="text-align: center;font-size:xx-large">Dance</p>
+  {% for category,subcats in event_data.items %}
+  <p style="text-align: center;font-size:xx-large">{{ category.name }}</p>
   <div class="row">
       <div class="col-4">
         <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action active" id="list-CAT1-list" data-toggle="list" href="#list-CAT1" role="tab" aria-controls="CAT1">CAT1</a>
-          <a class="list-group-item list-group-item-action" id="list-CAT2-list" data-toggle="list" href="#list-CAT2" role="tab" aria-controls="CAT2">CAT2</a>
+          {% for subcat,events in subcats.items %}
+          <a class="list-group-item list-group-item-action {% if subcat.name == '400' or subcat.name == '300' %}active{% endif %}" id="list-{{ subcat.name }}-list" data-toggle="list" href="#list-{{ subcat.name }}" role="tab" aria-controls="{{ subcat.name }}">{{ subcat.name }}</a>
+          
+          {% endfor %}
+          
 
         </div>
       </div>
       <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="list-CAT1" role="tabpanel" aria-labelledby="list-CAT1-list">
+          {% for subcat,events in subcats.items %}
+          <div class="tab-pane fade {% if subcat.name == '400' or subcat.name == '300' %}show active{% endif %}" id="list-{{ subcat.name }}" role="tabpanel" aria-labelledby="list-{{ subcat.name }}-list">
               <div class="list-group">
-
-                  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModalLong">Dapibus ac facilisis in</a>
-                    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-                  </div>
-                  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  {% for event in events %}
+                  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name }}">{{ event.name }}</a>
+                  {% endfor %}
+              </div>
+              {% for event in events %}
+                  <div class="modal fade" id="{{ event.name }}" tabindex="-1" role="dialog" aria-labelledby="{{ event.name }}Title" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 class="modal-title" id="{{ event.name }}Title">{{ event.name }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <img src="{% static 'main_page/images/zeitgeist.jpg' %}" alt="">
+                            <p>{{ event.description }}</p>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                            
                           </div>
                         </div>
                       </div>
                     </div>
-
+              {% endfor %}
           </div>
-          <div class="tab-pane fade" id="list-CAT2" role="tabpanel" aria-labelledby="list-CAT2-list">...</div>
-
+         
+          {% endfor %}
         </div>
       </div>
     </div>
+    <br><br>
+    {% endfor %}
 </div>
 {% endblock content %}
