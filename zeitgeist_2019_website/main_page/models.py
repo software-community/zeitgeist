@@ -67,6 +67,9 @@ class Event(models.Model):
     third_cash_prize = models.IntegerField(blank=False)
     minimum_team_size = models.IntegerField(blank=False)
     maximum_team_size = models.IntegerField(blank=False)
+    start_date_time = models.DateTimeField(blank=False)
+    end_date_time = models.DateTimeField(blank=False)
+    link_to_rulebook = models.URLField(max_length=400, verbose_name='Link to Rulebook', blank=False)
     description = models.TextField(blank=False)
 
     def __str__(self):
@@ -75,7 +78,8 @@ class Event(models.Model):
 
 class Participant(models.Model):
 
-    participating_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    participating_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    participant_code = models.CharField(max_length=15, verbose_name='Participant Code')
     mobile_number = PhoneNumberField(verbose_name='Mobile Number', region='IN')
 
     def __str__(self):

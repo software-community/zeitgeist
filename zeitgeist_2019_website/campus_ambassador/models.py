@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class RegistrationDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    campus_ambassador_code = models.CharField(max_length=15, verbose_name='CA code')
+    campus_ambassador_code = models.CharField(max_length=15, verbose_name='CA Code')
     college = models.CharField(max_length=200, verbose_name='College Name')
     # pip install django-phonenumber-field
     # pip install phonenumbers (or) pip install phonenumberslite

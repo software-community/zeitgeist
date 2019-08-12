@@ -34,11 +34,11 @@
   </div>
 </div> -->
 <ul>
-<!-- {% for category,subcats in event_data.items %}
+<!-- {% for category,subcategories in events_data.items %}
   <li><h1>{{ category.name }}</h1></li>
   <ul>
-  {% for subcat,events in subcats.items %}
-      <li><h3>{{ subcat.name }}</h3></li>
+  {% for subcategory,events in subcategories.items %}
+      <li><h3>{{ subcategory.name }}</h3></li>
       <ul>
         {% for event in events %}
         <li>{{ event.name }}</li>
@@ -51,13 +51,13 @@
 
 
 <div class="container" >
-  {% for category,subcats in event_data.items %}
+  {% for category,subcategories in events_data.items %}
   <p style="text-align: center;font-size:xx-large">{{ category.name }}</p>
   <div class="row">
       <div class="col-4">
         <div class="list-group" id="list-tab" role="tablist">
-          {% for subcat,events in subcats.items %}
-          <a class="list-group-item list-group-item-action {% if subcat.name == '400' or subcat.name == '300' %}active{% endif %}" id="list-{{ subcat.name }}-list" data-toggle="list" href="#list-{{ subcat.name }}" role="tab" aria-controls="{{ subcat.name }}">{{ subcat.name }}</a>
+          {% for subcategory,events in subcategories.items %}
+          <a class="list-group-item list-group-item-action {% if subcategory.name == '400' or subcategory.name == '300' %}active{% endif %}" id="list-{{ subcategory.name }}-list" data-toggle="list" href="#list-{{ subcategory.name }}" role="tab" aria-controls="{{ subcategory.name }}">{{ subcategory.name }}</a>
           
           {% endfor %}
           
@@ -66,8 +66,8 @@
       </div>
       <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
-          {% for subcat,events in subcats.items %}
-          <div class="tab-pane fade {% if subcat.name == '400' or subcat.name == '300' %}show active{% endif %}" id="list-{{ subcat.name }}" role="tabpanel" aria-labelledby="list-{{ subcat.name }}-list">
+          {% for subcategory,events in subcategories.items %}
+          <div class="tab-pane fade {% if subcategory.name == '400' or subcategory.name == '300' %}show active{% endif %}" id="list-{{ subcategory.name }}" role="tabpanel" aria-labelledby="list-{{ subcategory.name }}-list">
               <div class="list-group">
                   {% for event in events %}
                   <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name }}">{{ event.name }}</a>

@@ -19,10 +19,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.home, name = "campus_ambassador_home"),
+    path('', views.campus_ambassador_home, name = "campus_ambassador_home"),
     # remember to give the option to either 1.(change the account)
     # or 2.(login) using proper decoraters in campus_ambassador base html
     # which is possible by visiting the url named 'google_login'
     # exact url is /account/google/login/
-    path('register/', views.register, name = "campus_ambassador_register"),
+    path('register/', views.campus_ambassador_register, name = "campus_ambassador_register"),
 ]

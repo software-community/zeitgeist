@@ -21,9 +21,10 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
 
-    # path('', views.home, name = "main_page_home"),
-    path('', views.home, name="main_page_home"),
-    path('events/', views.events, name="main_page_events"),
+    path('', views.main_page_home, name="main_page_home"),
+    path('main_page_events/', views.main_page_events, name="main_page_events"),
+    # path('register_as_participant', views.main_page_register_as_participant, name="main_page_register_as_participant")
+    # path('register_for_some_event_regex', views.main_page_register_for_event, name="main_page_register_for_event")
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
