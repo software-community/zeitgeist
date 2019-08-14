@@ -70,31 +70,9 @@
           <div class="tab-pane fade " id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tabpanel" aria-labelledby="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list">
               <div class="list-group">
                   {% for event in events %}
-                  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">{{ event.name }}</a>
+                    <a href="{% url 'main_page_events' %}{{event.id}}" class="list-group-item list-group-item-action">{{ event.name }}</a>
                   {% endfor %}
               </div>
-              {% for event in events %}
-                  <div class="modal fade" id="{{ event.name|cut:' ' }}" tabindex="-1" role="dialog" aria-labelledby="{{ event.name|cut:' ' }}Title" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="{{ event.name|cut:' ' }}Title">{{ event.name }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <img src="{% static 'main_page/images/zeitgeist.jpg' %}" alt="">
-                            <p>{{ event.description }}</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              {% endfor %}
           </div>
          
           {% endfor %}
