@@ -68,9 +68,9 @@
 	});
 
 	// Parallax Background
-	$.stellar({
-		responsive: true
-	});
+	// $.stellar({
+	// 	responsive: true
+	// });
 
 	// CountTo
 	$('.counter').each(function() {
