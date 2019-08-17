@@ -3,21 +3,18 @@
 {% load static %}
 
 {% block content %}
-<div class='container-fluid px-0'>
+<div id="home">
+  <!-- background image -->
+  <div class="section-bg" style="background-image:url({% static 'main_page/img/events.jpg' %})" data-stellar-background-ratio="0.5"></div>
+  <!-- /background image -->
 
-
-  <div class="jumbotron">
-    <h1 class="display-4">ZeitGeist 2019</h1>
-    <p class="lead">A Gothic Poltergeist</p>
-    <hr class="my-4">
-    
-   
+  <!-- home wrapper -->
+  <div class="home-wrapper">
   </div>
-  
+  <!-- /home wrapper -->
 </div>
 
-
-
+<!-- 
 <div class="container" >
   {% for category,subcategories in events_data.items %}
   <p style="text-align: center;font-size:xx-large">{{ category.name }}</p>
@@ -37,10 +34,10 @@
           {% for subcategory,events in subcategories.items %}
           <div class="tab-pane fade " id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tabpanel" aria-labelledby="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list">
               <div class="list-group">
-                  {% for event in events %}
+                  {% for event in events %} -->
                     <!-- <a href="{% url 'main_page_events' %}{{event.id}}" class="list-group-item list-group-item-action">{{ event.name }}</a> -->
 
-                  <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">{{ event.name }}</a>
+                  <!-- <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">{{ event.name }}</a>
                   {% endfor %}
               </div>
               {% for event in events %}
@@ -73,5 +70,118 @@
     </div>
     <br><br>
     {% endfor %}
+</div> -->
+<div id="Events" class="section">
+  <!-- container -->
+  <div class="container">
+      <!-- row -->
+      {% for category,subcategories in events_data.items %}
+      
+          <!-- section title -->
+          <div class="section-title">
+              <h3 class="title"><span style="color: #dd0a37;">{{ category.name }}</span></h3>
+          </div>
+          <!-- section title -->
+          {% for subcategory,events in subcategories.items %}
+          <!-- member -->
+          <div class="jumbotron">
+            
+          <h2 class="title">{{ subcategory.name }}</h2>
+          
+          <!-- /member -->
+
+          <!-- member -->
+          
+          <!-- /member -->
+
+          <!-- member -->
+          {% for event in events %}
+          <div class="row">
+          <div class="col-md-4 col-xs-6">
+              <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">
+                  <div class="member-img">
+                      <img src="{% static 'main_page/img/member03.jpg' %}" alt="">
+                  </div>
+                  <div class="member-body">
+                      <div class="member-social">
+                          <a href="#"><i class="fa fa-facebook"></i></a>
+                          <a href="#"><i class="fa fa-twitter"></i></a>
+                          <a href="#"><i class="fa fa-instagram"></i></a>
+                          <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                      </div>
+                      <div class="member-content">
+                          <h2>John Doe</h2>
+                          <span>Manager, CEO</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </div>
+          {% endfor %}
+          </div>
+          <!-- /member -->
+          {% for event in events %}
+          <!-- member modal -->
+          <div id="{{ event.name|cut:' ' }}" class="member-modal modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <button type="button" class="member-modal-close" data-dismiss="modal"></button>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-5">
+                                  <div class="member-modal-img">
+                                      <img src="{% static 'main_page/img/member-info.jpg' %}" alt="">
+                                  </div>
+                              </div>
+                              <div class="col-md-7">
+                                  <div class="member-modal-content">
+                                      <h2 class="member-name">John Doe</h2>
+                                      <span class="member-job">- Manager, CEO</span>
+
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                                      <div class="member-website">
+                                          <h4>Website</h4>
+                                          <a href="#">www.johndoe.com</a>
+                                      </div>
+
+                                      <div class="member-social">
+                                          <h4>Social Profile</h4>
+                                          <a href="#"><i class="fa fa-facebook"></i></a>
+                                          <a href="#"><i class="fa fa-twitter"></i></a>
+                                          <a href="#"><i class="fa fa-instagram"></i></a>
+                                          <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                                      </div>
+
+                                      <div class="member-events">
+                                          <h4>Sessions</h4>
+                                          <div class="member-event">
+                                              <span><strong>Day 1 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
+                                              <p>His id altera fabellas facilisis. Has eros assueverit cu</p>
+                                          </div>
+
+                                          <div class="member-event">
+                                              <span><strong>Day 2 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
+                                              <p>At mucius deserunt delicatissimi eam, labitur detraxit ut sit</p>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+       
+       {% endfor %}
+          <!-- /member modal -->
+      
+      <!-- /row -->
+      {% endfor %}
+  </div>
+  <!-- /container -->
 </div>
 {% endblock content %}
