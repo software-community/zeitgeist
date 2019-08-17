@@ -14,5 +14,4 @@ def payment_request(amount, purpose, email):
         redirect_url="http://www.example.com/handle_redirect.py",
         webhook="http://www.example.com/handle_redirect.py"
         )
-    print(response)
-    return response['payment_request']['longurl'], response['payment_request']['id']
+    return response

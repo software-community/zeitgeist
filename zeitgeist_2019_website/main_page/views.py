@@ -8,20 +8,25 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
+from django.http import HttpResponseServerError
 # Create your views here.
 
 from .methods import payment_request
+
 
 def main_page_home(request):
     return render(request, 'main_page/index.html')
 
 # if some other page redirects us to change_account, then 404 will happen
 # but why will some other page redirect to here
+
+
 def change_account(request):
     prev_page = request.META.get('HTTP_REFERER', reverse('main_page_home'))
     _next = urlparse(prev_page).path
     logout(request)
     return redirect(reverse('google_login')+'?next='+_next)
+
 
 def main_page_events(request):
 
@@ -35,11 +40,13 @@ def main_page_events(request):
 
     print(events_data)
 
-    return render(request, 'main_page/events.html', {'events_data' : events_data})
+    return render(request, 'main_page/events.html', {'events_data': events_data})
+
 
 def event_view(request, event_id):
-    event = Event.objects.get(id = event_id)
-    return render(request, 'main_page/event_view.html', {'event' : event})
+    event = Event.objects.get(id=event_id)
+    return render(request, 'main_page/event_view.html', {'event': event})
+
 
 @login_required
 def register_as_participant(request):
@@ -55,21 +62,26 @@ def register_as_participant(request):
 
     # have a look at Social accounts Field in django admin
     # you will get it
-    request.user.email = SocialAccount.objects.get(user=request.user).extra_data.get("email")
+    request.user.email = SocialAccount.objects.get(
+        user=request.user).extra_data.get("email")
     request.user.save()
 
     if request.method == "POST":
         # edit: this is not saving the user itself
         # but on my windows environment, it wasn't raising integrity error
-        participant_registration_details_form = ParticipantRegistrationDetailsForm(request.POST)
+        participant_registration_details_form = ParticipantRegistrationDetailsForm(
+            request.POST)
         if participant_registration_details_form.is_valid():
-            new_registration = participant_registration_details_form.save(commit=False)
+            new_registration = participant_registration_details_form.save(
+                commit=False)
             new_registration.user = request.user
-            new_registration.participant_code = (str(request.user.first_name)[:4]).upper() + str(request.user.id) + 'Z19'
+            new_registration.participant_code = (str(request.user.first_name)[
+                                                 :4]).upper() + str(request.user.id) + 'Z19'
             new_registration.save()
             send_mail(
                 'Welcome to Zeitgeist 2k19',
-                'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(new_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+                    new_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                 'zeitgeist.pr@iitrpr.ac.in',
                 [request.user.email],
                 fail_silently=False,
@@ -79,7 +91,8 @@ def register_as_participant(request):
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
 
     return render(request, 'main_page/register.html',
-        {'participant_registration_details_form': participant_registration_details_form})
+                  {'participant_registration_details_form': participant_registration_details_form})
+
 
 def register_for_event(request):
 
@@ -127,7 +140,53 @@ def register_for_event(request):
     # 6. Show success page
 
 
+@login_required
 def pay_view(request, sub_cat_id):
-    sub_cat = SubCategory.objects.get(id = sub_cat_id)
-    url, rq_id = payment_request('10', sub_cat.name, request.user.email)
-    return redirect(url)
+    sub_cat = SubCategory.objects.get(id=sub_cat_id)
+    try:
+        participant = request.user.participant
+    except:
+        return register_as_participant(request)
+    response = payment_request('10', sub_cat.name, request.user.email)
+    if response['success']:
+        url = response['payment_request']['longurl']
+        req_id = response['payment_request']['id']
+        participanthaspaid = ParticipantHasPaid.objects.create(participant=participant,
+                                                               paid_sub_category=sub_cat, pay_request_id=req_id)
+        return redirect(url)
+    else:
+        return HttpResponseServerError()
+
+import hmac
+import os
+import hashlib 
+
+def weebhook_view(request):
+    if request.method == "POST":
+        print(request.POST)
+        data = request.POST
+        mac_provided = data['mac']
+
+        message = "|".join(v for k, v in sorted(data.items(), key=lambda x: x[0].lower()))
+
+        # Pass the 'salt' without the <>.
+
+        mac_calculated = hmac.new(os.getenv('private_salt'), message, hashlib.sha1).hexdigest()
+
+        if mac_provided == mac_calculated:
+
+            if data['status'] == "Credit":
+                # Payment was successful, mark it as completed in your database.
+                1
+            else:
+                # Payment was unsuccessful, mark it as failed in your database.
+                2
+            
+
+
+def redirect_view(request):
+    if request.method == "POST":
+        print(request.POST)
+
+
+
