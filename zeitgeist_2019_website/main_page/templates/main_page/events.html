@@ -5,7 +5,7 @@
 {% block content %}
 <div id="home">
   <!-- background image -->
-  <div class="section-bg" style="background-image:url({% static 'main_page/img/events.jpg' %})" data-stellar-background-ratio="0.5"></div>
+  <div class="section-bg" style="background-image:url({% static 'main_page/img/maxresdefault.jpg' %})" data-stellar-background-ratio="0.5"></div>
   <!-- /background image -->
 
   <!-- home wrapper -->
@@ -14,63 +14,7 @@
   <!-- /home wrapper -->
 </div>
 
-<!-- 
-<div class="container" >
-  {% for category,subcategories in events_data.items %}
-  <p style="text-align: center;font-size:xx-large">{{ category.name }}</p>
-  <div class="row">
-      <div class="col-sm-4">
-        <div class="list-group" id="list-tab" role="tablist">
-          {% for subcategory,events in subcategories.items %}
-          <a class="list-group-item list-group-item-action" id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list" data-toggle="list" href="#list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tab" aria-controls="{{ subcategory.name }}{{ category.name|cut:' ' }}">{{ subcategory.name }}</a>
-          
-          {% endfor %}
-          
 
-        </div>
-      </div>
-      <div class="col-sm-8">
-        <div class="tab-content" id="nav-tabContent">
-          {% for subcategory,events in subcategories.items %}
-          <div class="tab-pane fade " id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tabpanel" aria-labelledby="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list">
-              <div class="list-group">
-                  {% for event in events %} -->
-                    <!-- <a href="{% url 'main_page_events' %}{{event.id}}" class="list-group-item list-group-item-action">{{ event.name }}</a> -->
-
-                  <!-- <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">{{ event.name }}</a>
-                  {% endfor %}
-              </div>
-              {% for event in events %}
-                  <div class="modal fade" id="{{ event.name|cut:' ' }}" tabindex="-1" role="dialog" aria-labelledby="{{ event.name|cut:' ' }}Title" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="{{ event.name|cut:' ' }}Title">{{ event.name }}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <img src="{% static 'main_page/images/zeitgeist.jpg' %}" alt="">
-                            <p>{{ event.description }}</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            <button type="button" onclick="location.href='{{ event.id }}';" class="btn btn-outline-warning">Know More..</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              {% endfor %}
-          </div>
-         
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <br><br>
-    {% endfor %}
-</div> -->
 <div id="Events" class="section">
   <!-- container -->
   <div class="container">
@@ -172,7 +116,7 @@
                                           </div>
 
                                           <br>
-                                          <button class="btn btn-danger" href="#">Register</button>
+                                          <button class="btn btn-danger" onclick="location.href='{{ event.id }}';">Register</button>
                                       </div>
 
                                   </div>
