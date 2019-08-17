@@ -16,45 +16,13 @@
   
 </div>
 
-<!-- <div class="container">
-<div class="row ">
-    {% for event in events %}
-    <div class="col-sm-4 p-4">
-      <div class="card">
-        <img class='' src="{% static 'main_page/images/zeitgeist.jpg' %}" style="width: 100%;">
-        <div class="card-body">
-          <h5 class="card-title">{{ event.name }}</h5>
-          <p class="card-text">{{ event.shorttext }} </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a> 
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-    
-  </div>
-</div> -->
-<!-- <ul> -->
-<!-- {% for category,subcategories in events_data.items %}
-  <li><h1>{{ category.name }}</h1></li>
-  <ul>
-  {% for subcategory,events in subcategories.items %}
-      <li><h3>{{ subcategory.name }}</h3></li>
-      <ul>
-        {% for event in events %}
-        <li>{{ event.name }}</li>
-        {% endfor %}
-      </ul>
-  {% endfor %}
-  </ul>
-{% endfor %}
-</ul> -->
 
 
 <div class="container" >
   {% for category,subcategories in events_data.items %}
   <p style="text-align: center;font-size:xx-large">{{ category.name }}</p>
   <div class="row">
-      <div class="col-4">
+      <div class="col-sm-4">
         <div class="list-group" id="list-tab" role="tablist">
           {% for subcategory,events in subcategories.items %}
           <a class="list-group-item list-group-item-action" id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list" data-toggle="list" href="#list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tab" aria-controls="{{ subcategory.name }}{{ category.name|cut:' ' }}">{{ subcategory.name }}</a>
@@ -64,12 +32,14 @@
 
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-sm-8">
         <div class="tab-content" id="nav-tabContent">
           {% for subcategory,events in subcategories.items %}
           <div class="tab-pane fade " id="list-{{ subcategory.name }}{{ category.name|cut:' ' }}" role="tabpanel" aria-labelledby="list-{{ subcategory.name }}{{ category.name|cut:' ' }}-list">
               <div class="list-group">
                   {% for event in events %}
+                    <!-- <a href="{% url 'main_page_events' %}{{event.id}}" class="list-group-item list-group-item-action">{{ event.name }}</a> -->
+
                   <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">{{ event.name }}</a>
                   {% endfor %}
               </div>
@@ -89,7 +59,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            
+                            <button type="button" onclick="location.href='{{ event.id }}';" class="btn btn-outline-warning">Know More..</button>
                           </div>
                         </div>
                       </div>

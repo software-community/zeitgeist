@@ -35,6 +35,10 @@ def main_page_events(request):
 
     return render(request, 'main_page/events.html', {'events_data' : events_data})
 
+def event_view(request, event_id):
+    event = Event.objects.get(id = event_id)
+    return render(request, 'main_page/event_view.html', {'event' : event})
+
 @login_required
 def register_as_participant(request):
 
