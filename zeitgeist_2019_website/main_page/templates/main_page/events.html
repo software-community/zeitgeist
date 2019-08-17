@@ -104,22 +104,24 @@
                       <img src="{% static 'main_page/img/member03.jpg' %}" alt="">
                   </div>
                   <div class="member-body">
-                      <div class="member-social">
+                      <!-- <div class="member-social">
                           <a href="#"><i class="fa fa-facebook"></i></a>
                           <a href="#"><i class="fa fa-twitter"></i></a>
                           <a href="#"><i class="fa fa-instagram"></i></a>
                           <a href="#"><i class="fa fa fa-linkedin"></i></a>
-                      </div>
+                      </div> -->
                       <div class="member-content">
-                          <h2>John Doe</h2>
-                          <span>Manager, CEO</span>
+                          <h2>{{ event.name }}</h2>
+                          <span>{{ subcategory.name }}</span>
                       </div>
                   </div>
               </div>
           </div>
           
           {% endfor %}
+
         </div>
+        <button class='btn btn-danger btn-lg' href="#">Register</button>
           </div>
           <!-- /member -->
           {% for event in events %}
@@ -132,40 +134,41 @@
                           <div class="row">
                               <div class="col-md-5">
                                   <div class="member-modal-img">
-                                      <img src="{% static 'main_page/img/member-info.jpg' %}" alt="">
+                                      <img src="{% static 'main_page/img/member02.jpg' %}" alt="">
                                   </div>
                               </div>
                               <div class="col-md-7">
                                   <div class="member-modal-content">
-                                      <h2 class="member-name">John Doe</h2>
-                                      <span class="member-job">- Manager, CEO</span>
+                                      <h2 class="member-name">{{ event.name }}</h2>
+                                      <span class="member-job">-{{ category.name }}</span>
 
                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                                           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                                       <div class="member-website">
-                                          <h4>Website</h4>
-                                          <a href="#">www.johndoe.com</a>
+                                          <h4>Rulebook</h4>
+                                          <button class="btn btn-warning" >Download</button>
                                       </div>
 
-                                      <div class="member-social">
+                                      <!-- <div class="member-social">
                                           <h4>Social Profile</h4>
                                           <a href="#"><i class="fa fa-facebook"></i></a>
                                           <a href="#"><i class="fa fa-twitter"></i></a>
                                           <a href="#"><i class="fa fa-instagram"></i></a>
                                           <a href="#"><i class="fa fa fa-linkedin"></i></a>
-                                      </div>
+                                      </div> -->
+                                      <br>
 
                                       <div class="member-events">
-                                          <h4>Sessions</h4>
+                                          <h4>Dates</h4>
                                           <div class="member-event">
-                                              <span><strong>Day 1 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
+                                              <span><strong>Start Time -</strong> {{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}</span>
                                               <p>His id altera fabellas facilisis. Has eros assueverit cu</p>
                                           </div>
 
                                           <div class="member-event">
-                                              <span><strong>Day 2 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
-                                              <p>At mucius deserunt delicatissimi eam, labitur detraxit ut sit</p>
+                                              <span><strong>End Time -</strong> {{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}</span>
+                                              <p>His id altera fabellas facilisis. Has eros assueverit cu</p>
                                           </div>
                                       </div>
 
