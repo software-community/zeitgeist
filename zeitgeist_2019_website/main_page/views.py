@@ -165,22 +165,24 @@ def weebhook_view(request):
     if request.method == "POST":
         print(request.POST)
         data = request.POST
-        mac_provided = data['mac']
+        mac_provided = data.pop('mac')
 
         message = "|".join(v for k, v in sorted(data.items(), key=lambda x: x[0].lower()))
-
-        # Pass the 'salt' without the <>.
 
         mac_calculated = hmac.new(os.getenv('private_salt'), message, hashlib.sha1).hexdigest()
 
         if mac_provided == mac_calculated:
-
-            if data['status'] == "Credit":
-                # Payment was successful, mark it as completed in your database.
-                1
-            else:
-                # Payment was unsuccessful, mark it as failed in your database.
-                2
+            try:
+                participantpaspaid = ParticipantHasPaid.objects.get(pay_request_id=data['payment_request_id'])
+                if data['status'] == "Credit":
+                    # Payment was successful, mark it as completed in your database.
+                    participantpaspaid.transaction_id = data['payment_id']
+                else:
+                    # Payment was unsuccessful, mark it as failed in your database.
+                    participantpaspaid.transaction_id = '0'
+                participantpaspaid.save()
+            except Exception as err:
+                print(err)
             
 
 
