@@ -25,6 +25,7 @@ urlpatterns = [
     path('main_page_events/', views.main_page_events, name="main_page_events"),
     path('main_page_events/<int:event_id>/', views.event_view),
     path('register_event/', views.register_for_event, name="register_event"),
+    path('pay/<int:sub_cat_id>/', views.pay_view),
     
     # path('register_as_participant', views.main_page_register_as_participant, name="main_page_register_as_participant")
     # path('register_for_some_event_regex', views.main_page_register_for_that_event, name="main_page_register_for_that_event")

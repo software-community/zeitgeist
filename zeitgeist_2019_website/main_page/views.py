@@ -10,6 +10,8 @@ from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 # Create your views here.
 
+from .methods import payment_request
+
 def main_page_home(request):
     return render(request, 'main_page/index.html')
 
@@ -123,3 +125,9 @@ def register_for_event(request):
     # 3. Add the participant to TeamHasMember table
     # 5. We send email to the participant about their participation (Divyanshu will take care of the content of the email)
     # 6. Show success page
+
+
+def pay_view(request, sub_cat_id):
+    sub_cat = SubCategory.objects.get(id = sub_cat_id)
+    url, rq_id = payment_request('10', sub_cat.name, request.user.email)
+    return redirect(url)

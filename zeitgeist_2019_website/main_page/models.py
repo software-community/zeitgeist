@@ -93,6 +93,7 @@ class ParticipantHasPaid(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     paid_sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     transaction_id = models.CharField(max_length=100, default='-1')
+    pay_request_id = models.CharField(max_length=100, default='-1')
 
     def __str__(self):
         return str(self.participant) + " - " + str(self.paid_sub_category)
