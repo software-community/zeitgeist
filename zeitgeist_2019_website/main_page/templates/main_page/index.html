@@ -4,56 +4,547 @@
 
 {% block content %}
 
+<!-- Home -->
+<div id="home">
+    <!-- background image -->
+    <div class="section-bg" style="background-image:url({% static 'main_page/img/background01.jpg' %})" data-stellar-background-ratio="0.5"></div>
+    <!-- /background image -->
 
-<style>
-.alpha{
-    background-size: cover;
-}
-</style>
-<div class="container-fluid px-0 alpha" >
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-                  </ol>
-        <div class="carousel-inner bg-info" role="listbox">
-            <div class="carousel-item active">
-                <div class="d-flex align-items-center justify-content-center min-vh-100">
-                    <img src="{% static 'main_page/images/coming_soon.png' %}" alt="" style="height:950px;width:100%">
-                    <div class="carousel-caption d-none d-md-block">
-                            <h5><i>Zeitgeist a Gothic Poltergeist will be coming very soon!!</i></h5> 
-                            </i></div>
-                </div>
-               
+    <!-- home wrapper -->
+    <div class="home-wrapper">
+    </div>
+    <!-- /home wrapper -->
+</div>
+<!-- /Home -->
+
+<!-- About -->
+<div id="about" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="section-title">
+                <h3 class="title"><span>About</span> <span style="color: #dd0a37;">Zeitgeist</span></h3>
             </div>
-            <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center min-vh-100">
-                    <img src="{% static 'campus_ambassador/images/about_us.jpg' %}" alt="" style="height:950px;width:100%">
-                    <div class="carousel-caption d-none d-md-block">
-                            <h5><i>Zeitgeist</i></h5> 
-                            </i> </div>
+            <!-- /section title -->
+
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <!-- about content -->
+                <div class="about-content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="d-flex align-items-center justify-content-center min-vh-100">
-                    <img src="{% static 'campus_ambassador/images/zeitgeist_2k18.jpg' %}" alt="" style="height:950px;width:100%">
-                    <div class="carousel-caption d-none d-md-block">
-                            <h5><i>
-                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio vel qui iste explicabo quod necessitatibus ipsam, ipsum tempora neque pariatur tempore, minima rem praesentium atque corrupti saepe, cumque maiores quo.</h5> 
-                                </i>  </div>
+                <!-- /about content -->
+
+                <!-- Numbers -->
+                <div id="numbers">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- number -->
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="number">
+                                <h3><span class="counter" data-from="0" data-to="900" data-speed="1500">0</span>+</h3>
+                                <p>Hours</p>
+                            </div>
+                        </div>
+                        <!-- /number -->
+
+                        <!-- number -->
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="number">
+                                <h3><span class="counter" data-from="0" data-to="750" data-speed="1500">0</span>+</h3>
+                                <p>Venues</p>
+                            </div>
+                        </div>
+                        <!-- /number -->
+
+                        <!-- number -->
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="number">
+                                <h3><span class="counter" data-from="0" data-to="50" data-speed="1500">0</span>+</h3>
+                                <p>Country</p>
+                            </div>
+                        </div>
+                        <!-- /number -->
+
+                        <!-- number -->
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <div class="number">
+                                <h3><span class="counter" data-from="0" data-to="20" data-speed="1500">0</span>+</h3>
+                                <p>members</p>
+                            </div>
+                        </div>
+                        <!-- /number -->
+                    </div>
+                    <!-- /row -->
                 </div>
+                <!-- /Numbers -->
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <!-- row -->
     </div>
+    <!-- /container -->
 </div>
+<!-- /About -->
+
+<!-- Galery -->
+<div id="galery">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- galery owl -->
+            <div id="galery-owl" class="owl-carousel owl-theme">
+                <!-- galery item -->
+                <div class="galery-item">
+                    <img src="{% static 'main_page/img/galery01.jpg' %}" alt="">
+                </div>
+                <!-- /galery item -->
+
+                <!-- galery item -->
+                <div class="galery-item">
+                    <img src="{% static 'main_page/img/galery02.jpg' %}" alt="">
+                </div>
+                <!-- /galery item -->
+
+                <!-- galery item -->
+                <div class="galery-item">
+                    <img src="{% static 'main_page/img/galery03.jpg' %}" alt="">
+                </div>
+                <!-- /galery item -->
+
+            </div>
+            <!-- /galery owl -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Galery -->
+
+<!-- Video CTA -->
+<div id="video-cta" class="section">
+    <!-- background image -->
+    <div class="section-bg" style="background-image:url({% static 'main_page/img/background02.jpg' %})" data-stellar-background-ratio="0.5"></div>
+    <!-- /background image -->
+
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- cta content -->
+            <div class="col-md-8 col-md-offset-2">
+                <div class="cta-content text-center">
+                    <a class="video-play" href="#">
+                        <i class="fa fa-play"></i>
+                    </a>
+                    <h2>Watch this video</h2>
+                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+            <!-- /cta content -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Video CTA -->
+
+<!-- Event Schedule -->
+<div id="schedule" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="section-title">
+                <h3 class="title"><span>Event</span> <span style="color: #dd0a37;">Schedule</span></h3>
+            </div>
+            <!-- /section title -->
+
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="events-wrapper">
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-day">
+                            <div>
+                                <span class="day">15</span>
+                                <span class="year">Feb, 2018</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">His id altera fabellas facilisis. Has eros assueverit cu</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">Perpetua consectetuer definitiones id sea, mei utinam eripuit ne</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">At mucius deserunt delicatissimi eam, labitur detraxit ut sit</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-day">
+                            <div>
+                                <span class="day">16</span>
+                                <span class="year">Feb, 2018</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">His id altera fabellas facilisis. Has eros assueverit cu</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">At mucius deserunt delicatissimi eam, labitur detraxit ut sit</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-day">
+                            <div>
+                                <span class="day">17</span>
+                                <span class="year">Feb, 2018</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">His id altera fabellas facilisis. Has eros assueverit cu</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+
+                    <!-- event -->
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content">
+                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
+                            <h3 class="event-title">At mucius deserunt delicatissimi eam, labitur detraxit ut sit</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>By <a href="#">John Doe</a></p>
+                        </div>
+                    </div>
+                    <!-- /event -->
+                </div>
+
+                <div class="download-btn">
+                    <a href="#" class="main-btn">Download Schedule</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Event Schedule -->
+
+<!-- Team -->
+<div id="team" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="section-title">
+                <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Team</span></h3>
+            </div>
+            <!-- section title -->
+
+            <!-- member -->
+            <div class="col-md-4 col-sm-6">
+                <div class="member" data-toggle="modal" data-target="#member-modal-1">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/member01.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                        </div>
+                        <div class="member-content">
+                            <h2>John Doe</h2>
+                            <span>Manager, CEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /member -->
+
+            <!-- member -->
+            <div class="col-md-4 col-sm-6">
+                <div class="member" data-toggle="modal" data-target="#member-modal-1">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/member02.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                        </div>
+                        <div class="member-content">
+                            <h2>John Doe</h2>
+                            <span>Manager, CEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /member -->
+
+            <!-- member -->
+            <div class="col-md-4 col-sm-6">
+                <div class="member" data-toggle="modal" data-target="#member-modal-1">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/member03.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                        </div>
+                        <div class="member-content">
+                            <h2>John Doe</h2>
+                            <span>Manager, CEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /member -->
+
+            <!-- member modal -->
+            <div id="member-modal-1" class="member-modal modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="member-modal-close" data-dismiss="modal"></button>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="member-modal-img">
+                                        <img src="{% static 'main_page/img/member-info.jpg' %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="member-modal-content">
+                                        <h2 class="member-name">John Doe</h2>
+                                        <span class="member-job">- Manager, CEO</span>
+
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                                        <div class="member-website">
+                                            <h4>Website</h4>
+                                            <a href="#">www.johndoe.com</a>
+                                        </div>
+
+                                        <div class="member-social">
+                                            <h4>Social Profile</h4>
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-instagram"></i></a>
+                                            <a href="#"><i class="fa fa fa-linkedin"></i></a>
+                                        </div>
+
+                                        <div class="member-events">
+                                            <h4>Sessions</h4>
+                                            <div class="member-event">
+                                                <span><strong>Day 1 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
+                                                <p>His id altera fabellas facilisis. Has eros assueverit cu</p>
+                                            </div>
+
+                                            <div class="member-event">
+                                                <span><strong>Day 2 -</strong> February 20, 2018 8 : 00 AM - 11 : 00 AM</span>
+                                                <p>At mucius deserunt delicatissimi eam, labitur detraxit ut sit</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /member modal -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Team -->
+
+<!-- Sponsors -->
+<div id="sponsors" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="section-title">
+                <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+            </div>
+            <!-- /section title -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+            <!-- sponsor -->
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                <a href="#" class="sponsor">
+                    <img src="{% static 'main_page/img/sponsor.png' %}" alt="">
+                </a>
+            </div>
+            <!-- /sponsor -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Sponsors -->
+
+<!-- Contact -->
+<div id="contact" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="section-title">
+                <h3 class="title"><span>Contact</span> <span style="color: #dd0a37;">Info</span></h3>
+            </div>
+            <!-- /section title -->
+
+            <!-- contact -->
+            <div class="col-sm-4">
+                <div class="contact">
+                    <h3>Address</h3>
+                    <p><a href="https://goo.gl/maps/aesiYVwj8tya7BKY8">Indian Institute of Technology Ropar, 140111, Rupnagar, Punjab, India</a></p>
+                </div>
+            </div>
+            <!-- /contact -->
+
+            <!-- contact -->
+            <div class="col-sm-4">
+                <div class="contact">
+                    <h3>Phone</h3>
+                    <p><a href="tel:8427012721">+91 842 7012 721</p>
+                </div>
+            </div>
+            <!-- /contact -->
+
+            <!-- contact -->
+            <div class="col-sm-4">
+                <div class="contact">
+                    <h3>Email</h3>
+                    <a href="mailto:zeitgeist.pr@iitrpr.ac.in">zeitgeist.pr@iitrpr.ac.in</a>
+                </div>
+            </div>
+            <!-- /contact -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+
+</div>
+<!-- /Contact -->
 
 {% endblock %}
