@@ -19,7 +19,7 @@ NAVIGATION
 HOME
 ABOUT
 GALERY
-SPEAKERS
+TEAM
 EVENTS
 SPONSORS
 CONTACT
@@ -470,20 +470,20 @@ textarea.input {
 }
 
 /*=========================================================
-	SPEAKERS
+	TEAM
 ===========================================================*/
 
-#speakers {
+#team {
   background-color: #F9F9FA;
 }
 
-.speaker {
+.member {
   position: relative;
   cursor: pointer;
   margin-bottom: 30px;
 }
 
-.speaker:after {
+.member:after {
   content: "";
   position: absolute;
   left: 0;
@@ -496,22 +496,22 @@ textarea.input {
   transition: 0.3s all;
 }
 
-.speaker:hover:after {
+.member:hover:after {
   opacity: 0.8;
 }
 
-.speaker .speaker-img>img {
+.member .member-img>img {
   width: 100%
 }
 
-.speaker .speaker-body {
+.member .member-body {
   position: absolute;
   bottom: 60px;
   left: 0;
   right: 0;
 }
 
-.speaker .speaker-content {
+.member .member-content {
   position: relative;
   padding: 30px;
   background: #dd0a37;
@@ -519,15 +519,15 @@ textarea.input {
   z-index: 20;
 }
 
-.speaker .speaker-content>h2 {
+.member .member-content>h2 {
   color: #FFF;
 }
 
-.speaker .speaker-content>span {
+.member .member-content>span {
   color: #fff;
 }
 
-.speaker .speaker-social {
+.member .member-social {
   position: absolute;
   top: 0;
   right: 0;
@@ -539,7 +539,7 @@ textarea.input {
   transition: 0.3s all;
 }
 
-.speaker .speaker-social>a {
+.member .member-social>a {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -552,40 +552,40 @@ textarea.input {
   transition: 0.3s opacity;
 }
 
-.speaker .speaker-social a+a {
+.member .member-social a+a {
   margin-left: -4px;
   border-left: 1px solid #f8f8ff33;
 }
 
-.speaker .speaker-social a:hover {
+.member .member-social a:hover {
   opacity: 0.8;
 }
 
-.speaker:hover .speaker-social {
+.member:hover .member-social {
   -webkit-transform: translateY(-100%);
   -ms-transform: translateY(-100%);
   transform: translateY(-100%);
 }
 
 /*----------------------------*\
-	Speaker Modal
+	member Modal
 \*----------------------------*/
 
-.speaker-modal .modal-dialog {
+.member-modal .modal-dialog {
   width: 100%;
   max-width: 970px;
   margin-top: 60px;
   margin-bottom: 60px;
 }
 
-.speaker-modal .modal-content {
+.member-modal .modal-content {
   border: none;
   border-radius: 2px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 
-.speaker-modal .speaker-modal-close {
+.member-modal .member-modal-close {
   position: absolute;
   right: -15px;
   top: -15px;
@@ -602,34 +602,34 @@ textarea.input {
   z-index: 50;
 }
 
-.speaker-modal .speaker-modal-close:after {
+.member-modal .member-modal-close:after {
   content: "\f00d";
   font-family: FontAwesome;
 }
 
-.speaker-modal .modal-body {
+.member-modal .modal-body {
   padding: 30px;
 }
 
-.speaker-modal .speaker-modal-img>img {
+.member-modal .member-modal-img>img {
   width: 100%;
 }
 
-.speaker-modal .speaker-modal-content .speaker-name {
+.member-modal .member-modal-content .member-name {
   display: inline-block;
   margin-right: 15px;
 }
 
-.speaker-modal .speaker-modal-content .speaker-job {
+.member-modal .member-modal-content .member-job {
   color: #dd0a37;
 }
 
-.speaker-modal .speaker-modal-content .speaker-social {
+.member-modal .member-modal-content .member-social {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.speaker-modal .speaker-modal-content .speaker-social>a {
+.member-modal .member-modal-content .member-social>a {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -644,25 +644,25 @@ textarea.input {
   transition: 0.3s opacity;
 }
 
-.speaker-modal .speaker-modal-content .speaker-social>a:hover {
+.member-modal .member-modal-content .member-social>a:hover {
   opacity: 0.8;
 }
 
-.speaker-modal .speaker-modal-content .speaker-website {
+.member-modal .member-modal-content .member-website {
   margin-top: 30px;
 }
 
-.speaker-modal .speaker-modal-content .speaker-events .speaker-event+.speaker-event {
+.member-modal .member-modal-content .member-events .member-event+.member-event {
   margin-top: 30px;
 }
 
-.speaker-modal .speaker-modal-content .speaker-events .speaker-event>span {
+.member-modal .member-modal-content .member-events .member-event>span {
   display: block;
   margin-bottom: 10px;
   font-size: 12px;
 }
 
-.speaker-modal .speaker-modal-content .speaker-events .speaker-event>span strong {
+.member-modal .member-modal-content .member-events .member-event>span strong {
   color: #dd0a37;
 }
 
