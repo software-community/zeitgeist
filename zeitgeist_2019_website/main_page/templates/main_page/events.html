@@ -75,8 +75,8 @@
   <!-- container -->
   <div class="container">
       <!-- row -->
-      {% for category,subcategories in event_data.items %}
-      <div class="row">
+      {% for category,subcategories in events_data.items %}
+      
           <!-- section title -->
           <div class="section-title">
               <h3 class="title"><span style="color: #dd0a37;">{{ category.name }}</span></h3>
@@ -96,6 +96,7 @@
 
           <!-- member -->
           {% for event in events %}
+          <div class="row">
           <div class="col-md-4 col-xs-6">
               <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' ' }}">
                   <div class="member-img">
@@ -115,7 +116,9 @@
                   </div>
               </div>
           </div>
+          </div>
           {% endfor %}
+          </div>
           <!-- /member -->
           {% for event in events %}
           <!-- member modal -->
@@ -172,9 +175,9 @@
               </div>
           </div>
           {% endfor %}
-       </div>
+       
        {% endfor %}
-       </div>   <!-- /member modal -->
+          <!-- /member modal -->
       
       <!-- /row -->
       {% endfor %}
