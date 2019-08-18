@@ -9,19 +9,19 @@ from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
-# Create your views here.
-
 from .methods import payment_request
+# Create your views here.
 
 
 def main_page_home(request):
     return render(request, 'main_page/index.html')
 
-# if some other page redirects us to change_account, then 404 will happen
-# but why will some other page redirect to here
-
 
 def change_account(request):
+    '''
+    If some other page redirects us to change_account, then 404 will happen
+    but why will some other page redirect to here
+    '''
     prev_page = request.META.get('HTTP_REFERER', reverse('main_page_home'))
     _next = urlparse(prev_page).path
     logout(request)
@@ -38,7 +38,7 @@ def main_page_events(request):
         for subcategory in subcategories:
             events_data[category][subcategory] = subcategory.event_set.all()
 
-    print(events_data)
+    # print(events_data)
 
     return render(request, 'main_page/events.html', {'events_data': events_data})
 
@@ -183,12 +183,8 @@ def weebhook_view(request):
                 participantpaspaid.save()
             except Exception as err:
                 print(err)
-            
 
 
 def redirect_view(request):
     if request.method == "POST":
         print(request.POST)
-
-
-
