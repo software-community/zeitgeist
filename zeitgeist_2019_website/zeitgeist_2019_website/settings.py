@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'main_page.apps.MainPageConfig',
     'campus_ambassador.apps.CampusAmbassadorConfig',
 	'phonenumber_field',
@@ -172,3 +173,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = "587"
 EMAIL_HOST_USER = "your email"
 EMAIL_HOST_PASSWORD = "your password"
+CRISPY_TEMPLATE_PACK="bootstrap3"

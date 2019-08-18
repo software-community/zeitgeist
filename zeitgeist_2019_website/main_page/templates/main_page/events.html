@@ -83,10 +83,14 @@
                                     <p>{{ event.description }}</p>
 
                                     <div class="member-website">
-                                        <h4>Rulebook</h4>
+                                        <h3>Rulebook</h3>
                                         <a class="btn btn-warning" href="{{ event.link_to_rulebook }}"
                                             target="_blank">Download</a>
                                     </div>
+                                        <br>
+                                        <p><span style="color:crimson;font-weight: bold;">Maximum Team Size : </span> {{ event.maximum_team_size }}</p>
+                                        <p><span style="color:crimson;font-weight: bold;">Minimum Team Size : </span> {{ event.minimum_team_size }}</p>
+                                    
 
                                     <!-- <div class="member-social">
                                           <h4>Social Profile</h4>
@@ -96,21 +100,29 @@
                                           <a href="#"><i class="fa fa fa-linkedin"></i></a>
                                       </div> -->
                                     <br>
-
+                                      
+                                          <h3 class="member-name" >Prize Details </h3>
+                                          <span class="member-job" >- Prize Money + goodies</span>
+                                          <p><span style="color:crimson;font-weight: bold;">First : </span> {{ event.first_cash_prize }}</p>
+                                          <p><span style="color:crimson;font-weight: bold;">Second : </span> {{ event.second_cash_prize }}</p>
+                                          <p><span style="color:crimson;font-weight: bold;">Third : </span> {{ event.third_cash_prize }}</p>
+                                      <br>
+                                      
                                     <div class="member-events">
-                                        <h4>Event Schedule</h4>
+                                        <h3>Event Schedule</h3>
                                         <div class="member-event">
-                                            <span><strong>Start Time -</strong>
-                                                {{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}</span>
+                                            <span style="color:crimson;font-size: medium"><strong>Start Time -</strong>
+                                            </span>
                                         </div>
-
+                                        <p>{{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}</p>
                                         <div class="member-event">
-                                            <span><strong>End Time -</strong>
-                                                {{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}</span>
+                                            <span style="color:crimson;font-size: medium"><strong>End Time -</strong>
+                                                </span>
                                         </div>
+                                        <p>{{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}</p>
 
                                         <br>
-                                        <a href="google.com" class="btn btn-danger">Register</a>
+                                        <a href="https://www.google.com" class="btn btn-danger">Register</a>
                                     </div>
 
                                 </div>
