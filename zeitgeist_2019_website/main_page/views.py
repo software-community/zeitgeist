@@ -1,3 +1,6 @@
+import hashlib
+import hmac
+import os
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import logout
@@ -44,58 +47,56 @@ def main_page_events(request):
 
 
 @login_required
-def register_as_participant(request):
-    '''
-    When user registers for an event for the first time,
-    this form opens, and he has to provide his mobile number.
-    This view should never be called if Participant Model of a user already exists.
-    '''
-
-    request.user.email = SocialAccount.objects.get(
-        user=request.user).extra_data.get("email")
-    request.user.save()
-
-    if request.method == "POST":
-
-        participant_registration_details_form = ParticipantRegistrationDetailsForm(
-            request.POST)
-        if participant_registration_details_form.is_valid():
-            new_participant_registration = participant_registration_details_form.save(
-                commit=False)
-            new_participant_registration.user = request.user
-            new_participant_registration.participant_code = (str(request.user.first_name)[
-                                                 :4]).upper() + str(request.user.id) + 'Z19'
-            new_participant_registration.save()
-            send_mail(
-                'Welcome to Zeitgeist 2k19',
-                'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                'zeitgeist.pr@iitrpr.ac.in',
-                [request.user.email],
-                fail_silently=False,
-            )
-            return redirect('main_page_events')
-
-    else:
-
-        participant_registration_details_form = ParticipantRegistrationDetailsForm()
-
-    return render(request, 'main_page/register_as_participant.html',
-                  {'participant_registration_details_form': participant_registration_details_form})
-
-
-@login_required
 def register_for_event(request, event_id):
 
     try:
-        participant = Participant.objects.get(user=request.user)
+
+        participant = Participant.objects.get(participating_user=request.user)
+
     except Participant.DoesNotExist:
-        return redirect('register_as_participant')
+        '''
+        When user registers for an event for the first time,
+        this form opens, and he has to provide his mobile number.
+        This form should not open if Participant Model of a user already exists.
+        '''
+
+        request.user.email = SocialAccount.objects.get(
+            user=request.user).extra_data.get("email")
+        request.user.save()
+
+        if request.method == "POST":
+
+            participant_registration_details_form = ParticipantRegistrationDetailsForm(
+                request.POST)
+            if participant_registration_details_form.is_valid():
+                new_participant_registration = participant_registration_details_form.save(
+                    commit=False)
+                new_participant_registration.user = request.user
+                new_participant_registration.participant_code = (str(request.user.first_name)[
+                    :4]).upper() + str(request.user.id) + 'Z19'
+                new_participant_registration.save()
+                send_mail(
+                    'Welcome to Zeitgeist 2k19',
+                    'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+                        new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    'zeitgeist.pr@iitrpr.ac.in',
+                    [request.user.email],
+                    fail_silently=False,
+                )
+                return redirect('main_page_events')
+
+        else:
+
+            participant_registration_details_form = ParticipantRegistrationDetailsForm()
+
+        return render(request, 'main_page/register_as_participant.html',
+                      {'participant_registration_details_form': participant_registration_details_form})
 
     event = Event.objects.get(id=event_id)
 
     try:
-        payemnt_details = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=event.subcategory)
+        payemnt_details = ParticipantHasPaid.objects.get(
+            participant=participant, paid_subcategory=event.subcategory)
     except ParticipantHasPaid.DoesNotExist:
         return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
 
@@ -103,7 +104,8 @@ def register_for_event(request, event_id):
         return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
 
     if event.event_type == 'Solo':
-        ParticipantHasParticipated.objects.create(participant=participant, event=event)
+        ParticipantHasParticipated.objects.create(
+            participant=participant, event=event)
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
@@ -169,9 +171,6 @@ def pay_for_subcategory(request, subcategory_id):
     else:
         return HttpResponseServerError()
 
-import hmac
-import os
-import hashlib 
 
 def weebhook(request):
 
@@ -180,13 +179,16 @@ def weebhook(request):
         data = request.POST
         mac_provided = data.pop('mac')
 
-        message = "|".join(v for k, v in sorted(data.items(), key=lambda x: x[0].lower()))
+        message = "|".join(v for k, v in sorted(
+            data.items(), key=lambda x: x[0].lower()))
 
-        mac_calculated = hmac.new(os.getenv('private_salt'), message, hashlib.sha1).hexdigest()
+        mac_calculated = hmac.new(
+            os.getenv('private_salt'), message, hashlib.sha1).hexdigest()
 
         if mac_provided == mac_calculated:
             try:
-                participantpaspaid = ParticipantHasPaid.objects.get(payment_request_id=data['payment_request_id'])
+                participantpaspaid = ParticipantHasPaid.objects.get(
+                    payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']

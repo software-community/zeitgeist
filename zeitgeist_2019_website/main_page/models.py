@@ -83,7 +83,7 @@ class Participant(models.Model):
     participating_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
     mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Mobile Number', region='IN')
-    referring_ca = models.ForeignKey(RegistrationDetails, verbose_name='CA Referral Code', on_delete=models.CASCADE, blank=True)
+    referring_ca = models.ForeignKey(RegistrationDetails, verbose_name='CA Referral Code', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.participant_code)
