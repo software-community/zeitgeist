@@ -25,12 +25,13 @@ SECRET_KEY = "*=chpeu7a0#$9k0l1t!a88v^i8mmb#z1#6+k$b8+xc^t%9xulb"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost","172.26.141.197"]
+ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost","172.26.140.223"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'main_page.apps.MainPageConfig',
     'campus_ambassador.apps.CampusAmbassadorConfig',
 	'phonenumber_field',
@@ -172,3 +173,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = "587"
 EMAIL_HOST_USER = "your email"
 EMAIL_HOST_PASSWORD = "your password"
+CRISPY_TEMPLATE_PACK="bootstrap3"
