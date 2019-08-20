@@ -4,10 +4,17 @@ from .models import *
 class ParticipantRegistrationDetailsForm(forms.ModelForm):
     class Meta:
         model = Participant
-        fields = ['mobile_number']
-        widgets = {'mobile_number' : forms.TextInput()}
+        fields = ['mobile_number', 'referring_ca']
+        widgets = {
+            'mobile_number' : forms.TextInput(),
+            # 'referring_ca' : forms.ModelChoiceField(),
+        }
+
 
 class TeamRegistrationDetailsForm(forms.ModelForm):
     class Meta:
         model = Team
-        fields = ['name', 'captain']
+        fields = ['name']
+        wdigets = {
+            'name' : forms.TextInput()
+        }

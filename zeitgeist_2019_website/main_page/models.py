@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
+from campus_ambassador.models import *
 
 # Create your models here.
 
@@ -32,7 +33,8 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
-class SubCategory(models.Model):
+
+class Subcategory(models.Model):
 
     name = models.CharField(max_length=40, null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
@@ -42,13 +44,13 @@ class SubCategory(models.Model):
         return str(self.name) + " - " + str(self.category)
 
     class Meta:
-        verbose_name_plural = 'Sub Categories'
+        verbose_name_plural = 'Subcategories'
 
 
 class Event(models.Model):
 
     name = models.CharField(max_length=40, null=False, blank=False)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
 
     EVENT_TYPE_CHOICES = [
         ('Solo', 'Solo'),
@@ -73,30 +75,29 @@ class Event(models.Model):
     description = models.TextField(blank=False)
 
     def __str__(self):
-        return str(self.name) + " - " + str(self.sub_category)
+        return str(self.name) + " - " + str(self.subcategory)
 
 
 class Participant(models.Model):
 
     participating_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
-    # mobile number can be null if the user is not the captain and
-    # has only participated in team events
-    mobile_number = PhoneNumberField(verbose_name='Mobile Number', region='IN')
+    mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Mobile Number', region='IN')
+    referring_ca = models.ForeignKey(RegistrationDetails, verbose_name='CA Referral Code', on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return str(self.participating_user)
+        return str(self.participant_code)
 
 
 class ParticipantHasPaid(models.Model):
 
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    paid_sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    paid_subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     transaction_id = models.CharField(max_length=100, default='-1')
-    pay_request_id = models.CharField(max_length=100, default='-1')
+    payment_request_id = models.CharField(max_length=100, default='-1')
 
     def __str__(self):
-        return str(self.participant) + " - " + str(self.paid_sub_category)
+        return str(self.participant) + " - " + str(self.paid_subcategory)
 
     class Meta:
         verbose_name_plural = 'Participant Has Paid'
@@ -122,7 +123,7 @@ class Team(models.Model):
     captain = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.name) + " - " + str(self.event) + " - " + str(self.captain)
+        return str(self.team_code) + " - " + str(self.name)
 
 
 class TeamHasMember(models.Model):

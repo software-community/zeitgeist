@@ -1,0 +1,13 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <form method="POST">
+    {% csrf_token %}
+    {{ participant_registration_details_form }}
+    <input type="submit" value="Register">
+    </form>
+
+{% endblock %}

@@ -31,8 +31,9 @@ from .models import *
 # admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
 # admin.site.register(Team, TeamAdmin)
 # admin.site.register(TeamHasMember, TeamHasMemberAdmin)
+
 admin.site.register(Category)
-admin.site.register(SubCategory)
+admin.site.register(Subcategory)
 admin.site.register(Event)
 admin.site.register(Participant)
 admin.site.register(ParticipantHasPaid)

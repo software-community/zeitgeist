@@ -22,15 +22,11 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
 
     path('', views.main_page_home, name="main_page_home"),
-    path('main_page_events/', views.main_page_events, name="main_page_events"),
-    path('main_page_events/<int:event_id>/', views.event_view),
-    path('register_event/', views.register_for_event, name="register_event"),
-    path('pay/<int:sub_cat_id>/', views.pay_view),
-    path('webhook/', views.weebhook_view, name="webhook"),
-    path('payment_redirect/', views.redirect_view, name="payment_redirect"),
-    
-    # path('register_as_participant', views.main_page_register_as_participant, name="main_page_register_as_participant")
-    # path('register_for_some_event_regex', views.main_page_register_for_that_event, name="main_page_register_for_that_event")
+    path('events/', views.main_page_events, name="main_page_events"),
+    path('register/<int:event_id>/', views.register_for_event),
+    path('pay/<int:subcategory_id>/', views.pay_for_subcategory),
+    path('webhook/', views.weebhook, name="webhook"),
+    path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible

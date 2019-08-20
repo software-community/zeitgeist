@@ -43,67 +43,76 @@ def main_page_events(request):
     return render(request, 'main_page/events.html', {'events_data': events_data})
 
 
-def event_view(request, event_id):
-    event = Event.objects.get(id=event_id)
-    return render(request, 'main_page/event_view.html', {'event': event})
-
-
 @login_required
 def register_as_participant(request):
+    '''
+    When user registers for an event for the first time,
+    this form opens, and he has to provide his mobile number.
+    This view should never be called if Participant Model of a user already exists.
+    '''
 
-    try:
-        prev_registration_details = Participant.objects.get(user=request.user)
-    except Participant.DoesNotExist:
-        prev_registration_details = None
-
-    # if user is already registered as a participant
-    if prev_registration_details:
-        return render(request, 'main_page/already_registered.html')
-
-    # have a look at Social accounts Field in django admin
-    # you will get it
     request.user.email = SocialAccount.objects.get(
         user=request.user).extra_data.get("email")
     request.user.save()
 
     if request.method == "POST":
-        # edit: this is not saving the user itself
-        # but on my windows environment, it wasn't raising integrity error
+
         participant_registration_details_form = ParticipantRegistrationDetailsForm(
             request.POST)
         if participant_registration_details_form.is_valid():
-            new_registration = participant_registration_details_form.save(
+            new_participant_registration = participant_registration_details_form.save(
                 commit=False)
-            new_registration.user = request.user
-            new_registration.participant_code = (str(request.user.first_name)[
+            new_participant_registration.user = request.user
+            new_participant_registration.participant_code = (str(request.user.first_name)[
                                                  :4]).upper() + str(request.user.id) + 'Z19'
-            new_registration.save()
+            new_participant_registration.save()
             send_mail(
                 'Welcome to Zeitgeist 2k19',
                 'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-                    new_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                 'zeitgeist.pr@iitrpr.ac.in',
                 [request.user.email],
                 fail_silently=False,
             )
-            return render(request, 'main_page/success.html')
+            return redirect('main_page_events')
+
     else:
+
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
 
-    return render(request, 'main_page/register.html',
+    return render(request, 'main_page/register_as_participant.html',
                   {'participant_registration_details_form': participant_registration_details_form})
 
 
-def register_for_event(request):
+@login_required
+def register_for_event(request, event_id):
 
     try:
-        prev_registration_details = Participant.objects.get(user=request.user)
+        participant = Participant.objects.get(user=request.user)
     except Participant.DoesNotExist:
-        prev_registration_details = None
+        return redirect('register_as_participant')
 
-    # if user has not yet registered as a participant
-    if prev_registration_details == None:
-        return register_as_participant(request)
+    event = Event.objects.get(id=event_id)
+
+    try:
+        payemnt_details = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=event.subcategory)
+    except ParticipantHasPaid.DoesNotExist:
+        return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
+
+    if payemnt_details.transaction_id == '-1' or payemnt_details.transaction_id == '0':
+        return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
+
+    if event.event_type == 'Solo':
+        ParticipantHasParticipated.objects.create(participant=participant, event=event)
+        send_mail(
+            'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
+            'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+            'zeitgeist.pr@iitrpr.ac.in',
+            [request.user.email],
+            fail_silently=False,
+        )
+        return HttpResponse("Success")
 
     # No need to create form for solo events
     # If event_type is duet or group, then create a form and get the details
@@ -141,18 +150,21 @@ def register_for_event(request):
 
 
 @login_required
-def pay_view(request, sub_cat_id):
-    sub_cat = SubCategory.objects.get(id=sub_cat_id)
+def pay_for_subcategory(request, subcategory_id):
+
     try:
-        participant = request.user.participant
+        participant = Participant.objects.get(user=request.user)
     except:
-        return register_as_participant(request)
-    response = payment_request('10', sub_cat.name, request.user.email)
+        return redirect('register_as_participant')
+
+    subcategory = Subcategory.objects.get(id=subcategory_id)
+
+    response = payment_request('10', subcategory.name, request.user.email)
     if response['success']:
         url = response['payment_request']['longurl']
-        req_id = response['payment_request']['id']
+        payment_request_id = response['payment_request']['id']
         participanthaspaid = ParticipantHasPaid.objects.create(participant=participant,
-                                                               paid_sub_category=sub_cat, pay_request_id=req_id)
+                                                               paid_subcategory=subcategory, payment_request_id=payment_request_id)
         return redirect(url)
     else:
         return HttpResponseServerError()
@@ -161,7 +173,8 @@ import hmac
 import os
 import hashlib 
 
-def weebhook_view(request):
+def weebhook(request):
+
     if request.method == "POST":
         print(request.POST)
         data = request.POST
@@ -173,7 +186,7 @@ def weebhook_view(request):
 
         if mac_provided == mac_calculated:
             try:
-                participantpaspaid = ParticipantHasPaid.objects.get(pay_request_id=data['payment_request_id'])
+                participantpaspaid = ParticipantHasPaid.objects.get(payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']
@@ -185,6 +198,6 @@ def weebhook_view(request):
                 print(err)
 
 
-def redirect_view(request):
+def payment_redirect(request):
     if request.method == "POST":
         print(request.POST)

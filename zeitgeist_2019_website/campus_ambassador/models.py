@@ -4,6 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
+# I screwed up the name. It should have been CampusAmbassador, not RegistrationDetails
 class RegistrationDetails(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     campus_ambassador_code = models.CharField(max_length=15, verbose_name='CA Code', unique=True)
@@ -18,4 +19,4 @@ class RegistrationDetails(models.Model):
         verbose_name_plural = 'Registration details'
 
     def __str__(self):
-        return 'Registration by ' + str(self.user)
+        return str(self.campus_ambassador_code)
