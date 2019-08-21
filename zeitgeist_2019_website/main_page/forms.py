@@ -4,11 +4,7 @@ from campus_ambassador.models import *
 from django.shortcuts import get_object_or_404
 
 class ParticipantRegistrationDetailsForm(forms.ModelForm):
-    referring_ca = forms.CharField(required=False, widget=forms.TextInput)
-
-    class Meta:
-        model = Participant
-        fields = ['mobile_number', 'referring_ca']
+    referring_ca = forms.CharField(label='Referring Capmus Ambassador',required=False, widget=forms.TextInput)
 
     def clean(self):
         self.cleaned_data = super().clean()
@@ -23,6 +19,11 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
             msg = "Not a Valid CA Refferal Code!"
             self.add_error('referring_ca', msg)
 
+    class Meta:
+        model = Participant
+        fields = ['mobile_number', 'referring_ca']
+
+   
 
 class TeamRegistrationDetailsForm(forms.ModelForm):
 

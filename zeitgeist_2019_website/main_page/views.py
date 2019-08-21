@@ -204,3 +204,6 @@ def weebhook(request):
 def payment_redirect(request):
     if request.method == "POST":
         print(request.POST)
+
+# def already_registered_as_participant(request):
+    # return render(request,'main_page/already_registered_as_participant.html')
