@@ -22,6 +22,7 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
 
     path('', views.main_page_home, name="main_page_home"),
+    path('register_as_participant/', views.register_as_participant, name="register_as_participant"),
     path('events/', views.main_page_events, name="main_page_events"),
     path('register/<int:event_id>/', views.register_for_event, name="register_for_event"),
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
