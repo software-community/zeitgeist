@@ -4,7 +4,8 @@ from campus_ambassador.models import *
 from django.shortcuts import get_object_or_404
 
 class ParticipantRegistrationDetailsForm(forms.ModelForm):
-    referring_ca = forms.CharField(required=False, widget=forms.TextInput)
+
+    referring_ca = forms.CharField(required=False, widget=forms.TextInput, label='CA Refferal Code')
 
     class Meta:
         model = Participant

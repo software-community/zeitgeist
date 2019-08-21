@@ -32,6 +32,7 @@ def change_account(request):
     return redirect(reverse('google_login')+'?next='+_next)
 
 
+@login_required
 def register_as_participant(request):
 
     try:
@@ -52,7 +53,7 @@ def register_as_participant(request):
         if participant_registration_details_form.is_valid():
             new_participant_registration = participant_registration_details_form.save(
                 commit=False)
-            new_participant_registration.user = request.user
+            new_participant_registration.participating_user = request.user
             new_participant_registration.participant_code = (str(request.user.first_name)[
                 :4]).upper() + str(request.user.id) + 'Z19'
             new_participant_registration.save()
@@ -96,12 +97,12 @@ def register_for_event(request, event_id):
     event = Event.objects.get(id=event_id)
 
     try:
-        payemnt_details = ParticipantHasPaid.objects.get(
+        payment_details = ParticipantHasPaid.objects.get(
             participant=participant, paid_subcategory=event.subcategory)
     except ParticipantHasPaid.DoesNotExist:
         return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
 
-    if payemnt_details.transaction_id == '-1' or payemnt_details.transaction_id == '0':
+    if payment_details.transaction_id == '-1' or payment_details.transaction_id == '0':
         return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
 
     if event.event_type == 'Solo':
@@ -116,6 +117,9 @@ def register_for_event(request, event_id):
         #     fail_silently=False,
         # )
         return HttpResponse("Success")
+
+    else:
+        pass
 
     # No need to create form for solo events
     # If event_type is duet or group, then create a form and get the details
