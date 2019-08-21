@@ -24,6 +24,11 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
             msg = "Not a Valid CA Refferal Code!"
             self.add_error('referring_ca', msg)
 
+    class Meta:
+        model = Participant
+        fields = ['mobile_number', 'referring_ca']
+
+   
 
 class TeamRegistrationDetailsForm(forms.ModelForm):
 
