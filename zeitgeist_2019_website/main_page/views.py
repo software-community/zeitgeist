@@ -17,7 +17,8 @@ from .methods import payment_request
 
 
 def main_page_home(request):
-    return render(request, 'main_page/index.html')
+    context={'title':'Zeitgeist'}
+    return render(request, 'main_page/index.html',context)
 
 
 def change_account(request):
