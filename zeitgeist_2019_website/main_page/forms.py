@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from campus_ambassador.models import *
 
 class ParticipantRegistrationDetailsForm(forms.ModelForm):
     class Meta:
@@ -7,7 +8,6 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
         fields = ['mobile_number', 'referring_ca']
         widgets = {
             'mobile_number' : forms.TextInput(),
-            # 'referring_ca' : forms.ModelChoiceField(),
         }
 
 

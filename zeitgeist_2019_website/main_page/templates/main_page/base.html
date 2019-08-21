@@ -62,12 +62,12 @@
 			<nav id="nav">
 				<ul class="main-nav nav navbar-nav navbar-right">
 					<li><a href="{% url 'main_page_home' %}#home">Home</a></li>
-					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'main_page_home' %}#about">About</a></li>
 					<li><a href="{% url 'main_page_home' %}#schedule">Schedule</a></li>
 					<li><a href="{% url 'main_page_home' %}#team">Team</a></li>
 					<li><a href="{% url 'main_page_home' %}#sponsors">Sponsors</a></li>
 					<li><a href="{% url 'main_page_home' %}#contact">Contact</a></li>
+					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
 					
 					{% if request.user.is_authenticated %}
