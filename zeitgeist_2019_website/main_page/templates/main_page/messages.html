@@ -17,9 +17,13 @@
                     
                     <div class="col-md-8 col-md-offset-2">
                     <div class="home-content">
+                        {% if message %}
+                        <h1>{{ message }}</h1>
+                        {% else %}
                     <h1>You are already registered as Participant!!</h1>
                     <h4 class="lead">If you want to edit your response contact</h4>
                     <a href="tel:7742522607" class="main-btn">7742522607</a>
+                    {% endif %}
                     </div>
                     </div>
                     

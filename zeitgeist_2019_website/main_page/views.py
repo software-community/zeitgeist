@@ -43,7 +43,7 @@ def register_as_participant(request):
         prev_participant_registration_details = None
 
     if prev_participant_registration_details:
-        return render(request, 'main_page/already_registered_as_participant.html')
+        return render(request, 'main_page/messages.html',context={'already_registered':'already_registered'})
 
     request.user.email = SocialAccount.objects.get(
         user=request.user).extra_data.get("email")
@@ -114,7 +114,7 @@ def register_for_event(request, event_id):
         #     [request.user.email],
         #     fail_silently=False,
         # )
-        return HttpResponse("Success")
+        return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
 
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
@@ -127,9 +127,11 @@ def register_for_event(request, event_id):
                     try:
                         team_member_payment = ParticipantHasPaid.objects.get(participant=team_member_form.team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
-                            return HttpResponse("Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory.")
+                            return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
+                            # return HttpResponse()
                     except ParticipantHasPaid.DoesNotExist:
-                        return HttpResponse("Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory.")
+                        return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
+                        # return HttpResponse("Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory.")
                     # if form is empty
                     except:
                         continue
@@ -160,7 +162,7 @@ def register_for_event(request, event_id):
                 #     [request.user.email],
                 #     fail_silently=False,
                 # )
-                return HttpResponse("Success")
+                return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
         else:
             team_form = TeamForm()
             team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}],prefix='team_member')
