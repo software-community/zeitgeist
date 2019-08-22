@@ -1,0 +1,15 @@
+{% extends 'main_page/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+<br><br><br>
+<form method="POST">
+{% csrf_token %}
+{{ team_form|crispy }}
+{{ team_member_formset|crispy }}
+<input class='btn btn-danger btn-lg' type="submit" value="Register">
+</form>
+
+{% endblock content %}

@@ -80,8 +80,9 @@ class Event(models.Model):
 
 class Participant(models.Model):
 
-    participating_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    participating_user = models.OneToOneField(User, verbose_name='Participating User', on_delete=models.CASCADE, primary_key=True)
     participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
+    college = models.CharField(max_length=200, verbose_name='College Name')
     mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Mobile Number', region='IN')
     referring_ca = models.ForeignKey(RegistrationDetails, verbose_name='CA Referral Code', on_delete=models.CASCADE, null=True, blank=True)
 
@@ -117,7 +118,7 @@ class ParticipantHasParticipated(models.Model):
 
 class Team(models.Model):
 
-    name = models.CharField(max_length=40, null=False, blank=False)
+    name = models.CharField(max_length=40, verbose_name='Team Name', null=False, blank=False)
     team_code = models.CharField(max_length=15, verbose_name='Team Code', unique=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     captain = models.ForeignKey(Participant, on_delete=models.CASCADE)

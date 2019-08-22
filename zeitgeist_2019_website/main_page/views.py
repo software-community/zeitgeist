@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import os
+import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import logout
@@ -13,6 +14,7 @@ from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
 from .methods import payment_request
+from django.forms import formset_factory
 # Create your views here.
 
 
@@ -96,18 +98,14 @@ def register_for_event(request, event_id):
 
     event = Event.objects.get(id=event_id)
 
-    try:
-        payment_details = ParticipantHasPaid.objects.get(
-            participant=participant, paid_subcategory=event.subcategory)
-    except ParticipantHasPaid.DoesNotExist:
-        return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
-
-    if payment_details.transaction_id == '-1' or payment_details.transaction_id == '0':
-        return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
-
     if event.event_type == 'Solo':
-        ParticipantHasParticipated.objects.create(
-            participant=participant, event=event)
+        try:
+            payment_details = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=event.subcategory)
+            if payment_details.transaction_id == '-1' or payment_details.transaction_id == '0':
+                return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
+        except ParticipantHasPaid.DoesNotExist:
+            return redirect('pay_for_subcategory', subcategory_id=event.subcategory.id)
+        ParticipantHasParticipated.objects.create(participant=participant, event=event)
         # send_mail(
         #     'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
         #     'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
@@ -119,7 +117,57 @@ def register_for_event(request, event_id):
         return HttpResponse("Success")
 
     else:
-        pass
+        TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
+        if request.method == "POST":
+            team_member_formset = TeamHasMemberFormSet(request.POST, initial=[{'team_member' : str(participant.participant_code)}])
+            team_form = TeamForm(request.POST)
+            if team_member_formset.is_valid() and team_form.is_valid():
+                for team_member_form in team_member_formset:
+                    try:
+                        team_member_payment = ParticipantHasPaid.objects.get(participant=team_member_form.team_member, paid_subcategory=event.subcategory)
+                        if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
+                            return HttpResponse("Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory.")
+                    except ParticipantHasPaid.DoesNotExist:
+                        return HttpResponse("Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory.")
+                    # if form is empty
+                    except:
+                        continue
+                new_team = team_form.save(commit=False)
+                temp_team_code = str(request.user.id) + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+                new_team.team_code = temp_team_code
+                new_team.event = event
+                new_team.captain = participant
+                new_team.save()
+                new_team = Team.objects.get(name=team_form.name, team_code=temp_team_code, event=event, captain=participant)
+                new_team_code = ((str(new_team.name).replace(" ", ""))[:4]).upper() + str(new_team.id) + 'Z19'
+                new_team.team_code = new_team_code
+                new_team.save()
+                new_team = Team.objects.get(team_code=new_team_code)
+                # ParticipantHasParticipated.objects.create(participant=participant, event=event)
+                # TeamHasMember.objects.create(team=new_team, member=participant)
+                for team_member_form in team_member_formset:
+                    team_member = Participant.objects.get(participant_code=team_member_form.team_member)
+                    ParticipantHasParticipated.objects.create(participant=team_member, event=event)
+                    TeamHasMember.objects.create(team=new_team, member=team_member)
+                # send_mail(
+                #     'Welcome to Zeitgeist 2k19',
+                #     'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+                #         new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                #     'zeitgeist.pr@iitrpr.ac.in',
+                #     [request.user.email],
+                #     fail_silently=False,
+                # )
+                return HttpResponse("Success")
+        else:
+            team_form = TeamForm()
+            team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}])
+
+        return render(request, 'main_page/register_team.html',
+                        {
+                            'team_form': team_form,
+                            'team_member_formset': team_member_formset,
+                            })
+
 
     # No need to create form for solo events
     # If event_type is duet or group, then create a form and get the details
@@ -138,7 +186,7 @@ def register_for_event(request, event_id):
     # 5. We create a unique Team Code just like we created unique CA Code (Divyanshu will help)
     # 6. We send email to the whole team about their participation (Divyanshu will take care of the content of the email)
     # 7. Show success page
-    # Note: Remember to use TeamRegistrationDetailsForm as a part of the form
+    # Note: Remember to use TeamForm as a part of the form
     # Note: Give option of registering team member by entering his participant_code so that
     # participants who have already paid for the subcategory do not pay again
     # then we don't need to ask for that user's mobile number and email since he is already registered
@@ -166,7 +214,7 @@ def pay_for_subcategory(request, subcategory_id):
 
     subcategory = Subcategory.objects.get(id=subcategory_id)
 
-    response = payment_request('10', subcategory.name, request.user.email)
+    response = payment_request(subcategory.participation_fees_per_person, subcategory.name, request.user.email)
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']

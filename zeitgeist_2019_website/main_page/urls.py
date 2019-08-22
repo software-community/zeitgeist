@@ -28,7 +28,7 @@ urlpatterns = [
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
     path('webhook/', views.weebhook, name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
-    # path('already_registered_as_participant/',views.already_registered_as_participant),
+
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
     path('accounts/', include('allauth.socialaccount.providers.google.urls')),
