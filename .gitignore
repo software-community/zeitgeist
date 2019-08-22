@@ -5,3 +5,4 @@ zeitgeist_2019_website/db.sqlite3
 **/*.pyc
 **/*.pyo
 zeitgeist_2019_website/zeitgeist_2019_website/db.cnf
+.env

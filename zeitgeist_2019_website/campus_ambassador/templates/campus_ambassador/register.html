@@ -59,7 +59,7 @@
                 <h2 class="text-center">Registration Details</h2>
                 <form method="POST">
                 {% csrf_token %}
-                {{ registration_details_form }}<br>
+                {{ campus_ambassador_registration_details_form }}<br>
                 <label for="id_accept_campus_ambassador_policy"><input name="accept_campus_ambassador_policy" id="id_accept_campus_ambassador_policy" required="" type="checkbox"> I have read and accept the <a href="{% static 'campus_ambassador/CA.pdf' %}" target="_blank">Campus Ambassador Policy</a></label>
                 <input type="submit" value="Register">
                 </form>

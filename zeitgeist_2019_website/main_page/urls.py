@@ -18,11 +18,17 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
 
-    # path('', views.home, name = "main_page_home"),
-    path('', RedirectView.as_view(pattern_name='campus_ambassador_home', permanent=False), name="main_page_home"),
+    path('', views.main_page_home, name="main_page_home"),
+    path('register_as_participant/', views.register_as_participant, name="register_as_participant"),
+    path('events/', views.main_page_events, name="main_page_events"),
+    path('register/<int:event_id>/', views.register_for_event, name="register_for_event"),
+    path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
+    path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
+    path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible

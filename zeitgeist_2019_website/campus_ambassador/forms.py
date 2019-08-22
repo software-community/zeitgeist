@@ -1,7 +1,7 @@
 from django import forms
-from .models import RegistrationDetails
+from .models import *
 
-class RegistrationDetailsForm(forms.ModelForm):
+class CampusAmbassadorRegistrationDetailsForm(forms.ModelForm):
     class Meta:
         model = RegistrationDetails
         fields = ['college', 'mobile_number', 'why_interested',
