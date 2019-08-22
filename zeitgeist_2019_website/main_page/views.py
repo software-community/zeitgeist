@@ -119,7 +119,8 @@ def register_for_event(request, event_id):
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
         if request.method == "POST":
-            team_member_formset = TeamHasMemberFormSet(request.POST, initial=[{'team_member' : str(participant.participant_code)}])
+            print(request.POST)
+            team_member_formset = TeamHasMemberFormSet(request.POST, initial=[{'team_member' : str(participant.participant_code)}],prefix='team_member')
             team_form = TeamForm(request.POST)
             if team_member_formset.is_valid() and team_form.is_valid():
                 for team_member_form in team_member_formset:
@@ -132,13 +133,15 @@ def register_for_event(request, event_id):
                     # if form is empty
                     except:
                         continue
+                print(team_form.cleaned_data)
+                alpha_name=team_form.cleaned_data['name']
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(request.user.id) + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
                 new_team.team_code = temp_team_code
                 new_team.event = event
                 new_team.captain = participant
                 new_team.save()
-                new_team = Team.objects.get(name=team_form.name, team_code=temp_team_code, event=event, captain=participant)
+                new_team = Team.objects.get(name=alpha_name, team_code=temp_team_code, event=event, captain=participant)
                 new_team_code = ((str(new_team.name).replace(" ", ""))[:4]).upper() + str(new_team.id) + 'Z19'
                 new_team.team_code = new_team_code
                 new_team.save()
@@ -146,7 +149,7 @@ def register_for_event(request, event_id):
                 # ParticipantHasParticipated.objects.create(participant=participant, event=event)
                 # TeamHasMember.objects.create(team=new_team, member=participant)
                 for team_member_form in team_member_formset:
-                    team_member = Participant.objects.get(participant_code=team_member_form.team_member)
+                    team_member = Participant.objects.get(participant_code=team_member_form.cleaned_data['team_member'])
                     ParticipantHasParticipated.objects.create(participant=team_member, event=event)
                     TeamHasMember.objects.create(team=new_team, member=team_member)
                 # send_mail(
@@ -160,7 +163,7 @@ def register_for_event(request, event_id):
                 return HttpResponse("Success")
         else:
             team_form = TeamForm()
-            team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}])
+            team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}],prefix='team_member')
 
         return render(request, 'main_page/register_team.html',
                         {
