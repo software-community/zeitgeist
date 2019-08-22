@@ -13,7 +13,6 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
 
     def clean_referring_ca(self):
         referring_ca_code = self.cleaned_data['referring_ca'].strip().upper()
-        print(referring_ca_code)
         if referring_ca_code == '':
             referring_ca_code = None
         else:
@@ -33,18 +32,15 @@ class TeamForm(forms.ModelForm):
 
 class TeamHasMemberForm(forms.Form):
 
-    team_member = forms.CharField(label="Member Participant Code")
+    team_member = forms.CharField(label="Member Participant Code", required=True)
 
-    def clean(self):
-        self.cleaned_data = super().clean()
+    def clean_team_member(self):
+        team_member_code = self.cleaned_data['team_member'].strip().upper()
         try:
-            team_member = self.cleaned_data['team_member'].upper()
-            obj = Participant.objects.get(participant_code=team_member)
-            self.cleaned_data['team_member'] = obj
-            return self.cleaned_data
-        except:
-            err_message = "Please enter a valid Participant Code!"
-            self.add_error('team_member', err_message)
+            team_member_code = Participant.objects.get(participant_code=team_member_code)
+        except Participant.DoesNotExist:
+            raise forms.ValidationError(message="Please enter a valid Participant Code!", code="InvalidParticipantCode")
+        return team_member_code
 
 
 class BaseTeamFormSet(BaseFormSet):
@@ -53,9 +49,11 @@ class BaseTeamFormSet(BaseFormSet):
             return
         team_members = set()
         for form in self.forms:
-            team_member = form.cleaned_data.get('team_member')
-            if team_member == None:
+            try:
+                team_member = form.cleaned_data.get('team_member')
+            # this form was not intended to be submitted
+            except:
                 continue
             if team_member in team_members:
-                raise forms.ValidationError("Cannot have same participants in a team.")
+                raise forms.ValidationError(message="Cannot have same participants in one team!", code="SameParticipant")
             team_members.add(team_member)
