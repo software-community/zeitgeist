@@ -18,6 +18,7 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
 
@@ -26,7 +27,7 @@ urlpatterns = [
     path('events/', views.main_page_events, name="main_page_events"),
     path('register/<int:event_id>/', views.register_for_event, name="register_for_event"),
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
-    path('webhook/', views.weebhook, name="webhook"),
+    path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
 
     # define the login URLs

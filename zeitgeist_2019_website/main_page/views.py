@@ -183,8 +183,9 @@ def pay_for_subcategory(request, subcategory_id):
         return redirect('register_as_participant')
 
     subcategory = Subcategory.objects.get(id=subcategory_id)
-
-    response = payment_request(subcategory.participation_fees_per_person, subcategory.name, request.user.email)
+    print(participant.mobile_number.__str__())
+    response = payment_request(request.user.get_full_name,subcategory.participation_fees_per_person, subcategory.name,
+                request.user.email, participant.mobile_number.__str__())
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']
@@ -199,14 +200,13 @@ def weebhook(request):
 
     if request.method == "POST":
         print(request.POST)
-        data = request.POST
-        mac_provided = data.pop('mac')
+        data = request.POST.copy()
+        mac_provided = data.pop('mac')[0]
 
         message = "|".join(v for k, v in sorted(
             data.items(), key=lambda x: x[0].lower()))
-
         mac_calculated = hmac.new(
-            os.getenv('private_salt'), message, hashlib.sha1).hexdigest()
+            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
 
         if mac_provided == mac_calculated:
             try:
@@ -221,8 +221,11 @@ def weebhook(request):
                 participantpaspaid.save()
             except Exception as err:
                 print(err)
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=400)
 
 
 def payment_redirect(request):
-    if request.method == "POST":
-        print(request.POST)
+    return HttpResponse('<p>Payment ID: '+request.GET['payment_id']+'</p><p>Payment Status: '+
+                    request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
