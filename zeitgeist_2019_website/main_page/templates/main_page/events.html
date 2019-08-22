@@ -27,7 +27,9 @@
             <h3 class="title"><span style="color: #dd0a37;">{{ category.name }}</span></h3>
         </div>
         <!-- section title -->
+
         {% for subcategory,events in subcategories.items %}
+
         <!-- member -->
         <div class="jumbotron">
 
@@ -42,12 +44,6 @@
                             <img src="{% static 'main_page/img/member03.jpg' %}" alt="">
                         </div>
                         <div class="member-body">
-                            <!-- <div class="member-social">
-                          <a href="#"><i class="fa fa-facebook"></i></a>
-                          <a href="#"><i class="fa fa-twitter"></i></a>
-                          <a href="#"><i class="fa fa-instagram"></i></a>
-                          <a href="#"><i class="fa fa fa-linkedin"></i></a>
-                      </div> -->
                             <div class="member-content">
                                 <h2>{{ event.name }}</h2>
                                 <span>{{ subcategory.name }}</span>
@@ -59,9 +55,10 @@
                 {% endfor %}
 
             </div>
-            <button class='btn btn-danger btn-lg' href="#">Pay Now!</button>
+            <a href="{% url 'pay_for_subcategory' subcategory.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
         </div>
         <!-- /member -->
+
         {% for event in events %}
         <!-- member modal -->
         <div id="{{ event.name|cut:' '|cut:'('|cut:')' }}" class="member-modal modal fade">
@@ -72,7 +69,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="member-modal-img">
-                                    <img src="{% static 'main_page/img/member02.jpg' %}" alt="">
+                                    <img src="{% static 'main_page/img' %}{{ event.id }}" alt="">
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -87,42 +84,47 @@
                                         <a class="btn btn-warning" href="{{ event.link_to_rulebook }}"
                                             target="_blank">Download</a>
                                     </div>
-                                        <br>
-                                        <p><span style="color:crimson;font-weight: bold;">Minimum Team Size : </span> {{ event.minimum_team_size }}</p>
-                                        <p><span style="color:crimson;font-weight: bold;">Maximum Team Size : </span> {{ event.maximum_team_size }}</p>
-                                    
-
-                                    <!-- <div class="member-social">
-                                          <h4>Social Profile</h4>
-                                          <a href="#"><i class="fa fa-facebook"></i></a>
-                                          <a href="#"><i class="fa fa-twitter"></i></a>
-                                          <a href="#"><i class="fa fa-instagram"></i></a>
-                                          <a href="#"><i class="fa fa fa-linkedin"></i></a>
-                                      </div> -->
                                     <br>
-                                      
-                                          <h3 class="member-name" >Prize Details </h3>
-                                          <span class="member-job" >- Prize Money + Goodies</span>
-                                          <p><span style="color:crimson;font-weight: bold;">First : </span> {{ event.first_cash_prize }}</p>
-                                          <p><span style="color:crimson;font-weight: bold;">Second : </span> {{ event.second_cash_prize }}</p>
-                                          <p><span style="color:crimson;font-weight: bold;">Third : </span> {{ event.third_cash_prize }}</p>
-                                      <br>
-                                      
+                                    <h3 class="member-name">Type </h3>
+                                    <span class="member-job">- {{ event.event_type }}</span>
+                                    {% if event.event_type == "Group" %}
+                                    <p><span style="color:crimson;font-weight: bold;">Minimum Team Size : </span>
+                                        {{ event.minimum_team_size }}</p>
+                                    <p><span style="color:crimson;font-weight: bold;">Maximum Team Size : </span>
+                                        {{ event.maximum_team_size }}</p>
+                                    {% endif %}
+                                    <br>
+
+                                    <h3 class="member-name">Prize Details </h3>
+                                    <span class="member-job">- Prize Money + Goodies</span>
+                                    <p><span style="color:crimson;font-weight: bold;">First : </span>
+                                        {{ event.first_cash_prize }}</p>
+                                    <p><span style="color:crimson;font-weight: bold;">Second : </span>
+                                        {{ event.second_cash_prize }}</p>
+                                    <p><span style="color:crimson;font-weight: bold;">Third : </span>
+                                        {{ event.third_cash_prize }}</p>
+                                    <br>
+
                                     <div class="member-events">
                                         <h3>Event Schedule</h3>
                                         <div class="member-event">
-                                            <span style="color:crimson;font-size: medium"><strong>Start Time -</strong>
+                                            <span style="color:crimson;font-size: medium"><strong>Start Time
+                                                    -</strong>
                                             </span>
                                         </div>
-                                        <p>{{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}</p>
+                                        <p>{{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}
+                                        </p>
                                         <div class="member-event">
-                                            <span style="color:crimson;font-size: medium"><strong>End Time -</strong>
-                                                </span>
+                                            <span style="color:crimson;font-size: medium"><strong>End Time
+                                                    -</strong>
+                                            </span>
                                         </div>
-                                        <p>{{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}</p>
+                                        <p>{{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}
+                                        </p>
 
                                         <br>
-                                        <a href="{% url 'register_for_event' event.id %}" class="btn btn-danger">Register</a>
+                                        <a href="{% url 'register_for_event' event.id %}"
+                                            class="btn btn-danger">Register</a>
                                     </div>
 
                                 </div>
