@@ -11,19 +11,17 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
         model = Participant
         fields = ['college', 'mobile_number', 'referring_ca']
 
-    def clean(self):
-        self.cleaned_data = super().clean()
-        if self.data['referring_ca'] == '':
-            self.cleaned_data['referring_ca'] = None
-            return self.cleaned_data
-        try:
-            referring_ca = self.data['referring_ca'].upper()
-            obj = RegistrationDetails.objects.get(campus_ambassador_code=referring_ca)
-            self.cleaned_data['referring_ca'] = obj
-            return self.cleaned_data
-        except:
-            err_message = "Please enter a valid CA Referral Code!"
-            self.add_error('referring_ca', err_message)
+    def clean_referring_ca(self):
+        referring_ca_code = self.cleaned_data['referring_ca'].strip().upper()
+        print(referring_ca_code)
+        if referring_ca_code == '':
+            referring_ca_code = None
+        else:
+            try:
+                referring_ca_code = RegistrationDetails.objects.get(campus_ambassador_code=referring_ca_code)
+            except RegistrationDetails.DoesNotExist:
+                raise forms.ValidationError(message="Please enter a valid CA Referral Code!", code="InvalidCampusAmbassadorReferralCode")
+        return referring_ca_code
 
 
 class TeamForm(forms.ModelForm):
@@ -36,7 +34,6 @@ class TeamForm(forms.ModelForm):
 class TeamHasMemberForm(forms.Form):
 
     team_member = forms.CharField(label="Member Participant Code")
-    
 
     def clean(self):
         self.cleaned_data = super().clean()
