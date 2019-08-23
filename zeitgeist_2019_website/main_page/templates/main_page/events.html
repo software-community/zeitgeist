@@ -3,18 +3,28 @@
 {% load static %}
 
 {% block content %}
-<div id="home">
-    <!-- background image -->
+<!-- <div id="home">
+    background image
     <div class="section-bg" style="background-image:url({% static 'main_page/img/maxresdefault.jpg' %})"
         data-stellar-background-ratio="0.5"></div>
-    <!-- /background image -->
+    /background image
 
-    <!-- home wrapper -->
+    home wrapper
     <div class="home-wrapper">
     </div>
-    <!-- /home wrapper -->
-</div>
+    /home wrapper
+</div> -->
+<div class='jumbotron' style="background-color:#db324d; color:#fdef8d ">
+    <br><br>
+    <div class='container'>
+        <ul class='list-group'>
+            <li style="background-color:#db324d; color:#fdef8d; font-size: larger " class='list-group-item'>Participants must register before taking part in any event. Participants are required to give their <strong>valid mobile number (mandatory)</strong> and <strong>CA referral code (optional)</strong> for registration. To register as a participant,<br> <a  class='btn btn-warning btn-lg' href="{% url 'register_as_participant' %}" style="font-weight:bolder;">Click here</a></li>
+            <li style="background-color:#db324d; color:#fdef8d; font-size: larger " class='list-group-item'>Each Category is divided into Subcategories. The participant pays for the Subcategory, and becomes eligible to participate in any event in that Subcategory.<strong> Payment is based on Subcategory, not individual events.</strong></li>
+            <li style="background-color:#db324d; color:#fdef8d; font-size: larger " class='list-group-item'>For duet/group events, <strong>only the captain should register the team </strong>. All team members (including the captain) must have already paid for the Subcategory of the event that they are taking part in, otherwise the team won't get registered.</li>
+        </ul>
+    </div>
 
+</div>
 
 <div id="Events" class="section">
     <!-- container -->
