@@ -35,6 +35,7 @@
         <!-- section title -->
         <div class="section-title">
             <h3 class="title"><span style="color: #dd0a37;">{{ category.name }}</span></h3>
+            
         </div>
         <!-- section title -->
 
@@ -44,7 +45,6 @@
         <div class="jumbotron">
 
             <h2 class="title">{{ subcategory.name }}</h2>
-
             <div class="row">
                 {% for event in events %}
 
@@ -65,7 +65,10 @@
                 {% endfor %}
 
             </div>
+            <h4 class='title'><span style="color: crimson">Participation Fees:</span> {{ subcategory.participation_fees_per_person }} INR per person</h4>
+
             <a href="{% url 'pay_for_subcategory' subcategory.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
+
         </div>
         <!-- /member -->
 
