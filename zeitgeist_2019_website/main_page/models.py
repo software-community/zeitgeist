@@ -81,6 +81,7 @@ class Event(models.Model):
 class Participant(models.Model):
 
     participating_user = models.OneToOneField(User, verbose_name='Participating User', on_delete=models.CASCADE, primary_key=True)
+    name = models.CharField(verbose_name='Name', max_length=40, null=False, blank=False)
     participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
     college = models.CharField(max_length=200, verbose_name='College Name')
     mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Mobile Number', region='IN')

@@ -3,6 +3,7 @@ from .models import *
 from campus_ambassador.models import *
 from django.forms import BaseFormSet
 
+
 class ParticipantRegistrationDetailsForm(forms.ModelForm):
 
     referring_ca = forms.CharField(required=False, widget=forms.TextInput, label='CA Refferal Code')
@@ -47,12 +48,13 @@ class BaseTeamFormSet(BaseFormSet):
     def clean(self):
         if any(self.errors):
             return
+        if self.forms[0].has_changed():
+            self.forms[0].add_error('team_member', forms.ValidationError(message="This field should not be changed!", code="CaptainChanged"))
         team_members = set()
         for form in self.forms:
-            try:
-                team_member = form.cleaned_data.get('team_member')
-            # this form was not intended to be submitted
-            except:
+            team_member = form.cleaned_data.get('team_member')
+            # if form was not even filled
+            if not team_member:
                 continue
             if team_member in team_members:
                 raise forms.ValidationError(message="Cannot have same participants in one team!", code="SameParticipant")
