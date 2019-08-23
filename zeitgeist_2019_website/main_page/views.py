@@ -61,10 +61,10 @@ def register_as_participant(request):
             new_participant_registration.save()
             send_mail(
                 'Welcome to Zeitgeist 2k19',
-                'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+                'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
                     new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                 'zeitgeist.pr@iitrpr.ac.in',
-                [request.user.email],
+                [new_participant_registration.participating_user.email],
                 fail_silently=False,
             )
             return redirect('main_page_events')
@@ -98,6 +98,13 @@ def register_for_event(request, event_id):
 
     event = Event.objects.get(id=event_id)
 
+    try:
+        ParticipantHasParticipated.objects.get(participant=participant, event=event)
+        # code did not blow, hence participant has already participated in this event
+        return HttpResponse("You have already registered for this event! Double participation for one event is not allowed.")
+    except:
+        pass
+
     if event.event_type == 'Solo':
         try:
             payment_details = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=event.subcategory)
@@ -108,10 +115,10 @@ def register_for_event(request, event_id):
         ParticipantHasParticipated.objects.create(participant=participant, event=event)
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
-            'Dear ' + str(request.user.first_name) + ' ' + str(request.user.last_name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
+            'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
                 participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
-            [request.user.email],
+            [participant.participating_user.email],
             fail_silently=False,
         )
         return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
@@ -119,50 +126,51 @@ def register_for_event(request, event_id):
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
         if request.method == "POST":
-            print(request.POST)
-            team_member_formset = TeamHasMemberFormSet(request.POST, initial=[{'team_member' : str(participant.participant_code)}],prefix='team_member')
+            list_of_team_members = []
+            list_of_email_addresses_of_team_members = []
+            team_member_formset = TeamHasMemberFormSet(request.POST, initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
             team_form = TeamForm(request.POST)
             if team_member_formset.is_valid() and team_form.is_valid():
                 for team_member_form in team_member_formset:
+                    team_member = team_member_form.cleaned_data.get('team_member')
+                    # if form was empty
+                    if not team_member:
+                        continue
+                    # since participant is already validated, his model must exist
                     try:
-                        team_member_payment = ParticipantHasPaid.objects.get(participant=team_member_form.team_member, paid_subcategory=event.subcategory)
+                        list_of_team_members.append(team_member)
+                        list_of_email_addresses_of_team_members.append(team_member.participating_user.email)
+                        team_member_payment = ParticipantHasPaid.objects.get(participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
                             return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
                     except ParticipantHasPaid.DoesNotExist:
                         return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
-                    # if form is empty
-                    except:
-                        continue
-                print(team_form.cleaned_data)
-                alpha_name=team_form.cleaned_data['name']
+                # print(team_form.cleaned_data)
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(request.user.id) + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
                 new_team.team_code = temp_team_code
                 new_team.event = event
                 new_team.captain = participant
                 new_team.save()
-                new_team = Team.objects.get(name=alpha_name, team_code=temp_team_code, event=event, captain=participant)
+                new_team = Team.objects.get(team_code=temp_team_code)
                 new_team_code = ((str(new_team.name).replace(" ", ""))[:4]).upper() + str(new_team.id) + 'Z19'
                 new_team.team_code = new_team_code
                 new_team.save()
                 new_team = Team.objects.get(team_code=new_team_code)
-                # ParticipantHasParticipated.objects.create(participant=participant, event=event)
-                # TeamHasMember.objects.create(team=new_team, member=participant)
-                for team_member_form in team_member_formset:
-                    team_member = Participant.objects.get(participant_code=team_member_form.cleaned_data['team_member'])
+                for team_member in list_of_team_members:
                     ParticipantHasParticipated.objects.create(participant=team_member, event=event)
                     TeamHasMember.objects.create(team=new_team, member=team_member)
                 send_mail(
                     'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
-                    'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                     'zeitgeist.pr@iitrpr.ac.in',
-                    [request.user.email],
+                    list_of_email_addresses_of_team_members,
                     fail_silently=False,
                 )
                 return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
         else:
             team_form = TeamForm()
-            team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}],prefix='team_member')
+            team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
 
         return render(request, 'main_page/register_team.html',
                         {
@@ -180,9 +188,17 @@ def pay_for_subcategory(request, subcategory_id):
         return redirect('register_as_participant')
 
     subcategory = Subcategory.objects.get(id=subcategory_id)
-    print(participant.mobile_number.__str__())
+
+    try:
+        ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
+        # code did not blow, hence participant has already paid for this subcategory
+        return HttpResponse("You have already paid for this Subcategory! You do not need to pay again.")
+    except:
+        pass
+
     response = payment_request(request.user.get_full_name,subcategory.participation_fees_per_person, subcategory.name,
                 request.user.email, participant.mobile_number.__str__())
+
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']
@@ -196,7 +212,7 @@ def pay_for_subcategory(request, subcategory_id):
 def weebhook(request):
 
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         data = request.POST.copy()
         mac_provided = data.pop('mac')[0]
 
