@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from . import api
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'cats', api.CategoryViewSet)
+router.register(r'subcats', api.SubcategoryViewSet)
+router.register(r'events', api.EventViewSet)
 
 urlpatterns = [
-
     path('', views.main_page_home, name="main_page_home"),
     path('register_as_participant/', views.register_as_participant, name="register_as_participant"),
     path('events/', views.main_page_events, name="main_page_events"),
@@ -29,6 +35,7 @@ urlpatterns = [
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
+    path('data-api/', include(router.urls)),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
