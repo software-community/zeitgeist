@@ -98,6 +98,13 @@ def register_for_event(request, event_id):
 
     event = Event.objects.get(id=event_id)
 
+    try:
+        ParticipantHasParticipated.objects.get(participant=participant, event=event)
+        # code did not blow, hence participant has already participated in this event
+        return HttpResponse("You have already registered for this event! Double participation for one event is not allowed.")
+    except:
+        pass
+
     if event.event_type == 'Solo':
         try:
             payment_details = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=event.subcategory)
@@ -181,9 +188,17 @@ def pay_for_subcategory(request, subcategory_id):
         return redirect('register_as_participant')
 
     subcategory = Subcategory.objects.get(id=subcategory_id)
-    # print(participant.mobile_number.__str__())
+
+    try:
+        ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
+        # code did not blow, hence participant has already paid for this subcategory
+        return HttpResponse("You have already paid for this Subcategory! You do not need to pay again.")
+    except:
+        pass
+
     response = payment_request(request.user.get_full_name,subcategory.participation_fees_per_person, subcategory.name,
                 request.user.email, participant.mobile_number.__str__())
+
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']

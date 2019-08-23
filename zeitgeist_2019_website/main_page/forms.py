@@ -49,7 +49,9 @@ class BaseTeamFormSet(BaseFormSet):
         if any(self.errors):
             return
         if self.forms[0].has_changed():
-            self.forms[0].add_error('team_member', forms.ValidationError(message="This field should not be changed!", code="CaptainChanged"))
+            captain_participation_code = self.forms[0].initial['team_member']
+            msg = "You must fill " + str(captain_participation_code) + " here!"
+            self.forms[0].add_error('team_member', forms.ValidationError(message=msg, code="CaptainChanged"))
         team_members = set()
         for form in self.forms:
             team_member = form.cleaned_data.get('team_member')
@@ -57,5 +59,6 @@ class BaseTeamFormSet(BaseFormSet):
             if not team_member:
                 continue
             if team_member in team_members:
-                raise forms.ValidationError(message="Cannot have same participants in one team!", code="SameParticipant")
+                msg = "Each participant in a team must be unique!"
+                form.add_error('team_member', forms.ValidationError(message=msg, code="SameParticipant"))
             team_members.add(team_member)
