@@ -4,4 +4,5 @@
 .DS_Store
 **/*.pyc
 **/*.pyo
+zeitgeist_2019_website/zeitgeist_2019_website/db.cnf
 .env

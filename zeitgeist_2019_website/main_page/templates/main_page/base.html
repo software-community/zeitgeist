@@ -63,15 +63,13 @@
 				<ul class="main-nav nav navbar-nav navbar-right">
 					{% if title %}
 					<li><a href="#home">Home</a></li>
-					
 					<li><a href="#about">About</a></li>
 					<li><a href="#schedule">Schedule</a></li>
 					<li><a href="#team">Team</a></li>
 					<li><a href="#sponsors">Sponsors</a></li>
 					<li><a href="#contact">Contact</a></li>
 					{% else %}
-					<li><a href="{% url 'main_page_home' %}#home">Home</a></li>
-					
+					<li><a href="{% url 'main_page_home' %}#home">Home</a></li>					
 					<li><a href="{% url 'main_page_home' %}#about">About</a></li>
 					<li><a href="{% url 'main_page_home' %}#schedule">Schedule</a></li>
 					<li><a href="{% url 'main_page_home' %}#team">Team</a></li>
@@ -80,7 +78,6 @@
 					{% endif %}
 					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
-					
 					{% if request.user.is_authenticated %}
 					<li><a href="{% url 'account_logout' %}">Logout</a></li>
 					{% else %}
@@ -116,9 +113,9 @@
 				<!-- contact social -->
 				<div class="col-md-4 col-md-push-4">
 					<div class="contact-social">
-						<a href="https://www.facebook.com/zeitgeist.iitrpr/"><i class="fa fa-facebook"></i></a>
-						<a href="https://twitter.com/zeitgeist_rpr?lang=en"><i class="fa fa-twitter"></i></a>
-						<a href="https://www.instagram.com/zeitgeist_iitrpr/"><i class="fa fa-instagram"></i></a>
+						<a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i class="fa fa-facebook"></i></a>
+						<a href="https://twitter.com/zeitgeist_rpr" target="_blank"><i class="fa fa-twitter"></i></a>
+						<a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i class="fa fa-instagram"></i></a>
 					</div>
 				</div>
 				<!-- /contact social -->
@@ -136,8 +133,6 @@
 	<script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
 	<script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
 	<script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
-	<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script> -->
-	<!-- <script src="{% static 'main_page/js/google-map.js' %}"></script> -->
 	<script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
 	<script src="{% static 'main_page/js/main.js' %}"></script>
 
