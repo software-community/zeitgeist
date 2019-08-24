@@ -87,7 +87,7 @@ class Participant(models.Model):
     name = models.CharField(verbose_name='Name', max_length=40, null=False, blank=False)
     college_name = models.CharField(max_length=200, verbose_name='College Name', null=False, blank=False)
     college_city = models.CharField(max_length=50, verbose_name='College City', null=False, blank=False)
-    personal_address_with_pin_code = models.CharField(max_length=200, verbose_name='Personal Address with PIN Code', null=False, blank=False)
+    personal_address_with_pin_code = models.TextField(verbose_name='Personal Address with PIN Code', null=False, blank=False)
     contact_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Contact Mobile Number', region='IN')
     whatsapp_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='WhatsApp Mobile Number', region='IN')
     birth_date = models.DateField(verbose_name='Birth Date (YYYY-MM-DD)', null=False, blank=False)

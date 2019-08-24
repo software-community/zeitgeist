@@ -20,7 +20,7 @@ from django.forms import formset_factory
 
 
 def main_page_home(request):
-    context={'title':'Zeitgeist'}
+    context={'title': 'Zeitgeist'}
     return render(request, 'main_page/index.html',context)
 
 
@@ -70,7 +70,7 @@ def register_as_participant(request):
                 [new_participant_registration.participating_user.email],
                 fail_silently=False,
             )
-            messages={'2':f'You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {request.user.participant.participant_code }.','4':f'If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address { request.user.email }.','1':' We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!'}
+            messages={'2':f'You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {request.user.participant.participant_code }.','4':f'If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address { request.user.email }.','1':' Note that this message is not for your participation in any event. To participate in events, you need to register for them on the Events page. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!'}
             return render(request, 'main_page/register_as_participant_success.html')
     else:
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
@@ -126,7 +126,7 @@ def register_for_event(request, event_id):
             [participant.participating_user.email],
             fail_silently=False,
         )
-        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull."})
+        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck."})
 
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
@@ -174,7 +174,7 @@ def register_for_event(request, event_id):
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
                 )
-                messages={'1':f"Your Registration for the event {event.name} is succesfull.",'2':f'Your TEAM CODE is: {new_team_code} .'}
+                messages={'1':f"Your Registration for the event {event.name} is succesfull.",'2':f'Your TEAM CODE is: {new_team_code}. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck.'}
                 return render(request, 'main_page/messages.html', context={'messages':messages  })
         else:
             team_form = TeamForm()
