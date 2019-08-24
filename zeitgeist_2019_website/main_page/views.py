@@ -65,7 +65,7 @@ def register_as_participant(request):
             send_mail(
                 'Welcome to Zeitgeist 2k19',
                 'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nWe wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nNote that this email is not for your participation in any event. To participate in events, you need to register for them on the Events page of Zeitgeist website. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                 'zeitgeist.pr@iitrpr.ac.in',
                 [new_participant_registration.participating_user.email],
                 fail_silently=False,
@@ -141,10 +141,10 @@ def register_for_event(request, event_id):
                     # if form was empty
                     if not team_member:
                         continue
+                    list_of_team_members.append(team_member)
+                    list_of_email_addresses_of_team_members.append(team_member.participating_user.email)
                     # since participant is already validated, his model must exist
                     try:
-                        list_of_team_members.append(team_member)
-                        list_of_email_addresses_of_team_members.append(team_member.participating_user.email)
                         team_member_payment = ParticipantHasPaid.objects.get(participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
                             messages={'1':"Some of the team members have not paid for the subcategory !!!",'2':"Try again when all the team members have paid for the subcategory."}
@@ -205,8 +205,9 @@ def pay_for_subcategory(request, subcategory_id):
     except:
         pass
 
-    response = payment_request(request.user.get_full_name,subcategory.participation_fees_per_person, subcategory.name,
-                request.user.email, participant.mobile_number.__str__())
+    purpose = 'PAYMENT FOR ' + str(subcategory.name).upper() + ' OF ' + str(subcategory.category.name).upper() + ' CATEGORY'
+    response = payment_request(participant.name, subcategory.participation_fees_per_person, purpose,
+                request.user.email, participant.contact_mobile_number.__str__())
 
     if response['success']:
         url = response['payment_request']['longurl']
