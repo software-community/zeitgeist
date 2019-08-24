@@ -17,12 +17,24 @@
                     
                     <div class="col-md-8 col-md-offset-2">
                     <div class="home-content">
-                        {% if message %}
+                        <!-- {% if message %}
                         <h1>{{ message }}</h1>
                         {% else %}
                     <h1>You are already registered as Participant!!</h1>
                     <h4 class="lead">If you want to edit your response contact</h4>
                     <a href="tel:7742522607" class="main-btn">7742522607</a>
+                    {% endif %} -->
+                    {% if messages %}
+                            {% for level,info in messages.items %}
+                            <h{{ level }}>
+                                {{ info }}
+                            </h{{ level }}>
+                            {% endfor %}
+                    {% endif %}
+                    {% if buttons %}
+                            {% for button in buttons %}
+                            <a href="{{ button.link }}" class="main-btn btn-lg">{{ button.text }}</a>
+                            {% endfor %}
                     {% endif %}
                     </div>
                     </div>
