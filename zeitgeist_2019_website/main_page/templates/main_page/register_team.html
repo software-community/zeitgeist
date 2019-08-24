@@ -3,10 +3,12 @@
 {% load static %}
 
 {% block content %}
-<div class="jumbotron" style="background-color: crimson; color:blanchedalmond;" >
+<div class="jumbotron" style="background-color: #39a0ed; color:#17301c;" >
     <div class='container'>
         <br><br>
-    <h1>Fill the form below to register Team!</h1>
+    <h1>Fill the form below to register Team for {{ event.name }}!</h1>
+    <h4>Minimum Team Size (including captain) : {{ event.minimum_team_size }}</h4>
+    <h4>Maximum Team Size (including captain) : {{ event.maximum_team_size }}</h4>
     </div>
 </div>
 <div class='container'>

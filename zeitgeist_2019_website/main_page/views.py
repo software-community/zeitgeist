@@ -173,7 +173,7 @@ def register_for_event(request, event_id):
             team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
 
         return render(request, 'main_page/register_team.html',
-                        {
+                        {   'event':event,
                             'team_form': team_form,
                             'team_member_formset': team_member_formset,
                             })
