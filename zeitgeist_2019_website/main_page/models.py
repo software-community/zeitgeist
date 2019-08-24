@@ -74,7 +74,6 @@ class Event(models.Model):
     maximum_team_size = models.IntegerField(blank=False)
     start_date_time = models.DateTimeField(blank=False)
     end_date_time = models.DateTimeField(blank=False)
-    link_to_rulebook = models.URLField(max_length=400, verbose_name='Link to Rulebook', blank=False)
     description = models.TextField(blank=False)
 
     def __str__(self):
