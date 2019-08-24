@@ -10,7 +10,7 @@ class ParticipantRegistrationDetailsForm(forms.ModelForm):
 
     class Meta:
         model = Participant
-        fields = ['name', 'college', 'mobile_number', 'referring_ca']
+        fields = ['name', 'college_name', 'college_city', 'personal_address_with_pin_code', 'contact_mobile_number', 'whatsapp_mobile_number', 'birth_date', 'referring_ca']
 
     def clean_referring_ca(self):
         referring_ca_code = self.cleaned_data['referring_ca'].strip().upper()

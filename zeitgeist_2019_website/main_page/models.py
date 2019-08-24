@@ -84,10 +84,14 @@ class Event(models.Model):
 class Participant(models.Model):
 
     participating_user = models.OneToOneField(User, verbose_name='Participating User', on_delete=models.CASCADE, primary_key=True)
-    name = models.CharField(verbose_name='Name', max_length=40, null=False, blank=False)
     participant_code = models.CharField(max_length=15, verbose_name='Participant Code', unique=True)
-    college = models.CharField(max_length=200, verbose_name='College Name')
-    mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Mobile Number', region='IN')
+    name = models.CharField(verbose_name='Name', max_length=40, null=False, blank=False)
+    college_name = models.CharField(max_length=200, verbose_name='College Name', null=False, blank=False)
+    college_city = models.CharField(max_length=50, verbose_name='College City', null=False, blank=False)
+    personal_address_with_pin_code = models.CharField(max_length=200, verbose_name='Personal Address with PIN Code', null=False, blank=False)
+    contact_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='Contact Mobile Number', region='IN')
+    whatsapp_mobile_number = PhoneNumberField(null=False, blank=False, verbose_name='WhatsApp Mobile Number', region='IN')
+    birth_date = models.DateField(verbose_name='Birth Date (YYYY-MM-DD)', null=False, blank=False)
     referring_ca = models.ForeignKey(RegistrationDetails, verbose_name='CA Referral Code', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
