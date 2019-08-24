@@ -15,11 +15,12 @@ from django.core.mail import send_mail
 from django.http import HttpResponseServerError
 from .methods import payment_request
 from django.forms import formset_factory
+# from django.contrib import messages
 # Create your views here.
 
 
 def main_page_home(request):
-    context={'title':'Zeitgeist'}
+    context={'title': 'Zeitgeist'}
     return render(request, 'main_page/index.html',context)
 
 
@@ -43,7 +44,9 @@ def register_as_participant(request):
         prev_participant_registration_details = None
 
     if prev_participant_registration_details:
-        return render(request, 'main_page/messages.html',context={'already_registered':'already_registered'})
+        messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
+        buttons=[{'link':'tel:7742522607','text':'7742522607'}]
+        return render(request, 'main_page/messages.html',context={'messages':messages,'buttons':buttons})
 
     request.user.email = SocialAccount.objects.get(
         user=request.user).extra_data.get("email")
@@ -67,6 +70,7 @@ def register_as_participant(request):
                 [new_participant_registration.participating_user.email],
                 fail_silently=False,
             )
+            messages={'2':f'You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {request.user.participant.participant_code }.','4':f'If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address { request.user.email }.','1':' Note that this message is not for your participation in any event. To participate in events, you need to register for them on the Events page. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!'}
             return render(request, 'main_page/register_as_participant_success.html')
     else:
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
@@ -101,7 +105,8 @@ def register_for_event(request, event_id):
     try:
         ParticipantHasParticipated.objects.get(participant=participant, event=event)
         # code did not blow, hence participant has already participated in this event
-        return HttpResponse("You have already registered for this event! Double participation for one event is not allowed.")
+        messages={'2':"You have already registered for this event! Double participation for one event is not allowed."}
+        return render(request,'main_page/messages.html',{'messages':messages})
     except:
         pass
 
@@ -121,7 +126,7 @@ def register_for_event(request, event_id):
             [participant.participating_user.email],
             fail_silently=False,
         )
-        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull."})
+        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck."})
 
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
@@ -142,9 +147,11 @@ def register_for_event(request, event_id):
                     try:
                         team_member_payment = ParticipantHasPaid.objects.get(participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
-                            return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
+                            messages={'1':"Some of the team members have not paid for the subcategory !!!",'2':"Try again when all the team members have paid for the subcategory."}
+                            return render(request,'main_page/messages.html',context={'messages':messages })
                     except ParticipantHasPaid.DoesNotExist:
-                        return render(request,'main_page/messages.html',context={'message':"Some of the team members have not paid for the subcategory !!! Try again when all the team members have paid for the subcategory."})
+                        messages={'1':"Some of the team members have not paid for the subcategory !!!",'2':"Try again when all the team members have paid for the subcategory."}
+                        return render(request,'main_page/messages.html',context={'messages':messages})
                 # print(team_form.cleaned_data)
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(request.user.id) + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
@@ -167,7 +174,8 @@ def register_for_event(request, event_id):
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
                 )
-                return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull. Your TEAM CODE is {new_team_code}."})
+                messages={'1':f"Your Registration for the event {event.name} is succesfull.",'2':f'Your TEAM CODE is: {new_team_code}. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck.'}
+                return render(request, 'main_page/messages.html', context={'messages':messages  })
         else:
             team_form = TeamForm()
             team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
@@ -191,8 +199,9 @@ def pay_for_subcategory(request, subcategory_id):
 
     try:
         ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
+        messages={'1':'You have already paid for this Subcategory','2':'You do not need to pay again.'}
         # code did not blow, hence participant has already paid for this subcategory
-        return HttpResponse("You have already paid for this Subcategory! You do not need to pay again.")
+        return render(request,'main_page/messages.html',context={'messages':messages})
     except:
         pass
 
@@ -243,3 +252,8 @@ def weebhook(request):
 def payment_redirect(request):
     return HttpResponse('<p>Payment ID: '+request.GET['payment_id']+'</p><p>Payment Status: '+
                     request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
+
+# def testing(request):
+#     messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
+#     buttons=[{'link':'tel:7742522607','text':'7742522607'}]
+#     return render(request,'main_page/messages.html',context={'messages':messages,'buttons':buttons})

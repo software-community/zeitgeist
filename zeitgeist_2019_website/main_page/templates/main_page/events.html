@@ -18,7 +18,7 @@
     <br><br>
     <div class='container'>
         <ul class='list-group'>
-            <li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>Participants must register before taking part in any event. To register as a participant, <a href="{% url 'register_as_participant' %}" style="font-weight:bold;color:#17301c">click here</a>.</li>
+            <li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>Users must register themselves as participants, after which they can take part in any event after paying for that event's subcategory. To register as a participant, <a href="{% url 'register_as_participant' %}" style="font-weight:bold;color:#17301c">click here</a>. After successful registration, you will receive your unique PARTICIPANT CODE which you should use to take part in any event. <strong>Note that you can take part in events only after registering yourself as a participant.</strong></li>
             <li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>Each Category is divided into Subcategories. The participant pays for the Subcategory, and becomes eligible to participate in any event in that Subcategory.<strong> Payment is based on Subcategory, not individual events.</strong></li>
             <li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>For duet/group events, <strong>only the captain should register the team</strong>. All team members (including the captain) must have already paid for the Subcategory of the event that they are taking part in, otherwise the team won't get registered.</li>
             <li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'><strong>You will receive one email for each event you take part in.</strong> If you do not receive an email for the event, you should register for that event again.</li>
@@ -50,9 +50,9 @@
                 {% for event in events %}
 
                 <div class="col-md-4 col-xs-6">
-                    <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' '|cut:'('|cut:')' }}">
+                    <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.' }}">
                         <div class="member-img">
-                            <img src="{% static 'main_page/img/member03.jpg' %}" alt="">
+                            <img src="{% static 'main_page/img/zeitgeist_logo.png' %}" alt="">
                         </div>
                         <div class="member-body">
                             <div class="member-content">
@@ -75,7 +75,7 @@
 
         {% for event in events %}
         <!-- member modal -->
-        <div id="{{ event.name|cut:' '|cut:'('|cut:')' }}" class="member-modal modal fade">
+        <div id="{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.' }}" class="member-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="member-modal-close" data-dismiss="modal"></button>
@@ -83,7 +83,8 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="member-modal-img">
-                                    <img src="{% static 'main_page/img' %}{{ event.id }}" alt="">
+                                    <img src="{% static 'main_page/img/zeitgeist_logo.png' %}" alt="">
+                                    <!-- <img src="{% static 'main_page/img' %}{{ event.id }}" alt=""> -->
                                 </div>
                             </div>
                             <div class="col-md-7">
@@ -112,11 +113,11 @@
                                     <h3 class="member-name">Prize Details </h3>
                                     <span class="member-job">- Prize Money + Goodies</span>
                                     <p><span style="color:crimson;font-weight: bold;">First : </span>
-                                        {{ event.first_cash_prize }}</p>
+                                        {{ event.first_cash_prize }} Cash + {{ event.first_goodies }} Goodies</p>
                                     <p><span style="color:crimson;font-weight: bold;">Second : </span>
-                                        {{ event.second_cash_prize }}</p>
+                                        {{ event.second_cash_prize }} Cash + {{ event.second_goodies }} Goodies</p>
                                     <p><span style="color:crimson;font-weight: bold;">Third : </span>
-                                        {{ event.third_cash_prize }}</p>
+                                        {{ event.third_cash_prize }} Cash + {{ event.third_goodies }} Goodies </p>
                                     <br>
 
                                     <div class="member-events">
