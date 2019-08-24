@@ -62,12 +62,12 @@ def register_as_participant(request):
             send_mail(
                 'Welcome to Zeitgeist 2k19',
                 'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nWe wish you best of luck. Give your best and earn exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nWe wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                 'zeitgeist.pr@iitrpr.ac.in',
                 [new_participant_registration.participating_user.email],
                 fail_silently=False,
             )
-            return redirect('main_page_events')
+            return render(request, 'main_page/register_as_participant_success.html')
     else:
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
 
@@ -116,12 +116,12 @@ def register_for_event(request, event_id):
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR code.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
             fail_silently=False,
         )
-        return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
+        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull."})
 
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
@@ -167,13 +167,13 @@ def register_for_event(request, event_id):
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
                 )
-                return render(request,'main_page/messages.html',context={'message':f"Your Registration for the Event: {event.name} is succesfull"})
+                return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull. Your TEAM CODE is {new_team_code}."})
         else:
             team_form = TeamForm()
             team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
 
         return render(request, 'main_page/register_team.html',
-                        {
+                        {   'event': event,
                             'team_form': team_form,
                             'team_member_formset': team_member_formset,
                             })
