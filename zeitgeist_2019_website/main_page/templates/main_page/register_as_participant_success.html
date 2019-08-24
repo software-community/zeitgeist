@@ -1,9 +1,0 @@
-{% extends "main_page/base.html" %}
-
-{% load static %}
-
-{% block content %}
-
-<br><br><br><br>You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {{ request.user.participant.participant_code }}. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address {{ request.user.email }}. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!
-
-{% endblock %}
