@@ -1,0 +1,7 @@
+upload photo with its name as "name_of_event.jpg". see other names for reference
+
+ratio of all photos must be the same (these posters will appear on the left side when someone clicks on an event, so choose ratio accordingly) which can be set online at http://hornil.com/apps/photocrop/
+
+size of image should be strictly less than 200kb (preferrably 100kb) which can be reduced online at http://webresizer.com/resizer/
+
+continue to use the above site to reduce image size until it is around 100kb
