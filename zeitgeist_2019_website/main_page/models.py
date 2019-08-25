@@ -146,24 +146,6 @@ class TeamHasMember(models.Model):
         verbose_name_plural = 'Team Has Member'
 
 
-# class Accomodation(models.Model):
-
-#     participant = models.ForeignKey(Participant,on_delete=models.CASCADE)
-#     CHOICES_DAYS = [
-#         ('ONE','1 day'),
-#         ('TWO','2 days'),
-#         ('THREE','3 days')
-#     ]
-#     aadhar_no = models.CharField(max_length=4, blank=False, null=False, verbose_name="Last 4 digits of Aadhar No.")
-#     no_days = models.CharField(max_length=10, choices=CHOICES_DAYS, blank=False, null=False, verbose_name="Number of days")
-
-#     def __str__(self):
-#         return str(self.participant.participant_code) + str(self.no_days)
-    
-#     class Meta:
-#         verbose_name_plural = 'Accomodation'
-
-
 class Sponsor(models.Model):
 
     name_of_photo_in_static_files = models.CharField(max_length=15, blank=False, null=False)
