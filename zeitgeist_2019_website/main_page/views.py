@@ -44,9 +44,9 @@ def register_as_participant(request):
         prev_participant_registration_details = None
 
     if prev_participant_registration_details:
-        messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
+        messages={'1':'You are already registered as Participant','4':'If you want to edit your response, please contact:'}
         buttons=[{'link':'tel:7742522607','text':'7742522607'}]
-        return render(request, 'main_page/messages.html',context={'messages':messages,'buttons':buttons})
+        return render(request, 'main_page/messages.html', context={'messages':messages,'buttons':buttons})
 
     request.user.email = SocialAccount.objects.get(
         user=request.user).extra_data.get("email")
@@ -106,7 +106,7 @@ def register_for_event(request, event_id):
         ParticipantHasParticipated.objects.get(participant=participant, event=event)
         # code did not blow, hence participant has already participated in this event
         messages={'2':"You have already registered for this event! Double participation for one event is not allowed."}
-        return render(request,'main_page/messages.html',{'messages':messages})
+        return render(request, 'main_page/messages.html', {'messages':messages})
     except:
         pass
 
@@ -126,7 +126,8 @@ def register_for_event(request, event_id):
             [participant.participating_user.email],
             fail_silently=False,
         )
-        return render(request, 'main_page/messages.html', context={'message': f"Your Registration for the event {event.name} is succesfull. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck."})
+        messages={'1':f'Your Registration for the event {event.name} is succesfull.','2': 'Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck.'}
+        return render(request, 'main_page/messages.html', context={'messages':messages})
 
     else:
         TeamHasMemberFormSet = formset_factory(form=TeamHasMemberForm, formset=BaseTeamFormSet, extra=event.maximum_team_size-1, max_num=event.maximum_team_size, validate_max=True, min_num=event.minimum_team_size, validate_min=True)
@@ -252,6 +253,7 @@ def weebhook(request):
 def payment_redirect(request):
     return HttpResponse('<p>Payment ID: '+request.GET['payment_id']+'</p><p>Payment Status: '+
                     request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
+
 
 # def testing(request):
 #     messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
