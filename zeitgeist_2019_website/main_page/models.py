@@ -145,18 +145,18 @@ class TeamHasMember(models.Model):
     class Meta:
         verbose_name_plural = 'Team Has Member'
 
-class RoomRegistration(models.Model):
-    occupant=models.ForeignKey(Participant,on_delete=models.CASCADE)
+class Accomodation(models.Model):
+    participant=models.ForeignKey(Participant,on_delete=models.CASCADE)
     CHOICES_DAYS=[
         ('ONE','1 day'),
         ('TWO','2 days'),
         ('THREE','3 days')
     ]
-    aadhar_no=models.IntegerField(blank=False,null=False,verbose_name="12-digit Aadhar No.")
+    aadhar_no=models.CharField(max_length=12,blank=False,null=False,verbose_name="12-digit Aadhar No.")
     no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False,verbose_name="No. of days")
 
     def __str__(self):
-        return str(occupant.participant_code) + str(CHOICE_DAYS)
+        return str(self.participant.participant_code) + str(self.no_days)
     
     class Meta:
-        verbose_name_plural='Room Registrations'
+        verbose_name_plural='Accomodation'

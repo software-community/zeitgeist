@@ -272,11 +272,18 @@ def accomodation(request):
     except:
         messages={'1':'You can view this page only if you have participated in an event'}
         return render(request,'main_page/messages.html',{'messages':messages})
+    try:
+        Accomodation.objects.get(participant=participant)
+        messages={'1':'You can book only Once'}
+        return render(request,'main_page/messages.html',{'messages':messages})
+    except:
+        pass
+    
     if request.method=='POST':
         accomodationform=AccomodationForm(request.POST)
         if accomodationform.is_valid():
             new_bakra=accomodationform.save(commit=False)
-            new_bakra.occupant=participant
+            new_bakra.participant=participant
             new_bakra.save()
             messages={'1':'Room booked Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Zeitgeist 2k19 wishes you best of luck'}
             return render(request,'main_page/messages.html',{'messages':messages})
