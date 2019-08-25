@@ -260,41 +260,14 @@ def weebhook(request):
 
 
 def payment_redirect(request):
-    return HttpResponse('<p>Payment ID: '+request.GET['payment_id']+'</p><p>Payment Status: '+
-                    request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
+    participanthaspaid=ParticipantHasPaid.objects.get(payment_request_id=request.GET['payment_request_id'])
+    paidsubcategory=participanthaspaid.paid_subcategory
+    if participanthaspaid.transaction_id == '-1' or participanthaspaid.transaction_id=='0':
+        messages={'1':'Your Payment was unsuccesfull.','3':'Payment Status:'+request.GET['payment_status']+'Payment Request ID:'+request.GET['payment_request_id']}
+    else :
+        messages={
+            '3':'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory. It only means that you are now eligible to register for any event in that subcategory . To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.',
+            '2':'  Payment Status:  '+request.GET['payment_status']+'  Payment Request ID:  '+request.GET['payment_request_id']+'  Transaction ID:  '+request.GET['payment_id']
+            }
+    return render(request,'main_page/messages.html',{'messages':messages})
 
-
-# @login_required
-# def accomodation(request):
-
-#     try:
-#         participant=Participant.objects.get(participating_user=request.user)
-        
-#         participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
-#         print(participantdata)
-#         if len(participantdata)== 0:
-#             raise ParticipantHasParticipated.DoesNotExist('no query')
-#     except:
-#         messages={'1':'You can view this page only if you have participated in an event'}
-#         return render(request,'main_page/messages.html',{'messages':messages})
-
-#     try:
-#         Accomodation.objects.get(participant=participant)
-#         messages={'1':'You can book only Once'}
-#         return render(request,'main_page/messages.html',{'messages':messages})
-#     except:
-#         pass
-
-#     if request.method=='POST':
-#         accomodationform=AccomodationForm(request.POST)
-#         if accomodationform.is_valid():
-#             new_bakra=accomodationform.save(commit=False)
-#             new_bakra.participant=participant
-#             new_bakra.save()
-#             messages={'1':'Room booked Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Zeitgeist 2k19 wishes you best of luck'}
-#             return render(request,'main_page/messages.html',{'messages':messages})
-#     else:
-#         accomodationform=AccomodationForm()
-    
-#     charges={'1':'300','2':'500','3':'700'}
-#     return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
