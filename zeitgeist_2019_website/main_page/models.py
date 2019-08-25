@@ -152,11 +152,11 @@ class RoomRegistration(models.Model):
         ('TWO','2 days'),
         ('THREE','3 days')
     ]
-    aadhar_no=models.IntegerField(blank=False,default=-1,null=False)
-    no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False)
+    aadhar_no=models.IntegerField(blank=False,null=False,verbose_name="12-digit Aadhar No.")
+    no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False,verbose_name="No. of days")
 
     def __str__(self):
-        return occupant.participant_code+str(CHOICE_DAYS)
+        return str(occupant.participant_code) + str(CHOICE_DAYS)
     
     class Meta:
         verbose_name_plural='Room Registrations'
