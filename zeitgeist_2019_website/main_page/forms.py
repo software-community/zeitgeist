@@ -63,8 +63,9 @@ class BaseTeamFormSet(BaseFormSet):
                 form.add_error('team_member', forms.ValidationError(message=msg, code="SameParticipant"))
             team_members.add(team_member)
 
-class AccomodationForm(forms.ModelForm):
+
+# class AccomodationForm(forms.ModelForm):
     
-    class Meta:
-        model=Accomodation
-        fields=['no_days','aadhar_no']
+#     class Meta:
+#         model=Accomodation
+#         fields=['no_days','aadhar_no']

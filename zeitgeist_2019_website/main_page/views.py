@@ -264,43 +264,37 @@ def payment_redirect(request):
                     request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
 
 
-# def testing(request):
-#     messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
-#     buttons=[{'link':'tel:7742522607','text':'7742522607'}]
-#     return render(request,'main_page/messages.html',context={'messages':messages,'buttons':buttons})
+# @login_required
+# def accomodation(request):
 
-
-@login_required
-def accomodation(request):
-
-    try:
-        participant=Participant.objects.get(participating_user=request.user)
+#     try:
+#         participant=Participant.objects.get(participating_user=request.user)
         
-        participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
-        print(participantdata)
-        if len(participantdata)== 0:
-            raise ParticipantHasParticipated.DoesNotExist('no query')
-    except:
-        messages={'1':'You can view this page only if you have participated in an event'}
-        return render(request,'main_page/messages.html',{'messages':messages})
+#         participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
+#         print(participantdata)
+#         if len(participantdata)== 0:
+#             raise ParticipantHasParticipated.DoesNotExist('no query')
+#     except:
+#         messages={'1':'You can view this page only if you have participated in an event'}
+#         return render(request,'main_page/messages.html',{'messages':messages})
 
-    try:
-        Accomodation.objects.get(participant=participant)
-        messages={'1':'You can book only Once'}
-        return render(request,'main_page/messages.html',{'messages':messages})
-    except:
-        pass
+#     try:
+#         Accomodation.objects.get(participant=participant)
+#         messages={'1':'You can book only Once'}
+#         return render(request,'main_page/messages.html',{'messages':messages})
+#     except:
+#         pass
 
-    if request.method=='POST':
-        accomodationform=AccomodationForm(request.POST)
-        if accomodationform.is_valid():
-            new_bakra=accomodationform.save(commit=False)
-            new_bakra.participant=participant
-            new_bakra.save()
-            messages={'1':'Room booked Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Zeitgeist 2k19 wishes you best of luck'}
-            return render(request,'main_page/messages.html',{'messages':messages})
-    else:
-        accomodationform=AccomodationForm()
+#     if request.method=='POST':
+#         accomodationform=AccomodationForm(request.POST)
+#         if accomodationform.is_valid():
+#             new_bakra=accomodationform.save(commit=False)
+#             new_bakra.participant=participant
+#             new_bakra.save()
+#             messages={'1':'Room booked Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Zeitgeist 2k19 wishes you best of luck'}
+#             return render(request,'main_page/messages.html',{'messages':messages})
+#     else:
+#         accomodationform=AccomodationForm()
     
-    charges={'1':'300','2':'500','3':'700'}
-    return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
+#     charges={'1':'300','2':'500','3':'700'}
+#     return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
