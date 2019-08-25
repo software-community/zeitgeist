@@ -3,6 +3,9 @@ from .models import *
 
 # Register your models here.
 
+# class CategoryAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Category._meta.get_fields()]
+
 # class SubCategoryAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in SubCategory._meta.get_fields()]
 
@@ -24,6 +27,7 @@ class ParticipantHasPaidAdmin(admin.ModelAdmin):
 # class TeamHasMemberAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in TeamHasMember._meta.get_fields()]
 
+# admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
 # admin.site.register(Participant, ParticipantAdmin)

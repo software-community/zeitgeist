@@ -20,7 +20,8 @@ from django.forms import formset_factory
 
 
 def main_page_home(request):
-    context={'title': 'Zeitgeist'}
+    sponsors = Sponsor.objects.all()
+    context={'title': 'Zeitgeist', 'sponsors': sponsors}
     return render(request, 'main_page/index.html',context)
 
 
@@ -239,6 +240,14 @@ def weebhook(request):
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']
+                    # str(participantpaspaid.paid_subcategory) inlcudes name of category also
+                    send_mail(
+                        'Payment confirmation of ' + str(participantpaspaid.paid_subcategory) + ' to Zeitgeist 2k19',
+                        'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory, it only means that you are now eligible to register for any event in that subcategory. To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        'zeitgeist.pr@iitrpr.ac.in',
+                        [participantpaspaid.participant.participating_user.email],
+                        fail_silently=False,
+                    )
                 else:
                     # Payment was unsuccessful, mark it as failed in your database.
                     participantpaspaid.transaction_id = '0'
@@ -255,7 +264,37 @@ def payment_redirect(request):
                     request.GET['payment_status']+'</p><p>Payment Request ID: '+request.GET['payment_request_id']+'</p>')
 
 
-# def testing(request):
-#     messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
-#     buttons=[{'link':'tel:7742522607','text':'7742522607'}]
-#     return render(request,'main_page/messages.html',context={'messages':messages,'buttons':buttons})
+# @login_required
+# def accomodation(request):
+
+#     try:
+#         participant=Participant.objects.get(participating_user=request.user)
+        
+#         participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
+#         print(participantdata)
+#         if len(participantdata)== 0:
+#             raise ParticipantHasParticipated.DoesNotExist('no query')
+#     except:
+#         messages={'1':'You can view this page only if you have participated in an event'}
+#         return render(request,'main_page/messages.html',{'messages':messages})
+
+#     try:
+#         Accomodation.objects.get(participant=participant)
+#         messages={'1':'You can book only Once'}
+#         return render(request,'main_page/messages.html',{'messages':messages})
+#     except:
+#         pass
+
+#     if request.method=='POST':
+#         accomodationform=AccomodationForm(request.POST)
+#         if accomodationform.is_valid():
+#             new_bakra=accomodationform.save(commit=False)
+#             new_bakra.participant=participant
+#             new_bakra.save()
+#             messages={'1':'Room booked Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Zeitgeist 2k19 wishes you best of luck'}
+#             return render(request,'main_page/messages.html',{'messages':messages})
+#     else:
+#         accomodationform=AccomodationForm()
+    
+#     charges={'1':'300','2':'500','3':'700'}
+#     return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
