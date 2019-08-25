@@ -126,7 +126,7 @@ class ParticipantHasParticipated(models.Model):
 class Team(models.Model):
 
     name = models.CharField(max_length=40, verbose_name='Team Name', null=False, blank=False)
-    team_code = models.CharField(max_length=15, verbose_name='Team Code', unique=True)
+    team_code = models.CharField(max_length=30, verbose_name='Team Code', unique=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     captain = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
