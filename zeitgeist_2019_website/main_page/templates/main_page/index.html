@@ -598,13 +598,13 @@
             <!-- /section title -->
 
 			<!-- sponsor -->
-			{{ for sponsor in sponsors }}
+			{% for sponsor in sponsors %}
             <div class="col-md-3 col-sm-4 col-xs-6">
 				<a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
                     <img src="{% static 'main_page/img/sponsors/last_year' %}{{ sponsor.name_of_photo_in_static_files }}" alt="">
                 </a>
 			</div>
-			{{ endfor }}
+			{% endfor %}
             <!-- /sponsor -->
 
 			<!-- VIEW ALL ################################################################ -->
