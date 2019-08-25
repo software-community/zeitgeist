@@ -20,7 +20,8 @@ from django.forms import formset_factory
 
 
 def main_page_home(request):
-    context={'title': 'Zeitgeist'}
+    sponsors = Sponsor.objects.all()
+    context={'title': 'Zeitgeist', 'sponsors': sponsors}
     return render(request, 'main_page/index.html',context)
 
 
