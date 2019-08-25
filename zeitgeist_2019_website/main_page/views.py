@@ -271,3 +271,123 @@ def payment_redirect(request):
             }
     return render(request,'main_page/messages.html',{'messages':messages})
 
+
+@login_required
+def accomodation(request):
+    try:
+        participant=Participant.objects.get(participating_user=request.user)
+        
+        participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
+        # print(participantdata)
+        #we will give accomodation if he has participated in atleast one event
+        if len(participantdata)== 0:
+            
+            raise ParticipantHasParticipated.DoesNotExist('no query')
+    except:
+        messages={'1':'You can view this page only if you have participated in an event'}
+        return render(request,'main_page/messages.html',{'messages':messages})
+    try:
+        accomodation=Accomodation.objects.get(participant=participant)
+        #checking if he has alredy booked or his transaction failed
+        if accomodation.transaction_id == '0' or accomodation.transaction_id == '-1':
+            #transaction failed case
+            #redirect to payment page
+            return redirect('accomodation_pay')
+        else :
+            #booking already case 
+            messages={'1':'You can book only Once'}
+            return render(request,'main_page/messages.html',{'messages':messages})
+    except:
+        pass
+    
+    if request.method=='POST':
+        accomodationform=AccomodationForm(request.POST)
+        if accomodationform.is_valid():
+            accomodation=accomodationform.save(commit=False)
+            accomodation.participant=participant
+            accomodation.save()
+            return redirect('accomodation_pay')
+            # messages={'1':'Request Submitted Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Please complete your payment below'}
+            # buttons=[{'link':'{%  %}'}]
+            # return render(request,'main_page/messages.html',{'messages':messages})
+    else:
+        accomodationform=AccomodationForm()
+    
+    charges={'1':300,'2':500,'3':700}
+    return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
+
+
+@login_required
+def accomodation_payment(request):
+    try:
+        participant = Participant.objects.get(participating_user=request.user)
+    except:
+        return redirect('register_as_participant')
+    try:
+        accomodation=Accomodation.objects.get(participant=participant)
+        
+    except:
+        messages={'1':'Sorry, You are at the Worng Place'}
+        return render(request,'main_page/messages.html',{'messages':messages})
+    # print(accomodation.no_days)
+    # subcategory = Subcategory.objects.get(id=subcategory_id)
+
+    # try:
+    #     ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
+    #     messages={'1':'You have already paid for this Subcategory','2':'You do not need to pay again.'}
+    #     # code did not blow, hence participant has already paid for this subcategory
+    #     return render(request,'main_page/messages.html',context={'messages':messages})
+    # except:
+    #     pass
+
+    charges={'1':300,'2':500,'3':700}
+    purpose = 'PAYMENT FOR ACCOMODATION FOR '+str(accomodation.no_days)
+    response = payment_request(participant.name,charges[str(accomodation.no_days)], purpose,
+                request.user.email, participant.contact_mobile_number.__str__())
+
+    if response['success']:
+        url = response['payment_request']['longurl']
+        payment_request_id = response['payment_request']['id']
+        
+        accomodation.payment_request_id=payment_request_id
+        accomodation.save()
+        return redirect(url)
+    else:
+        return HttpResponseServerError()
+
+def accomodation_weebhook(request):
+    
+    if request.method == "POST":
+        # print(request.POST)
+        data = request.POST.copy()
+        mac_provided = data.pop('mac')[0]
+
+        message = "|".join(v for k, v in sorted(
+            data.items(), key=lambda x: x[0].lower()))
+        mac_calculated = hmac.new(
+            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
+
+        if mac_provided == mac_calculated:
+            try:
+                accomodation = Accomodation.objects.get(
+                    payment_request_id=data['payment_request_id'])
+                if data['status'] == "Credit":
+                    # Payment was successful, mark it as completed in your database.
+                    accomodation.transaction_id = data['payment_id']
+                else:
+                    # Payment was unsuccessful, mark it as failed in your database.
+                    accomodation.transaction_id = '0'
+                accomodation.save()
+            except Exception as err:
+                print(err)
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=400)
+
+def accomodation_payment_redirect(request):
+    accomodation=Accomodation.objects.get(payment_request_id=request.GET['payment_request_id'])
+    if accomodation.transaction_id =='-1' or accomodation.transaction_id=='0':
+        messages={'1':'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please try again'}
+    else:
+        messages={'1':'Transaction ID :'+request.GET['payment_id']+'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please bring your aadhar card for verification purposes.'}
+    return render(request,'main_page/messages.html',{'messages':messages})

@@ -36,7 +36,10 @@ urlpatterns = [
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
     path('data-api/', include(router.urls)),
- 
+    path('accomodation_weebhook/',csrf_exempt(views.accomodation_weebhook),name='accomodation_weebhook'),
+    path('accomodation_payment_redirect/',views.accomodation_payment_redirect,name='accomodation_payment_redirect'),
+    path('accomodation/',views.accomodation),
+    path('accomodation_pay/',views.accomodation_payment,name='accomodation_pay'),
   
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
