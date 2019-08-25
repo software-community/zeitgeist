@@ -150,3 +150,21 @@ class Sponsor(models.Model):
 
     name_of_photo_in_static_files = models.CharField(max_length=15, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
+
+class Accomodation(models.Model):
+    participant=models.ForeignKey(Participant,on_delete=models.CASCADE)
+    CHOICES_DAYS=[
+        ('1','1 day'),
+        ('2','2 days'),
+        ('3','3 days')
+    ]
+    transaction_id = models.CharField(max_length=100, default='-1')
+    payment_request_id = models.CharField(max_length=100, default='-1')
+    aadhar_no=models.CharField(max_length=4,blank=False,null=False,verbose_name="Last 4 digits of Aadhar No.")
+    no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False,verbose_name="No. of days")
+
+    def __str__(self):
+        return str(self.participant.participant_code) + str(self.no_days)
+    
+    class Meta:
+        verbose_name_plural='Accomodation'

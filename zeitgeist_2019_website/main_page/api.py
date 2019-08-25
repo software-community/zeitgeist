@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import CategorySerializer, SubcategorySerializer, EventSerializer
-from .models import Category, Subcategory, Event
+from .serializers import CategorySerializer, SubcategorySerializer, EventSerializer, SponsorSerializer
+from .models import Category, Subcategory, Event, Sponsor
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -25,3 +25,8 @@ class EventViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
     filter_backends = (DjangoFilterBackend, )
     filter_fields = ('name', 'subcategory')
+
+class SponsorViewSet(viewsets.ModelViewSet):
+    queryset = Sponsor.objects.all()
+    serializer_class = SponsorSerializer
+    http_method_names = ['get']
