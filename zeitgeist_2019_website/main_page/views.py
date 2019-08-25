@@ -259,3 +259,18 @@ def payment_redirect(request):
 #     messages={'1':'You are already registered as Participant','4':'If you want to edit oyur response, please contact:'}
 #     buttons=[{'link':'tel:7742522607','text':'7742522607'}]
 #     return render(request,'main_page/messages.html',context={'messages':messages,'buttons':buttons})
+@login_required
+def accomodation(request):
+    try:
+        participant=Participant.objects.get(participating_user=request.user)
+        
+        participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
+        print(participantdata)
+        if len(participantdata)== 0:
+            
+            raise ParticipantHasParticipated.DoesNotExist('no query')
+    except:
+        messages={'1':'You can view this page only if you have participated in an event'}
+        return render(request,'main_page/messages.html',{'messages':messages})
+    print(participantdata)
+    return HttpResponse("Success")

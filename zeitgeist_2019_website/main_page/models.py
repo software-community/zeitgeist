@@ -144,3 +144,19 @@ class TeamHasMember(models.Model):
 
     class Meta:
         verbose_name_plural = 'Team Has Member'
+
+class RoomRegistration(models.Model):
+    occupant=models.ForeignKey(Participant,on_delete=models.CASCADE)
+    CHOICES_DAYS=[
+        ('ONE','1 day'),
+        ('TWO','2 days'),
+        ('THREE','3 days')
+    ]
+    aadhar_no=models.IntegerField(blank=False,default=-1,null=False)
+    no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False)
+
+    def __str__(self):
+        return occupant.participant_code+str(CHOICE_DAYS)
+    
+    class Meta:
+        verbose_name_plural='Room Registrations'

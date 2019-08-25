@@ -62,3 +62,9 @@ class BaseTeamFormSet(BaseFormSet):
                 msg = "Each participant in a team must be unique!"
                 form.add_error('team_member', forms.ValidationError(message=msg, code="SameParticipant"))
             team_members.add(team_member)
+
+class AccomodationForm(forms.ModelForm):
+    
+    class Meta:
+        model=['no_days','aadhar_no']
+        
