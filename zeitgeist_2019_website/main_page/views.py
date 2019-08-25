@@ -120,7 +120,7 @@ def register_for_event(request, event_id):
         ParticipantHasParticipated.objects.create(participant=participant, event=event)
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
-            'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRemider - Your PARTICIPANT CODE is ' + str(
+            'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
                 participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
