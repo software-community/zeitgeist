@@ -152,7 +152,7 @@ class Accomodation(models.Model):
         ('TWO','2 days'),
         ('THREE','3 days')
     ]
-    aadhar_no=models.CharField(max_length=12,blank=False,null=False,verbose_name="Last 4 digits of Aadhar No.")
+    aadhar_no=models.CharField(max_length=4,blank=False,null=False,verbose_name="Last 4 digits of Aadhar No.")
     no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False,verbose_name="No. of days")
 
     def __str__(self):
