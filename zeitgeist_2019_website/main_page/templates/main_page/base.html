@@ -72,6 +72,7 @@
 					<li><a href="#about">About</a></li>
 					<li><a href="#schedule">Schedule</a></li>
 					<li><a href="#team">Team</a></li>
+					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="#sponsors">Sponsors</a></li>
 					<li><a href="#contact">Contact</a></li>
 					{% else %}
@@ -79,10 +80,10 @@
 					<li><a href="{% url 'main_page_home' %}#about">About</a></li>
 					<li><a href="{% url 'main_page_home' %}#schedule">Schedule</a></li>
 					<li><a href="{% url 'main_page_home' %}#team">Team</a></li>
+					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'main_page_home' %}#sponsors">Sponsors</a></li>
 					<li><a href="{% url 'main_page_home' %}#contact">Contact</a></li>
 					{% endif %}
-					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
 					{% if request.user.is_authenticated %}
 					<li><a href="{% url 'account_logout' %}">Logout</a></li>
