@@ -28,6 +28,6 @@ def accomodation_payment_request(name,amount,purpose,email,mobile):
         email=email,
         phone=mobile,
         redirect_url='http://zeitgeist.org.in/accomodation_payment_redirect/',
-        weebhook='http://zeitgeist.org.in/accomodation_weebhook/'
+        webhook='http://zeitgeist.org.in/accomodation_weebhook/'
         )
     return response
