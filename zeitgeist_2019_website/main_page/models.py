@@ -174,7 +174,7 @@ class Accomodation(models.Model):
     aadhar_no = models.CharField(max_length=4, blank=False, null=False, verbose_name="Last 4 digits of your Aadhar Number")
 
     def __str__(self):
-        return str(self.participant.participant_code) +' - ' + str(self.no_days)+' - ' + str(self.gender)
+        return str(self.participant.participant_code) +' - ' + str(self.no_of_days)+' - ' + str(self.gender)
 
     class Meta:
         verbose_name_plural = 'Accomodation'
