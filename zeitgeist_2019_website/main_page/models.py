@@ -158,13 +158,18 @@ class Accomodation(models.Model):
         ('2','2 days'),
         ('3','3 days')
     ]
+    GENDER_CHOICES=[
+        ('M','Male'),
+        ('F','Female')
+    ]
     transaction_id = models.CharField(max_length=100, default='-1')
     payment_request_id = models.CharField(max_length=100, default='-1')
+    gender=models.CharField(max_length=4,blank=False,null=False,choices=GENDER_CHOICES,verbose_name='Gender')
     aadhar_no=models.CharField(max_length=4,blank=False,null=False,verbose_name="Last 4 digits of Aadhar No.")
     no_days=models.CharField(max_length=10,choices=CHOICES_DAYS,blank=False,null=False,verbose_name="No. of days")
 
     def __str__(self):
-        return str(self.participant.participant_code) + str(self.no_days)
+        return str(self.participant.participant_code) +'_' +str(self.no_days)+'_'+str(self.gender)
     
     class Meta:
         verbose_name_plural='Accomodation'
