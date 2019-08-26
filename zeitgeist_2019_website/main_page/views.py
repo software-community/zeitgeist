@@ -263,13 +263,13 @@ def payment_redirect(request):
     participanthaspaid=ParticipantHasPaid.objects.get(payment_request_id=request.GET['payment_request_id'])
     paidsubcategory=participanthaspaid.paid_subcategory
     if participanthaspaid.transaction_id == '-1' or participanthaspaid.transaction_id=='0':
-        messages={'1':'Your Payment was unsuccesfull.','3':'Payment Status:'+request.GET['payment_status']+'Payment Request ID:'+request.GET['payment_request_id']}
+        mp=['Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
+        messages={'1':'Your Payment was unsuccesfull.'}
     else :
+        mp=['Transaction ID :'+ request.GET['payment_id'],'Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
         messages={
-            '3':'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory. It only means that you are now eligible to register for any event in that subcategory . To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.',
-            '2':'  Payment Status:  '+request.GET['payment_status']+'  Payment Request ID:  '+request.GET['payment_request_id']+'  Transaction ID:  '+request.GET['payment_id']
-            }
-    return render(request,'main_page/messages.html',{'messages':messages})
+            '4':'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory. It only means that you are now eligible to register for any event in that subcategory . To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.'}
+    return render(request,'main_page/messages.html',{'messages':messages,'mp':mp})
 
 
 @login_required
@@ -387,7 +387,13 @@ def accomodation_weebhook(request):
 def accomodation_payment_redirect(request):
     accomodation=Accomodation.objects.get(payment_request_id=request.GET['payment_request_id'])
     if accomodation.transaction_id =='-1' or accomodation.transaction_id=='0':
+        mp=['Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
         messages={'1':'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please try again'}
     else:
-        messages={'1':'Transaction ID :'+request.GET['payment_id']+'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please bring your aadhar card for verification purposes.'}
-    return render(request,'main_page/messages.html',{'messages':messages})
+        mp=['Transaction ID :'+ request.GET['payment_id'],'Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
+        messages={'2':'Please bring your aadhar card for verification purposes.'}
+    return render(request,'main_page/messages.html',{'messages':messages,'mp':mp})
+
+# def testing(request):
+#     mp=['Hello','I am here','what about you!!']
+#     return render(request,'main_page/messages.html',{'mp':mp})

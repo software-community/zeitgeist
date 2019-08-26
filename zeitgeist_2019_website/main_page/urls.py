@@ -70,4 +70,5 @@ urlpatterns = [
     # due to internal failures
     # it might occur when accounts/google/login fails and hence redirects to accounts/login
     path('accounts/login/', RedirectView.as_view(pattern_name='google_login', permanent=False), name="go_to_google_login"),
+    # path('test/',views.testing)
 ]
