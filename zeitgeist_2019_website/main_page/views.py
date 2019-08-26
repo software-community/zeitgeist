@@ -63,14 +63,14 @@ def register_as_participant(request):
             new_participant_registration.participant_code = (str(request.user.first_name)[
                 :4]).upper() + str(request.user.id) + 'Z19'
             new_participant_registration.save()
-            # send_mail(
-            #     'Welcome to Zeitgeist 2k19',
-            #     'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-            #         new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nNote that this email is not for your participation in any event. To participate in events, you need to register for them on the Events page of Zeitgeist website. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-            #     'zeitgeist.pr@iitrpr.ac.in',
-            #     [new_participant_registration.participating_user.email],
-            #     fail_silently=False,
-            # )
+            send_mail(
+                'Welcome to Zeitgeist 2k19',
+                'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nNote that this email is not for your participation in any event. To participate in events, you need to register for them on the Events page of Zeitgeist website. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                'zeitgeist.pr@iitrpr.ac.in',
+                [new_participant_registration.participating_user.email],
+                fail_silently=False,
+            )
             messages={'2':f'You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {request.user.participant.participant_code }.','4':f'If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address { request.user.email }.','1':' Note that this message is not for your participation in any event. To participate in events, you need to register for them on the Events page. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!'}
             return render(request, 'main_page/messages.html',{'messages':messages})
     else:
