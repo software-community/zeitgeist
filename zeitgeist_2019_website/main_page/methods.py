@@ -1,7 +1,7 @@
 from instamojo_wrapper import Instamojo
 import os
 
-def payment_request(name,amount, purpose, email,mobile):
+def payment_request(name, amount, purpose, email, mobile):
     api = Instamojo(api_key=os.getenv('api_auth_key'),
                     auth_token=os.getenv('api_auth_token'))
 
@@ -17,8 +17,9 @@ def payment_request(name,amount, purpose, email,mobile):
         webhook="http://zeitgeist.org.in/webhook/"
         )
     return response
-    
-def accomodation_payment_request(name,amount,purpose,email,mobile):
+
+
+def accomodation_payment_request(name, amount, purpose, email, mobile):
     api= Instamojo(api_key=os.getenv('api_auth_key'),auth_token=os.getenv('api_auth_token'))
 
     response = api.payment_request_create(

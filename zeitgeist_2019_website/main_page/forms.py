@@ -65,7 +65,7 @@ class BaseTeamFormSet(BaseFormSet):
 
 
 class AccomodationForm(forms.ModelForm):
-    
+
     class Meta:
-        model=Accomodation
-        fields=['no_days','aadhar_no']
+        model = Accomodation
+        fields = ['no_of_days', 'aadhar_no', 'gender']

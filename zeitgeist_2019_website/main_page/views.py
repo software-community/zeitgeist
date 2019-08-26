@@ -22,7 +22,7 @@ from django.forms import formset_factory
 def main_page_home(request):
     sponsors = Sponsor.objects.all()
     context={'title': 'Zeitgeist', 'sponsors': sponsors}
-    return render(request, 'main_page/index.html',context)
+    return render(request, 'main_page/index.html', context)
 
 
 def change_account(request):
@@ -72,7 +72,7 @@ def register_as_participant(request):
                 fail_silently=False,
             )
             messages={'2':f'You have registered yourself successfully as a participant. Your PARTICIPANT CODE is {request.user.participant.participant_code }.','4':f'If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address { request.user.email }.','1':' Note that this message is not for your participation in any event. To participate in events, you need to register for them on the Events page. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!'}
-            return render(request, 'main_page/register_as_participant_success.html')
+            return render(request, 'main_page/messages.html',{'messages':messages})
     else:
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
 
@@ -122,7 +122,7 @@ def register_for_event(request, event_id):
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgesit.org.in/accomodation.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
             fail_silently=False,
@@ -149,11 +149,11 @@ def register_for_event(request, event_id):
                     try:
                         team_member_payment = ParticipantHasPaid.objects.get(participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
-                            messages={'1':"Some of the team members have not paid for the subcategory !!!",'2':"Try again when all the team members have paid for the subcategory."}
-                            return render(request,'main_page/messages.html',context={'messages':messages })
+                            messages = {'1':"Some of the team members have not paid for the subcategory !!!", '2':"Try again when all the team members have paid for the subcategory."}
+                            return render(request, 'main_page/messages.html', context={'messages':messages })
                     except ParticipantHasPaid.DoesNotExist:
-                        messages={'1':"Some of the team members have not paid for the subcategory !!!",'2':"Try again when all the team members have paid for the subcategory."}
-                        return render(request,'main_page/messages.html',context={'messages':messages})
+                        messages = {'1':"Some of the team members have not paid for the subcategory !!!", '2':"Try again when all the team members have paid for the subcategory."}
+                        return render(request, 'main_page/messages.html', context={'messages':messages})
                 # print(team_form.cleaned_data)
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(request.user.id) + datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
@@ -171,13 +171,13 @@ def register_for_event(request, event_id):
                     TeamHasMember.objects.create(team=new_team, member=team_member)
                 send_mail(
                     'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
-                    'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                    'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgesit.org.in/accomodation.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                     'zeitgeist.pr@iitrpr.ac.in',
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
                 )
                 messages={'1':f"Your Registration for the event {event.name} is succesfull.",'2':f'Your TEAM CODE is: {new_team_code}. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck.'}
-                return render(request, 'main_page/messages.html', context={'messages':messages  })
+                return render(request, 'main_page/messages.html', context={'messages':messages})
         else:
             team_form = TeamForm()
             team_member_formset = TeamHasMemberFormSet(initial=[{'team_member' : str(participant.participant_code)}], prefix='team_member')
@@ -199,11 +199,15 @@ def pay_for_subcategory(request, subcategory_id):
 
     subcategory = Subcategory.objects.get(id=subcategory_id)
 
+    participanthaspaid = None
+
     try:
-        ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
-        messages={'1':'You have already paid for this Subcategory','2':'You do not need to pay again.'}
+        participanthaspaid = ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
+        if participanthaspaid.transaction_id == '0' and participanthaspaid.transaction_id == '-1':
+            raise Exception("Previous payment was a failure !")
+        messages = {'1':'You have already paid for this Subcategory', '2':'You do not need to pay again.'}
         # code did not blow, hence participant has already paid for this subcategory
-        return render(request,'main_page/messages.html',context={'messages':messages})
+        return render(request, 'main_page/messages.html', context={'messages':messages})
     except:
         pass
 
@@ -214,8 +218,14 @@ def pay_for_subcategory(request, subcategory_id):
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']
-        participanthaspaid = ParticipantHasPaid.objects.create(participant=participant,
-                                                               paid_subcategory=subcategory, payment_request_id=payment_request_id)
+        # if previous payment was unsuccessful
+        if participanthaspaid:
+            participanthaspaid.payment_request_id = payment_request_id
+        # if there was no previous payment
+        else:
+            # transaction_id is set to be '-1' by default
+            participanthaspaid = ParticipantHasPaid.objects.create(participant=participant,
+                                    paid_subcategory=subcategory, payment_request_id=payment_request_id)
         return redirect(url)
     else:
         return HttpResponseServerError()
@@ -260,61 +270,59 @@ def weebhook(request):
 
 
 def payment_redirect(request):
-    participanthaspaid=ParticipantHasPaid.objects.get(payment_request_id=request.GET['payment_request_id'])
-    paidsubcategory=participanthaspaid.paid_subcategory
-    if participanthaspaid.transaction_id == '-1' or participanthaspaid.transaction_id=='0':
-        messages={'1':'Your Payment was unsuccesfull.','3':'Payment Status:'+request.GET['payment_status']+'Payment Request ID:'+request.GET['payment_request_id']}
-    else :
-        messages={
-            '3':'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory. It only means that you are now eligible to register for any event in that subcategory . To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.',
-            '2':'  Payment Status:  '+request.GET['payment_status']+'  Payment Request ID:  '+request.GET['payment_request_id']+'  Transaction ID:  '+request.GET['payment_id']
-            }
-    return render(request,'main_page/messages.html',{'messages':messages})
+    participanthaspaid = ParticipantHasPaid.objects.get(payment_request_id=request.GET['payment_request_id'])
+    paidsubcategory = participanthaspaid.paid_subcategory
+    if participanthaspaid.transaction_id == '-1' or participanthaspaid.transaction_id == '0':
+        mp = ['Payment Status : ' + request.GET['payment_status'], 'Payment Request ID : ' + request.GET['payment_request_id']]
+        messages = {'1':'Your Payment was unsuccesfull.'}
+    else:
+        mp = ['Transaction ID :' + request.GET['payment_id'], 'Payment Status : ' + request.GET['payment_status'], 'Payment Request ID : ' + request.GET['payment_request_id']]
+        messages = {
+            '4':'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of that subcategory. It only means that you are now eligible to register for any event in that subcategory. To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.'}
+    return render(request,'main_page/messages.html', {'messages':messages,'mp':mp})
 
 
 @login_required
 def accomodation(request):
     try:
-        participant=Participant.objects.get(participating_user=request.user)
-        
-        participantdata=ParticipantHasParticipated.objects.filter(participant=participant)
-        # print(participantdata)
-        #we will give accomodation if he has participated in atleast one event
-        if len(participantdata)== 0:
-            
-            raise ParticipantHasParticipated.DoesNotExist('no query')
+        participant = Participant.objects.get(participating_user=request.user)
+        participantdata = ParticipantHasParticipated.objects.filter(participant=participant)
+        # we will give accomodation if he has participated in atleast one event
+        if len(participantdata) == 0:
+            raise ParticipantHasParticipated.DoesNotExist('Did not participate in any event !')
     except:
-        messages={'1':'You can view this page only if you have participated in an event'}
-        return render(request,'main_page/messages.html',{'messages':messages})
+        messages = {'1':'You can view this page only if you have registered for an event in Zeitgeist 2k19.'}
+        return render(request, 'main_page/messages.html', {'messages':messages})
+
     try:
-        accomodation=Accomodation.objects.get(participant=participant)
-        #checking if he has alredy booked or his transaction failed
+        accomodation = Accomodation.objects.get(participant=participant)
+        # checking if he has alredy booked or his transaction failed
         if accomodation.transaction_id == '0' or accomodation.transaction_id == '-1':
-            #transaction failed case
-            #redirect to payment page
+            # transaction failed case
+            # redirect to payment page
             return redirect('accomodation_pay')
-        else :
+        else:
             #booking already case 
-            messages={'1':'You can book only Once'}
+            messages={'1':'You have already booked your accomodation with us !'}
             return render(request,'main_page/messages.html',{'messages':messages})
     except:
         pass
-    
-    if request.method=='POST':
-        accomodationform=AccomodationForm(request.POST)
+
+    if request.method == 'POST':
+        accomodationform = AccomodationForm(request.POST)
         if accomodationform.is_valid():
-            accomodation=accomodationform.save(commit=False)
-            accomodation.participant=participant
+            accomodation = accomodationform.save(commit=False)
+            accomodation.participant = participant
             accomodation.save()
             return redirect('accomodation_pay')
             # messages={'1':'Request Submitted Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Please complete your payment below'}
             # buttons=[{'link':'{%  %}'}]
             # return render(request,'main_page/messages.html',{'messages':messages})
     else:
-        accomodationform=AccomodationForm()
-    
-    charges={'1':300,'2':500,'3':700}
-    return render(request,'main_page/accomodate.html',{'form':accomodationform,'charges':charges})
+        accomodationform = AccomodationForm()
+
+    charges = {'1':300, '2':500, '3':700}
+    return render(request, 'main_page/accomodate.html', {'form':accomodationform, 'charges':charges})
 
 
 @login_required
@@ -323,13 +331,14 @@ def accomodation_payment(request):
         participant = Participant.objects.get(participating_user=request.user)
     except:
         return redirect('register_as_participant')
+
     try:
-        accomodation=Accomodation.objects.get(participant=participant)
-        
+        accomodation = Accomodation.objects.get(participant=participant)
     except:
-        messages={'1':'Sorry, You are at the Worng Place'}
-        return render(request,'main_page/messages.html',{'messages':messages})
-    # print(accomodation.no_days)
+        messages={'1':'Sorry, You are at the worng place'}
+        return render(request, 'main_page/messages.html', {'messages':messages})
+
+    # print(accomodation.no_of_days)
     # subcategory = Subcategory.objects.get(id=subcategory_id)
 
     # try:
@@ -340,9 +349,9 @@ def accomodation_payment(request):
     # except:
     #     pass
 
-    charges={'1':300,'2':500,'3':700}
-    purpose = 'PAYMENT FOR ACCOMODATION FOR '+str(accomodation.no_days)
-    response = accomodation_payment_request(participant.name,charges[str(accomodation.no_days)], purpose,
+    charges={'1':300, '2':500, '3':700}
+    purpose = 'PAYMENT FOR ACCOMODATION FOR ' + str(accomodation.no_of_days)
+    response = accomodation_payment_request(participant.name,charges[str(accomodation.no_of_days)], purpose,
                 request.user.email, participant.contact_mobile_number.__str__())
 
     if response['success']:
@@ -354,6 +363,7 @@ def accomodation_payment(request):
         return redirect(url)
     else:
         return HttpResponseServerError()
+
 
 def accomodation_weebhook(request):
     
@@ -369,11 +379,17 @@ def accomodation_weebhook(request):
 
         if mac_provided == mac_calculated:
             try:
-                accomodation = Accomodation.objects.get(
-                    payment_request_id=data['payment_request_id'])
+                accomodation = Accomodation.objects.get(payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     accomodation.transaction_id = data['payment_id']
+                    send_mail(
+                        'Payment confirmation of Accommodation for ' + str(accomodation.no_of_days) + ' to Zeitgeist 2k19',
+                        'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + str(accomodation.no_of_days) + ', is successful. Have a happy and safe stay at IIT Ropar !\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        'zeitgeist.pr@iitrpr.ac.in',
+                        [participantpaspaid.participant.participating_user.email],
+                        fail_silently=False,
+                    )
                 else:
                     # Payment was unsuccessful, mark it as failed in your database.
                     accomodation.transaction_id = '0'
@@ -384,10 +400,18 @@ def accomodation_weebhook(request):
         else:
             return HttpResponse(status=400)
 
+
 def accomodation_payment_redirect(request):
     accomodation=Accomodation.objects.get(payment_request_id=request.GET['payment_request_id'])
     if accomodation.transaction_id =='-1' or accomodation.transaction_id=='0':
+        mp=['Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
         messages={'1':'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please try again'}
     else:
-        messages={'1':'Transaction ID :'+request.GET['payment_id']+'  Payment Status: '+request.GET['payment_status']+'  Payment Request ID: '+request.GET['payment_request_id'],'2':'Please bring your aadhar card for verification purposes.'}
-    return render(request,'main_page/messages.html',{'messages':messages})
+        mp=['Transaction ID :'+ request.GET['payment_id'],'Payment Status : '+request.GET['payment_status'],'Payment Request ID : '+ request.GET['payment_request_id']]
+        messages={'2':'Please bring your aadhar card for verification purposes.'}
+    return render(request,'main_page/messages.html',{'messages':messages,'mp':mp})
+
+
+# def testing(request):
+#     mp=['Hello','I am here','what about you!!']
+#     return render(request,'main_page/messages.html',{'mp':mp})

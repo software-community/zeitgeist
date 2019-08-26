@@ -31,6 +31,11 @@
                             </h{{ level }}>
                             {% endfor %}
                     {% endif %}
+                    {% if mp %}
+                    {% for m in mp %}
+                    <p style="color:blanchedalmond;font-size: large">{{m}}</p>
+                    {% endfor %}
+                    {% endif %}
                     {% if buttons %}
                             {% for button in buttons %}
                             <a href="{{ button.link }}" class="main-btn btn-lg">{{ button.text }}</a>
