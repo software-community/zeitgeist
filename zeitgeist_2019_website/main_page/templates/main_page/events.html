@@ -68,9 +68,13 @@
                 {% endfor %}
 
             </div>
-            <h4 class='title'><span style="color: crimson">Participation Fees:</span> {{ subcategory.participation_fees_per_person }} INR per person</h4>
 
+            {% if subcategory.participation_fees_per_person == 0 %}
+            <h4 class='title'><span style="color: crimson">Participation Fees:</span> {{ subcategory.participation_fees_per_person }} INR per person</h4>
             <a href="{% url 'pay_for_subcategory' subcategory.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
+            {% else %}
+            <h4 class='title'><span style="color: crimson">This is an online event, and it's registrations are handled separatedly. Contact event heads for more details.</span></h4>
+            {% endif %}
 
         </div>
         <!-- /member -->
@@ -140,8 +144,11 @@
                                         </p>
 
                                         <br>
-                                        <a href="{% url 'register_for_event' event.id %}"
-                                            class="btn btn-danger">Register</a>
+                                        {% if event.subcategory.participation_fees_per_person == 0 %}
+                                        <h3 class="member-name">Regitrations for this event are handled on Facebook page of Zeitgeist. Please contact event heads for more details.</h3>
+                                        {% else %}
+                                        <a href="{% url 'register_for_event' event.id %}" class="btn btn-danger">Register</a>
+                                        {% endif %}
                                     </div>
 
                                 </div>
