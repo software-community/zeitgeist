@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
-from .methods import payment_request
+from .methods import payment_request, accomodation_payment_request
 from django.forms import formset_factory
 # from django.contrib import messages
 # Create your views here.
@@ -342,7 +342,7 @@ def accomodation_payment(request):
 
     charges={'1':300,'2':500,'3':700}
     purpose = 'PAYMENT FOR ACCOMODATION FOR '+str(accomodation.no_days)
-    response = payment_request(participant.name,charges[str(accomodation.no_days)], purpose,
+    response = accomodation_payment_request(participant.name,charges[str(accomodation.no_days)], purpose,
                 request.user.email, participant.contact_mobile_number.__str__())
 
     if response['success']:
