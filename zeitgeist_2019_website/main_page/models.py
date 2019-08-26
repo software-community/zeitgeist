@@ -153,6 +153,7 @@ class Sponsor(models.Model):
 
 
 class Accomodation(models.Model):
+
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
 
     NO_OF_DAYS_CHOICES = [
