@@ -1,0 +1,33 @@
+{% extends 'main_page/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div id="home">
+    <!-- background image -->
+    <div class="section-bg" style="background-color:grey" data-stellar-background-ratio="0.5"></div>
+    <!-- /background image -->
+
+    <!-- home wrapper -->
+    <div class="home-wrapper">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="home-content">
+
+                        <h2>Your Registration for the event {{ event.name }} is succesfull. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. You will receive an email for your registration in the event shortly.<b> To get accomodation in IIT Ropar, <a href="{% url 'accomodation' %}">click here</a>.</b> The link to get accomodation will also be sent on email. We wish you best of luck.</h2>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- /home wrapper -->
+</div>
+
+{% endblock %}
