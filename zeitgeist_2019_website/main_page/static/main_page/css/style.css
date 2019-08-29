@@ -1042,12 +1042,12 @@ textarea.input {
     width: 100%;
   }
 }
-#desktop_only {display: block;}
-#mobile_only {display: none;}
+.desktop_only {display: block;}
+.mobile_only {display: none;}
 
 @media screen and (max-width: 768px) {
 
-#desktop_only {display: none;}
-#mobile_only {display: block;}
+.desktop_only {display: none;}
+.mobile_only {display: block;}
 
 }

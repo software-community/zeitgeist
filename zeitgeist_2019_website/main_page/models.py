@@ -51,6 +51,7 @@ class Event(models.Model):
 
     name = models.CharField(max_length=40, null=False, blank=False)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    link_to_rulebook = models.URLField(max_length=300)
 
     EVENT_TYPE_CHOICES = [
         ('Solo', 'Solo'),
