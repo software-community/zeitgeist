@@ -52,7 +52,7 @@
                 {% for event in events %}
 
                 <div class="col-md-4 col-xs-6">
-                    <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.' }}">
+                    <div class="member" data-toggle="modal" data-target="#{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.'|cut:'/' }}">
                         <div class="member-img">
                             <img src="{% static 'main_page/img/events_background.png' %}" alt="">
                         </div>
@@ -81,7 +81,7 @@
 
         {% for event in events %}
         <!-- member modal -->
-        <div id="{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.' }}" class="member-modal modal fade">
+        <div id="{{ event.name|cut:' '|cut:'('|cut:')'|cut:'&'|cut:'.'|cut:'/' }}" class="member-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <button type="button" class="member-modal-close" data-dismiss="modal"></button>

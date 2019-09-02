@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block content %}
-
+<script>
+    alert("Free Gift Vouchers worth 990 INR for those who register before 15th September");
+</script>
 <!-- Home -->
 <div id="home">
     <!-- background image -->
@@ -389,7 +391,7 @@
                         </div>
                         <div class="member-content">
                             <h3>Jashan Sanger</h3>
-                            <span>Event Head</span>
+                            <span>Events Head</span>
                         </div>
                     </div>
                 </div>
@@ -409,7 +411,7 @@
                         </div>
                         <div class="member-content">
                             <h3>Naveen Tosawara</h3>
-                            <span>Event Head</span>
+                            <span>Events Head</span>
                         </div>
                     </div>
                 </div>
@@ -519,7 +521,7 @@
                         </div>
                         <div class="member-content">
                             <h3>Anmol Rattan</h3>
-                            <span>Sponsorship & Marketing Head</span>
+                            <span>Marketing Head</span>
                         </div>
                     </div>
                 </div>
@@ -582,7 +584,7 @@
                         </div>
                         <div class="member-content">
                             <h3>Piyush Chechi</h3>
-                            <span>Media & Publicity Head</span>
+                            <span>Media Head</span>
                         </div>
                     </div>
                 </div>
@@ -601,12 +603,13 @@
                         </div>
                         <div class="member-content">
                             <h3>Sunil Meena</h3>
-                            <span>PR Head</span>
+                            <span>Publicity Head</span>
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+            <div class='row'>
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -666,8 +669,51 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-sm-3">
+                <div class="member">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/team_members/Yashvardhan_MarketingHead.jpeg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="tel:9610003799"><i class="fa fa-phone"></i></a>
+                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
+                        </div>
+                        <div class="member-content">
+                            <h3>Yashvardhan</h3>
+                            <span>Marketing Head</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="member">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/team_members/Harshit_Malik_Publicity_Head.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="tel:8587963620"><i class="fa fa-phone"></i></a>
+                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
+                        </div>
+                        <div class="member-content">
+                            <h3>Harshit Malik</h3>
+                            <span>Publicity Head</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        
+
+        
         <!-- /member -->
 
         <!-- /row -->
@@ -712,7 +758,7 @@
                 {% endif %}
                 <div class="col-xs-3">
                     <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/sponsors/last_year' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                        <img src="{% static 'main_page/img/sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
                             alt="">
                     </a>
                 </div>
