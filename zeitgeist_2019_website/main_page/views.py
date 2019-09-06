@@ -193,6 +193,9 @@ def register_for_event(request, event_id):
 @login_required
 def pay_for_subcategory(request, subcategory_id):
 
+    if os.getenv("REGISTRATION_ENABLE") == "0":
+        return HttpResponse("Registration Portal will open soon !!!")
+
     try:
         subcategory = Subcategory.objects.get(id=subcategory_id)
     except Subcategory.DoesNotExist:
@@ -226,9 +229,10 @@ def pay_for_subcategory(request, subcategory_id):
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']
-        # if previous payment was unsuccessful
+        # if previous payment was unsuccessful, update payment_request_id
         if participanthaspaid:
             participanthaspaid.payment_request_id = payment_request_id
+            participanthaspaid.save()
         # if there was no previous payment
         else:
             # transaction_id is set to be '-1' by default
