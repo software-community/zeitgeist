@@ -13,8 +13,8 @@ def payment_request(name, amount, purpose, email, mobile):
         send_email=True,
         email=email,
         phone=mobile,
-        redirect_url="http://zeitgeist.org.in/payment_redirect/",
-        webhook="http://zeitgeist.org.in/webhook/"
+        redirect_url="https://zeitgeist.org.in/payment_redirect/",
+        webhook="https://zeitgeist.org.in/webhook/"
         )
     return response
 
@@ -29,7 +29,7 @@ def accomodation_payment_request(name, amount, purpose, email, mobile):
         send_email=True,
         email=email,
         phone=mobile,
-        redirect_url='http://zeitgeist.org.in/accomodation_payment_redirect/',
-        webhook='http://zeitgeist.org.in/accomodation_weebhook/'
+        redirect_url='https://zeitgeist.org.in/accomodation_payment_redirect/',
+        webhook='https://zeitgeist.org.in/accomodation_weebhook/'
         )
     return response
