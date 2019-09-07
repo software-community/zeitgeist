@@ -19,7 +19,7 @@
                     <div class="home-content">
 
                         <h2>Before registering for {{ event.name }}, you must <a
-                                href="{% url 'pay_for_subcategory' event.subcategory.id %}">PAY FOR
+                                href="{% url 'pay_for_subcategory' event.subcategory.id %}" style="color:crimson">PAY FOR
                                 {{ event.subcategory }}</a>. Pay just INR
                             {{ event.subcategory.participation_fees_per_person }} and become eligible to participate
                             in {% for each_event in events_in_subcategory %}{% if forloop.first %}{{ each_event.name }}{% else %}, {{ each_event.name }}{% endif %}{% endfor %}.</h2>

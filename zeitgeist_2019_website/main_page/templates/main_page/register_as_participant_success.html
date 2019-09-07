@@ -18,8 +18,16 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="home-content">
 
-                        <h2>You have registered yourself successfully as a participant. <b>Your PARTICIPANT CODE is {{ request.user.participant.participant_code }}.</b> If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event in Zeitgeist 2k19. We have also emailed this code to your email address {{ request.user.email }}.</h2>
-                        <h3><b>Note that this message is not for your participation in any event.</b> To participate in events, you need to register for them on the <a href="{% url 'main_page_events' %}">Events Page</a>. We wish you best of luck for all the events you take part in. Give your best and stand a chance to win exciting prizes !!!</h3>
+                        <h2>You have registered yourself successfully as a participant. <b>Your PARTICIPANT CODE is
+                                <span style="color: crimson">{{ request.user.participant.participant_code }}</span>.</b>
+                            If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the
+                            same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event
+                            in Zeitgeist 2k19. We have also emailed this code to your email address <span
+                                style="color: crimson">{{ request.user.email }}</span>.</h2>
+                        <h3><b>Note that this message is not for your participation in any event.</b> To participate in
+                            events, you need to register for them on the <a href="{% url 'main_page_events' %}"
+                                style="color: crimson">Events Page</a>. We wish you best of luck for all the events you
+                            take part in. Give your best and stand a chance to win exciting prizes !!!</h3>
 
                     </div>
                 </div>
