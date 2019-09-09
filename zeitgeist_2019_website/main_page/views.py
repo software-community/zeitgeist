@@ -290,7 +290,7 @@ def weebhook(request):
                         str(participantpaspaid.paid_subcategory) +
                         ' to Zeitgeist 2k19',
                         'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) +
-                        ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY. To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY WITHOUT ANY EXTRA COST !!! To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                         'zeitgeist.pr@iitrpr.ac.in',
                         [participantpaspaid.participant.participating_user.email],
                         fail_silently=False,
@@ -318,7 +318,7 @@ def payment_redirect(request):
         mp = ['Transaction ID :' + request.GET['payment_id'], 'Payment Status : ' +
               request.GET['payment_status'], 'Payment Request ID : ' + request.GET['payment_request_id']]
         messages = {
-            '4': 'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY. To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.'}
+            '4': 'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY WITHOUT ANY EXTRA COST !!! To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.'}
     return render(request, 'main_page/messages.html', {'messages': messages, 'mp': mp})
 
 
