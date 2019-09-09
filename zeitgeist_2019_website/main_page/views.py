@@ -122,6 +122,7 @@ def register_for_event(request, event_id):
         except ParticipantHasPaid.DoesNotExist:
             context = {'event': event, 'events_in_subcategory': Event.objects.filter(subcategory=event.subcategory)}
             return render(request, 'main_page/must_pay_for_subcategory_first.html', context)
+        ParticipantHasParticipated.objects.create(participant=participant, event=event)
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
