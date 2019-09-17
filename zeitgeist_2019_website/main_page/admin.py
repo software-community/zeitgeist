@@ -15,8 +15,45 @@ from .models import *
 # class SponsorAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in Sponsor._meta.get_fields()]
 
-# class AccomodationAdmin(admin.ModelAdmin):
-#     list_display = [field.name for field in Accomodation._meta.get_fields()]
+class AccomodationAdmin(admin.ModelAdmin):
+
+    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'no_of_days', 'gender', 'transaction_id', 'payment_request_id', 'aadhar_no']
+
+    def get_participant_participant_code(self, obj):
+        return obj.participant.participant_code
+
+    get_participant_participant_code.short_description = 'Participant Code'
+    get_participant_participant_code.admin_order_field = 'participant__participant_code'
+
+    def get_participant_name(self, obj):
+        return obj.participant.name
+
+    get_participant_name.short_description = 'Participant Name'
+    get_participant_name.admin_order_field = 'participant__name'
+
+    def get_participant_participating_user_email(self, obj):
+        return obj.participant.participating_user.email
+
+    get_participant_participating_user_email.short_description = 'Participant Email'
+    get_participant_participating_user_email.admin_order_field = 'participant__participating_user__email'
+
+    def get_participant_college_name(self, obj):
+        return obj.participant.college_name
+
+    get_participant_college_name.short_description = 'Participant College Name'
+    get_participant_college_name.admin_order_field = 'participant__college_name'
+
+    def get_participant_contact_mobile_number(self, obj):
+        return obj.participant.contact_mobile_number
+
+    get_participant_contact_mobile_number.short_description = 'Participant Contact Mobile Number'
+    get_participant_contact_mobile_number.admin_order_field = 'participant__contact_mobile_number'
+
+    def get_participant_whatsapp_mobile_number(self, obj):
+        return obj.participant.whatsapp_mobile_number
+
+    get_participant_whatsapp_mobile_number.short_description = 'Participant WhatsApp Mobile Number'
+    get_participant_whatsapp_mobile_number.admin_order_field = 'participant__whatsapp_mobile_number'
 
 
 class ParticipantAdmin(admin.ModelAdmin):
@@ -33,7 +70,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
-    list_display = ['participant', 'paid_subcategory', 'transaction_id',
+    list_display = ['id', 'participant', 'paid_subcategory', 'transaction_id',
                     'payment_request_id', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
 
     def get_participant_name(self, obj):
@@ -69,7 +106,7 @@ class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
 class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
-    list_display = ['participant', 'event', 'get_participant_name', 'get_participant_participating_user_email',
+    list_display = ['id', 'participant', 'event', 'get_participant_name', 'get_participant_participating_user_email',
                     'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
 
     def get_participant_name(self, obj):
@@ -105,7 +142,7 @@ class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
 class TeamAdmin(admin.ModelAdmin):
 
-    list_display = ['name', 'team_code', 'event', 'captain', 'get_captain_name', 'get_captain_participating_user_email',
+    list_display = ['id', 'name', 'team_code', 'event', 'captain', 'get_captain_name', 'get_captain_participating_user_email',
                     'get_captain_college_name', 'get_captain_contact_mobile_number', 'get_captain_whatsapp_mobile_number']
 
     def get_captain_name(self, obj):
@@ -141,7 +178,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 class TeamHasMemberAdmin(admin.ModelAdmin):
 
-    list_display = ['get_member_participant_code', 'get_member_name', 'get_member_college_name', 'get_member_contact_mobile_number', 'get_member_whatsapp_mobile_number', 'get_member_participating_user_email', 'get_team_team_code', 'get_team_name',
+    list_display = ['id', 'get_member_participant_code', 'get_member_name', 'get_member_college_name', 'get_member_contact_mobile_number', 'get_member_whatsapp_mobile_number', 'get_member_participating_user_email', 'get_team_team_code', 'get_team_name',
                     'get_team_event', 'get_team_captain_participant_code', 'get_team_captain_name', 'get_team_captain_college_name', 'get_team_captain_contact_mobile_number', 'get_team_captain_whatsapp_mobile_number', 'get_team_captain_participating_user_email']
 
     def get_member_participant_code(self, obj):
@@ -239,7 +276,7 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
 # admin.site.register(Sponsor, SponsorAdmin)
-# admin.site.register(Accomodation, AccomodationAdmin)
+admin.site.register(Accomodation, AccomodationAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
 admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
@@ -250,7 +287,7 @@ admin.site.register(Category)
 admin.site.register(Subcategory)
 admin.site.register(Event)
 admin.site.register(Sponsor)
-admin.site.register(Accomodation)
+# admin.site.register(Accomodation)
 # admin.site.register(Participant)
 # admin.site.register(ParticipantHasPaid)
 # admin.site.register(ParticipantHasParticipated)
