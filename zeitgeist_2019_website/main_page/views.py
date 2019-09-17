@@ -307,6 +307,7 @@ def weebhook(request):
 
 
 def payment_redirect(request):
+
     participanthaspaid = ParticipantHasPaid.objects.get(
         payment_request_id=request.GET['payment_request_id'])
     paidsubcategory = participanthaspaid.paid_subcategory
@@ -324,6 +325,7 @@ def payment_redirect(request):
 
 @login_required
 def accomodation(request):
+
     try:
         participant = Participant.objects.get(participating_user=request.user)
         participantdata = ParticipantHasParticipated.objects.filter(
@@ -371,6 +373,7 @@ def accomodation(request):
 
 @login_required
 def accomodation_payment(request):
+
     try:
         participant = Participant.objects.get(participating_user=request.user)
     except:
@@ -449,6 +452,7 @@ def accomodation_weebhook(request):
 
 
 def accomodation_payment_redirect(request):
+
     accomodation = Accomodation.objects.get(
         payment_request_id=request.GET['payment_request_id'])
     if accomodation.transaction_id == '-1' or accomodation.transaction_id == '0':
@@ -464,6 +468,6 @@ def accomodation_payment_redirect(request):
     return render(request, 'main_page/messages.html', {'messages': messages, 'mp': mp})
 
 
-# def testing(request):
-#     mp=['Hello','I am here','what about you!!']
-#     return render(request,'main_page/messages.html',{'mp':mp})
+def under_maintainance(request):
+
+    return render(request, 'main_page/under_maintainance.html')
