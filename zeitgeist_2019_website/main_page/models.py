@@ -172,7 +172,7 @@ class Accomodation(models.Model):
 
     transaction_id = models.CharField(max_length=100, default='-1')
     payment_request_id = models.CharField(max_length=100, default='-1')
-    aadhar_no = models.CharField(max_length=4, blank=False, null=False, verbose_name="Last 4 digits of your Aadhar Number")
+    aadhar_no = models.CharField(max_length=5, blank=False, null=False, verbose_name="Last 4 digits of your Aadhar Number")
 
     def __str__(self):
         return str(self.participant.participant_code) +' - ' + str(self.no_of_days)+' - ' + str(self.gender)
