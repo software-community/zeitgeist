@@ -12,8 +12,11 @@ from .models import *
 # class EventAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in Event._meta.get_fields()]
 
-# class SponsorAdmin(admin.ModelAdmin):
-#     list_display = [field.name for field in Sponsor._meta.get_fields()]
+# class Our_SponsorAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Our_Sponsor._meta.get_fields()]
+
+# class Prev_SponsorAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Prev_Sponsor._meta.get_fields()]
 
 class AccomodationAdmin(admin.ModelAdmin):
 
@@ -58,8 +61,14 @@ class AccomodationAdmin(admin.ModelAdmin):
 
 class ParticipantAdmin(admin.ModelAdmin):
 
-    list_display = ['participant_code', 'name', 'get_participating_user_email',
+    list_display = ['get_participating_user_id', 'participant_code', 'name', 'get_participating_user_email',
                     'college_name', 'contact_mobile_number', 'whatsapp_mobile_number', 'referring_ca']
+
+    def get_participating_user_id(self, obj):
+        return obj.participating_user.id
+
+    get_participating_user_id.short_description = 'ID'
+    get_participating_user_id.admin_order_field = 'participating_user__id'
 
     def get_participating_user_email(self, obj):
         return obj.participating_user.email
@@ -275,7 +284,8 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
-# admin.site.register(Sponsor, SponsorAdmin)
+# admin.site.register(Our_Sponsor, Our_SponsorAdmin)
+# admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
 admin.site.register(Accomodation, AccomodationAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
@@ -286,7 +296,8 @@ admin.site.register(TeamHasMember, TeamHasMemberAdmin)
 admin.site.register(Category)
 admin.site.register(Subcategory)
 admin.site.register(Event)
-admin.site.register(Sponsor)
+admin.site.register(Our_Sponsor)
+admin.site.register(Prev_Sponsor)
 # admin.site.register(Accomodation)
 # admin.site.register(Participant)
 # admin.site.register(ParticipantHasPaid)
