@@ -20,8 +20,9 @@ from django.http import HttpResponseNotFound
 
 
 def main_page_home(request):
-    sponsors = Sponsor.objects.all()
-    context = {'title': 'Zeitgeist', 'sponsors': sponsors}
+    our_sponsors = Our_Sponsor.objects.all()
+    prev_sponsors = Prev_Sponsor.objects.all()
+    context = {'our_sponsors': our_sponsors, 'prev_sponsors': prev_sponsors}
     return render(request, 'main_page/index.html', context)
 
 

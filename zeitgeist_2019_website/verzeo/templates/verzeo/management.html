@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/card.css" />
+
+    <title>Zeitgeist</title>
+  </head>
+  <body>
+    <div class="first" id="root">
+      <a href="index.html" class="imagelink">
+        <img src="images/house.png" alt="home" />
+      </a>
+      <a href="#" class="backbutton">
+        <img src="images/back1.png" alt="home" />
+      </a>
+      <div class="main">
+        <div id="app" class="department container">
+          <div class="eachdept" id="block">
+            <a href="management/blockchain.html">
+              <card data-image="images/block.png">
+                <h1 slot="header">Block Chain</h1>
+                <p slot="content"></p>
+              </card>
+            </a>
+          </div>
+
+          <div class="eachdept" id="fin">
+            <a href="management/finance&stock.html">
+              <card data-image="images/stock.jpg">
+                <h1 slot="header">Finance / Stock Market</h1>
+                <p slot="content"></p>
+              </card>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/three.r92.min.js"></script>
+    <script src="js/vanta.fog.min.js"></script>
+    <script>
+      VANTA.FOG({
+        el: "#root",
+        highlightColor: 0x71c4ff,
+        midtoneColor: 0x3a9cb1,
+        lowlightColor: 0x567478,
+        baseColor: 0xfff5d5,
+        blurFactor: 0.67,
+        speed: 1.4,
+        zoom: 1.1
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

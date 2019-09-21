@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Category, Subcategory, Event, Sponsor
+from .models import *
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -18,7 +18,12 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = '__all__'
 
-class SponsorSerializer(serializers.ModelSerializer):
+class Our_SponsorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Sponsor
+        model = Our_Sponsor
+        fields = '__all__'
+
+class Prev_SponsorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Prev_Sponsor
         fields = '__all__'

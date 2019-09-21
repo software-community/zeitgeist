@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +29,8 @@
 	{% if event %}
 	<style>
 		.asteriskField {
-  display:none;
-}
+			display: none;
+		}
 	</style>
 	{% endif %}
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,6 +40,7 @@
 			  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 			<![endif]-->
 </head>
+
 <body>
 
 	<!-- Header -->
@@ -58,8 +60,8 @@
 
 				<!-- Mobile toggle -->
 				<button class="navbar-toggle">
-						<i class="fa fa-bars"></i>
-					</button>
+					<i class="fa fa-bars"></i>
+				</button>
 				<!-- /Mobile toggle -->
 			</div>
 			<!-- /navbar header -->
@@ -67,24 +69,17 @@
 			<!-- Navigation -->
 			<nav id="nav">
 				<ul class="main-nav nav navbar-nav navbar-right">
-					{% if title %}
-					<li><a href="#home">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#schedule">Schedule</a></li>
-					<li><a href="#team">Team</a></li>
+					<li><a href="{% url 'main_page_home' %}">Home</a></li>
 					<li><a href="{% url 'main_page_events' %}">Events</a></li>
-					<li><a href="#sponsors">Sponsors</a></li>
-					<li><a href="#contact">Contact</a></li>
-					{% else %}
-					<li><a href="{% url 'main_page_home' %}#home">Home</a></li>					
-					<li><a href="{% url 'main_page_home' %}#about">About</a></li>
-					<li><a href="{% url 'main_page_home' %}#schedule">Schedule</a></li>
-					<li><a href="{% url 'main_page_home' %}#team">Team</a></li>
-					<li><a href="{% url 'main_page_events' %}">Events</a></li>
-					<li><a href="{% url 'main_page_home' %}#sponsors">Sponsors</a></li>
-					<li><a href="{% url 'main_page_home' %}#contact">Contact</a></li>
-					{% endif %}
-					<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
+					<li><a href="https://www.instamojo.com/whataftercollege/wac-2019-workshop-series-at-iit-ropar-in-ass-89a3f/" target="_blank">Workshops</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Internship
+							<span class="caret"></span></a>
+						<ul class="dropdown-menu" style="background-color: #0d0b0b;">
+							<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
+							<li><a href="{% url 'verzeo_home' %}" target="_blank">Verzeo</a></li>
+						</ul>
+					</li>
 					{% if request.user.is_authenticated %}
 					<li><a href="{% url 'account_logout' %}">Logout</a></li>
 					{% else %}
@@ -107,7 +102,8 @@
 			<!-- row -->
 			<div class="row">
 				<div class='col-md-4'>
-						<p style="text-align: center;">Made with <i class='fa fa-heart-o'></i> by Software Community, IIT Ropar</p>
+					<p style="text-align: center;">Made with <i class='fa fa-heart-o'></i> by Software Community, IIT
+						Ropar</p>
 				</div>
 
 				<!-- footer logo -->
@@ -115,7 +111,7 @@
 					<div class="footer-brand">
 						<a class="logo" href="{% url 'main_page_home' %}">
 							<img class="logo-img" src="{% static 'main_page/img/logo.png' %}" alt="logo"><br>
-							
+
 						</a>
 					</div>
 				</div>
@@ -124,9 +120,11 @@
 				<!-- contact social -->
 				<div class="col-md-4 ">
 					<div class="contact-social">
-						<a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i class="fa fa-facebook"></i></a>
+						<a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i
+								class="fa fa-facebook"></i></a>
 						<a href="https://twitter.com/zeitgeist_rpr" target="_blank"><i class="fa fa-twitter"></i></a>
-						<a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i class="fa fa-instagram"></i></a>
+						<a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i
+								class="fa fa-instagram"></i></a>
 					</div>
 				</div>
 				<!-- /contact social -->

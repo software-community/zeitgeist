@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+
 <!-- Home -->
 <div id="home">
     <!-- background image -->
@@ -507,7 +508,7 @@
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
-                        <img src="{% static 'main_page/img/team_members/Anmol_Sponsorship&MarketingHead.jpg' %}" alt="">
+                        <img src="{% static 'main_page/img/team_members/Anmol_Sponsorship_MarketingHead.jpg' %}" alt="">
                     </div>
                     <div class="member-body">
                         <div class="member-social">
@@ -570,7 +571,7 @@
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
-                        <img src="{% static 'main_page/img/team_members/Piyush_Media&PublicityHead.jpg' %}" alt="">
+                        <img src="{% static 'main_page/img/team_members/Piyush_Media_PublicityHead.jpg' %}" alt="">
                     </div>
                     <div class="member-body">
                         <div class="member-social">
@@ -687,6 +688,7 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -706,21 +708,57 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-3">
+                <div class="member">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/team_members/Ashish_Security Head.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="tel:8284020226"><i class="fa fa-phone"></i></a>
+                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
+                        </div>
+                        <div class="member-content">
+                            <h3>Ashish Swami</h3>
+                            <span>Security Head</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="member">
+                    <div class="member-img">
+                        <img src="{% static 'main_page/img/team_members/Mehul_SecurityHead.jpg' %}" alt="">
+                    </div>
+                    <div class="member-body">
+                        <div class="member-social">
+                            <a href="tel:8266971443"><i class="fa fa-phone"></i></a>
+                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
+                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
+                        </div>
+                        <div class="member-content">
+                            <h3>Mehul Kapadia</h3>
+                            <span>Security Head</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-            
-        
-
-        
-        <!-- /member -->
-
         <!-- /row -->
     </div>
     <!-- /container -->
 </div>
 <!-- /Team -->
 
-<!-- Sponsors -->
-<div id="sponsors" class="section">
+
+<!-- Our Sponsors -->
+<div id="our_sponsors" class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
@@ -733,13 +771,13 @@
 
         <!-- sponsor -->
         <div class='desktop_only'>
-            {% for sponsor in sponsors %}
+            {% for sponsor in our_sponsors %}
             {% if forloop.counter0|divisibleby:"6" %}
             <div class='row'>
                 {% endif %}
                 <div class="col-xs-2">
                     <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
                             alt="">
                     </a>
                 </div>
@@ -749,13 +787,13 @@
             {% endfor %}
         </div>
         <div class='mobile_only'>
-            {% for sponsor in sponsors %}
+            {% for sponsor in our_sponsors %}
             {% if forloop.counter0|divisibleby:"4" %}
             <div class='row'>
                 {% endif %}
                 <div class="col-xs-3">
                     <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
                             alt="">
                     </a>
                 </div>
@@ -765,18 +803,65 @@
             {% endfor %}
         </div>
     </div>
-    <!-- /sponsor -->
-
-    <!-- VIEW ALL ################################################################ -->
-    <!-- <div class="section-title" ><button class="btn btn-danger btn-lg">View All</button></div> -->
-
-
-
     <!-- /row -->
 </div>
 <!-- /container -->
 </div>
 <!-- /Sponsors -->
+
+
+<!-- Previous Sponsors -->
+<div id="prev_sponsors" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+
+        <!-- section title -->
+        <div class="section-title">
+            <h3 class="title"><span>Previous</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+        </div>
+        <!-- /section title -->
+
+        <!-- sponsor -->
+        <div class='desktop_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"6" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-2">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class='mobile_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-3">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"4" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <!-- /row -->
+</div>
+<!-- /container -->
+</div>
+<!-- /Previos Sponsors -->
+
 
 <!-- Contact -->
 <div id="contact" class="section">
