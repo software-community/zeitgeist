@@ -12,11 +12,16 @@ from .models import *
 # class EventAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in Event._meta.get_fields()]
 
-# class Our_SponsorAdmin(admin.ModelAdmin):
-#     list_display = [field.name for field in Our_Sponsor._meta.get_fields()]
 
-# class Prev_SponsorAdmin(admin.ModelAdmin):
-#     list_display = [field.name for field in Prev_Sponsor._meta.get_fields()]
+class Our_SponsorAdmin(admin.ModelAdmin):
+
+    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+
+
+class Prev_SponsorAdmin(admin.ModelAdmin):
+
+    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+
 
 class AccomodationAdmin(admin.ModelAdmin):
 
@@ -284,8 +289,8 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
-# admin.site.register(Our_Sponsor, Our_SponsorAdmin)
-# admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
+admin.site.register(Our_Sponsor, Our_SponsorAdmin)
+admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
 admin.site.register(Accomodation, AccomodationAdmin)
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
@@ -296,8 +301,8 @@ admin.site.register(TeamHasMember, TeamHasMemberAdmin)
 admin.site.register(Category)
 admin.site.register(Subcategory)
 admin.site.register(Event)
-admin.site.register(Our_Sponsor)
-admin.site.register(Prev_Sponsor)
+# admin.site.register(Our_Sponsor)
+# admin.site.register(Prev_Sponsor)
 # admin.site.register(Accomodation)
 # admin.site.register(Participant)
 # admin.site.register(ParticipantHasPaid)
