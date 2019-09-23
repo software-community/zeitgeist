@@ -1,0 +1,30 @@
+{% extends "campus_ambassador/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<header>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-brand">
+				<a href="{% url 'main_page_home' %}" class="button">Zeitgeist</a>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<section class="hero-wrap" style="height: auto; padding-bottom: 30px">
+	<!-- content goes here -->
+	<div class="container form-group" style="margin-top:190px;">
+		<div class="row">
+			<div class="card col-md-8 offset-md-2"
+				style="padding: 3%; background-color: transparent; border: transparent">
+				<h4 style="color: white">Registrations for Campus Ambassador are now closed. Please contact <a
+						href="tel:7742522607" style="color: rgb(237, 255, 253);">7742522607</a> for further queries.</h4>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}
