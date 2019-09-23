@@ -1,135 +1,117 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700"
-    />
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
-    /> -->
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/card.css" />
 
-    <title>Zeitgeist</title>
-  </head>
-  <body>
-    <div class="first" id="root">
-      <a href="../cse.html" class="backbutton" style="display: block">
-        <img src="../images/back1.png" alt="home" />
-      </a>
-      <div class="row">
-        <div class="col coursedes machine" style="display: block">
-          <div class="col"><h1>Machine Learning With Python</h1></div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700" />
+	<link rel="stylesheet" href="{% static 'verzeo/css/index.css' %}" />
+	<link rel="stylesheet" href="{% static 'verzeo/css/card.css' %}" />
 
-          <br />
+	<title>Zeitgeist</title>
+</head>
 
-          <div class="col">
-            <h4>What you will learn?</h4>
-            <br />
-            <ul>
-              <li>
-                Gain mastery over algorithms, principles, and applications of
-                Machine Learning through live projects.
-              </li>
-              <li>
-                Learn the statistical aspects of Machine Learning and implement
-                models like vector machines, K-means, random forest classifier
-                and a lot more.
-              </li>
-              <li>
-                Get a thorough approach regarding the time series modelling as
-                well as supervised and unsupervised learning along with
-                recommendation engine.
-              </li>
-            </ul>
-            <br />
-            <br />
-            <h4>What you will get?</h4>
-            <ul>
-              <li>Microsoft training associate certification</li>
-              <li>
-                Guaranteed Co-Branded Internship certificate from one of the
-                partnered 100+ companies
-              </li>
-              <li>
-                Hands-on experience through capstone projects provided by
-                industry partner.
-              </li>
-              <li>Training completion certificate</li>
-              <li>Certification of participation from Zeitgeist + Verzeo</li>
-            </ul>
-            <br /><br />
+<body>
+	<div class="first" id="root">
+		<a href="{% url 'cse' %}" class="backbutton" style="display: block">
+			<img src="{% static 'verzeo/images/back1.png' %}" alt="home" />
+		</a>
+		<div class="row">
+			<div class="col coursedes machine" style="display: block">
+				<div class="col">
+					<h1>Machine Learning With Python</h1>
+				</div>
 
-            <br />
-            <br />
-          </div>
+				<br />
 
-          <br /><br />
+				<div class="col">
+					<h4>What you will learn?</h4>
+					<br />
+					<ul>
+						<li>
+							Gain mastery over algorithms, principles, and applications of
+							Machine Learning through live projects.
+						</li>
+						<li>
+							Learn the statistical aspects of Machine Learning and implement
+							models like vector machines, K-means, random forest classifier
+							and a lot more.
+						</li>
+						<li>
+							Get a thorough approach regarding the time series modelling as
+							well as supervised and unsupervised learning along with
+							recommendation engine.
+						</li>
+					</ul>
+					<br />
+					<br />
+					<h4>What you will get?</h4>
+					<ul>
+						<li>Microsoft training associate certification</li>
+						<li>
+							Guaranteed Co-Branded Internship certificate from one of the
+							partnered 100+ companies
+						</li>
+						<li>
+							Hands-on experience through capstone projects provided by
+							industry partner.
+						</li>
+						<li>Training completion certificate</li>
+						<li>Certification of participation from Zeitgeist + Verzeo</li>
+					</ul>
+					<br /><br />
 
-          <div class="buxt">
-            <a
-              href="https://form.jotform.me/92604911227454"
-              target="blank"
-              class="link"
-              >Online</a
-            >&nbsp;
-            <a
-              href="https://form.jotform.me/92605106021443"
-              target="blank"
-              class="link"
-              >Hybrid
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.js"
-      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"
-    ></script>
-    <script src="../js/three.r92.min.js"></script>
-    <script src="../js/vanta.fog.min.js"></script>
-    <script>
-      VANTA.FOG({
-        el: "#root",
-        highlightColor: 0x71c4ff,
-        midtoneColor: 0x3a9cb1,
-        lowlightColor: 0x567478,
-        baseColor: 0xfff5d5,
-        blurFactor: 0.67,
-        speed: 1.4,
-        zoom: 1.1
-      });
-    </script>
+					<br />
+					<br />
+				</div>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				<br /><br />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
-    <script src="../js/card.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/three.r92.min.js"></script>
-    <script src="../js/vanta.fog.min.js"></script>
-  </body>
+				<div class="buxt">
+					<a href="https://form.jotform.me/92604911227454" target="blank" class="link">Online</a>&nbsp;
+					<a href="https://form.jotform.me/92605106021443" target="blank" class="link">Hybrid
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	<script src="{% static 'verzeo/js/three.r92.min.js' %}"></script>
+	<script src="{% static 'verzeo/js/vanta.fog.min.js' %}"></script>
+	<script>
+		VANTA.FOG({
+			el: "#root",
+			highlightColor: 0x71c4ff,
+			midtoneColor: 0x3a9cb1,
+			lowlightColor: 0x567478,
+			baseColor: 0xfff5d5,
+			blurFactor: 0.67,
+			speed: 1.4,
+			zoom: 1.1
+		});
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+	<script src="{% static 'verzeo/js/card.js' %}"></script>
+	<script src="{% static 'verzeo/js/index.js' %}"></script>
+	<script src="{% static 'verzeo/js/three.r92.min.js' %}"></script>
+	<script src="{% static 'verzeo/js/vanta.fog.min.js' %}"></script>
+</body>
+
 </html>
