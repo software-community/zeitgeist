@@ -38,13 +38,15 @@ urlpatterns = [
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
     path('data-api/', include(router.urls)),
+
     # path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook), name='accomodation_weebhook'),
     # path('accomodation_payment_redirect/', views.accomodation_payment_redirect, name='accomodation_payment_redirect'),
     # path('accomodation/', views.accomodation, name='accomodation'),
     # path('accomodation_pay/', views.accomodation_payment, name='accomodation_pay'),
+
     path('accomodation_weebhook/', views.under_maintainance),
     path('accomodation_payment_redirect/', views.under_maintainance),
-    path('accomodation/', views.under_maintainance),
+    path('accomodation/', views.accomodation_static),
     path('accomodation_pay/', views.under_maintainance),
 
     # define the login URLs

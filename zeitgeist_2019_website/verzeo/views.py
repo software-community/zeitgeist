@@ -18,17 +18,8 @@ def content(request):
 def digital(request):
 	return render(request, 'verzeo/arts&commerce/digital.html')
 
-def hr(request):
-	return render(request, 'verzeo/arts&commerce/hr.html')
-
 def journalism(request):
 	return render(request, 'verzeo/arts&commerce/journalism.html')
-
-def lean(request):
-	return render(request, 'verzeo/arts&commerce/lean.html')
-
-def marketing(request):
-	return render(request, 'verzeo/arts&commerce/marketing.html')
 
 def photo(request):
 	return render(request, 'verzeo/arts&commerce/photo.html')
@@ -103,6 +94,15 @@ def blockchain(request):
 
 def finance_stock(request):
 	return render(request, 'verzeo/management/finance&stock.html')
+
+def lean(request):
+	return render(request, 'verzeo/management/lean.html')
+
+def marketing(request):
+	return render(request, 'verzeo/management/marketing.html')
+
+def hr(request):
+	return render(request, 'verzeo/management/hr.html')
 
 
 def mech(request):
