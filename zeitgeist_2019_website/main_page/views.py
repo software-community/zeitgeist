@@ -472,3 +472,7 @@ def accomodation_payment_redirect(request):
 def under_maintainance(request):
 
     return render(request, 'main_page/under_maintainance.html')
+
+
+def accomodation_static(request):
+    return render(request, 'main_page/accomodation_static.html')

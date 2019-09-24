@@ -32,11 +32,34 @@
 						</card>
 					</a>
 				</div>
-
 				<div class="eachdept" id="fin">
 					<a href="{% url 'finance_stock' %}">
 						<card data-image="{% static 'verzeo/images/stock.jpg' %}">
 							<h1 slot="header">Finance / Stock Market</h1>
+							<p slot="content"></p>
+						</card>
+					</a>
+				</div>
+				<div class="col col-md-3 eachdept" id="lop">
+					<a href="{% url 'lean' %}">
+						<card data-image="{% static 'verzeo/images/lean.jpg' %}">
+							<h1 slot="header">Lean Operations</h1>
+							<p slot="content"></p>
+						</card>
+					</a>
+				</div>
+				<div class="col col-md-3 eachdept" id="marketing">
+					<a href="{% url 'marketing' %}">
+						<card data-image="{% static 'verzeo/images/marketing.jpeg' %}">
+							<h1 slot="header">Marketing</h1>
+							<p slot="content"></p>
+						</card>
+					</a>
+				</div>
+				<div class="col col-md-3 eachdept" id="human">
+					<a href="{% url 'hr' %}">
+						<card data-image="{% static 'verzeo/images/hr.jpg' %}">
+							<h1 slot="header">Human Resources</h1>
 							<p slot="content"></p>
 						</card>
 					</a>
