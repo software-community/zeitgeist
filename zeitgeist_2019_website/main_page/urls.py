@@ -46,7 +46,7 @@ urlpatterns = [
 
     path('accomodation_weebhook/', views.under_maintainance),
     path('accomodation_payment_redirect/', views.under_maintainance),
-    path('accomodation/', views.accomodation_static),
+    path('accomodation/', views.accomodation_static, name="accomodation_static"),
     path('accomodation_pay/', views.under_maintainance),
 
     # define the login URLs
