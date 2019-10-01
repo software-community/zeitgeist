@@ -25,7 +25,13 @@ class Prev_SponsorAdmin(admin.ModelAdmin):
 
 class AccomodationAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'no_of_days', 'gender', 'transaction_id', 'payment_request_id', 'aadhar_no']
+    list_display = ['get_participant_participating_user_id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'transaction_id', 'payment_request_id']
+
+    def get_participant_participating_user_id(self, obj):
+        return obj.participant.participating_user.id
+
+    get_participant_participating_user_id.short_description = 'ID'
+    get_participant_participating_user_id.admin_order_field = 'participant__participating_user__id'
 
     def get_participant_participant_code(self, obj):
         return obj.participant.participant_code
@@ -84,8 +90,14 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'participant', 'paid_subcategory', 'transaction_id',
-                    'payment_request_id', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
+    list_display = ['id', 'paid_subcategory', 'transaction_id',
+                    'payment_request_id', 'get_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
+
+    def get_participant_code(self, obj):
+        return obj.participant.participant_code
+
+    get_participant_code.short_description = 'Participant Code'
+    get_participant_code.admin_order_field = 'participant__participant_code'
 
     def get_participant_name(self, obj):
         return obj.participant.name
@@ -120,8 +132,15 @@ class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
 class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'participant', 'event', 'get_participant_name', 'get_participant_participating_user_email',
+    list_display = ['id', 'event', 'get_participant_code', 'get_participant_name', 'get_participant_participating_user_email',
                     'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
+
+    def get_participant_code(self, obj):
+        return obj.participant.participant_code
+
+    get_participant_code.short_description = 'Participant Code'
+    get_participant_code.admin_order_field = 'participant__participant_code'
+
 
     def get_participant_name(self, obj):
         return obj.participant.name
@@ -156,8 +175,14 @@ class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
 class TeamAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'name', 'team_code', 'event', 'captain', 'get_captain_name', 'get_captain_participating_user_email',
+    list_display = ['id', 'name', 'team_code', 'event', 'get_captain_participant_code', 'get_captain_name', 'get_captain_participating_user_email',
                     'get_captain_college_name', 'get_captain_contact_mobile_number', 'get_captain_whatsapp_mobile_number']
+
+    def get_captain_participant_code(self, obj):
+        return obj.captain.participant_code
+
+    get_captain_participant_code.short_description = 'Captain Participant Code'
+    get_captain_participant_code.admin_order_field = 'captain__participant_code'
 
     def get_captain_name(self, obj):
         return obj.captain.name

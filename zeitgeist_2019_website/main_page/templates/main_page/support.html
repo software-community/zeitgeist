@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'support' %}">
+    {% csrf_token %}
+    <input type="number" name="amount" id="" required min="100">
+    <button type="submit">PAY</button>
+</form>

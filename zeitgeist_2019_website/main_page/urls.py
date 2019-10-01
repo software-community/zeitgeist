@@ -37,17 +37,14 @@ urlpatterns = [
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
+    path('support/', views.support, name="support"),
+    path('swiggy_launchpad', views.swiggy_launchpad, name='swiggy_launchpad'),
     path('data-api/', include(router.urls)),
 
-    # path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook), name='accomodation_weebhook'),
-    # path('accomodation_payment_redirect/', views.accomodation_payment_redirect, name='accomodation_payment_redirect'),
-    # path('accomodation/', views.accomodation, name='accomodation'),
-    # path('accomodation_pay/', views.accomodation_payment, name='accomodation_pay'),
-
-    path('accomodation_weebhook/', views.under_maintainance),
-    path('accomodation_payment_redirect/', views.under_maintainance),
-    path('accomodation/', views.accomodation_static, name="accomodation_static"),
-    path('accomodation_pay/', views.under_maintainance),
+    path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook), name='accomodation_weebhook'),
+    path('accomodation_payment_redirect/', views.accomodation_payment_redirect, name='accomodation_payment_redirect'),
+    path('accomodation/', views.accomodation, name='accomodation'),
+    path('accomodation_for/<int:number_of_people_to_accomodate>/', views.accomodation, name='accomodation_for'),
 
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
