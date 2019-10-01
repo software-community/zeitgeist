@@ -167,7 +167,7 @@ class Prev_Sponsor(models.Model):
 
 class Accomodation(models.Model):
 
-    participant = models.OneToOneField(Participant, verbose_name='Participant', on_delete=models.CASCADE, primary_key=True)
+    participant = models.ForeignKey(Participant, verbose_name='Participant', on_delete=models.CASCADE)
     acco_for_day_one = models.BooleanField(verbose_name='11 Oct', default=False)
     acco_for_day_two = models.BooleanField(verbose_name='12 Oct', default=False)
     acco_for_day_three = models.BooleanField(verbose_name='13 Oct', default=False)
@@ -187,3 +187,14 @@ class Accomodation(models.Model):
 
     class Meta:
         verbose_name_plural = 'Accomodation'
+
+
+class Support(models.Model):
+
+    donating_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    donation_amount = models.CharField(max_length=10)
+    transaction_id = models.CharField(max_length=100, default='-1')
+    payment_request_id = models.CharField(max_length=100, default='-1')
+
+    def __str__(self):
+        return str(self.donating_user.get_full_name()) + ' ' + str(self.donating_user.email)
