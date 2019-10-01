@@ -167,14 +167,11 @@ class Prev_Sponsor(models.Model):
 
 class Accomodation(models.Model):
 
-    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-
-    NO_OF_DAYS_CHOICES = [
-        ('1','1 DAY'),
-        ('2','2 DAYS'),
-        ('3','3 DAYS')
-    ]
-    no_of_days = models.CharField(max_length=10, choices=NO_OF_DAYS_CHOICES, blank=False, null=False, verbose_name="Number of days")
+    participant = models.OneToOneField(Participant, verbose_name='Participant', on_delete=models.CASCADE, primary_key=True)
+    acco_for_day_one = models.BooleanField(verbose_name='11 Oct', default=False)
+    acco_for_day_two = models.BooleanField(verbose_name='12 Oct', default=False)
+    acco_for_day_three = models.BooleanField(verbose_name='13 Oct', default=False)
+    include_meals = models.BooleanField(verbose_name='Meals Included', default=False)
 
     GENDER_CHOICES = [
         ('M','Male'),
@@ -184,10 +181,9 @@ class Accomodation(models.Model):
 
     transaction_id = models.CharField(max_length=100, default='-1')
     payment_request_id = models.CharField(max_length=100, default='-1')
-    aadhar_no = models.CharField(max_length=5, blank=False, null=False, verbose_name="Last 4 digits of your Aadhar Number")
 
     def __str__(self):
-        return str(self.participant.participant_code) +' - ' + str(self.no_of_days)+' - ' + str(self.gender)
+        return str(self.participant.participant_code) + str(self.gender)
 
     class Meta:
         verbose_name_plural = 'Accomodation'

@@ -8,17 +8,18 @@
 
 <div class="jumbotron" style="background-color: #39a0ed; color:#17301c;">
     <div class='container'>
-        <br><br>
-        <h1>Fill the form below to register as Participant!</h1>
+        <br><br><br>
+        <h2>Fill the details of the participants!</h2>
     </div>
 </div>
+
 <div class='container'>
     <div class="row">
         <div class="col-md-6">
-            <form method="POST">
+            <form method="POST" action="{% url 'accomodation_for' number_of_people_to_accomodate %}">
                 {% csrf_token %}
-                {{ participant_registration_details_form|crispy }}
-                <input class='btn btn-danger btn-lg' type="submit" value="Register">
+                {{ accomodation_modelformset|crispy }}
+                <button type="submit" class="btn btn-danger">PAY</button>
             </form>
         </div>
     </div>

@@ -14,7 +14,7 @@ from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
 from .methods import payment_request, accomodation_payment_request
-from django.forms import formset_factory
+from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
 # Create your views here.
 
@@ -238,10 +238,7 @@ def pay_for_subcategory(request, subcategory_id):
             participant=participant, paid_subcategory=subcategory)
         if participanthaspaid.transaction_id == '0' or participanthaspaid.transaction_id == '-1':
             raise Exception("Previous payment was a failure !")
-        messages = {'1': 'You have already paid for this Subcategory',
-                    '2': 'You do not need to pay again.'}
-        # code did not blow, hence participant has already paid for this subcategory
-        return render(request, 'main_page/messages.html', context={'messages': messages})
+        return render(request, 'main_page/already_paid_for_subcategory.html')
     except:
         pass
 
@@ -269,7 +266,6 @@ def pay_for_subcategory(request, subcategory_id):
 def weebhook(request):
 
     if request.method == "POST":
-        # print(request.POST)
         data = request.POST.copy()
         mac_provided = data.pop('mac')[0]
 
@@ -309,114 +305,83 @@ def weebhook(request):
 
 def payment_redirect(request):
 
-    participanthaspaid = ParticipantHasPaid.objects.get(
-        payment_request_id=request.GET['payment_request_id'])
-    paidsubcategory = participanthaspaid.paid_subcategory
-    if participanthaspaid.transaction_id == '-1' or participanthaspaid.transaction_id == '0':
-        mp = ['Payment Status : ' + request.GET['payment_status'],
-              'Payment Request ID : ' + request.GET['payment_request_id']]
-        messages = {'1': 'Your Payment was unsuccesfull.'}
-    else:
-        mp = ['Transaction ID :' + request.GET['payment_id'], 'Payment Status : ' +
-              request.GET['payment_status'], 'Payment Request ID : ' + request.GET['payment_request_id']]
-        messages = {
-            '4': 'Your payment for the purpose, ' + str(paidsubcategory) + ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY WITHOUT ANY EXTRA COST !!! To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.'}
-    return render(request, 'main_page/messages.html', {'messages': messages, 'mp': mp})
+    return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
 
 @login_required
-def accomodation(request):
+def accomodation(request, number_of_people_to_accomodate=None):
 
     try:
-        participant = Participant.objects.get(participating_user=request.user)
-        participantdata = ParticipantHasParticipated.objects.filter(
-            participant=participant)
-        # we will give accomodation if he has participated in atleast one event
-        if len(participantdata) == 0:
-            raise ParticipantHasParticipated.DoesNotExist(
-                'Did not participate in any event !')
-    except:
-        messages = {
-            '1': 'You can view this page only if you have registered for an event in Zeitgeist 2k19.'}
-        return render(request, 'main_page/messages.html', {'messages': messages})
+        form_filling_participant = Participant.objects.get(participating_user=request.user)
+    except Participant.DoesNotExist:
+        return render(request, 'main_page/must_register_as_participant_first.html')
 
-    try:
-        accomodation = Accomodation.objects.get(participant=participant)
-        # checking if he has alredy booked or his transaction failed
-        if accomodation.transaction_id == '0' or accomodation.transaction_id == '-1':
-            # transaction failed case
-            # redirect to payment page
-            return redirect('accomodation_pay')
+    if number_of_people_to_accomodate:
+        AccomodationFormSet = formset_factory(form=AccomodationForm, extra=number_of_people_to_accomodate,
+                                                   max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
+        if request.method == 'POST':
+            accomodation_formset = AccomodationFormSet(request.POST)
+            if accomodation_formset.is_valid():
+                payable_amount = 0
+                for accomodation_form in accomodation_formset:
+                    ad1 = accomodation_form.cleaned_data.get('acco_for_day_one')
+                    ad2 = accomodation_form.cleaned_data.get('acco_for_day_two')
+                    ad3 = accomodation_form.cleaned_data.get('acco_for_day_three')
+                    meals_inc = accomodation_form.cleaned_data.get('include_meals')
+                    if meals_inc:
+                        if ad1 and ad2 and ad3:
+                            payable_amount = payable_amount + 1200
+                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
+                            payable_amount = payable_amount + 850
+                        else:
+                            payable_amount = payable_amount + 500
+                    else:
+                        if ad1 and ad2 and ad3:
+                            payable_amount = payable_amount + 700
+                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
+                            payable_amount = payable_amount + 500
+                        else:
+                            payable_amount = payable_amount + 300
+                purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
+                response = payment_request(form_filling_participant.name, payable_amount, purpose,
+                                        request.user.email, form_filling_participant.contact_mobile_number.__str__())
+                if response['success']:
+                    url = response['payment_request']['longurl']
+                    payment_request_id = response['payment_request']['id']
+                    for accomodation_form in accomodation_formset:
+                        # form was valid (since formset was valid), hence the below line cannot blow
+                        accomodation_participant = accomodation_form.cleaned_data.get('participant')
+                        try:
+                            prev_accomodation_details = Accomodation.objects.get(participant=accomodation_participant)
+                        except Accomodation.DoesNotExist:
+                            prev_accomodation_details = None
+                        if prev_accomodation_details:
+                            prev_accomodation_details.payment_request_id = payment_request_id
+                            prev_accomodation_details.save()
+                        # if there was no previous payment
+                        else:
+                            new_accomodation = accomodation_form.save(commit=False)
+                            new_accomodation.payment_request_id = payment_request_id
+                            new_accomodation.save()
+                    return redirect(url)
+                else:
+                    return HttpResponseServerError()
         else:
-            # booking already case
-            messages = {
-                '1': 'You have already booked your accomodation with us !'}
-            return render(request, 'main_page/messages.html', {'messages': messages})
-    except:
-        pass
+            accomodation_formset = AccomodationFormSet()
+        return render(request, 'main_page/accomodation_for.html', {'accomodation_modelformset': accomodation_formset, 'number_of_people_to_accomodate': number_of_people_to_accomodate})
 
-    if request.method == 'POST':
-        accomodationform = AccomodationForm(request.POST)
-        if accomodationform.is_valid():
-            accomodation = accomodationform.save(commit=False)
-            accomodation.participant = participant
-            accomodation.save()
-            return redirect('accomodation_pay')
-            # messages={'1':'Request Submitted Succesfully','2':'Please carry your Aadhar Card for verification of identity','3':'Please complete your payment below'}
-            # buttons=[{'link':'{%  %}'}]
-            # return render(request,'main_page/messages.html',{'messages':messages})
     else:
-        accomodationform = AccomodationForm()
-
-    charges = {'1': 300, '2': 500, '3': 700}
-    return render(request, 'main_page/accomodate.html', {'form': accomodationform, 'charges': charges})
-
-
-@login_required
-def accomodation_payment(request):
-
-    try:
-        participant = Participant.objects.get(participating_user=request.user)
-    except:
-        return redirect('register_as_participant')
-
-    try:
-        accomodation = Accomodation.objects.get(participant=participant)
-    except:
-        messages = {'1': 'Sorry, You are at the worng place'}
-        return render(request, 'main_page/messages.html', {'messages': messages})
-
-    # print(accomodation.no_of_days)
-    # subcategory = Subcategory.objects.get(id=subcategory_id)
-
-    # try:
-    #     ParticipantHasPaid.objects.get(participant=participant, paid_subcategory=subcategory)
-    #     messages={'1':'You have already paid for this Subcategory','2':'You do not need to pay again.'}
-    #     # code did not blow, hence participant has already paid for this subcategory
-    #     return render(request,'main_page/messages.html',context={'messages':messages})
-    # except:
-    #     pass
-
-    charges = {'1': 300, '2': 500, '3': 700}
-    purpose = 'ACCOMODATION FOR ' + str(accomodation.no_of_days).upper()
-    response = accomodation_payment_request(participant.name, charges[str(accomodation.no_of_days)], purpose,
-                                            request.user.email, participant.contact_mobile_number.__str__())
-
-    if response['success']:
-        url = response['payment_request']['longurl']
-        payment_request_id = response['payment_request']['id']
-
-        accomodation.payment_request_id = payment_request_id
-        accomodation.save()
-        return redirect(url)
-    else:
-        return HttpResponseServerError()
+        if request.method == 'POST':
+            number_of_people_to_accomodate = request.POST.get(
+                'number_of_people_to_accomodate')
+            return redirect('accomodation_for', number_of_people_to_accomodate=number_of_people_to_accomodate)
+        else:
+            return render(request, 'main_page/number_of_people_to_accomodate.html')
 
 
 def accomodation_weebhook(request):
 
     if request.method == "POST":
-        # print(request.POST)
         data = request.POST.copy()
         mac_provided = data.pop('mac')[0]
 
@@ -427,24 +392,44 @@ def accomodation_weebhook(request):
 
         if mac_provided == mac_calculated:
             try:
-                accomodation = Accomodation.objects.get(
-                    payment_request_id=data['payment_request_id'])
+                accomodation_all = Accomodation.objects.filter(payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
-                    # Payment was successful, mark it as completed in your database.
-                    accomodation.transaction_id = data['payment_id']
-                    send_mail(
-                        'Payment confirmation of Accommodation for ' +
-                        str(accomodation.no_of_days) + ' to Zeitgeist 2k19',
-                        'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + str(
-                            accomodation.no_of_days) + ', is successful. Have a happy and safe stay at IIT Ropar !\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                        'zeitgeist.pr@iitrpr.ac.in',
-                        [participantpaspaid.participant.participating_user.email],
-                        fail_silently=False,
-                    )
+                    for accomodation in accomodation_all:
+                        # Payment was successful, mark it as completed in your database.
+                        accomodation.transaction_id = data['payment_id']
+                        accomodation.save()
+
+                        if accomodation.acco_for_day_one and accomodation.acco_for_day_two and accomodation.acco_for_day_three:
+                            days_and_meals = '11 OCT, 12 OCT, 13 OCT'
+                        elif accomodation.acco_for_day_one and accomodation.acco_for_day_two:
+                            days_and_meals = '11 OCT, 12 OCT'
+                        elif accomodation.acco_for_day_two and accomodation.acco_for_day_three:
+                            days_and_meals = '12 OCT, 13 OCT'
+                        elif accomodation.acco_for_day_one and accomodation.acco_for_day_three:
+                            days_and_meals = '11 OCT, 13 OCT'
+                        elif accomodation.acco_for_day_one:
+                            days_and_meals = '11 OCT'
+                        elif accomodation.acco_for_day_two:
+                            days_and_meals = '12 OCT'
+                        elif accomodation.acco_for_day_three:
+                            days_and_meals = '13 OCT'
+
+                        if accomodation.include_meals:
+                            days_and_meals = days_and_meals + ' INCLUDING MEALS'
+
+                        send_mail(
+                            'Payment confirmation of Accommodation for ' +
+                            days_and_meals + ' to Zeitgeist 2k19',
+                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar !\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                            'zeitgeist.pr@iitrpr.ac.in',
+                            [accomodation.participant.participating_user.email],
+                            fail_silently=False,
+                        )
                 else:
-                    # Payment was unsuccessful, mark it as failed in your database.
-                    accomodation.transaction_id = '0'
-                accomodation.save()
+                    for accomodation in accomodation_all:
+                        # Payment was unsuccessful, mark it as failed in your database.
+                        accomodation.transaction_id = '0'
+                        accomodation.save()
             except Exception as err:
                 print(err)
             return HttpResponse(status=200)
@@ -454,25 +439,24 @@ def accomodation_weebhook(request):
 
 def accomodation_payment_redirect(request):
 
-    accomodation = Accomodation.objects.get(
-        payment_request_id=request.GET['payment_request_id'])
-    if accomodation.transaction_id == '-1' or accomodation.transaction_id == '0':
-        mp = ['Payment Status : '+request.GET['payment_status'],
-              'Payment Request ID : ' + request.GET['payment_request_id']]
-        messages = {'1': '  Payment Status: '+request.GET['payment_status'] +
-                    '  Payment Request ID: '+request.GET['payment_request_id'], '2': 'Please try again'}
-    else:
-        mp = ['Transaction ID :' + request.GET['payment_id'], 'Payment Status : ' +
-              request.GET['payment_status'], 'Payment Request ID : ' + request.GET['payment_request_id']]
-        messages = {
-            '2': 'Please bring your aadhar card for verification purposes.'}
-    return render(request, 'main_page/messages.html', {'messages': messages, 'mp': mp})
+    return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
+
+def swiggy_launchpad(request):
+
+    return render(request, 'main_page/swiggy_launchpad.html')
+
+
+def support(request):
+    if request.method == 'POST':
+        print(request.POST.get('amount'))
+    else:
+        return HttpResponse("WHAT TO VIEW")
+    return render(request, 'main_page/support.html')
+
+
+# --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
 
     return render(request, 'main_page/under_maintainance.html')
-
-
-def accomodation_static(request):
-    return render(request, 'main_page/accomodation_static.html')
