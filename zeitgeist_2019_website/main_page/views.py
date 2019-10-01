@@ -427,9 +427,8 @@ def accomodation_weebhook(request):
                         )
                 else:
                     for accomodation in accomodation_all:
-                        # Payment was unsuccessful, mark it as failed in your database.
-                        accomodation.transaction_id = '0'
-                        accomodation.save()
+                        # Payment was unsuccessful, delete them from the database.
+                        accomodation.delete()
             except Exception as err:
                 print(err)
             return HttpResponse(status=200)
