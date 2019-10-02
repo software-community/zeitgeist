@@ -430,11 +430,6 @@ def accomodation_payment_redirect(request):
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
 
-def swiggy_launchpad(request):
-
-    return render(request, 'main_page/swiggy_launchpad.html')
-
-
 @login_required
 def support(request):
 
@@ -491,6 +486,11 @@ def support_weebhook(request):
 def support_payment_redirect(request):
 
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
+
+
+def swiggy_launchpad(request):
+
+    return render(request, 'main_page/swiggy_launchpad.html')
 
 
 # --------------------------------------------------------------------------------------
