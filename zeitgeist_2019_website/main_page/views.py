@@ -416,8 +416,9 @@ def accomodation_weebhook(request):
                         )
                 else:
                     for accomodation in accomodation_all:
-                        # Payment was unsuccessful, delete them from the database.
-                        accomodation.delete()
+                        # Payment was unsuccessful, mark it as failed in your database.
+                        accomodation.transaction_id = '0'
+                        accomodation.save()
             except Exception as err:
                 print(err)
             return HttpResponse(status=200)
@@ -491,6 +492,11 @@ def support_payment_redirect(request):
 def swiggy_launchpad(request):
 
     return render(request, 'main_page/swiggy_launchpad.html')
+
+
+def reach_us(request):
+
+    return render(request, 'main_page/reach_us.html')
 
 
 # --------------------------------------------------------------------------------------

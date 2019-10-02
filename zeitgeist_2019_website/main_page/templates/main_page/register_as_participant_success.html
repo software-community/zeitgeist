@@ -4,10 +4,8 @@
 
 {% block content %}
 
-<div id="home">
-    <!-- background image -->
-    <div class="section-bg" style="background-color:grey" data-stellar-background-ratio="0.5"></div>
-    <!-- /background image -->
+<div class='jumbotron' style="background-color:#39a0ed; color:#fdef8d ">
+    <br><br><br>
 
     <!-- home wrapper -->
     <div class="home-wrapper">
@@ -24,10 +22,10 @@
                             same as your CAMPUS AMBASSADOR CODE. You must use this code for participating in any event
                             in Zeitgeist 2k19. We have also emailed this code to your email address <span
                                 style="color: crimson">{{ request.user.email }}</span>.</h3>
-                        <h4><b>Note that this message is not for your participation in any event.</b> To participate in
+                        <h3>Note that this message is not for your participation in any event. To participate in
                             events, you need to register for them on the <a href="{% url 'main_page_events' %}"
                                 style="color: crimson">Events Page</a>. We wish you best of luck for all the events you
-                            take part in. Give your best and stand a chance to win exciting prizes !!!</h4>
+                            take part in. Give your best and stand a chance to win exciting prizes !!!</h3>
 
                     </div>
                 </div>
