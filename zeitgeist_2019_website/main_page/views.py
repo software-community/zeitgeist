@@ -134,7 +134,7 @@ def register_for_event(request, event_id):
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
             fail_silently=False,
@@ -166,9 +166,9 @@ def register_for_event(request, event_id):
                         team_member_payment = ParticipantHasPaid.objects.get(
                             participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
-                            return render(request, 'main_page/some_team_members_have_not_paid.html')
+                            return render(request, 'main_page/some_team_members_have_not_paid.html', {'member_who_has_not_paid': team_member})
                     except ParticipantHasPaid.DoesNotExist:
-                        return render(request, 'main_page/some_team_members_have_not_paid.html')
+                        return render(request, 'main_page/some_team_members_have_not_paid.html', {'member_who_has_not_paid': team_member})
                 # print(team_form.cleaned_data)
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(
@@ -192,7 +192,7 @@ def register_for_event(request, event_id):
                     'Participation in ' +
                     str(event.name) + ' in Zeitgeist 2k19',
                     'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(
-                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                     'zeitgeist.pr@iitrpr.ac.in',
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
@@ -409,7 +409,7 @@ def accomodation_weebhook(request):
                         send_mail(
                             'Payment confirmation of Accommodation for ' +
                             days_and_meals + ' to Zeitgeist 2k19',
-                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar !\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar ! To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                             'zeitgeist.pr@iitrpr.ac.in',
                             [accomodation.participant.participating_user.email],
                             fail_silently=False,
