@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
-from .methods import payment_request, accomodation_payment_request
+from .methods import payment_request, accomodation_payment_request, sendNotification
 from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
 # Create your views here.
@@ -453,6 +453,13 @@ def support(request):
     else:
         return HttpResponse("WHAT TO VIEW")
     return render(request, 'main_page/support.html')
+
+def send_noti(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        message = request.POST.get('message')
+        sendNotification(title, message)
+        
 
 
 # --------------------------------------------------------------------------------------
