@@ -25,13 +25,7 @@ class Prev_SponsorAdmin(admin.ModelAdmin):
 
 class AccomodationAdmin(admin.ModelAdmin):
 
-    list_display = ['get_participant_participating_user_id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'transaction_id', 'payment_request_id']
-
-    def get_participant_participating_user_id(self, obj):
-        return obj.participant.participating_user.id
-
-    get_participant_participating_user_id.short_description = 'ID'
-    get_participant_participating_user_id.admin_order_field = 'participant__participating_user__id'
+    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'transaction_id', 'payment_request_id']
 
     def get_participant_participant_code(self, obj):
         return obj.participant.participant_code
@@ -311,6 +305,10 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
     get_team_captain_participating_user_email.admin_order_field = 'team__captain__participating_user__email'
 
 
+# class SupportAdmin(admin.ModelAdmin):
+#     list_display = [field.name for field in Category._meta.get_fields()]
+
+
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
@@ -322,6 +320,7 @@ admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
 admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamHasMember, TeamHasMemberAdmin)
+# admin.site.register(Support, SupportAdmin)
 
 admin.site.register(Category)
 admin.site.register(Subcategory)
@@ -334,3 +333,4 @@ admin.site.register(Event)
 # admin.site.register(ParticipantHasParticipated)
 # admin.site.register(Team)
 # admin.site.register(TeamHasMember)
+admin.site.register(Support)

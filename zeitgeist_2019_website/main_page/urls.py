@@ -34,16 +34,22 @@ urlpatterns = [
     path('register_as_participant/', views.register_as_participant, name="register_as_participant"),
     path('events/', views.main_page_events, name="main_page_events"),
     path('register/<int:event_id>/', views.register_for_event, name="register_for_event"),
+    path('swiggy_launchpad/', views.swiggy_launchpad, name='swiggy_launchpad'),
+    path('data-api/', include(router.urls)),
+    path('reach_us/', views.reach_us, name='reach_us'),
+
     path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
-    path('support/', views.support, name="support"),
-    path('swiggy_launchpad', views.swiggy_launchpad, name='swiggy_launchpad'),
-    path('data-api/', include(router.urls)),
 
+    path('support/', views.support, name="support"),
+    path('support_weebhook/', csrf_exempt(views.support_weebhook), name="support_weebhook"),
+    path('support_payment_redirect/', views.support_payment_redirect, name="support_payment_redirect"),
+
+    path('accomodation/', views.accomodation, name='accomodation'),
     path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook), name='accomodation_weebhook'),
     path('accomodation_payment_redirect/', views.accomodation_payment_redirect, name='accomodation_payment_redirect'),
-    path('accomodation/', views.accomodation, name='accomodation'),
+
     path('accomodation_for/<int:number_of_people_to_accomodate>/', views.accomodation, name='accomodation_for'),
 
     # define the login URLs

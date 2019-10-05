@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
-from .methods import payment_request, accomodation_payment_request, sendNotification
+from .methods import *
 from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
 # Create your views here.
@@ -134,7 +134,7 @@ def register_for_event(request, event_id):
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
             fail_silently=False,
@@ -166,9 +166,9 @@ def register_for_event(request, event_id):
                         team_member_payment = ParticipantHasPaid.objects.get(
                             participant=team_member, paid_subcategory=event.subcategory)
                         if team_member_payment.transaction_id == '-1' or team_member_payment.transaction_id == '0':
-                            return render(request, 'main_page/some_team_members_have_not_paid.html')
+                            return render(request, 'main_page/some_team_members_have_not_paid.html', {'member_who_has_not_paid': team_member})
                     except ParticipantHasPaid.DoesNotExist:
-                        return render(request, 'main_page/some_team_members_have_not_paid.html')
+                        return render(request, 'main_page/some_team_members_have_not_paid.html', {'member_who_has_not_paid': team_member})
                 # print(team_form.cleaned_data)
                 new_team = team_form.save(commit=False)
                 temp_team_code = str(
@@ -192,7 +192,7 @@ def register_for_event(request, event_id):
                     'Participation in ' +
                     str(event.name) + ' in Zeitgeist 2k19',
                     'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(
-                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                     'zeitgeist.pr@iitrpr.ac.in',
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
@@ -343,26 +343,15 @@ def accomodation(request, number_of_people_to_accomodate=None):
                         else:
                             payable_amount = payable_amount + 300
                 purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
-                response = payment_request(form_filling_participant.name, payable_amount, purpose,
+                response = accomodation_payment_request(form_filling_participant.name, payable_amount, purpose,
                                         request.user.email, form_filling_participant.contact_mobile_number.__str__())
                 if response['success']:
                     url = response['payment_request']['longurl']
                     payment_request_id = response['payment_request']['id']
                     for accomodation_form in accomodation_formset:
-                        # form was valid (since formset was valid), hence the below line cannot blow
-                        accomodation_participant = accomodation_form.cleaned_data.get('participant')
-                        try:
-                            prev_accomodation_details = Accomodation.objects.get(participant=accomodation_participant)
-                        except Accomodation.DoesNotExist:
-                            prev_accomodation_details = None
-                        if prev_accomodation_details:
-                            prev_accomodation_details.payment_request_id = payment_request_id
-                            prev_accomodation_details.save()
-                        # if there was no previous payment
-                        else:
-                            new_accomodation = accomodation_form.save(commit=False)
-                            new_accomodation.payment_request_id = payment_request_id
-                            new_accomodation.save()
+                        new_accomodation = accomodation_form.save(commit=False)
+                        new_accomodation.payment_request_id = payment_request_id
+                        new_accomodation.save()
                     return redirect(url)
                 else:
                     return HttpResponseServerError()
@@ -420,7 +409,7 @@ def accomodation_weebhook(request):
                         send_mail(
                             'Payment confirmation of Accommodation for ' +
                             days_and_meals + ' to Zeitgeist 2k19',
-                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar !\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar ! To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                             'zeitgeist.pr@iitrpr.ac.in',
                             [accomodation.participant.participating_user.email],
                             fail_silently=False,
@@ -442,17 +431,72 @@ def accomodation_payment_redirect(request):
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
 
+@login_required
+def support(request):
+
+    if request.method == 'POST':
+        payable_amount = request.POST.get('amount')
+        purpose = 'SUPPORT TO ZEITGEIST WORTH INR ' + str(payable_amount)
+        response = support_payment_request(request.user.get_full_name(), payable_amount, purpose,
+                        request.user.email, None)
+        if response['success']:
+            url = response['payment_request']['longurl']
+            payment_request_id = response['payment_request']['id']
+            Support.objects.create(donating_user=request.user, donation_amount=payable_amount, payment_request_id=payment_request_id)
+            return redirect(url)
+        else:
+            return HttpResponseServerError()
+    return render(request, 'main_page/support.html')
+
+
+def support_weebhook(request):
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        mac_provided = data.pop('mac')[0]
+
+        message = "|".join(v for k, v in sorted(
+            data.items(), key=lambda x: x[0].lower()))
+        mac_calculated = hmac.new(
+            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
+
+        if mac_provided == mac_calculated:
+            try:
+                support = Support.objects.get(payment_request_id=data['payment_request_id'])
+                if data['status'] == "Credit":
+                    # Payment was successful, mark it as completed in your database.
+                    support.transaction_id = data['payment_id']
+                    send_mail(
+                        'Donation to Zeitgeist 2k19',
+                        'Dear ' + str(request.user.get_full_name()) + '\n\nThank you for your donation to Zeitgeist 2k19. Awesome people like you are the main reason of success of Zeitgeist, and IIT Ropar as a whole. From the side of Zeitgeist 2k19 team, we thank you a lot for your valuable contribution.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        'zeitgeist.pr@iitrpr.ac.in',
+                        [request.user.email],
+                        fail_silently=False,
+                    )
+                else:
+                    # Payment was unsuccessful, mark it as failed in your database.
+                    support.transaction_id = '0'
+                support.save()
+            except Exception as err:
+                print(err)
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=400)
+
+
+def support_payment_redirect(request):
+
+    return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
+
+
 def swiggy_launchpad(request):
 
     return render(request, 'main_page/swiggy_launchpad.html')
 
 
-def support(request):
-    if request.method == 'POST':
-        print(request.POST.get('amount'))
-    else:
-        return HttpResponse("WHAT TO VIEW")
-    return render(request, 'main_page/support.html')
+def reach_us(request):
+
+    return render(request, 'main_page/reach_us.html')
 
 def send_noti(request):
     if request.method == "POST":
