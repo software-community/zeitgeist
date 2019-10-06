@@ -4,12 +4,15 @@
 
 {% block content %}
 
-<div class='jumbotron' style="background-color:black;">
-    <br><br><br><br><br>
+<div class='jumbotron' style="background-color:rgb(32, 35, 37)">
+    <br><br><br><br>
     <div id="galery">
         <div class="container">
             <div class="row">
                 <div id="galery-owl" class="owl-carousel owl-theme">
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/sitar_metal.jpg' %}" alt="">
+                    </div>
                     <div class="galery-item">
                         <img src="{% static 'main_page/img/star_nights/vishal.jpg' %}" alt="">
                     </div>
@@ -73,31 +76,10 @@
     </div>
 </div>
 
-<div id="galery">
-    <div class="container">
-        <div class="row">
-            <div id="galery-owl" class="owl-carousel owl-theme">
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/vishal.jpg' %}" alt="">
-                </div>
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/shekhar.jpg' %}" alt="">
-                </div>
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/ranjit_bawa.jpg' %}" alt="">
-                </div>
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/olly_esse.jpg' %}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="video-cta" class="section">
     <div class="section-bg"
         style="background-image:url({% static 'main_page/img/vishal_shekhar_video_thumbnail.jpg' %})"
-        data-stellar-background-ratio="0.5"></div>
+        data-stellar-background-ratio="0.8"></div>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -134,66 +116,21 @@
                             </div>
                         </div>
                         <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 10 : 00 AM - 12 : 00 NOON</p>
-                            <h3 class="event-title">Chaplin - Dramatics</h3>
-                            <p>Venue - Lecture Hall Complex</p>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 1</h3>
                         </div>
                     </div>
+                    {% for event in events_11_oct %}
                     <div class="event">
                         <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 12 : 00 NOON - 06 : 00 PM</p>
-                            <h3 class="event-title">Yatharth - Dramatics</h3>
-                            <p>Venue - Lecture Hall Complex</p>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
                         </div>
                     </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 12 : 00 NOON - 06 : 00 PM</p>
-                            <h3 class="event-title">Saaz and Adagio (PRELIMS) - Music</h3>
-                            <p>Venue - Zone 2</p>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 01 : 00 PM - 03 : 00 PM</p>
-                            <h3 class="event-title">Doodle 4 Zeitgeist - Fine Arts</h3>
-                            <p>Venue - M3, Lecture Hall Complex</p>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 01 : 00 PM - 03 : 00 PM</p>
-                            <h3 class="event-title">GD - Literary</h3>
-                            <p>Venue - ME1</p>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 03 : 00 PM - 05 : 00 PM</p>
-                            <h3 class="event-title">Poster Designing - Fine Arts</h3>
-                            <p>Venue - M3, Lecture Hall Complex</p>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 04 : 00 PM - 06 : 00 PM</p>
-                            <h3 class="event-title">Extempore - Literary</h3>
-                            <p>Venue - ME1</p>
-                        </div>
-                    </div>
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> ALL DAY LONG</p>
-                            <h3 class="event-title">Wall Graffiti</h3>
-                        </div>
-                    </div>
+                    {% endfor %}
                     <div class="event">
                         <div class="event-day">
                             <div>
@@ -202,10 +139,21 @@
                             </div>
                         </div>
                         <div class="event-content">
-                            <p class="event-time">Good things take time.</p>
-                            <h3 class="event-title">Coming soon !</h3>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 2</h3>
                         </div>
                     </div>
+                    {% for event in events_12_oct %}
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <div class="event">
                         <div class="event-day">
                             <div>
@@ -214,12 +162,103 @@
                             </div>
                         </div>
                         <div class="event-content">
-                            <p class="event-time">Good things take time.</p>
-                            <h3 class="event-title">Coming soon !</h3>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 3</h3>
                         </div>
                     </div>
+                    {% for event in events_13_oct %}
+                    <div class="event">
+                        <div class="event-hour"></div>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="our_sponsors" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+        </div>
+        <div class='desktop_only'>
+            {% for sponsor in our_sponsors %}
+            {% if forloop.counter0|divisibleby:"6" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-2">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class='mobile_only'>
+            {% for sponsor in our_sponsors %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-3">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"4" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="prev_sponsors" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h3 class="title"><span>Previous</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+        </div>
+        <div class='desktop_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"6" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-2">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class='mobile_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-3">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"4" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -558,86 +597,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div id="our_sponsors" class="section">
-    <div class="container">
-        <div class="section-title">
-            <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Sponsors</span></h3>
-        </div>
-        <div class='desktop_only'>
-            {% for sponsor in our_sponsors %}
-            {% if forloop.counter0|divisibleby:"6" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-2">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"6" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class='mobile_only'>
-            {% for sponsor in our_sponsors %}
-            {% if forloop.counter0|divisibleby:"4" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-3">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"4" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<div id="prev_sponsors" class="section">
-    <div class="container">
-        <div class="section-title">
-            <h3 class="title"><span>Previous</span> <span style="color: #dd0a37;">Sponsors</span></h3>
-        </div>
-        <div class='desktop_only'>
-            {% for sponsor in prev_sponsors %}
-            {% if forloop.counter0|divisibleby:"6" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-2">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"6" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class='mobile_only'>
-            {% for sponsor in prev_sponsors %}
-            {% if forloop.counter0|divisibleby:"4" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-3">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"4" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
 </div>

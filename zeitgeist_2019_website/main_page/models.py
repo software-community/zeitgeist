@@ -77,6 +77,7 @@ class Event(models.Model):
     start_date_time = models.DateTimeField(blank=False)
     end_date_time = models.DateTimeField(blank=False)
     description = models.TextField(blank=False)
+    venue = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.name) + " - " + str(self.subcategory)

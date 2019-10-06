@@ -11,7 +11,7 @@
 			<li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>Events
 				Schedule is out. <a
 					href="https://docs.google.com/spreadsheets/d/1aDIqm1APSnE8J9jjZTHfZdp59CVc1JkLQPYkKTBXAYA/edit#gid=0"
-					style="font-weight:bold;color:#17301c">View Schedule here</a>.
+					style="font-weight:bold;color:#17301c" target="_blank">View Schedule here</a>.
 			<li style="background-color:#39a0ed; color:#29339b; font-size: larger " class='list-group-item'>Users must
 				register themselves as participants, after which they can take part in any event after paying for that
 				event's subcategory. To register as a participant, <a href="{% url 'register_as_participant' %}"
@@ -95,52 +95,48 @@
 											target="_blank">View Rulebook</a>
 									</div>
 									<br>
-									<h3 class="member-name">Type </h3>
-									<span class="member-job">- {{ event.event_type }}</span>
+									<h3 class="member-name">{{ event.event_type }} event</h3>
 									{% if event.event_type == "Group" %}
 									<p><span style="color:crimson;font-weight: bold;">Minimum Team Size : </span>
 										{{ event.minimum_team_size }}</p>
 									<p><span style="color:crimson;font-weight: bold;">Maximum Team Size : </span>
 										{{ event.maximum_team_size }}</p>
+									{% else %}
+									<br>
 									{% endif %}
 									<br>
 									<h3 class="member-name">Prize Details </h3>
 									<p><span style="color:crimson;font-weight: bold;">First : </span>
 										Worth INR {{ event.first_cash_prize|add:event.first_goodies }}</p>
+									{% if event.second_cash_prize|add:event.second_goodies > 0 %}
 									<p><span style="color:crimson;font-weight: bold;">Second : </span>
 										Worth INR {{ event.second_cash_prize|add:event.second_goodies }}</p>
+									{% endif %}
 									{% if event.third_cash_prize|add:event.third_goodies > 0 %}
 									<p><span style="color:crimson;font-weight: bold;">Third : </span>
 										Worth INR {{ event.third_cash_prize|add:event.third_goodies }}</p>
 									{% endif %}
 									<br>
-									<div class="member-events">
-										<h3>Event Schedule</h3>
-										<div class="member-event">
-											<span style="color:crimson;font-size: medium"><strong>Start Time
-													-</strong>
-											</span>
-										</div>
-										<p>{{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}
-										</p>
-										<div class="member-event">
-											<span style="color:crimson;font-size: medium"><strong>End Time
-													-</strong>
-											</span>
-										</div>
-										<p>{{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}
-										</p>
-										<br>
-										{% if event.subcategory.participation_fees_per_person == 0 %}
-										<h3 class="member-name">Regitrations for this event are handled on the <a
-												href="https://www.facebook.com/zeitgeist.iitrpr/"
-												style="color: crimson">Facebook page of Zeitgeist</a>. Please contact
-											event heads for more details.</h3>
-										{% else %}
-										<a href="{% url 'register_for_event' event.id %}"
-											class="btn btn-danger">Register</a>
-										{% endif %}
-									</div>
+									<h3 class="member-name">Evenet Schedule </h3>
+									<p><span style="color:crimson;font-weight: bold;">Start Date-Time : </span>
+										{{ event.start_date_time|date:"D d M Y  " }}{{ event.start_date_time|time:"h:i A" }}
+									</p>
+									<p><span style="color:crimson;font-weight: bold;">End Date-Time : </span>
+										{{ event.end_date_time|date:"D d M Y  " }}{{ event.end_date_time|time:"h:i A" }}
+									</p>
+									<p><span style="color:crimson;font-weight: bold;">Venue : </span>
+										{{ event.venue }}
+									</p>
+									<br>
+									{% if event.subcategory.participation_fees_per_person == 0 %}
+									<h3 class="member-name">Regitrations for this event are handled on the <a
+											href="https://www.facebook.com/zeitgeist.iitrpr/"
+											style="color: crimson">Facebook page of Zeitgeist</a>. Please contact
+										event heads for more details.</h3>
+									{% else %}
+									<a href="{% url 'register_for_event' event.id %}"
+										class="btn btn-danger">Register</a>
+									{% endif %}
 								</div>
 							</div>
 						</div>
@@ -148,9 +144,10 @@
 				</div>
 			</div>
 		</div>
-		{% endfor %}
-		{% endfor %}
-		{% endfor %}
 	</div>
+	{% endfor %}
+	{% endfor %}
+	{% endfor %}
+</div>
 </div>
 {% endblock content %}
