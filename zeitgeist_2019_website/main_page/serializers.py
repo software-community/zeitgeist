@@ -27,3 +27,8 @@ class Prev_SponsorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prev_Sponsor
         fields = '__all__'
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = '__all__'

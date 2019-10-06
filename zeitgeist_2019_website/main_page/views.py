@@ -22,7 +22,10 @@ from django.http import HttpResponseNotFound
 def main_page_home(request):
     our_sponsors = Our_Sponsor.objects.all()
     prev_sponsors = Prev_Sponsor.objects.all()
-    context = {'our_sponsors': our_sponsors, 'prev_sponsors': prev_sponsors}
+    events_11_oct = Event.objects.filter(start_date_time__day=11).order_by('start_date_time')
+    events_12_oct = Event.objects.filter(start_date_time__day=12).order_by('start_date_time')
+    events_13_oct = Event.objects.filter(start_date_time__day=13).order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct}
     return render(request, 'main_page/index.html', context)
 
 
@@ -88,8 +91,6 @@ def main_page_events(request):
         subcategories = category.subcategory_set.all()
         for subcategory in subcategories:
             events_data[category][subcategory] = subcategory.event_set.all()
-
-    # print(events_data)
     return render(request, 'main_page/events.html', {'events_data': events_data})
 
 
@@ -134,7 +135,7 @@ def register_for_event(request, event_id):
         send_mail(
             'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
             'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
             'zeitgeist.pr@iitrpr.ac.in',
             [participant.participating_user.email],
             fail_silently=False,
@@ -192,7 +193,7 @@ def register_for_event(request, event_id):
                     'Participation in ' +
                     str(event.name) + ' in Zeitgeist 2k19',
                     'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(
-                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                     'zeitgeist.pr@iitrpr.ac.in',
                     list_of_email_addresses_of_team_members,
                     fail_silently=False,
@@ -407,9 +408,9 @@ def accomodation_weebhook(request):
                             days_and_meals = days_and_meals + ' INCLUDING MEALS'
 
                         send_mail(
-                            'Payment confirmation of Accommodation for ' +
+                            'Payment confirmation of ACCOMODATION FOR ' +
                             days_and_meals + ' to Zeitgeist 2k19',
-                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, Accommodation for ' + days_and_meals + ', is successful. Have a happy and safe stay at IIT Ropar ! To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ACCOMODATION FOR ' + days_and_meals + ', is successful. Please carry your Photo ID Proof with you, otherwise your accomodation might stand cancelled. Have a happy and safe stay at IIT Ropar !\n\nTo check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                             'zeitgeist.pr@iitrpr.ac.in',
                             [accomodation.participant.participating_user.email],
                             fail_silently=False,

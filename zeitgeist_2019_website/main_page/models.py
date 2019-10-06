@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from campus_ambassador.models import *
+from main_page.methods import sendNotification
 
 # Create your models here.
 
@@ -76,6 +77,7 @@ class Event(models.Model):
     start_date_time = models.DateTimeField(blank=False)
     end_date_time = models.DateTimeField(blank=False)
     description = models.TextField(blank=False)
+    venue = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.name) + " - " + str(self.subcategory)
@@ -198,3 +200,15 @@ class Support(models.Model):
 
     def __str__(self):
         return str(self.donating_user.get_full_name()) + ' ' + str(self.donating_user.email)
+
+
+class Notification(models.Model):
+
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+        sendNotification(self.title, self.content)

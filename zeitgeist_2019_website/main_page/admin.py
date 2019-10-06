@@ -25,7 +25,7 @@ class Prev_SponsorAdmin(admin.ModelAdmin):
 
 class AccomodationAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'transaction_id', 'payment_request_id']
+    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'include_meals', 'transaction_id', 'payment_request_id']
 
     def get_participant_participant_code(self, obj):
         return obj.participant.participant_code
@@ -308,6 +308,9 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
 # class SupportAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in Category._meta.get_fields()]
 
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Notification._meta.get_fields()]
+
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
@@ -321,6 +324,7 @@ admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamHasMember, TeamHasMemberAdmin)
 # admin.site.register(Support, SupportAdmin)
+admin.site.register(Notification, NotificationAdmin)
 
 admin.site.register(Category)
 admin.site.register(Subcategory)
@@ -334,3 +338,4 @@ admin.site.register(Event)
 # admin.site.register(Team)
 # admin.site.register(TeamHasMember)
 admin.site.register(Support)
+# admin.site.register(Notification)

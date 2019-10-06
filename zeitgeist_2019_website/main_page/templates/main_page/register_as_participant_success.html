@@ -6,16 +6,11 @@
 
 <div class='jumbotron' style="background-color:#39a0ed; color:#fdef8d ">
     <br><br><br>
-
-    <!-- home wrapper -->
     <div class="home-wrapper">
         <div class="container">
-
             <div class="row">
-
                 <div class="col-md-8 col-md-offset-2">
                     <div class="home-content">
-
                         <h3>You have registered yourself successfully as a participant. <b>Your PARTICIPANT CODE is
                                 <span style="color: crimson">{{ request.user.participant.participant_code }}</span>.</b>
                             If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the
@@ -26,15 +21,11 @@
                             events, you need to register for them on the <a href="{% url 'main_page_events' %}"
                                 style="color: crimson">Events Page</a>. We wish you best of luck for all the events you
                             take part in. Give your best and stand a chance to win exciting prizes !!!</h3>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-    <!-- /home wrapper -->
 </div>
 
 {% endblock %}

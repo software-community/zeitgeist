@@ -4,40 +4,40 @@
 
 {% block content %}
 
-<!-- Home -->
-<div id="home">
-    <!-- background image -->
-    <div class='desktop_only'>
-        <div class="section-bg" style="background-image:url({% static 'main_page/img/theme_background.jpg' %})"
-            data-stellar-background-ratio="0.5"></div>
+<div class='jumbotron' style="background-color:rgb(32, 35, 37)">
+    <br><br><br><br>
+    <div id="galery">
+        <div class="container">
+            <div class="row">
+                <div id="galery-owl" class="owl-carousel owl-theme">
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/sitar_metal.jpg' %}" alt="">
+                    </div>
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/vishal.jpg' %}" alt="">
+                    </div>
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/shekhar.jpg' %}" alt="">
+                    </div>
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/ranjit_bawa.jpg' %}" alt="">
+                    </div>
+                    <div class="galery-item">
+                        <img src="{% static 'main_page/img/star_nights/olly_esse.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class='mobile_only'>
-        <div class="section-bg" style="background-image:url({% static 'main_page/img/theme_background.jpg' %})"
-            data-stellar-background-ratio="0.5"></div>
-    </div>
-    <!-- /background image -->
-
-    <!-- home wrapper -->
-    <div class="home-wrapper">
-    </div>
-    <!-- /home wrapper -->
 </div>
-<!-- /Home -->
 
-<!-- About -->
 <div id="about" class="section">
-    <!-- container -->
     <div class="container">
-        <!-- row -->
         <div class="row">
-            <!-- section title -->
             <div class="section-title">
                 <h3 class="title"><span>About</span> <span style="color: #dd0a37;">Zeitgeist</span></h3>
             </div>
-            <!-- /section title -->
-
             <div class="col-md-8 col-md-offset-2 text-center">
-                <!-- about content -->
                 <div class="about-content">
                     <p>Deemed as the largest Cultural Fest in Punjab-Haryana, Zeitgeist is not just another event at IIT
                         ROPAR, it is an experience to be lived, and it will leave behind memories that you will cherish
@@ -49,107 +49,39 @@
                         no other. This year’s theme, “A Gothic Poltergeist”, promises to be an edge of the seat
                         thriller, so be warned, because this time, it is not for the faint hearted.</p>
                 </div>
-                <!-- /about content -->
-
-                <!-- Numbers -->
                 <div id="numbers">
-                    <!-- row -->
                     <div class="row">
-
-                        <!-- number -->
                         <div class="col-md-4 col-sm-3 col-xs-6">
                             <div class="number">
                                 <h3><span class="counter" data-from="0" data-to="15000" data-speed="1500">0</span>+</h3>
                                 <p>Footfall</p>
                             </div>
                         </div>
-                        <!-- /number -->
-
-                        <!-- number -->
                         <div class="col-md-4 col-sm-3 col-xs-6">
                             <div class="number">
                                 <h3><span class="counter" data-from="0" data-to="45" data-speed="1500">0</span>+</h3>
                                 <p>Events</p>
                             </div>
                         </div>
-                        <!-- /number -->
-
-                        <!-- number -->
                         <div class="col-md-4 col-sm-3 col-xs-6">
                             <div class="number">
                                 <h3><span class="counter" data-from="0" data-to="5" data-speed="1500">0</span>+</h3>
                                 <p>Star Nights</p>
                             </div>
                         </div>
-                        <!-- /number -->
-
                     </div>
-                    <!-- /row -->
                 </div>
-                <!-- /Numbers -->
             </div>
         </div>
-        <!-- row -->
     </div>
-    <!-- /container -->
 </div>
-<!-- /About -->
 
-<!-- Galery -->
-<div id="galery">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <!-- galery owl -->
-            <div id="galery-owl" class="owl-carousel owl-theme">
-
-                <!-- galery item -->
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/vishal.jpg' %}" alt="">
-                </div>
-                <!-- /galery item -->
-
-                <!-- galery item -->
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/shekhar.jpg' %}" alt="">
-                </div>
-                <!-- /galery item -->
-
-                <!-- galery item -->
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/ranjit_bawa.jpg' %}" alt="">
-                </div>
-                <!-- /galery item -->
-
-                <!-- galery item -->
-                <div class="galery-item">
-                    <img src="{% static 'main_page/img/star_nights/olly_esse.jpg' %}" alt="">
-                </div>
-                <!-- /galery item -->
-
-            </div>
-            <!-- /galery owl -->
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /Galery -->
-
-<!-- Video CTA -->
 <div id="video-cta" class="section">
-    <!-- background image -->
     <div class="section-bg"
         style="background-image:url({% static 'main_page/img/vishal_shekhar_video_thumbnail.jpg' %})"
-        data-stellar-background-ratio="0.5"></div>
-    <!-- /background image -->
-
-    <!-- container -->
+        data-stellar-background-ratio="0.8"></div>
     <div class="container">
-        <!-- row -->
         <div class="row">
-            <!-- cta content -->
             <div class="col-md-8 col-md-offset-2">
                 <div class="cta-content text-center">
                     <a class="video-play" href="https://www.youtube.com/watch?v=EaxXhX7dSX8" target="_blank">
@@ -159,37 +91,23 @@
                     <p class="lead">Vishal & Shekhar live at Zeitgeist 2k18</p>
                 </div>
             </div>
-            <!-- /cta content -->
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
 </div>
-<!-- /Video CTA -->
 
-<!-- Event Schedule -->
 <div id="schedule" class="section">
-    <!-- container -->
     <div class="container">
-        <!-- row -->
         <div class="row">
-            <!-- section title -->
             <div class="section-title">
                 <h3 class="title"><span>Event</span> <span style="color: #dd0a37;">Schedule</span></h3>
             </div>
-            <!-- /section title -->
-
             <div class="col-md-8 col-md-offset-2">
-
                 <div class="download-btn">
-                    <a href="https://docs.google.com/spreadsheets/d/1aDIqm1APSnE8J9jjZTHfZdp59CVc1JkLQPYkKTBXAYA/edit#gid=0" class="main-btn" target="_blank">View Schedule</a>
+                    <a href="https://docs.google.com/spreadsheets/d/1aDIqm1APSnE8J9jjZTHfZdp59CVc1JkLQPYkKTBXAYA/edit#gid=0"
+                        class="main-btn" target="_blank">View Schedule</a>
                 </div>
-
                 <br><br>
-
                 <div class="events-wrapper">
-
-                    <!-- event -->
                     <div class="event">
                         <div class="event-day">
                             <div>
@@ -198,75 +116,21 @@
                             </div>
                         </div>
                         <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 10 : 00 AM - 12 : 00 NOON</p>
-                            <h3 class="event-title">Chaplin - Dramatics</h3>
-                            <p>Venue - Lecture Hall Complex</p>
-						</div>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 1</h3>
+                        </div>
                     </div>
-                    
+                    {% for event in events_11_oct %}
                     <div class="event">
                         <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 12 : 00 NOON - 06 : 00 PM</p>
-                            <h3 class="event-title">Yatharth - Dramatics</h3>
-                            <p>Venue - Lecture Hall Complex</p>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
                         </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 12 : 00 NOON - 06 : 00 PM</p>
-                            <h3 class="event-title">Saaz and Adagio (PRELIMS) - Music</h3>
-                            <p>Venue - Zone 2</p>
-                        </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 01 : 00 PM - 03 : 00 PM</p>
-                            <h3 class="event-title">Doodle 4 Zeitgeist - Fine Arts</h3>
-                            <p>Venue - M3, Lecture Hall Complex</p>
-                        </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 01 : 00 PM - 03 : 00 PM</p>
-                            <h3 class="event-title">GD - Literary</h3>
-                            <p>Venue - ME1</p>
-                        </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 03 : 00 PM - 05 : 00 PM</p>
-                            <h3 class="event-title">Poster Designing - Fine Arts</h3>
-                            <p>Venue - M3, Lecture Hall Complex</p>
-                        </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 04 : 00 PM - 06 : 00 PM</p>
-                            <h3 class="event-title">Extempore - Literary</h3>
-                            <p>Venue - ME1</p>
-                        </div>
-					</div>
-
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> ALL DAY LONG</p>
-                            <h3 class="event-title">Wall Graffiti</h3>
-                        </div>
-					</div>
-
-                    <!-- event -->
+                    </div>
+                    {% endfor %}
                     <div class="event">
                         <div class="event-day">
                             <div>
@@ -274,43 +138,22 @@
                                 <span class="year">Oct, 2019</span>
                             </div>
                         </div>
-                        <!-- <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
-                            <h3 class="event-title">His id altera fabellas facilisis. Has eros assueverit cu</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <p>By <a href="#">John Doe</a></p>
-						</div> -->
-
                         <div class="event-content">
-                            <p class="event-time">Good things take time.</p>
-                            <h3 class="event-title">Coming soon !</h3>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 2</h3>
                         </div>
-                        <!--  ##################################################################  -->
-
                     </div>
-                    <!-- /event -->
-
-                    <!-- event -->
-
-                    <!--  ##################################################################  -->
-
-                    <!-- <div class="event">
+                    {% for event in events_12_oct %}
+                    <div class="event">
                         <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
-                            <h3 class="event-title">At mucius deserunt delicatissimi eam, labitur detraxit ut sit</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <p>By <a href="#">John Doe</a></p>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
                         </div>
-					</div> -->
-
-                    <!--  ##################################################################  -->
-
-                    <!-- /event -->
-
-                    <!-- event -->
+                    </div>
+                    {% endfor %}
                     <div class="event">
                         <div class="event-day">
                             <div>
@@ -318,74 +161,114 @@
                                 <span class="year">Oct, 2019</span>
                             </div>
                         </div>
-
-                        <!--  ##################################################################  -->
-
-                        <!-- <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
-                            <h3 class="event-title">His id altera fabellas facilisis. Has eros assueverit cu</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <p>By <a href="#">John Doe</a></p>
-						</div> -->
-
                         <div class="event-content">
-                            <p class="event-time">Good things take time.</p>
-                            <h3 class="event-title">Coming soon !</h3>
+                            <br><br>
+                            <h3 class="event-title">EVENTS FOR DAY 3</h3>
                         </div>
-                        <!--  ##################################################################  -->
-
                     </div>
-                    <!-- /event -->
-
-                    <!-- event -->
-
-                    <!--  ##################################################################  -->
-
-                    <!-- <div class="event">
+                    {% for event in events_13_oct %}
+                    <div class="event">
                         <div class="event-hour"></div>
-                        <div class="event-content">
-                            <p class="event-time"><i class="fa fa-clock-o"></i> 8 : 00 AM - 11 : 00 AM</p>
-                            <h3 class="event-title">At mucius deserunt delicatissimi eam, labitur detraxit ut sit</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.</p>
-                            <p>By <a href="#">John Doe</a></p>
+                        <div class="event-content"><br>
+                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
+                                {{ event.end_date_time }}</p>
+                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
+                            <p>Venue - {{ event.venue }}</p>
                         </div>
-					</div> -->
-
-                    <!--  ##################################################################  -->
-
-                    <!-- /event -->
+                    </div>
+                    {% endfor %}
                 </div>
-
-                <!--  ##################################################################  -->
-
-                
-
-                <!--  ##################################################################  -->
-
             </div>
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
 </div>
-<!-- /Event Schedule -->
 
-<!-- Team -->
-<div id="team" class="section">
-    <!-- container -->
+<div id="our_sponsors" class="section">
     <div class="container">
-        <!-- row -->
+        <div class="section-title">
+            <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+        </div>
+        <div class='desktop_only'>
+            {% for sponsor in our_sponsors %}
+            {% if forloop.counter0|divisibleby:"6" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-2">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class='mobile_only'>
+            {% for sponsor in our_sponsors %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-3">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"4" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="prev_sponsors" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h3 class="title"><span>Previous</span> <span style="color: #dd0a37;">Sponsors</span></h3>
+        </div>
+        <div class='desktop_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"6" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-2">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"6" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class='mobile_only'>
+            {% for sponsor in prev_sponsors %}
+            {% if forloop.counter0|divisibleby:"4" %}
+            <div class='row'>
+                {% endif %}
+                <div class="col-xs-3">
+                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
+                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
+                            alt="">
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"4" or forloop.last %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="team" class="section">
+    <div class="container">
         <div class="row">
-            <!-- section title -->
             <div class="section-title">
                 <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Team</span></h3>
             </div>
-            <!-- section title -->
-
-            <!-- member -->
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -394,9 +277,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8427012721"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/hardik-goyal-276818152/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Hardik Goyal</h3>
@@ -413,9 +293,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:9988069842"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/jashan-sanger-973663170/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Jashan Sanger</h3>
@@ -424,7 +301,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -433,9 +309,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:7610911344"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/naveen-tosawara-78995b167/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Naveen Tosawara</h3>
@@ -452,9 +325,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8708725393"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/hardik-goyal-276818152/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Abhishek Balhara</h3>
@@ -463,16 +333,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /member -->
-
-        <!-- member -->
         <div class="row">
-
-            <!-- /member -->
-
-            <!-- member -->
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -481,9 +343,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8283918488"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Divyanshu Bains</h3>
@@ -492,10 +351,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- /member -->
-
-            <!-- member -->
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -504,13 +359,10 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8896740277"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/dilip-sharma-6066aa168/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Dilip Sharma</h3>
-                            <span>WebDev Head</span>
+                            <span>WebDev & AppDev Head</span>
                         </div>
                     </div>
                 </div>
@@ -523,9 +375,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8949089986"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Gaurav Ailaney</h3>
@@ -534,7 +383,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -543,9 +391,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:7889483240"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Anmol Rattan</h3>
@@ -554,12 +399,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- /member -->
         </div>
-        <!-- member -->
         <div class='row'>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -568,9 +409,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:9779122050"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.facebook.com/gurnoor.sikka"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Gurnoor Singh</h3>
@@ -587,9 +425,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:7589406499"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Luvkesh Attri</h3>
@@ -606,9 +441,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8708185501"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Piyush Chechi</h3>
@@ -625,9 +457,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8264971809"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Sunil Meena</h3>
@@ -646,9 +475,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8708980575"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/rishabh-mudgal-0a9975155/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Rishabh Mudgal</h3>
@@ -657,7 +483,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -666,9 +491,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8295654006"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Kshitiz Sharma</h3>
@@ -677,7 +499,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -686,9 +507,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:9888357685"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Abhinav Khanna</h3>
@@ -705,9 +523,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:9610003799"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Yashvardhan</h3>
@@ -718,7 +533,6 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -727,9 +541,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8587963620"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Harshit Malik</h3>
@@ -738,7 +549,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -747,9 +557,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8284020226"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Ashish Swami</h3>
@@ -758,7 +565,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -767,9 +573,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:8266971443"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Mehul Kapadia</h3>
@@ -778,7 +581,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-3">
                 <div class="member">
                     <div class="member-img">
@@ -787,9 +589,6 @@
                     <div class="member-body">
                         <div class="member-social">
                             <a href="tel:9079350330"><i class="fa fa-phone"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
-                            <!-- <a href="https://www.linkedin.com/in/divyanshubains14/"><i class="fa fa fa-linkedin"></i></a> -->
                         </div>
                         <div class="member-content">
                             <h3>Mayank Raj</h3>
@@ -798,145 +597,26 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /Team -->
-
-
-<!-- Our Sponsors -->
-<div id="our_sponsors" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-
-        <!-- section title -->
-        <div class="section-title">
-            <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Sponsors</span></h3>
-        </div>
-        <!-- /section title -->
-
-        <!-- sponsor -->
-        <div class='desktop_only'>
-            {% for sponsor in our_sponsors %}
-            {% if forloop.counter0|divisibleby:"6" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-2">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"6" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class='mobile_only'>
-            {% for sponsor in our_sponsors %}
-            {% if forloop.counter0|divisibleby:"4" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-3">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/our_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"4" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
-    <!-- /row -->
 </div>
-<!-- /container -->
-</div>
-<!-- /Sponsors -->
 
-
-<!-- Previous Sponsors -->
-<div id="prev_sponsors" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-
-        <!-- section title -->
-        <div class="section-title">
-            <h3 class="title"><span>Previous</span> <span style="color: #dd0a37;">Sponsors</span></h3>
-        </div>
-        <!-- /section title -->
-
-        <!-- sponsor -->
-        <div class='desktop_only'>
-            {% for sponsor in prev_sponsors %}
-            {% if forloop.counter0|divisibleby:"6" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-2">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"6" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class='mobile_only'>
-            {% for sponsor in prev_sponsors %}
-            {% if forloop.counter0|divisibleby:"4" %}
-            <div class='row'>
-                {% endif %}
-                <div class="col-xs-3">
-                    <a href="{{ sponsor.link_to_sponsor }}" class="sponsor">
-                        <img src="{% static 'main_page/img/prev_sponsors' %}/{{ sponsor.name_of_photo_in_static_files }}"
-                            alt="">
-                    </a>
-                </div>
-                {% if forloop.counter|divisibleby:"4" or forloop.last %}
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-    <!-- /row -->
-</div>
-<!-- /container -->
-</div>
-<!-- /Previos Sponsors -->
-
-
-<!-- Contact -->
 <div id="contact" class="section">
-    <!-- container -->
     <div class="container">
-        <!-- row -->
         <div class="row">
-            <!-- section title -->
             <div class="section-title">
                 <h3 class="title"><span>Contact</span> <span style="color: #dd0a37;">Info</span></h3>
             </div>
-            <!-- /section title -->
-
-            <!-- contact -->
             <div class="col-sm-4">
                 <div class="contact">
                     <h3>Address</h3>
                     <p><a href="https://goo.gl/maps/aesiYVwj8tya7BKY8">Indian Institute of Technology Ropar, 140001,
                             Rupnagar, Punjab, India</a></p>
-                    <b><p><a href="{% url 'reach_us' %}">How to reach us?</a></p></b>
+                    <b>
+                        <p><a href="{% url 'reach_us' %}">How to reach us?</a></p>
+                    </b>
                 </div>
             </div>
-            <!-- /contact -->
-
-            <!-- contact -->
             <div class="col-sm-4">
                 <div class="contact">
                     <h3>Phone</h3>
@@ -944,23 +624,14 @@
                     <p><a href="tel:8427012721">+91 842 7012 721</p>
                 </div>
             </div>
-            <!-- /contact -->
-
-            <!-- contact -->
             <div class="col-sm-4">
                 <div class="contact">
                     <h3>Email</h3>
                     <a href="mailto:zeitgeist.pr@iitrpr.ac.in">zeitgeist.pr@iitrpr.ac.in</a>
                 </div>
             </div>
-            <!-- /contact -->
-
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
-
 </div>
-<!-- /Contact -->
 
 {% endblock %}
