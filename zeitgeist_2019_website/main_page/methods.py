@@ -1,6 +1,6 @@
 from instamojo_wrapper import Instamojo
 import os
-from fcm_django.models import FCMDevice
+import requests
 
 
 def payment_request(name, amount, purpose, email, mobile):
@@ -58,5 +58,22 @@ def support_payment_request(name, amount, purpose, email, mobile):
 
 
 def sendNotification(title, message):
-    devices = FCMDevice.objects.all()
-    devices.send_message(title=title, body=message, data={"click_action": "FLUTTER_NOTIFICATION_CLICK"})
+    headers = {'Content-type': 'application/json',
+               'Authorization': 'key=' + os.environ.get('FCM_APIKEY', '')}
+    postdata = {
+        
+            "notification":
+            {
+                "body": message,
+                "title": title
+            },
+            "priority": "high",
+            "data":
+            {
+                "click_action": "FLUTTER_NOTIFICATION_CLICK"
+            },
+            "condition": "!('anytopicyoudontwanttouse' in topics)"
+        
+    }
+    r = requests.post('https://fcm.googleapis.com/fcm/send', json = postdata, headers = headers)
+    print(r.text)
