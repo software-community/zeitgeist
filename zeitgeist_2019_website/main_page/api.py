@@ -37,6 +37,6 @@ class Prev_SponsorViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 
 class NotificationViewSet(viewsets.ModelViewSet):
-    queryset = Notification.objects.all()
+    queryset = Notification.objects.order_by('id').reverse()
     serializer_class = NotificationSerializer
     http_method_names = ['get']
