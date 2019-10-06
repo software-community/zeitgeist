@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192
 # Application definition
 
 INSTALLED_APPS = [
+    'fcm_django',
     'django_filters',
     'rest_framework',
     'crispy_forms',
@@ -179,3 +180,18 @@ EMAIL_HOST_PASSWORD = "your password"
 CRISPY_TEMPLATE_PACK="bootstrap3"
 
 os.environ["REGISTRATION_ENABLE"] = "1"
+
+# Firebase Notification
+
+FCM_DJANGO_SETTINGS = {
+        "APP_VERBOSE_NAME": "[string for AppConfig's verbose_name]",
+         # default: _('FCM Django')
+        "FCM_SERVER_KEY": os.environ.get('FCM_APIKEY',''),
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": False,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": False,
+}

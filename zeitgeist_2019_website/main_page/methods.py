@@ -1,5 +1,6 @@
 from instamojo_wrapper import Instamojo
 import os
+from fcm_django.models import FCMDevice
 
 
 def payment_request(name, amount, purpose, email, mobile):
@@ -54,3 +55,7 @@ def support_payment_request(name, amount, purpose, email, mobile):
         webhook="https://zeitgeist.org.in/support_weebhook/"
     )
     return response
+
+def sendNotification(title, message):
+    devices = FCMDevice.objects.all()
+    devices.send_message(title=title, body=message, data={"click_action": "FLUTTER_NOTIFICATION_CLICK"})
