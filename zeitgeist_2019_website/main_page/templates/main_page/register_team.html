@@ -1,29 +1,31 @@
 {% extends 'main_page/base.html' %}
+
 {% load crispy_forms_tags %}
+
 {% load static %}
 
 {% block content %}
-<div class="jumbotron" style="background-color: #39a0ed; color:#17301c;" >
+
+<div class="jumbotron" style="background-color: #39a0ed; color:#17301c;">
     <div class='container'>
         <br><br>
-    <h1>Fill the form below to register Team for {{ event.name }}!</h1>
-    <h4>Minimum Team Size (including captain) : {{ event.minimum_team_size }}</h4>
-    <h4>Maximum Team Size (including captain) : {{ event.maximum_team_size }}</h4>
+        <h1>Fill the form below to register Team for {{ event.name }}!</h1>
+        <h4>Minimum Team Size (including captain) : {{ event.minimum_team_size }}</h4>
+        <h4>Maximum Team Size (including captain) : {{ event.maximum_team_size }}</h4>
     </div>
 </div>
+
 <div class='container'>
-<div class="row">
-    <div class="col-md-6">
-<form method="POST">
-    {% csrf_token %}
-    {{ team_form|crispy }}
-    {{ team_member_formset|crispy }}
-<input class='btn btn-danger btn-lg' type="submit" value="Register">
-</form>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                {{ team_form|crispy }}
+                {{ team_member_formset|crispy }}
+                <input class='btn btn-danger btn-lg' type="submit" value="Register">
+            </form>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-
-
 
 {% endblock content %}

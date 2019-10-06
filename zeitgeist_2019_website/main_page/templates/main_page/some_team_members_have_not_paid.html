@@ -5,30 +5,20 @@
 {% block content %}
 
 <div id="home">
-    <!-- background image -->
     <div class="section-bg" style="background-color:grey" data-stellar-background-ratio="0.5"></div>
-    <!-- /background image -->
-
-    <!-- home wrapper -->
     <div class="home-wrapper">
         <div class="container">
-
             <div class="row">
-
                 <div class="col-md-8 col-md-offset-2">
                     <div class="home-content">
-
-                        <h2>{{ member_who_has_not_paid.name }} has not paid for the subcategory of this event ( PARTICIPANT CODE : {{ member_who_has_not_paid.participant_code }} ) !!! Try again when
+                        <h2>{{ member_who_has_not_paid.name }} has not paid for the subcategory of this event (
+                            PARTICIPANT CODE : {{ member_who_has_not_paid.participant_code }} ) !!! Try again when
                             all the team members have paid for the subcategory of this event.</h2>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-    <!-- /home wrapper -->
 </div>
 
 {% endblock %}

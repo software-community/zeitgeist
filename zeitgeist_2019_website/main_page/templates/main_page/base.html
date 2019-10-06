@@ -7,24 +7,12 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 	<title>Zeitgeist</title>
-
-	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet">
-
-	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
-
-	<!-- Owl Carousel -->
 	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
 	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
-
-	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}">
-
-	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}" />
 	{% if event %}
 	<style>
@@ -33,40 +21,22 @@
 		}
 	</style>
 	{% endif %}
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-			  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-			<![endif]-->
 </head>
 
 <body>
-
-	<!-- Header -->
 	<header id="header" class="transparent-navbar">
-		<!-- container -->
 		<div class="container">
-			<!-- navbar header -->
 			<div class="navbar-header">
-				<!-- Logo -->
 				<div class="navbar-brand">
 					<a class="logo" href="{% url 'main_page_home' %}">
 						<img class="logo-img" src="{% static 'main_page/img/logo.png' %}" alt="logo">
 						<img class="logo-alt-img" src="{% static 'main_page/img/logo-alt.png' %}" alt="logo">
 					</a>
 				</div>
-				<!-- /Logo -->
-
-				<!-- Mobile toggle -->
 				<button class="navbar-toggle">
 					<i class="fa fa-bars"></i>
 				</button>
-				<!-- /Mobile toggle -->
 			</div>
-			<!-- /navbar header -->
-
-			<!-- Navigation -->
 			<nav id="nav">
 				<ul class="main-nav nav navbar-nav navbar-right">
 					<li><a href="{% url 'main_page_home' %}">Home</a></li>
@@ -95,26 +65,16 @@
 					{% endif %}
 				</ul>
 			</nav>
-			<!-- /Navigation -->
 		</div>
-		<!-- /container -->
 	</header>
-	<!-- /Header -->
-
 	{% block content %} {% endblock %}
-
-	<!-- Footer -->
 	<footer id="footer">
-		<!-- container -->
 		<div class="container">
-			<!-- row -->
 			<div class="row">
 				<div class='col-md-4'>
 					<p style="text-align: center;">Made with <i class='fa fa-heart-o'></i> by Software Community, IIT
 						Ropar</p>
 				</div>
-
-				<!-- footer logo -->
 				<div class="col-md-4">
 					<div class="footer-brand">
 						<a class="logo" href="{% url 'main_page_home' %}">
@@ -123,9 +83,6 @@
 						</a>
 					</div>
 				</div>
-				<!-- /footer logo -->
-
-				<!-- contact social -->
 				<div class="col-md-4 ">
 					<div class="contact-social">
 						<a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i
@@ -135,16 +92,9 @@
 								class="fa fa-instagram"></i></a>
 					</div>
 				</div>
-				<!-- /contact social -->
-
 			</div>
-			<!-- /row -->
 		</div>
-		<!-- /container -->
 	</footer>
-	<!-- /Footer -->
-
-	<!-- jQuery Plugins -->
 	<script src="{% static 'main_page/js/jquery.min.js' %}"></script>
 	<script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
@@ -152,7 +102,6 @@
 	<script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
 	<script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
 	<script src="{% static 'main_page/js/main.js' %}"></script>
-
 </body>
 
 </html>
