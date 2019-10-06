@@ -498,13 +498,6 @@ def reach_us(request):
 
     return render(request, 'main_page/reach_us.html')
 
-def send_noti(request):
-    if request.method == "POST":
-        title = request.POST.get('title')
-        message = request.POST.get('message')
-        sendNotification(title, message)
-        
-
 
 # --------------------------------------------------------------------------------------
 

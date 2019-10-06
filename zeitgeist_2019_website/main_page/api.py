@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import CategorySerializer, SubcategorySerializer, EventSerializer, Our_SponsorSerializer, Prev_SponsorSerializer
-from .models import Category, Subcategory, Event, Our_Sponsor, Prev_Sponsor
+from .serializers import *
+from .models import *
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -32,7 +32,11 @@ class Our_SponsorViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 
 class Prev_SponsorViewSet(viewsets.ModelViewSet):
-    # code goes here
     queryset = Prev_Sponsor.objects.all()
     serializer_class = Prev_SponsorSerializer
+    http_method_names = ['get']
+
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
     http_method_names = ['get']

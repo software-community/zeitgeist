@@ -56,6 +56,7 @@ def support_payment_request(name, amount, purpose, email, mobile):
     )
     return response
 
+
 def sendNotification(title, message):
     devices = FCMDevice.objects.all()
     devices.send_message(title=title, body=message, data={"click_action": "FLUTTER_NOTIFICATION_CLICK"})

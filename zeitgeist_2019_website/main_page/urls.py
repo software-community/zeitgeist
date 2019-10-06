@@ -27,7 +27,8 @@ router.register(r'cats', api.CategoryViewSet)
 router.register(r'subcats', api.SubcategoryViewSet)
 router.register(r'events', api.EventViewSet)
 router.register(r'our_sponsor', api.Our_SponsorViewSet)
-# router.register(r'prev_sponsor', api.Prev_SponsorViewSet)
+router.register(r'prev_sponsor', api.Prev_SponsorViewSet)
+router.register(r'notification', api.NotificationViewSet)
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
