@@ -20,7 +20,7 @@ from django.http import HttpResponseNotFound
 
 
 def main_page_home(request):
-    our_sponsors = Our_Sponsor.objects.all()
+    our_sponsors = Our_Sponsor.objects.all().order_by('id')
     prev_sponsors = Prev_Sponsor.objects.all()
     # # not working on server, hence commented
     # events_11_oct = Event.objects.filter(start_date_time__day=11).order_by('start_date_time')
