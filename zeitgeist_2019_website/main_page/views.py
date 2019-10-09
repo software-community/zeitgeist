@@ -219,8 +219,8 @@ def register_for_event(request, event_id):
 @login_required
 def pay_for_subcategory(request, subcategory_id):
 
-    if os.getenv("REGISTRATION_ENABLE") == "0":
-        return HttpResponse("Registration Portal will open soon !!!")
+    if subcategory_id != 18:
+        return render(request, 'main_page/registrations_closed.html')
 
     try:
         subcategory = Subcategory.objects.get(id=subcategory_id)
@@ -292,7 +292,7 @@ def weebhook(request):
                         str(participantpaspaid.paid_subcategory) +
                         ' to Zeitgeist 2k19',
                         'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) +
-                        ', is successful. However, this does not mean you have participated in an event of this subcategory. It only means that YOU ARE NOW ELIGIBLE TO REGISTER FOR ANY EVENT IN THIS SUBCATEGORY WITHOUT ANY EXTRA COST !!! To participate in an event of the subcategory you have paid for, you need to register for that event on the Zeitgeist website. For every event you take part in, you will receive an email comfirming your participation in that event.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                        ', is successful.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                         'zeitgeist.pr@iitrpr.ac.in',
                         [participantpaspaid.participant.participating_user.email],
                         fail_silently=False,
@@ -316,61 +316,63 @@ def payment_redirect(request):
 @login_required
 def accomodation(request, number_of_people_to_accomodate=None):
 
-    try:
-        form_filling_participant = Participant.objects.get(participating_user=request.user)
-    except Participant.DoesNotExist:
-        return render(request, 'main_page/must_register_as_participant_first.html')
+    return render(request, 'main_page/registrations_closed.html')
 
-    if number_of_people_to_accomodate:
-        AccomodationFormSet = formset_factory(form=AccomodationForm, extra=number_of_people_to_accomodate,
-                                                   max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
-        if request.method == 'POST':
-            accomodation_formset = AccomodationFormSet(request.POST)
-            if accomodation_formset.is_valid():
-                payable_amount = 0
-                for accomodation_form in accomodation_formset:
-                    ad1 = accomodation_form.cleaned_data.get('acco_for_day_one')
-                    ad2 = accomodation_form.cleaned_data.get('acco_for_day_two')
-                    ad3 = accomodation_form.cleaned_data.get('acco_for_day_three')
-                    meals_inc = accomodation_form.cleaned_data.get('include_meals')
-                    if meals_inc:
-                        if ad1 and ad2 and ad3:
-                            payable_amount = payable_amount + 1200
-                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
-                            payable_amount = payable_amount + 850
-                        else:
-                            payable_amount = payable_amount + 500
-                    else:
-                        if ad1 and ad2 and ad3:
-                            payable_amount = payable_amount + 700
-                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
-                            payable_amount = payable_amount + 500
-                        else:
-                            payable_amount = payable_amount + 300
-                purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
-                response = accomodation_payment_request(form_filling_participant.name, payable_amount, purpose,
-                                        request.user.email, form_filling_participant.contact_mobile_number.__str__())
-                if response['success']:
-                    url = response['payment_request']['longurl']
-                    payment_request_id = response['payment_request']['id']
-                    for accomodation_form in accomodation_formset:
-                        new_accomodation = accomodation_form.save(commit=False)
-                        new_accomodation.payment_request_id = payment_request_id
-                        new_accomodation.save()
-                    return redirect(url)
-                else:
-                    return HttpResponseServerError()
-        else:
-            accomodation_formset = AccomodationFormSet()
-        return render(request, 'main_page/accomodation_for.html', {'accomodation_modelformset': accomodation_formset, 'number_of_people_to_accomodate': number_of_people_to_accomodate})
+    # try:
+    #     form_filling_participant = Participant.objects.get(participating_user=request.user)
+    # except Participant.DoesNotExist:
+    #     return render(request, 'main_page/must_register_as_participant_first.html')
 
-    else:
-        if request.method == 'POST':
-            number_of_people_to_accomodate = request.POST.get(
-                'number_of_people_to_accomodate')
-            return redirect('accomodation_for', number_of_people_to_accomodate=number_of_people_to_accomodate)
-        else:
-            return render(request, 'main_page/number_of_people_to_accomodate.html')
+    # if number_of_people_to_accomodate:
+    #     AccomodationFormSet = formset_factory(form=AccomodationForm, extra=number_of_people_to_accomodate,
+    #                                                max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
+    #     if request.method == 'POST':
+    #         accomodation_formset = AccomodationFormSet(request.POST)
+    #         if accomodation_formset.is_valid():
+    #             payable_amount = 0
+    #             for accomodation_form in accomodation_formset:
+    #                 ad1 = accomodation_form.cleaned_data.get('acco_for_day_one')
+    #                 ad2 = accomodation_form.cleaned_data.get('acco_for_day_two')
+    #                 ad3 = accomodation_form.cleaned_data.get('acco_for_day_three')
+    #                 meals_inc = accomodation_form.cleaned_data.get('include_meals')
+    #                 if meals_inc:
+    #                     if ad1 and ad2 and ad3:
+    #                         payable_amount = payable_amount + 1200
+    #                     elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
+    #                         payable_amount = payable_amount + 850
+    #                     else:
+    #                         payable_amount = payable_amount + 500
+    #                 else:
+    #                     if ad1 and ad2 and ad3:
+    #                         payable_amount = payable_amount + 700
+    #                     elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
+    #                         payable_amount = payable_amount + 500
+    #                     else:
+    #                         payable_amount = payable_amount + 300
+    #             purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
+    #             response = accomodation_payment_request(form_filling_participant.name, payable_amount, purpose,
+    #                                     request.user.email, form_filling_participant.contact_mobile_number.__str__())
+    #             if response['success']:
+    #                 url = response['payment_request']['longurl']
+    #                 payment_request_id = response['payment_request']['id']
+    #                 for accomodation_form in accomodation_formset:
+    #                     new_accomodation = accomodation_form.save(commit=False)
+    #                     new_accomodation.payment_request_id = payment_request_id
+    #                     new_accomodation.save()
+    #                 return redirect(url)
+    #             else:
+    #                 return HttpResponseServerError()
+    #     else:
+    #         accomodation_formset = AccomodationFormSet()
+    #     return render(request, 'main_page/accomodation_for.html', {'accomodation_modelformset': accomodation_formset, 'number_of_people_to_accomodate': number_of_people_to_accomodate})
+
+    # else:
+    #     if request.method == 'POST':
+    #         number_of_people_to_accomodate = request.POST.get(
+    #             'number_of_people_to_accomodate')
+    #         return redirect('accomodation_for', number_of_people_to_accomodate=number_of_people_to_accomodate)
+    #     else:
+    #         return render(request, 'main_page/number_of_people_to_accomodate.html')
 
 
 def accomodation_weebhook(request):
