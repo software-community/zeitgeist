@@ -219,8 +219,8 @@ def register_for_event(request, event_id):
 @login_required
 def pay_for_subcategory(request, subcategory_id):
 
-    if os.getenv("REGISTRATION_ENABLE") == "0":
-        return HttpResponse("Registration Portal will open soon !!!")
+    if os.environ.get("REGISTRATION_ENABLE", '1') == "0":
+        return HttpResponse("Registration Portal has been closed !!!")
 
     try:
         subcategory = Subcategory.objects.get(id=subcategory_id)
@@ -315,6 +315,8 @@ def payment_redirect(request):
 
 @login_required
 def accomodation(request, number_of_people_to_accomodate=None):
+    if os.environ.get("REGISTRATION_ENABLE", '1') == "0":
+        return HttpResponse("Registration Portal has been closed !!!")
 
     try:
         form_filling_participant = Participant.objects.get(participating_user=request.user)
