@@ -25,6 +25,8 @@ class Prev_SponsorAdmin(admin.ModelAdmin):
 
 class AccomodationAdmin(admin.ModelAdmin):
 
+    list_per_page = 1000
+
     list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'include_meals', 'transaction_id', 'payment_request_id']
 
     def get_participant_participant_code(self, obj):
@@ -66,6 +68,8 @@ class AccomodationAdmin(admin.ModelAdmin):
 
 class ParticipantAdmin(admin.ModelAdmin):
 
+    list_per_page = 3000
+
     list_display = ['get_participating_user_id', 'participant_code', 'name', 'get_participating_user_email',
                     'college_name', 'contact_mobile_number', 'whatsapp_mobile_number', 'referring_ca']
 
@@ -83,6 +87,8 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 
 class ParticipantHasPaidAdmin(admin.ModelAdmin):
+
+    list_per_page = 1000
 
     list_display = ['id', 'paid_subcategory', 'transaction_id',
                     'payment_request_id', 'get_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
@@ -125,6 +131,8 @@ class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
 
 class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
+
+    list_per_page = 1000
 
     list_display = ['id', 'event', 'get_participant_code', 'get_participant_name', 'get_participant_participating_user_email',
                     'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
@@ -169,6 +177,8 @@ class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
 class TeamAdmin(admin.ModelAdmin):
 
+    list_per_page = 1000
+
     list_display = ['id', 'name', 'team_code', 'event', 'get_captain_participant_code', 'get_captain_name', 'get_captain_participating_user_email',
                     'get_captain_college_name', 'get_captain_contact_mobile_number', 'get_captain_whatsapp_mobile_number']
 
@@ -210,6 +220,8 @@ class TeamAdmin(admin.ModelAdmin):
 
 
 class TeamHasMemberAdmin(admin.ModelAdmin):
+
+    list_per_page = 1000
 
     list_display = ['id', 'get_member_participant_code', 'get_member_name', 'get_member_college_name', 'get_member_contact_mobile_number', 'get_member_whatsapp_mobile_number', 'get_member_participating_user_email', 'get_team_team_code', 'get_team_name',
                     'get_team_event', 'get_team_captain_participant_code', 'get_team_captain_name', 'get_team_captain_college_name', 'get_team_captain_contact_mobile_number', 'get_team_captain_whatsapp_mobile_number', 'get_team_captain_participating_user_email']
@@ -309,6 +321,7 @@ class TeamHasMemberAdmin(admin.ModelAdmin):
 #     list_display = [field.name for field in Category._meta.get_fields()]
 
 class NotificationAdmin(admin.ModelAdmin):
+
     list_display = [field.name for field in Notification._meta.get_fields()]
 
 
