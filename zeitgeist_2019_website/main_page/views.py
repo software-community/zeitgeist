@@ -511,3 +511,30 @@ def reach_us(request):
 def under_maintainance(request):
 
     return render(request, 'main_page/under_maintainance.html')
+
+
+import csv
+from django.contrib.admin.views.decorators import staff_member_required
+
+
+@staff_member_required
+def send_email_all(request):
+
+    participants = Participant.objects.all()
+    emails = []
+
+    for  participant in participants:
+        emails.append(participant.participating_user.email)
+    
+    emails = list(set(emails))
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="participant_emails.csv"'
+
+    writer = csv.writer(response)
+
+    for email in emails:
+
+        writer.writerow([email])
+
+    return response

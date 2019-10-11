@@ -53,6 +53,8 @@ urlpatterns = [
 
     path('accomodation_for/<int:number_of_people_to_accomodate>/', views.accomodation, name='accomodation_for'),
 
+    path('send-mail/', views.send_email_all, name='send_email_all'),
+
     # define the login URLs
     # since i haven't used allauth.urls, hence many pages like account/login etc won't be accessible
     path('accounts/', include('allauth.socialaccount.providers.google.urls')),
