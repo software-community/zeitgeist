@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include("main_page.urls")),
     path('campus_ambassador/', include("campus_ambassador.urls")),
     path('verzeo/', include("verzeo.urls")),
+    path('TSP/',include("TSP.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

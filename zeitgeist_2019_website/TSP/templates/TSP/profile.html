@@ -1,0 +1,63 @@
+{% extends 'TSP/base.html'%}
+{% load static %}
+{% block title %} Profile Page {%endblock%}
+{% block body %}
+
+<div class="ftco-blocks-cover-1">
+    <div class="ftco-cover-1 main-back overlay">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 text-center text-white">
+                    <div class="heading">Basic Info</div>
+
+                    <table class="table display-data text-white align-items-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">FIELDS</th>
+                                <th scope="col">DATA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">School Name:</th>
+                                <td>{{ profile.school_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">School Address:</th>
+                                <td>{{ profile.school_address }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">School Phone:</th>
+                                <td>{{ profile.school_phone }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Point of Contact Name:</th>
+                                <td>{{ profile.point_of_contact_name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Point of Contact Phone:</th>
+                                <td>{{ profile.point_of_contact_phone }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Paid for Category A (Classes 9th & 10th):</th>
+                                <td>{{ num_cat_a }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Paid for Category B (Classes 11 & 12th):</th>
+                                <td>{{ num_cat_b }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <center>
+                        <a class="btn-primary primary " style="color: white;" href="{% url 'TSP:home' %}">
+                            Back</a>
+                        <a class="btn-primary primary " style="color: white;" href="{% url 'TSP:payment_view' %}">
+                            Pay Fee</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

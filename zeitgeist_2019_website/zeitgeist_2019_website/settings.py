@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192
 # Application definition
 
 INSTALLED_APPS = [
+    'TSP.apps.TspConfig',
     'django_filters',
     'rest_framework',
     'crispy_forms',
