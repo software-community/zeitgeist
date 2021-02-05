@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'main_page.apps.MainPageConfig',
     'campus_ambassador.apps.CampusAmbassadorConfig',
-    'verzeo.apps.VerzeoConfig',
 	'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
