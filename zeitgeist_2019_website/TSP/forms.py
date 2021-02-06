@@ -29,4 +29,4 @@ class PaymentForm(forms.ModelForm):
 
 class ResultForm(forms.Form):
     name = forms.CharField(label="Your Name", min_length=4,widget=forms.TextInput)
-    advitiya_id = forms.CharField(label="Advitiya ID",widget=forms.TextInput)
+    advitiya_id = forms.CharField(label="Zeitgeist ID",widget=forms.TextInput)

@@ -23,49 +23,6 @@ class Prev_SponsorAdmin(admin.ModelAdmin):
     list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
 
 
-class AccomodationAdmin(admin.ModelAdmin):
-
-    list_per_page = 1000
-
-    list_display = ['id', 'get_participant_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_college_name', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'include_meals', 'transaction_id', 'payment_request_id']
-
-    def get_participant_participant_code(self, obj):
-        return obj.participant.participant_code
-
-    get_participant_participant_code.short_description = 'Participant Code'
-    get_participant_participant_code.admin_order_field = 'participant__participant_code'
-
-    def get_participant_name(self, obj):
-        return obj.participant.name
-
-    get_participant_name.short_description = 'Participant Name'
-    get_participant_name.admin_order_field = 'participant__name'
-
-    def get_participant_participating_user_email(self, obj):
-        return obj.participant.participating_user.email
-
-    get_participant_participating_user_email.short_description = 'Participant Email'
-    get_participant_participating_user_email.admin_order_field = 'participant__participating_user__email'
-
-    def get_participant_college_name(self, obj):
-        return obj.participant.college_name
-
-    get_participant_college_name.short_description = 'Participant College Name'
-    get_participant_college_name.admin_order_field = 'participant__college_name'
-
-    def get_participant_contact_mobile_number(self, obj):
-        return obj.participant.contact_mobile_number
-
-    get_participant_contact_mobile_number.short_description = 'Participant Contact Mobile Number'
-    get_participant_contact_mobile_number.admin_order_field = 'participant__contact_mobile_number'
-
-    def get_participant_whatsapp_mobile_number(self, obj):
-        return obj.participant.whatsapp_mobile_number
-
-    get_participant_whatsapp_mobile_number.short_description = 'Participant WhatsApp Mobile Number'
-    get_participant_whatsapp_mobile_number.admin_order_field = 'participant__whatsapp_mobile_number'
-
-
 class ParticipantAdmin(admin.ModelAdmin):
 
     list_per_page = 3000
@@ -330,7 +287,7 @@ class NotificationAdmin(admin.ModelAdmin):
 # admin.site.register(Event, EventAdmin)
 admin.site.register(Our_Sponsor, Our_SponsorAdmin)
 admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
-admin.site.register(Accomodation, AccomodationAdmin)
+
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
 admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
@@ -344,7 +301,7 @@ admin.site.register(Subcategory)
 admin.site.register(Event)
 # admin.site.register(Our_Sponsor)
 # admin.site.register(Prev_Sponsor)
-# admin.site.register(Accomodation)
+
 # admin.site.register(Participant)
 # admin.site.register(ParticipantHasPaid)
 # admin.site.register(ParticipantHasParticipated)

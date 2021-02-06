@@ -167,28 +167,6 @@ class Prev_Sponsor(models.Model):
         verbose_name_plural = 'Previous Sponsor'
 
 
-class Accomodation(models.Model):
-
-    participant = models.ForeignKey(Participant, verbose_name='Participant', on_delete=models.CASCADE)
-    acco_for_day_one = models.BooleanField(verbose_name='11 Oct', default=False)
-    acco_for_day_two = models.BooleanField(verbose_name='12 Oct', default=False)
-    acco_for_day_three = models.BooleanField(verbose_name='13 Oct', default=False)
-    include_meals = models.BooleanField(verbose_name='Meals Included', default=False)
-
-    GENDER_CHOICES = [
-        ('M','Male'),
-        ('F','Female')
-    ]
-    gender = models.CharField(max_length=4, blank=False, null=False, choices=GENDER_CHOICES, verbose_name='Gender')
-
-    transaction_id = models.CharField(max_length=100, default='-1')
-    payment_request_id = models.CharField(max_length=100, default='-1')
-
-    def __str__(self):
-        return str(self.participant.participant_code) + str(self.gender)
-
-    class Meta:
-        verbose_name_plural = 'Accomodation'
 
 
 class Support(models.Model):

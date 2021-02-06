@@ -47,7 +47,6 @@
 					<li><a href="{% url 'main_page_events' %}">Events</a></li>
 					<li><a href="{% url 'campus_ambassador_home' %}">Campus Ambassador</a></li>
 					<li><a href="{% url 'TSP:home' %}">TSP</a></li>
-					<li><a href="{% url 'reach_us' %}">Reach Us and Entry</a></li>
 					{% if request.user.is_authenticated %}
 					<li><a href="{% url 'account_logout' %}">Logout</a></li>
 					{% else %}

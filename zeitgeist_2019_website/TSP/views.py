@@ -52,17 +52,17 @@ def register_profile(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            send_mail(subject='Successful Registration for Techno School program: Advitiya 2020',
+            send_mail(subject='Successful Registration for Techno School program: Zeitgeist 2020',
                       message='',
                       from_email=os.environ.get(
                           'EMAIL_HOST_USER', ''),
                       recipient_list=[instance.user.email],
                       fail_silently=True,
                       html_message='Dear ' + str(request.user.get_full_name()) +
-                      ',<br><br>You are successfully registered for Techno School program for Advitiya 2020.' +
+                      ',<br><br>You are successfully registered for Techno School program for Zeitgeist 2020.' +
                       'We are excited for your journey with us.' +
                       '<br>Please read the <b>TSP Brochure</b> at https://'
-                      + request.get_host() + static('TSP/TSP_Invitation.pdf') + '<br><br>For any queries, feel free to contact Mr. Akash(8949852311), or Mr. Jishu(9110914050)<br><br>Regards<br>Advitiya 2020 ' +
+                      + request.get_host() + static('TSP/TSP_Invitation.pdf') + '<br><br>For any queries, feel free to contact Mr. Akash(8949852311), or Mr. Jishu(9110914050)<br><br>Regards<br>Zeitgeist 2020 ' +
                       '<br>Public Relations Team')
             return redirect('TSP:profile')
     return render(request, "TSP/register.html", {"form": form, 'person': person})
@@ -138,14 +138,14 @@ def webhook(request):
                     payment_detail.transaction_id = data['payment_id']
                     # str(participantpaspaid.paid_subcategory) inlcudes name of category also
                     send_mail(
-                        'Payment confirmation of TSP | ADVITIYA 2020',
+                        'Payment confirmation of TSP | ZEITGEIST 2k21',
                         'Dear ' + str(payment_detail.profile.user.get_full_name()) + '\n\nThis is to confirm '+
-                        'that your payment to ADVITIYA 2020 ' +
+                        'that your payment to ZEITGEIST 2k21 ' +
                         ' is successful.\n\n'+
                         'No. of Students in Category A(9-10th class) : '+ str(payment_detail.category_a) +
                         '\nNo. of Students in Category B(11-12th class) : '+ str(payment_detail.category_b) +
                         '\n Total Payment of Rs. ' + str(payment_detail.get_total_payment()) +
-                        '\n\nRegards\nADVITIYA 2020 Public Relations Team',
+                        '\n\nRegards\nZEITGEIST 2k21 Public Relations Team',
                         os.environ.get(
                           'EMAIL_HOST_USER', ''),
                         [payment_detail.profile.user.email],
