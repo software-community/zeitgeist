@@ -87,11 +87,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="cta-content text-center">
-                    <a class="video-play" href="https://www.youtube.com/watch?v=EaxXhX7dSX8" target="_blank">
+                    <a class="video-play" href="https://www.youtube.com/watch?v=jOLDCQBOiag" target="_blank">
                         <i class="fa fa-play"></i>
                     </a>
                     <h2>Watch this video</h2>
-                    <p class="lead">Vishal & Shekhar live at Zeitgeist 2k18</p>
+                    <p class="lead">Zeitgeist 2k21 aftermovie</p>
                 </div>
             </div>
         </div>
@@ -105,81 +105,8 @@
                 <h3 class="title"><span>Event</span> <span style="color: #dd0a37;">Schedule</span></h3>
             </div>
             <div class="col-md-8 col-md-offset-2">
-                <div class="download-btn">
-                    <a href="https://docs.google.com/spreadsheets/d/1aDIqm1APSnE8J9jjZTHfZdp59CVc1JkLQPYkKTBXAYA/edit#gid=0"
-                        class="main-btn" target="_blank">View Schedule</a>
-                </div>
-                <br><br>
-                <div class="events-wrapper">
-                    <div class="event">
-                        <div class="event-day">
-                            <div>
-                                <span class="day">11</span>
-                                <span class="year">Oct, 2019</span>
-                            </div>
-                        </div>
-                        <div class="event-content">
-                            <br><br>
-                            <h3 class="event-title">EVENTS FOR DAY 1</h3>
-                        </div>
-                    </div>
-                    {% for event in events_11_oct %}
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content"><br>
-                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
-                                {{ event.end_date_time }}</p>
-                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
-                            <p>Venue - {{ event.venue }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <div class="event">
-                        <div class="event-day">
-                            <div>
-                                <span class="day">12</span>
-                                <span class="year">Oct, 2019</span>
-                            </div>
-                        </div>
-                        <div class="event-content">
-                            <br><br>
-                            <h3 class="event-title">EVENTS FOR DAY 2</h3>
-                        </div>
-                    </div>
-                    {% for event in events_12_oct %}
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content"><br>
-                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
-                                {{ event.end_date_time }}</p>
-                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
-                            <p>Venue - {{ event.venue }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    <div class="event">
-                        <div class="event-day">
-                            <div>
-                                <span class="day">13</span>
-                                <span class="year">Oct, 2019</span>
-                            </div>
-                        </div>
-                        <div class="event-content">
-                            <br><br>
-                            <h3 class="event-title">EVENTS FOR DAY 3</h3>
-                        </div>
-                    </div>
-                    {% for event in events_13_oct %}
-                    <div class="event">
-                        <div class="event-hour"></div>
-                        <div class="event-content"><br>
-                            <p class="event-time"><i class="fa fa-clock-o"></i> {{ event.start_date_time }} -
-                                {{ event.end_date_time }}</p>
-                            <h3 class="event-title">{{ event.name }} - {{ event.subcategory.category.name }}</h3>
-                            <p>Venue - {{ event.venue }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
+                <div class="about-content" style="text-align: center;">
+                    Good Things Usually take time!
                 </div>
             </div>
         </div>
@@ -552,54 +479,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="{% static 'main_page/img/team_members/Ashish_Security Head.jpg' %}" alt="">
-                    </div>
-                    <div class="member-body">
-                        <div class="member-social">
-                            <a href="tel:8284020226"><i class="fa fa-phone"></i></a>
-                        </div>
-                        <div class="member-content">
-                            <h3>Ashish Swami</h3>
-                            <span>Security Head</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="{% static 'main_page/img/team_members/Mehul_SecurityHead.jpg' %}" alt="">
-                    </div>
-                    <div class="member-body">
-                        <div class="member-social">
-                            <a href="tel:8266971443"><i class="fa fa-phone"></i></a>
-                        </div>
-                        <div class="member-content">
-                            <h3>Mehul Kapadia</h3>
-                            <span>Security Head</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="{% static 'main_page/img/team_members/Mayank_DecorationHead.jpg' %}" alt="">
-                    </div>
-                    <div class="member-body">
-                        <div class="member-social">
-                            <a href="tel:9079350330"><i class="fa fa-phone"></i></a>
-                        </div>
-                        <div class="member-content">
-                            <h3>Mayank Raj</h3>
-                            <span>Decoration Head</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            
         </div>
     </div>
 </div>
@@ -623,8 +504,8 @@
             <div class="col-sm-4">
                 <div class="contact">
                     <h3>Phone</h3>
-                    <p>Overall Coordinator <br> Hardik Goyal</p>
-                    <p><a href="tel:8427012721">+91 842 7012 721</p>
+                    <p>Overall Coordinator <br> Ritesh Chaudhary</p>
+                    <p><a href="tel:9158725099">+91 915 8725 099</p>
                 </div>
             </div>
             <div class="col-sm-4">

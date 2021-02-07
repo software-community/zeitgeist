@@ -16,16 +16,14 @@ from django.http import HttpResponseServerError
 from .methods import *
 from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
+import csv
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 
 
 def main_page_home(request):
     our_sponsors = Our_Sponsor.objects.all().order_by('id')
     prev_sponsors = Prev_Sponsor.objects.all()
-    # # not working on server, hence commented
-    # events_11_oct = Event.objects.filter(start_date_time__day=11).order_by('start_date_time')
-    # events_12_oct = Event.objects.filter(start_date_time__day=12).order_by('start_date_time')
-    # events_13_oct = Event.objects.filter(start_date_time__day=13).order_by('start_date_time')
     events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
     events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
     events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
@@ -70,14 +68,14 @@ def register_as_participant(request):
             new_participant_registration.participant_code = (str(request.user.first_name)[
                 :4]).upper() + str(request.user.id) + 'Z19'
             new_participant_registration.save()
-            send_mail(
-                'Welcome to Zeitgeist 2k19',
-                'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k19. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
-                    new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nNote that this email is not for your participation in any event. To participate in events, you need to register for them on the Events page of Zeitgeist website. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                'zeitgeist.pr@iitrpr.ac.in',
-                [new_participant_registration.participating_user.email],
-                fail_silently=False,
-            )
+            # send_mail(
+            #     'Welcome to Zeitgeist 2k21',
+            #     'Dear ' + str(new_participant_registration.name) + '\n\nThank you for showing your interest in Zeitgeist 2k21. We are excited for your journey with us and wish you luck for all the events that you take part in.\n\nYour PARTICIPANT CODE is ' + str(
+            #         new_participant_registration.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k21, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nNote that this email is not for your participation in any event. To participate in events, you need to register for them on the Events page of Zeitgeist website. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+            #     'zeitgeist.pr@iitrpr.ac.in',
+            #     [new_participant_registration.participating_user.email],
+            #     fail_silently=False,
+            # )
             return render(request, 'main_page/register_as_participant_success.html')
     else:
         participant_registration_details_form = ParticipantRegistrationDetailsForm()
@@ -136,14 +134,14 @@ def register_for_event(request, event_id):
             return render(request, 'main_page/must_pay_for_subcategory_first.html', context)
         ParticipantHasParticipated.objects.create(
             participant=participant, event=event)
-        send_mail(
-            'Participation in ' + str(event.name) + ' in Zeitgeist 2k19',
-            'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
-                participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k19, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-            'zeitgeist.pr@iitrpr.ac.in',
-            [participant.participating_user.email],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     'Participation in ' + str(event.name) + ' in Zeitgeist 2k21',
+        #     'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
+        #         participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k21, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+        #     'zeitgeist.pr@iitrpr.ac.in',
+        #     [participant.participating_user.email],
+        #     fail_silently=False,
+        # )
         context = {'event': event}
         return render(request, 'main_page/register_in_solo_event_success.html', context)
 
@@ -193,15 +191,15 @@ def register_for_event(request, event_id):
                         participant=team_member, event=event)
                     TeamHasMember.objects.create(
                         team=new_team, member=team_member)
-                send_mail(
-                    'Participation in ' +
-                    str(event.name) + ' in Zeitgeist 2k19',
-                    'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(
-                        new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nTo get accomodation in IIT Ropar, please visit https://zeitgeist.org.in/accomodation/. To check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                    'zeitgeist.pr@iitrpr.ac.in',
-                    list_of_email_addresses_of_team_members,
-                    fail_silently=False,
-                )
+                # send_mail(
+                #     'Participation in ' +
+                #     str(event.name) + ' in Zeitgeist 2k21',
+                #     'Dear ' + str(new_team.name) + '\n\nThank you for participating in ' + str(event.name) + '. Each of you must carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled.\n\nYour TEAM CODE is ' + str(
+                #         new_team.team_code) + '. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+                #     'zeitgeist.pr@iitrpr.ac.in',
+                #     list_of_email_addresses_of_team_members,
+                #     fail_silently=False,
+                # )
                 context = {'event': event, 'team': new_team}
                 return render(request, 'main_page/register_in_group_event_success.html')
         else:
@@ -219,8 +217,8 @@ def register_for_event(request, event_id):
 @login_required
 def pay_for_subcategory(request, subcategory_id):
 
-    if subcategory_id != 19:
-        return render(request, 'main_page/registrations_closed.html')
+    # if subcategory_id != 19:
+    #     return render(request, 'main_page/registrations_closed.html')
 
     try:
         subcategory = Subcategory.objects.get(id=subcategory_id)
@@ -287,16 +285,16 @@ def weebhook(request):
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']
                     # str(participantpaspaid.paid_subcategory) inlcudes name of category also
-                    send_mail(
-                        'Payment confirmation of ' +
-                        str(participantpaspaid.paid_subcategory) +
-                        ' to Zeitgeist 2k19',
-                        'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) +
-                        ', is successful.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                        'zeitgeist.pr@iitrpr.ac.in',
-                        [participantpaspaid.participant.participating_user.email],
-                        fail_silently=False,
-                    )
+                    # send_mail(
+                    #     'Payment confirmation of ' +
+                    #     str(participantpaspaid.paid_subcategory) +
+                    #     ' to Zeitgeist 2k21',
+                    #     'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) +
+                    #     ', is successful.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+                    #     'zeitgeist.pr@iitrpr.ac.in',
+                    #     [participantpaspaid.participant.participating_user.email],
+                    #     fail_silently=False,
+                    # )
                 else:
                     # Payment was unsuccessful, mark it as failed in your database.
                     participantpaspaid.transaction_id = '0'
@@ -309,131 +307,6 @@ def weebhook(request):
 
 
 def payment_redirect(request):
-
-    return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
-
-
-@login_required
-def accomodation(request, number_of_people_to_accomodate=None):
-
-    # return render(request, 'main_page/registrations_closed.html')
-
-    try:
-        form_filling_participant = Participant.objects.get(participating_user=request.user)
-    except Participant.DoesNotExist:
-        return render(request, 'main_page/must_register_as_participant_first.html')
-
-    if number_of_people_to_accomodate:
-        AccomodationFormSet = formset_factory(form=AccomodationForm, extra=number_of_people_to_accomodate,
-                                                   max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
-        if request.method == 'POST':
-            accomodation_formset = AccomodationFormSet(request.POST)
-            if accomodation_formset.is_valid():
-                payable_amount = 0
-                for accomodation_form in accomodation_formset:
-                    ad1 = accomodation_form.cleaned_data.get('acco_for_day_one')
-                    ad2 = accomodation_form.cleaned_data.get('acco_for_day_two')
-                    ad3 = accomodation_form.cleaned_data.get('acco_for_day_three')
-                    meals_inc = accomodation_form.cleaned_data.get('include_meals')
-                    if meals_inc:
-                        if ad1 and ad2 and ad3:
-                            payable_amount = payable_amount + 1200
-                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
-                            payable_amount = payable_amount + 850
-                        else:
-                            payable_amount = payable_amount + 500
-                    else:
-                        if ad1 and ad2 and ad3:
-                            payable_amount = payable_amount + 700
-                        elif (ad1 and ad2) or (ad2 and ad3) or (ad1 and ad3):
-                            payable_amount = payable_amount + 500
-                        else:
-                            payable_amount = payable_amount + 300
-                purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
-                response = accomodation_payment_request(form_filling_participant.name, payable_amount, purpose,
-                                        request.user.email, form_filling_participant.contact_mobile_number.__str__())
-                if response['success']:
-                    url = response['payment_request']['longurl']
-                    payment_request_id = response['payment_request']['id']
-                    for accomodation_form in accomodation_formset:
-                        new_accomodation = accomodation_form.save(commit=False)
-                        new_accomodation.payment_request_id = payment_request_id
-                        new_accomodation.save()
-                    return redirect(url)
-                else:
-                    return HttpResponseServerError()
-        else:
-            accomodation_formset = AccomodationFormSet()
-        return render(request, 'main_page/accomodation_for.html', {'accomodation_modelformset': accomodation_formset, 'number_of_people_to_accomodate': number_of_people_to_accomodate})
-
-    else:
-        if request.method == 'POST':
-            number_of_people_to_accomodate = request.POST.get(
-                'number_of_people_to_accomodate')
-            return redirect('accomodation_for', number_of_people_to_accomodate=number_of_people_to_accomodate)
-        else:
-            return render(request, 'main_page/number_of_people_to_accomodate.html')
-
-
-def accomodation_weebhook(request):
-
-    if request.method == "POST":
-        data = request.POST.copy()
-        mac_provided = data.pop('mac')[0]
-
-        message = "|".join(v for k, v in sorted(
-            data.items(), key=lambda x: x[0].lower()))
-        mac_calculated = hmac.new(
-            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
-
-        if mac_provided == mac_calculated:
-            try:
-                accomodation_all = Accomodation.objects.filter(payment_request_id=data['payment_request_id'])
-                if data['status'] == "Credit":
-                    for accomodation in accomodation_all:
-                        # Payment was successful, mark it as completed in your database.
-                        accomodation.transaction_id = data['payment_id']
-                        accomodation.save()
-
-                        if accomodation.acco_for_day_one and accomodation.acco_for_day_two and accomodation.acco_for_day_three:
-                            days_and_meals = '11 OCT, 12 OCT, 13 OCT'
-                        elif accomodation.acco_for_day_one and accomodation.acco_for_day_two:
-                            days_and_meals = '11 OCT, 12 OCT'
-                        elif accomodation.acco_for_day_two and accomodation.acco_for_day_three:
-                            days_and_meals = '12 OCT, 13 OCT'
-                        elif accomodation.acco_for_day_one and accomodation.acco_for_day_three:
-                            days_and_meals = '11 OCT, 13 OCT'
-                        elif accomodation.acco_for_day_one:
-                            days_and_meals = '11 OCT'
-                        elif accomodation.acco_for_day_two:
-                            days_and_meals = '12 OCT'
-                        elif accomodation.acco_for_day_three:
-                            days_and_meals = '13 OCT'
-
-                        if accomodation.include_meals:
-                            days_and_meals = days_and_meals + ' INCLUDING MEALS'
-
-                        send_mail(
-                            'Payment confirmation of ACCOMODATION FOR ' +
-                            days_and_meals + ' to Zeitgeist 2k19',
-                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ACCOMODATION FOR ' + days_and_meals + ', is successful. Please carry your Photo ID Proof with you, otherwise your accomodation might stand cancelled. Have a happy and safe stay at IIT Ropar !\n\nTo check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                            'zeitgeist.pr@iitrpr.ac.in',
-                            [accomodation.participant.participating_user.email],
-                            fail_silently=False,
-                        )
-                else:
-                    for accomodation in accomodation_all:
-                        # Payment was unsuccessful, mark it as failed in your database.
-                        accomodation.transaction_id = '0'
-                        accomodation.save()
-            except Exception as err:
-                print(err)
-            return HttpResponse(status=200)
-        else:
-            return HttpResponse(status=400)
-
-
-def accomodation_payment_redirect(request):
 
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
@@ -465,7 +338,7 @@ def support_weebhook(request):
         message = "|".join(v for k, v in sorted(
             data.items(), key=lambda x: x[0].lower()))
         mac_calculated = hmac.new(
-            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
+            (os.getenv('PRIVATE_SALT')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
 
         if mac_provided == mac_calculated:
             try:
@@ -473,13 +346,13 @@ def support_weebhook(request):
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     support.transaction_id = data['payment_id']
-                    send_mail(
-                        'Donation to Zeitgeist 2k19',
-                        'Dear ' + str(request.user.get_full_name()) + '\n\nThank you for your donation to Zeitgeist 2k19. Awesome people like you are the main reason of success of Zeitgeist, and IIT Ropar as a whole. From the side of Zeitgeist 2k19 team, we thank you a lot for your valuable contribution.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
-                        'zeitgeist.pr@iitrpr.ac.in',
-                        [request.user.email],
-                        fail_silently=False,
-                    )
+                    # send_mail(
+                    #     'Donation to Zeitgeist 2k21',
+                    #     'Dear ' + str(request.user.get_full_name()) + '\n\nThank you for your donation to Zeitgeist 2k21. Awesome people like you are the main reason of success of Zeitgeist, and IIT Ropar as a whole. From the side of Zeitgeist 2k21 team, we thank you a lot for your valuable contribution.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+                    #     'zeitgeist.pr@iitrpr.ac.in',
+                    #     [request.user.email],
+                    #     fail_silently=False,
+                    # )
                 else:
                     # Payment was unsuccessful, mark it as failed in your database.
                     support.transaction_id = '0'
@@ -496,10 +369,6 @@ def support_payment_redirect(request):
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
 
-def swiggy_launchpad(request):
-
-    return render(request, 'main_page/swiggy_launchpad.html')
-
 
 def reach_us(request):
 
@@ -513,8 +382,7 @@ def under_maintainance(request):
     return render(request, 'main_page/under_maintainance.html')
 
 
-import csv
-from django.contrib.admin.views.decorators import staff_member_required
+
 
 
 @staff_member_required

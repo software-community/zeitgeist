@@ -65,27 +65,3 @@ class BaseTeamFormSet(BaseFormSet):
             team_members.add(team_member)
 
 
-class AccomodationForm(forms.ModelForm):
-
-    participant = forms.CharField(required=True, widget=forms.TextInput, label='Participant Code')
-
-    class Meta:
-        model = Accomodation
-        fields = ['participant', 'gender', 'acco_for_day_one', 'acco_for_day_two', 'acco_for_day_three', 'include_meals']
-
-    def clean_participant(self):
-        participant_code = self.cleaned_data['participant'].strip().upper()
-        try:
-            participant_code = Participant.objects.get(participant_code=participant_code)
-        except Participant.DoesNotExist:
-            raise forms.ValidationError(message="Please enter a valid Participant Code!", code="InvalidParticipantCode")
-        return participant_code
-
-    def clean(self):
-        cleaned_data = super().clean()
-        ad1 = cleaned_data.get("acco_for_day_one")
-        ad2 = cleaned_data.get("acco_for_day_two")
-        ad3 = cleaned_data.get("acco_for_day_three")
-        # if accomodation for no day is selected
-        if not (ad1 or ad2 or ad3):
-            raise forms.ValidationError("Atleast one of the three nights should be selected")

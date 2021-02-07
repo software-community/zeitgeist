@@ -1,0 +1,94 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'TSP/css/style.css' %}" rel="stylesheet">
+    <title>{% block title %} Zeitgeist{%endblock%} </title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'TSP/img/favicon.jpg' %}">
+</head>
+
+<body>
+
+    <!--NAVBAR-->
+    <header class="site-navbar" role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 text-left">
+                    <a href="{% url 'main_page_home' %}"><img src="{% static 'TSP/img/logo.png' %}"
+                            class='nav-brand-logo' alt="" srcset=""></a>
+                </div>
+
+                <div class="col-6 text-right">
+                    <!-- <a href="{% url 'TSP:result' %}" class="btn btn-secondary"
+                        style="margin-bottom: 3px;">TSP Result</a> -->
+
+                    {% if not user.is_authenticated %}
+                    <a href="{% provider_login_url 'google' %}?next={% url 'TSP:profile' %}" class="btn btn-secondary"
+                        style="margin-bottom: 3px;">
+                        <i class="fab fa-google"></i> Register | Login </a>
+                    {% else %}
+                    {% if person %}
+                    <a href="{% url 'TSP:profile' %}" class="btn btn-secondary" style="margin-bottom: 3px;"><i
+                            class="fas fa-user-circle"></i>PROFILE</a>
+                    {% endif %}
+                    <a href="{% url 'TSP:account_logout' %}?next={% url 'TSP:home' %}" class="btn btn-secondary"
+                        style="margin-bottom: 3px;"><i class="fas fa-sign-out-alt"></i>SIGN OUT</a>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    {% block body %}
+    {% endblock %}
+
+
+
+    <!--FOOTER-->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xs-12 about-company">
+                    <h2>About Us</h2>
+                    <p style="font-size:15px;">The Techno-Cultural festival of IIT ropar “Zeitgeist”, marks a 3 day
+                        journey consisting of various competitions spread across Robotics, Management, Coding,
+                        Designing, Gaming, Astronomy, Aero-modelling and Quizzing. Apart from
+                        the competitions, talks and workshops are few of the interesting events of the fest. The
+                        upcoming Zeitgeist is going to be held in April 2021.</p>
+
+                    <p><a href="https://www.facebook.com/advitiya.iitrpr/"><i
+                                class="fab fa-facebook-square fa-3x mr-1"></i></a><a
+                            href="https://twitter.com/advitiyaiitrpr?lang=en"><i
+                                class="fab fa-twitter-square fa-3x"></i></a><a
+                            href="https://www.instagram.com/advitiya_iitrpr/?hl=en"><i
+                                class="fab fa-instagram ml-1 fa-3x"></i></a></p>
+                </div>
+                <div class="col-lg-2 col-xs-12 about-company"></div>
+                <div class="col-lg-4 col-xs-12 location">
+                    <h4 class="mt-lg-0 mt-sm-4">Location</h4>
+                    <p> Birla Seeds Farms, Rupnagar, Punjab 140111</p>
+                    <p class="mb-0"><i class="fa fa-phone mr-3"></i>09306359202</p>
+                    <p><i class="fa fa-envelope-o mr-3"></i>zeitgeist.pr@iitrpr.ac.in</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://kit.fontawesome.com/a9af552946.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script src="{% static 'TSP/js/main.js' %}"></script>
+</body>
+
+</html>
