@@ -338,7 +338,7 @@ def support_weebhook(request):
         message = "|".join(v for k, v in sorted(
             data.items(), key=lambda x: x[0].lower()))
         mac_calculated = hmac.new(
-            (os.getenv('private_salt')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
+            (os.getenv('PRIVATE_SALT')).encode('utf-8'), message.encode('utf-8'), hashlib.sha1).hexdigest()
 
         if mac_provided == mac_calculated:
             try:

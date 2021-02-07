@@ -24,8 +24,8 @@ def payment_request(name, amount, purpose, email, mobile):
 
 
 def support_payment_request(name, amount, purpose, email, mobile):
-    api = Instamojo(api_key=os.getenv('api_auth_key'),
-                    auth_token=os.getenv('api_auth_token'))
+    api = Instamojo(api_key=os.getenv('API_AUTH_KEY'),
+                    auth_token=os.getenv('API_AUTH_TOKEN'))
 
     # Create a new Payment Request
     response = api.payment_request_create(
