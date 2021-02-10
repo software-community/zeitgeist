@@ -29,7 +29,7 @@ if os.environ.get('ENV')=='DEV':
 else:
     DEBUG=False
 
-ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
+ALLOWED_HOSTS = ["www.advitiya.in","advitiya.in","zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
 
 
 # Application definition
