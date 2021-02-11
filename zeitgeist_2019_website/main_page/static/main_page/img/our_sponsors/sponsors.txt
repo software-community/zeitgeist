@@ -1,7 +1,0 @@
-upload photo with its name as "name_of_sponsor.jpg". see other names for reference
-
-ratio of photo must be 16x9 (shorter in height) which can be set online at http://hornil.com/apps/photocrop/
-
-size of image should be strictly less than 100kb (preferrably 40kb) which can be reduced online at http://webresizer.com/resizer/
-
-continue to use the above site to reduce image size until it is around 40kb
