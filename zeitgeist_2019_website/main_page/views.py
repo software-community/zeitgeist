@@ -17,7 +17,7 @@ from .methods import *
 from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
 import csv
-from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.admin.views.decorators import staff_member_required,csrf_exempt
 # Create your views here.
 
 
@@ -265,7 +265,7 @@ def pay_for_event(request, event_id):
     else:
         return HttpResponseServerError()
 
-
+@csrf_exempt
 def weebhook(request):
 
     if request.method == "POST":
