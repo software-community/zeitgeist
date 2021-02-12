@@ -39,7 +39,7 @@ class Subcategory(models.Model):
 
     name = models.CharField(max_length=40, null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
-    participation_fees_per_person = models.IntegerField(blank=False)
+    
 
     def __str__(self):
         return str(self.name) + " - " + str(self.category)
@@ -53,10 +53,9 @@ class Event(models.Model):
     name = models.CharField(max_length=40, null=False, blank=False)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     link_to_rulebook = models.URLField(max_length=300)
-
+    participation_fees_per_person = models.IntegerField(blank=False)
     EVENT_TYPE_CHOICES = [
         ('Solo', 'Solo'),
-        ('Duet', 'Duet'),
         ('Group', 'Group'),
     ]
     event_type = models.CharField(
@@ -103,12 +102,12 @@ class Participant(models.Model):
 class ParticipantHasPaid(models.Model):
 
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
-    paid_subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    paid_event = models.ForeignKey(Event, on_delete=models.CASCADE)
     transaction_id = models.CharField(max_length=100, default='-1')
     payment_request_id = models.CharField(max_length=100, default='-1')
 
     def __str__(self):
-        return str(self.participant) + " - " + str(self.paid_subcategory)
+        return str(self.participant) + " - " + str(self.paid_event)
 
     class Meta:
         verbose_name_plural = 'Participant Has Paid'

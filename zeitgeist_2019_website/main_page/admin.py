@@ -47,7 +47,7 @@ class ParticipantHasPaidAdmin(admin.ModelAdmin):
 
     list_per_page = 1000
 
-    list_display = ['id', 'paid_subcategory', 'transaction_id',
+    list_display = ['id', 'paid_event', 'transaction_id',
                     'payment_request_id', 'get_participant_code', 'get_participant_name', 'get_participant_participating_user_email', 'get_participant_contact_mobile_number', 'get_participant_whatsapp_mobile_number', 'get_participant_college_name']
 
     def get_participant_code(self, obj):
