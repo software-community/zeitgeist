@@ -215,18 +215,18 @@ def register_for_event(request, event_id):
 
 
 @login_required
-def pay_for_subcategory(request, subcategory_id):
+def pay_for_event(request, event_id):
 
     # if subcategory_id != 19:
     #     return render(request, 'main_page/registrations_closed.html')
 
     try:
-        subcategory = Subcategory.objects.get(id=subcategory_id)
-    except Subcategory.DoesNotExist:
-        # if no such subcategory exists
+        event = Event.objects.get(id=event_id)
+    except Event.DoesNotExist:
+        # if no such Event exists
         return HttpResponseNotFound()
 
-    if subcategory.participation_fees_per_person == 0:
+    if event.participation_fees_per_person == 0:
         return HttpResponseNotFound()
 
     try:
@@ -238,17 +238,17 @@ def pay_for_subcategory(request, subcategory_id):
 
     try:
         participanthaspaid = ParticipantHasPaid.objects.get(
-            participant=participant, paid_subcategory=subcategory)
+            participant=participant, paid_event=event)
         if participanthaspaid.transaction_id == '0' or participanthaspaid.transaction_id == '-1':
             raise Exception("Previous payment was a failure !")
-        return render(request, 'main_page/already_paid_for_subcategory.html')
+        return render(request, 'main_page/already_registered_in_event.html')
     except:
         pass
 
-    purpose = str(subcategory.name).upper() + ' OF ' + str(subcategory.category.name).upper()
-    response = payment_request(participant.name, subcategory.participation_fees_per_person, purpose,
+    purpose = str(event.name).upper() + ' OF ' + str(event.subcategory.category.name).upper()
+    response = payment_request(participant.name, event.participation_fees_per_person, purpose,
                                request.user.email, participant.contact_mobile_number.__str__())
-
+    print(response)
     if response['success']:
         url = response['payment_request']['longurl']
         payment_request_id = response['payment_request']['id']
@@ -260,7 +260,7 @@ def pay_for_subcategory(request, subcategory_id):
         else:
             # transaction_id is set to be '-1' by default
             participanthaspaid = ParticipantHasPaid.objects.create(participant=participant,
-                                                                   paid_subcategory=subcategory, payment_request_id=payment_request_id)
+                                                                   paid_event=event, payment_request_id=payment_request_id)
         return redirect(url)
     else:
         return HttpResponseServerError()
@@ -284,17 +284,28 @@ def weebhook(request):
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']
-                    # str(participantpaspaid.paid_subcategory) inlcudes name of category also
-                    # send_mail(
-                    #     'Payment confirmation of ' +
-                    #     str(participantpaspaid.paid_subcategory) +
-                    #     ' to Zeitgeist 2k21',
-                    #     'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_subcategory) +
-                    #     ', is successful.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
-                    #     'zeitgeist.pr@iitrpr.ac.in',
-                    #     [participantpaspaid.participant.participating_user.email],
-                    #     fail_silently=False,
-                    # )
+                    event=participantpaspaid.paid_event
+                    ParticipantHasParticipated.objects.create(
+                        participant=participant, event=event)
+                    send_mail(
+                        'Participation in ' + str(event.name) + ' in Zeitgeist 2k21',
+                        'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
+                            participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k21, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+                        'zeitgeist.pr@iitrpr.ac.in',
+                        [participant.participating_user.email],
+                        fail_silently=False,
+                    )
+                    # str(participantpaspaid.paid_event) inlcudes name of category also
+                    send_mail(
+                        'Payment confirmation of ' +
+                        str(participantpaspaid.paid_event) +
+                        ' to Zeitgeist 2k21',
+                        'Dear ' + str(participantpaspaid.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ' + str(participantpaspaid.paid_event) +
+                        ', is successful.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
+                        'zeitgeist.pr@iitrpr.ac.in',
+                        [participantpaspaid.participant.participating_user.email],
+                        fail_silently=False,
+                    )
                 else:
                     # Payment was unsuccessful, mark it as failed in your database.
                     participantpaspaid.transaction_id = '0'

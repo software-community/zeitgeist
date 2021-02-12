@@ -60,16 +60,7 @@
 				</div>
 				{% endfor %}
 			</div>
-			{% if subcategory.participation_fees_per_person == 0 %}
-			<h4 class='title'><span style="color: crimson">This subcategory is for online events, and registrations for
-					these events are handled on the <a href="https://www.facebook.com/zeitgeist.iitrpr/"
-						style="color:#29339b">Facebook page of Zeitgeist</a>. Contact event heads for more
-					details.</span></h4>
-			{% else %}
-			<h4 class='title'><span style="color: crimson">Participation Fees:</span>
-				{{ subcategory.participation_fees_per_person }} INR per person</h4>
-			<a href="{% url 'pay_for_subcategory' subcategory.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
-			{% endif %}
+			
 		</div>
 		{% for event in events %}
 		<div id="event_id_{{ event.id }}" class="member-modal modal fade">
@@ -127,7 +118,20 @@
 										{{ event.venue }}
 									</p>
 									<br>
-									{% if event.subcategory.participation_fees_per_person == 0 %}
+									{% if event.participation_fees_per_person == 0 %}
+									<h4 class='title'><span style="color: crimson">Participation Fees:</span>
+										{{ event.participation_fees_per_person }} INR per person</h4>
+									<a href="{% url 'pay_for_event' event.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
+									<!-- <h4 class='title'><span style="color: crimson">registrations for
+											these events are handled on the <a href="https://www.facebook.com/zeitgeist.iitrpr/"
+												style="color:#29339b">Facebook page of Zeitgeist</a>. Contact event heads for more
+											details.</span></h4> -->
+									{% else %}
+									<h4 class='title'><span style="color: crimson">Participation Fees:</span>
+										{{ event.participation_fees_per_person }} INR per person</h4>
+									<a href="{% url 'pay_for_event' event.id %}" class='btn btn-danger btn-lg'>Pay Now!</a>
+									{% endif %}
+									<!-- {% if event.participation_fees_per_person == 0 %}
 									<h3 class="member-name">Regitrations for this event are handled on the <a
 											href="https://www.facebook.com/zeitgeist.iitrpr/"
 											style="color: crimson">Facebook page of Zeitgeist</a>. Please contact
@@ -135,6 +139,9 @@
 									{% else %}
 									<a href="{% url 'register_for_event' event.id %}"
 										class="btn btn-danger">Register</a>
+									{% endif %} -->
+									{% if event.event_type == 'Group' %}
+									<a href="" class='btn btn-danger btn-lg'>Make Team Now!</a>
 									{% endif %}
 								</div>
 							</div>

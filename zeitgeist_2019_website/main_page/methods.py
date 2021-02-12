@@ -5,7 +5,7 @@ import requests
 
 def payment_request(name, amount, purpose, email, mobile):
     api = Instamojo(api_key=os.getenv('API_AUTH_KEY'),
-                    auth_token=os.getenv('API_AUTH_TOKEN'))
+                    auth_token=os.getenv('API_AUTH_TOKEN'),endpoint='https://test.instamojo.com/api/1.1/')
 
     # Create a new Payment Request
     response = api.payment_request_create(
@@ -15,8 +15,8 @@ def payment_request(name, amount, purpose, email, mobile):
         send_email=True,
         email=email,
         phone=mobile,
-        redirect_url="https://zeitgeist.org.in/payment_redirect/",
-        webhook="https://zeitgeist.org.in/webhook/"
+        redirect_url="https://advitiya.in/payment_redirect/",
+        webhook="https://advitiya.in/webhook/"
     )
     return response
 

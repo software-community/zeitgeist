@@ -38,7 +38,7 @@ urlpatterns = [
     path('data-api/', include(router.urls)),
     path('reach_us/', views.reach_us, name='reach_us'),
 
-    path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
+    path('pay/<int:event_id>/', views.pay_for_event, name="pay_for_event"),
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
 
