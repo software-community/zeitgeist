@@ -17,7 +17,8 @@ from .methods import *
 from django.forms import formset_factory, modelformset_factory
 from django.http import HttpResponseNotFound
 import csv
-from django.contrib.admin.views.decorators import staff_member_required,csrf_exempt
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
