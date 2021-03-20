@@ -285,6 +285,9 @@ class NotificationAdmin(admin.ModelAdmin):
 
     list_display = [field.name for field in Notification._meta.get_fields()]
 
+class WebCountsAdmin(admin.ModelAdmin):
+    list_display = ['count']
+
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
@@ -314,3 +317,5 @@ admin.site.register(Event)
 # admin.site.register(TeamHasMember)
 admin.site.register(Support)
 # admin.site.register(Notification)
+
+admin.site.register(WebCounts, WebCountsAdmin)
