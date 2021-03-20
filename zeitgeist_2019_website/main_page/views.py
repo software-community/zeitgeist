@@ -1,3 +1,5 @@
+from django.contrib.admin.views.decorators import staff_member_required
+import csv
 import hashlib
 import hmac
 import os
@@ -26,11 +28,19 @@ def main_page_home(request):
     # events_11_oct = Event.objects.filter(start_date_time__day=11).order_by('start_date_time')
     # events_12_oct = Event.objects.filter(start_date_time__day=12).order_by('start_date_time')
     # events_13_oct = Event.objects.filter(start_date_time__day=13).order_by('start_date_time')
-    events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
-    events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
-    events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct}
+    events_11_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-11').order_by('start_date_time')
+    events_12_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-12').order_by('start_date_time')
+    events_13_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-13').order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'prev_sponsors': prev_sponsors,
+               'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct}
     return render(request, 'main_page/index.html', context)
+
+
+def workshop(request):
+    return render(request, 'main_page/workshop.html')
 
 
 def change_account(request):
@@ -247,7 +257,8 @@ def pay_for_subcategory(request, subcategory_id):
     except:
         pass
 
-    purpose = str(subcategory.name).upper() + ' OF ' + str(subcategory.category.name).upper()
+    purpose = str(subcategory.name).upper() + ' OF ' + \
+        str(subcategory.category.name).upper()
     response = payment_request(participant.name, subcategory.participation_fees_per_person, purpose,
                                request.user.email, participant.contact_mobile_number.__str__())
 
@@ -319,22 +330,27 @@ def accomodation(request, number_of_people_to_accomodate=None):
     # return render(request, 'main_page/registrations_closed.html')
 
     try:
-        form_filling_participant = Participant.objects.get(participating_user=request.user)
+        form_filling_participant = Participant.objects.get(
+            participating_user=request.user)
     except Participant.DoesNotExist:
         return render(request, 'main_page/must_register_as_participant_first.html')
 
     if number_of_people_to_accomodate:
         AccomodationFormSet = formset_factory(form=AccomodationForm, extra=number_of_people_to_accomodate,
-                                                   max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
+                                              max_num=number_of_people_to_accomodate, validate_max=True, min_num=number_of_people_to_accomodate, validate_min=True)
         if request.method == 'POST':
             accomodation_formset = AccomodationFormSet(request.POST)
             if accomodation_formset.is_valid():
                 payable_amount = 0
                 for accomodation_form in accomodation_formset:
-                    ad1 = accomodation_form.cleaned_data.get('acco_for_day_one')
-                    ad2 = accomodation_form.cleaned_data.get('acco_for_day_two')
-                    ad3 = accomodation_form.cleaned_data.get('acco_for_day_three')
-                    meals_inc = accomodation_form.cleaned_data.get('include_meals')
+                    ad1 = accomodation_form.cleaned_data.get(
+                        'acco_for_day_one')
+                    ad2 = accomodation_form.cleaned_data.get(
+                        'acco_for_day_two')
+                    ad3 = accomodation_form.cleaned_data.get(
+                        'acco_for_day_three')
+                    meals_inc = accomodation_form.cleaned_data.get(
+                        'include_meals')
                     if meals_inc:
                         if ad1 and ad2 and ad3:
                             payable_amount = payable_amount + 1200
@@ -349,9 +365,11 @@ def accomodation(request, number_of_people_to_accomodate=None):
                             payable_amount = payable_amount + 500
                         else:
                             payable_amount = payable_amount + 300
-                purpose = 'ACCOMODATION FOR ' + str(number_of_people_to_accomodate) + ' WORTH INR ' + str(payable_amount)
+                purpose = 'ACCOMODATION FOR ' + \
+                    str(number_of_people_to_accomodate) + \
+                    ' WORTH INR ' + str(payable_amount)
                 response = accomodation_payment_request(form_filling_participant.name, payable_amount, purpose,
-                                        request.user.email, form_filling_participant.contact_mobile_number.__str__())
+                                                        request.user.email, form_filling_participant.contact_mobile_number.__str__())
                 if response['success']:
                     url = response['payment_request']['longurl']
                     payment_request_id = response['payment_request']['id']
@@ -388,7 +406,8 @@ def accomodation_weebhook(request):
 
         if mac_provided == mac_calculated:
             try:
-                accomodation_all = Accomodation.objects.filter(payment_request_id=data['payment_request_id'])
+                accomodation_all = Accomodation.objects.filter(
+                    payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     for accomodation in accomodation_all:
                         # Payment was successful, mark it as completed in your database.
@@ -416,7 +435,8 @@ def accomodation_weebhook(request):
                         send_mail(
                             'Payment confirmation of ACCOMODATION FOR ' +
                             days_and_meals + ' to Zeitgeist 2k19',
-                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ACCOMODATION FOR ' + days_and_meals + ', is successful. Please carry your Photo ID Proof with you, otherwise your accomodation might stand cancelled. Have a happy and safe stay at IIT Ropar !\n\nTo check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
+                            'Dear ' + str(accomodation.participant.name) + '\n\nThis is to confirm with you that your payment for the purpose, ACCOMODATION FOR ' + days_and_meals +
+                            ', is successful. Please carry your Photo ID Proof with you, otherwise your accomodation might stand cancelled. Have a happy and safe stay at IIT Ropar !\n\nTo check out how to reach IIT Ropar, please visit https://www.zeitgeist.org.in/reach_us/.\n\nRegards\nZeitgeist 2k19 Public Relations Team',
                             'zeitgeist.pr@iitrpr.ac.in',
                             [accomodation.participant.participating_user.email],
                             fail_silently=False,
@@ -445,11 +465,12 @@ def support(request):
         payable_amount = request.POST.get('amount')
         purpose = 'SUPPORT TO ZEITGEIST WORTH INR ' + str(payable_amount)
         response = support_payment_request(request.user.get_full_name(), payable_amount, purpose,
-                        request.user.email, None)
+                                           request.user.email, None)
         if response['success']:
             url = response['payment_request']['longurl']
             payment_request_id = response['payment_request']['id']
-            Support.objects.create(donating_user=request.user, donation_amount=payable_amount, payment_request_id=payment_request_id)
+            Support.objects.create(
+                donating_user=request.user, donation_amount=payable_amount, payment_request_id=payment_request_id)
             return redirect(url)
         else:
             return HttpResponseServerError()
@@ -469,7 +490,8 @@ def support_weebhook(request):
 
         if mac_provided == mac_calculated:
             try:
-                support = Support.objects.get(payment_request_id=data['payment_request_id'])
+                support = Support.objects.get(
+                    payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     support.transaction_id = data['payment_id']
@@ -513,19 +535,15 @@ def under_maintainance(request):
     return render(request, 'main_page/under_maintainance.html')
 
 
-import csv
-from django.contrib.admin.views.decorators import staff_member_required
-
-
 @staff_member_required
 def send_email_all(request):
 
     participants = Participant.objects.all()
     emails = []
 
-    for  participant in participants:
+    for participant in participants:
         emails.append(participant.participating_user.email)
-    
+
     emails = list(set(emails))
 
     response = HttpResponse(content_type='text/csv')

@@ -32,26 +32,35 @@ router.register(r'notification', api.NotificationViewSet)
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
-    path('register_as_participant/', views.register_as_participant, name="register_as_participant"),
+    path('workshop/', views.workshop, name="workshop"),
+    path('register_as_participant/', views.register_as_participant,
+         name="register_as_participant"),
     path('events/', views.main_page_events, name="main_page_events"),
-    path('register/<int:event_id>/', views.register_for_event, name="register_for_event"),
+    path('register/<int:event_id>/',
+         views.register_for_event, name="register_for_event"),
     path('swiggy_launchpad/', views.swiggy_launchpad, name='swiggy_launchpad'),
     path('data-api/', include(router.urls)),
     path('reach_us/', views.reach_us, name='reach_us'),
 
-    path('pay/<int:subcategory_id>/', views.pay_for_subcategory, name="pay_for_subcategory"),
+    path('pay/<int:subcategory_id>/',
+         views.pay_for_subcategory, name="pay_for_subcategory"),
     path('webhook/', csrf_exempt(views.weebhook), name="webhook"),
     path('payment_redirect/', views.payment_redirect, name="payment_redirect"),
 
     path('support/', views.support, name="support"),
-    path('support_weebhook/', csrf_exempt(views.support_weebhook), name="support_weebhook"),
-    path('support_payment_redirect/', views.support_payment_redirect, name="support_payment_redirect"),
+    path('support_weebhook/', csrf_exempt(views.support_weebhook),
+         name="support_weebhook"),
+    path('support_payment_redirect/', views.support_payment_redirect,
+         name="support_payment_redirect"),
 
     path('accomodation/', views.accomodation, name='accomodation'),
-    path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook), name='accomodation_weebhook'),
-    path('accomodation_payment_redirect/', views.accomodation_payment_redirect, name='accomodation_payment_redirect'),
+    path('accomodation_weebhook/', csrf_exempt(views.accomodation_weebhook),
+         name='accomodation_weebhook'),
+    path('accomodation_payment_redirect/', views.accomodation_payment_redirect,
+         name='accomodation_payment_redirect'),
 
-    path('accomodation_for/<int:number_of_people_to_accomodate>/', views.accomodation, name='accomodation_for'),
+    path('accomodation_for/<int:number_of_people_to_accomodate>/',
+         views.accomodation, name='accomodation_for'),
 
     path('send-mail/', views.send_email_all, name='send_email_all'),
 
@@ -61,27 +70,35 @@ urlpatterns = [
 
     # just to define account_email, account_login, account_signup, socialaccount_login, socialaccount_signup
     # to resolve internal server error issue
-    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="account_login"),
-    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="account_signup"),
-    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="socialaccount_login"),
-    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login', permanent=True), name="socialaccount_signup"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login',
+                                                        permanent=True), name="account_login"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login',
+                                                        permanent=True), name="account_signup"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login',
+                                                        permanent=True), name="socialaccount_login"),
+    path('accounts/google/login/', RedirectView.as_view(pattern_name='google_login',
+                                                        permanent=True), name="socialaccount_signup"),
 
     # define the logout URL
-    path('accounts/google/logout/', auth_views.LogoutView.as_view(), name = "google_logout"),
+    path('accounts/google/logout/',
+         auth_views.LogoutView.as_view(), name="google_logout"),
 
     # just to define account_logout
     # to resolve internal server error issue
-    path('accounts/google/logout/', auth_views.LogoutView.as_view(), name = "account_logout"),
+    path('accounts/google/logout/',
+         auth_views.LogoutView.as_view(), name="account_logout"),
 
     # for account change, which logs the user out and then redirects to account_login
     path('accounts/change_account/', views.change_account, name="account_email"),
 
     # if somehow django redirects to accounts/logout
     # due to internal failures
-    path('accounts/logout/', RedirectView.as_view(pattern_name='google_logout', permanent=True), name="go_to_google_logout"),
+    path('accounts/logout/', RedirectView.as_view(pattern_name='google_logout',
+                                                  permanent=True), name="go_to_google_logout"),
 
     # if somehow django redirects to accounts/login
     # due to internal failures
     # it might occur when accounts/google/login fails and hence redirects to accounts/login
-    path('accounts/login/', RedirectView.as_view(pattern_name='google_login', permanent=False), name="go_to_google_login"),
+    path('accounts/login/', RedirectView.as_view(pattern_name='google_login',
+                                                 permanent=False), name="go_to_google_login"),
 ]
