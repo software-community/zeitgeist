@@ -17,6 +17,10 @@ class Our_SponsorAdmin(admin.ModelAdmin):
 
     list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
 
+class Media_PartnerAdmin(admin.ModelAdmin):
+
+    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+
 
 class Prev_SponsorAdmin(admin.ModelAdmin):
 
@@ -286,6 +290,7 @@ class NotificationAdmin(admin.ModelAdmin):
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
 admin.site.register(Our_Sponsor, Our_SponsorAdmin)
+admin.site.register(Media_Partner, Media_PartnerAdmin)
 admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
 
 admin.site.register(Participant, ParticipantAdmin)
