@@ -2,87 +2,90 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Zeitgeist</title>
-    <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
-    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
-    <link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}" />
-    {% if event %}
-    <style>
-      .asteriskField {
-        display: none;
-      }
-    </style>
-    {% endif %}
-  </head>
 
-  <body>
-    <header id="header" class="transparent-navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <div class="navbar-brand">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zeitgeist</title>
+  <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
+  <link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}" />
+  {% if event %}
+  <style>
+    .asteriskField {
+      display: none;
+    }
+  </style>
+  {% endif %}
+</head>
+
+<body>
+  <header id="header" class="transparent-navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">
+          <a class="logo" href="{% url 'main_page_home' %}">
+            <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+            <img class="logo-alt-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+          </a>
+        </div>
+        <button class="navbar-toggle">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+      <nav id="nav">
+        <ul class="main-nav nav navbar-nav navbar-right">
+          <li><a href="{% url 'main_page_home' %}">Home</a></li>
+          <!-- <li><a href="{% url 'main_page_events' %}">Events</a></li> -->
+          <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
+          <li><a href="{% url 'workshop' %}">Workshops</a></li>
+          <li><a href="/#our_sponsors">Sponsors</a></li>
+          <!-- <li><a href="{% url 'TSP:home' %}">TSP</a></li> -->
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'account_logout' %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url 'account_login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  {% block content %} {% endblock %}
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <p style="text-align: center">Made with <i class="fa fa-heart-o"></i> by Software Community, IIT Ropar</p>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-brand">
             <a class="logo" href="{% url 'main_page_home' %}">
-              <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
-              <img class="logo-alt-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+              <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" /><br />
             </a>
           </div>
-          <button class="navbar-toggle">
-            <i class="fa fa-bars"></i>
-          </button>
         </div>
-        <nav id="nav">
-          <ul class="main-nav nav navbar-nav navbar-right">
-            <li><a href="{% url 'main_page_home' %}">Home</a></li>
-            <!-- <li><a href="{% url 'main_page_events' %}">Events</a></li> -->
-            <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
-            <li><a href="/#our_sponsors">Sponsors</a></li>
-            <!-- <li><a href="{% url 'TSP:home' %}">TSP</a></li> -->
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'account_logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'account_login' %}">Login</a></li>
-            {% endif %}
-          </ul>
-        </nav>
-      </div>
-    </header>
-    {% block content %} {% endblock %}
-    <footer id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <p style="text-align: center">Made with <i class="fa fa-heart-o"></i> by Software Community, IIT Ropar</p>
-          </div>
-          <div class="col-md-4">
-            <div class="footer-brand">
-              <a class="logo" href="{% url 'main_page_home' %}">
-                <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" /><br />
-              </a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="contact-social">
-              <a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i class="fa fa-facebook"></i></a>
-              <a href="https://twitter.com/zeitgeist_rpr" target="_blank"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i class="fa fa-instagram"></i></a>
-            </div>
+        <div class="col-md-4">
+          <div class="contact-social">
+            <a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/zeitgeist_rpr" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i class="fa fa-instagram"></i></a>
           </div>
         </div>
       </div>
-    </footer>
-    <script src="{% static 'main_page/js/jquery.min.js' %}"></script>
-    <script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
-    <script src="{% static 'main_page/js/main.js' %}"></script>
-  </body>
+    </div>
+  </footer>
+  <script src="{% static 'main_page/js/jquery.min.js' %}"></script>
+  <script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
+  <script src="{% static 'main_page/js/main.js' %}"></script>
+</body>
+
 </html>
