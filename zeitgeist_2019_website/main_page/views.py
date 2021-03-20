@@ -23,11 +23,13 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def main_page_home(request):
-    WebCounts.increment()
     our_sponsors = Our_Sponsor.objects.all().order_by('id')
     media_partners = Media_Partner.objects.all()
     prev_sponsors = Prev_Sponsor.objects.all()
-    web_counts = WebCounts.objects.first()
+    if WebCounts.objects.count()>0:
+        web_counts = WebCounts.increment()
+    else:
+        web_counts=0
     events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
     events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
     events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')

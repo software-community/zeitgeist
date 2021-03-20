@@ -206,6 +206,7 @@ class WebCounts(models.Model):
         count = WebCounts.objects.first()
         count.count+=1
         count.save()
+        return count.count
 
     class Meta:
         verbose_name_plural = 'Website Counts'
