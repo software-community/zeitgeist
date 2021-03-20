@@ -26,11 +26,19 @@ def main_page_home(request):
     our_sponsors = Our_Sponsor.objects.all().order_by('id')
     media_partners = Media_Partner.objects.all()
     prev_sponsors = Prev_Sponsor.objects.all()
-    events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
-    events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
-    events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct}
+    events_11_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-11').order_by('start_date_time')
+    events_12_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-12').order_by('start_date_time')
+    events_13_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-13').order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'media_partners': media_partners, 'prev_sponsors': prev_sponsors,
+               'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct}
     return render(request, 'main_page/index.html', context)
+
+
+def workshop(request):
+    return render(request, 'main_page/workshop.html')
 
 
 def change_account(request):
@@ -247,7 +255,8 @@ def pay_for_event(request, event_id):
     except:
         pass
 
-    purpose = str(event.name).upper() + ' OF ' + str(event.subcategory.category.name).upper()
+    purpose = str(event.name).upper() + ' OF ' + \
+        str(event.subcategory.category.name).upper()
     response = payment_request(participant.name, event.participation_fees_per_person, purpose,
                                request.user.email, participant.contact_mobile_number.__str__())
     print(response)
@@ -266,6 +275,7 @@ def pay_for_event(request, event_id):
         return redirect(url)
     else:
         return HttpResponseServerError()
+
 
 @csrf_exempt
 def weebhook(request):
@@ -286,11 +296,12 @@ def weebhook(request):
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     participantpaspaid.transaction_id = data['payment_id']
-                    event=participantpaspaid.paid_event
+                    event = participantpaspaid.paid_event
                     ParticipantHasParticipated.objects.create(
                         participant=participant, event=event)
                     send_mail(
-                        'Participation in ' + str(event.name) + ' in Zeitgeist 2k21',
+                        'Participation in ' +
+                        str(event.name) + ' in Zeitgeist 2k21',
                         'Dear ' + str(participant.name) + '\n\nThank you for participating in ' + str(event.name) + '. Please carry a Photo ID Proof with you for your onsite registration, otherwise your registration might get cancelled. We wish you best of luck. Give your best and stand a chance to win exciting prizes !!!\n\nReminder - Your PARTICIPANT CODE is ' + str(
                             participant.participant_code) + '. If you are also a Campus Ambassador for Zeitgeist 2k21, your PARTICIPANT CODE is also the same as your CAMPUS AMBASSADOR CODE.\n\nRegards\nZeitgeist 2k21 Public Relations Team',
                         'zeitgeist.pr@iitrpr.ac.in',
@@ -331,11 +342,12 @@ def support(request):
         payable_amount = request.POST.get('amount')
         purpose = 'SUPPORT TO ZEITGEIST WORTH INR ' + str(payable_amount)
         response = support_payment_request(request.user.get_full_name(), payable_amount, purpose,
-                        request.user.email, None)
+                                           request.user.email, None)
         if response['success']:
             url = response['payment_request']['longurl']
             payment_request_id = response['payment_request']['id']
-            Support.objects.create(donating_user=request.user, donation_amount=payable_amount, payment_request_id=payment_request_id)
+            Support.objects.create(
+                donating_user=request.user, donation_amount=payable_amount, payment_request_id=payment_request_id)
             return redirect(url)
         else:
             return HttpResponseServerError()
@@ -355,7 +367,8 @@ def support_weebhook(request):
 
         if mac_provided == mac_calculated:
             try:
-                support = Support.objects.get(payment_request_id=data['payment_request_id'])
+                support = Support.objects.get(
+                    payment_request_id=data['payment_request_id'])
                 if data['status'] == "Credit":
                     # Payment was successful, mark it as completed in your database.
                     support.transaction_id = data['payment_id']
@@ -382,7 +395,6 @@ def support_payment_redirect(request):
     return render(request, 'main_page/payment_details.html', {'payment_status': request.GET['payment_status'], 'payment_request_id': request.GET['payment_request_id'], 'payment_id': request.GET['payment_id']})
 
 
-
 def reach_us(request):
 
     return render(request, 'main_page/reach_us.html')
@@ -395,18 +407,15 @@ def under_maintainance(request):
     return render(request, 'main_page/under_maintainance.html')
 
 
-
-
-
 @staff_member_required
 def send_email_all(request):
 
     participants = Participant.objects.all()
     emails = []
 
-    for  participant in participants:
+    for participant in participants:
         emails.append(participant.participating_user.email)
-    
+
     emails = list(set(emails))
 
     response = HttpResponse(content_type='text/csv')
