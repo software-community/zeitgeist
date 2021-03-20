@@ -156,6 +156,14 @@ class Our_Sponsor(models.Model):
     class Meta:
         verbose_name_plural = 'Our Sponsor'
 
+class Media_Partner(models.Model):
+
+    name_of_photo_in_static_files = models.CharField(max_length=15, blank=False, null=False)
+    link_to_sponsor = models.URLField(max_length=300)
+
+    class Meta:
+        verbose_name_plural = 'Media Partner'
+
 
 class Prev_Sponsor(models.Model):
 
