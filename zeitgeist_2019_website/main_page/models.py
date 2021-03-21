@@ -197,3 +197,16 @@ class Notification(models.Model):
 
         super().save(*args, **kwargs)
         sendNotification(self.title, self.content)
+
+class WebCounts(models.Model):
+
+    count = models.IntegerField(blank=False, null=False)
+
+    def increment():
+        count = WebCounts.objects.first()
+        count.count+=1
+        count.save()
+        return count.count
+
+    class Meta:
+        verbose_name_plural = 'Website Counts'

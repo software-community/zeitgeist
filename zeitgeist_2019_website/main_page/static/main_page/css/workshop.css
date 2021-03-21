@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Berkshire+Swash&family=Merienda&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    max-width:100vw;
+    min-height:100vh;
+    background:linear-gradient(to top left , rgb(0, 69, 126) ,rgb(116, 14, 14));
+
+}
+body header{
+    margin-top:20px;
+    height:15vh
+}
+
+.workshop_main > h1{
+    font-family: 'Merienda', cursive;
+    letter-spacing: 10px;
+    font-size:90px;
+    text-align: center;
+    color:azure;
+    animation: logo_animation 4s infinite;
+}
+
+.workshop_nav a:hover{
+    color: aliceblue;
+    text-decoration: none;
+}
+
+@keyframes logo_animation{
+    0%{
+        color: rgb(255, 253, 158);
+    }
+    25%{
+        color: rgb(255, 187, 0);
+    }
+    75%{
+        color:rgb(255, 170, 121)
+    }
+    100%{
+        color:rgb(255, 253, 158);
+    }
+}
+
+.workshop_btn:hover{
+    transform:scale(1.05)
+}
+
+.text-box-ca{
+
+    width:84vw;
+    min-height:30vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background: linear-gradient(to top right, rgba(223, 255, 251, 0.103), rgba(215, 255, 209, 0.377));
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    margin-top:40px;
+
+}
+.text-box-ca > h6{
+    width:90%;
+    font-family: 'Baloo Bhaina 2', cursive;
+    font-weight: normal;
+    letter-spacing:1.5px;
+    line-height: 1.5;
+    text-align: center;
+   color: rgb(255, 255, 255);
+
+}
+
+.workshop_links{
+    margin:10vh auto;
+    
+    width:90vw;
+    display:flex;
+    justify-content:space-evenly
+}
+
+.workshop_links>a:hover{
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.workshop_btn{
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(151, 13, 128);
+    background:linear-gradient(rgba(255, 128, 128, 0.267),rgba(122, 120, 255, 0.288));
+    border-radius:20px;
+    padding: 10px;
+    font-size:18px;
+}
+
+#workshop_explore_wrapper{
+  padding: 30px;
+    min-height:100vh;
+    margin-top: 20px;
+    max-width:100vw;
+    height: fit-content;
+}
+#workshop_explore_wrapper >h4{
+    color: rgb(0, 255, 179);
+
+    text-align: center;
+    font-size:30px;
+    font-family: 'Baloo Bhaina 2', cursive;
+    letter-spacing: 5px;
+   
+}
+
+
+#workshop_explore{
+    max-width:94vw;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    flex-direction:row;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.workshop_image_wrap{
+    width:400px;
+    height:250px;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.workshop_logo{
+   
+    width:400px;
+    height:250px;
+    
+}
+
+.workshop_image_text{
+    width:400px;
+    height:250px;
+    position: absolute;
+    top:0;
+    left:0;
+    background: rgba(0, 94, 94, 0.863);
+    color: white;
+    visibility:hidden;
+    opacity: 0;
+    transition: opacity .2s, visibility .2s;
+    text-align:center;
+    letter-spacing:1px;
+
+}
+
+.workshop_image_wrap:hover .workshop_image_text{
+    visibility:visible;
+    opacity: 1;
+}
+
+.workshop_benifits{
+    min-height: 100vh;
+    width: 90vw;
+    margin: 30px auto;
+    color: whitesmoke;
+    letter-spacing: 1px;
+    line-height:2;
+    padding-top: 50px;
+}
+.workshop_benifits >ul{
+    list-style:square;
+    margin-top:100px;
+}
+.workshop_benifits>ul>li>ul>li{
+    margin-left: 100px;
+}
+.workshop_benifits > h4{
+    color: rgb(0, 255, 179);
+
+    text-align: center;
+    font-size:20px;
+    font-family: 'Baloo Bhaina 2', cursive;
+    letter-spacing: 3px;
+
+}
+
+@media only screen and (max-width:1400px){
+    
+.workshop_image_wrap{
+    width:300px;
+    height:200px;
+    
+}
+
+.workshop_logo{
+   
+    width:300px;
+    height:200px;
+    
+}
+
+.workshop_image_text{
+    width:300px;
+    height:200px;
+    
+}
+}
+
+@media only screen and (max-width:1060px){
+    .workshop_main > h1{
+        font-size:60px;
+    }
+    .text-box-ca > h6{
+        margin: 40px auto;      
+    }
+    .workshop_image_wrap{
+        width:400px;
+        height:250px;
+        
+    }
+    
+    .workshop_logo{
+       
+        width:400px;
+        height:250px;
+        
+    }
+    
+    .workshop_image_text{
+        width:400px;
+        height:250px;
+        
+    }
+}
+
+@media only screen and (max-width:840px){
+    .workshop_main > h1{
+        font-size:30px;
+    }
+    .workshop_btn{
+        
+        padding: 5px;
+        font-size:15px
+    }
+    .text-box-ca > h6{
+        font-size:0.8rem;
+
+    }
+    .workshop_image_wrap{
+        width:90vw;
+        height:60vw;
+        
+    }
+    
+    .workshop_logo{
+       
+        width:90vw;
+        height:60vw;
+        
+    }
+    
+    .workshop_image_text{
+        width:90vw;
+        height:60vw;
+        
+    }
+   
+}
+
+@media only screen and (max-width:590px){
+    .workshop_main > h1{
+        font-size:20px;
+    }
+    .workshop_btn{
+        
+        padding: 5px;
+        font-size:15px
+    }
+    .text-box-ca{
+
+        max-width:96vw; 
+        
+    }
+    .text-box-ca > h6{
+        width:94%;
+        
+    }
+    #workshop_explore_wrapper >h4{
+      
+        font-size:16px;
+    
+    }
+    .workshop_benifits >ul{
+      
+        margin-top:50px;
+        font-size: 0.8rem;
+    }
+    .workshop_benifits > h4{
+   
+        font-size:15px;
+      
+    
+    }
+    
+}
+@media only screen and (max-width:470px){
+    .workshop_main > h1{
+        font-size:15px;
+        margin-top: -10px;
+    }
+    .text-box-ca{
+
+        margin-top: 20px;
+        min-height: none;
+    }
+    .text-box-ca > h6{
+        font-size:0.7rem;
+
+    }
+    .workshop_btn{
+        
+        padding: 3px;
+        font-size:13px
+    }
+}
