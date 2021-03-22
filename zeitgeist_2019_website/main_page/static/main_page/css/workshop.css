@@ -15,6 +15,10 @@ body header{
     height:15vh
 }
 
+#workshop_explore_wrapper>center>a{
+   transform: translate(2);
+}
+
 .workshop_main > h1{
     font-family: 'Merienda', cursive;
     letter-spacing: 10px;
@@ -74,7 +78,7 @@ body header{
 
 .workshop_links{
     margin:10vh auto;
-    
+  
     width:90vw;
     display:flex;
     justify-content:space-evenly
@@ -83,6 +87,7 @@ body header{
 .workshop_links>a:hover{
     text-decoration: none;
     transform: scale(1.05);
+
 }
 
 .workshop_btn{
