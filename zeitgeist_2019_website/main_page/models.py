@@ -47,6 +47,56 @@ class Subcategory(models.Model):
     class Meta:
         verbose_name_plural = 'Subcategories'
 
+class Cat(models.Model):
+    category = models.CharField(blank=False, null=False,max_length=200)
+
+    class Meta:
+        verbose_name_plural = "Event Categories"
+
+    def __str__(self):
+        return str(self.category)
+
+class SubCat(models.Model):
+    category = models.ForeignKey(Cat, models.SET_NULL, blank=True, null=True)
+    sub_category = models.CharField(blank=False, null=False,max_length=200)
+
+    class Meta:
+        verbose_name_plural = "Event Sub Categories"
+
+    def __str__(self):
+        return str(self.sub_category)
+
+class Events(models.Model):
+    serial = models.IntegerField(blank=False)
+    category = models.ForeignKey(SubCat, models.SET_NULL, blank=True, null=True)
+    name = models.CharField(max_length=40, null=False, blank=False)
+    code = models.CharField(max_length=20, null=False, blank=False, unique=True)
+    EVENT_TYPE_CHOICES = [
+        ('Solo', 'Solo'),
+        ('Group', 'Group'),
+    ]
+    event_type = models.CharField(
+        max_length=5,
+        choices=EVENT_TYPE_CHOICES,
+        null=False,
+        blank=False,
+    )
+    rulebook = models.CharField(max_length=300)
+    poster = models.CharField(max_length=300)
+    class Meta:
+        verbose_name_plural = 'Events List'
+        
+class Registration(models.Model):
+    user_unique_id = models.CharField(blank=False, null=False,max_length=200)
+    first_name = models.CharField(blank=False, null=False,max_length=200)
+    last_name = models.CharField(blank=False, null=False,max_length=200)
+    email = models.CharField(blank=False, null=False,max_length=200)
+    college_name = models.CharField(blank=False, null=False,max_length=200)
+    events=models.CharField(max_length=500)
+    mobile = models.CharField(blank=False, null=False,max_length=15)
+
+    class Meta:
+        verbose_name_plural = "Registrations"
 
 class Event(models.Model):
 

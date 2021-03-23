@@ -19,6 +19,9 @@ from django.http import HttpResponseNotFound
 import csv
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
+import random,string
+
+import json
 # Create your views here.
 
 
@@ -33,7 +36,7 @@ def main_page_home(request):
     events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
     events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
     events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts}
+    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts}    
     return render(request, 'main_page/index.html', context)
 
 
@@ -95,7 +98,7 @@ def register_as_participant(request):
 
 
 def main_page_events(request):
-
+    '''
     events_data = {}
     categories = Category.objects.all()
     for category in categories:
@@ -104,11 +107,65 @@ def main_page_events(request):
         for subcategory in subcategories:
             events_data[category][subcategory] = subcategory.event_set.all()
     return render(request, 'main_page/events.html', {'events_data': events_data})
+    '''
+    events=Events.objects.all().order_by('serial')
+    cats=Cat.objects.all()
+    subcats=SubCat.objects.all()
+    already_registered=[]
+    if request.user.is_authenticated:
+        email = str(request.user.email)
+        if (Registration.objects.all().count()>0 and Registration.objects.filter(email=email).count()>0):
+            participant = Registration.objects.get(email=email)
+            already_registered = json.loads(participant.events)
+            
+    return render(request,'main_page/events1.html', {'events':events,'cats':cats,'subcats':subcats,'already_registered':already_registered})
 
+@login_required   
+def profile(request):
+    name = str(request.user.first_name) + ' ' + str(request.user.last_name)
+    email = str(request.user.email)
+    if (Registration.objects.all().count()>0 and Registration.objects.filter(email=email).count()>0):
+        participant = Registration.objects.get(email=email)
+        college_name = participant.college_name
+        mobile = participant.mobile
+        user_unique_id = participant.user_unique_id
+        events_code = json.loads(participant.events)
+        events=[]
+        for i in range(1,len(events_code)):
+            events.append(Events.objects.get(code=events_code[i]).name)
+        return render(request,'main_page/profile.html',{'name':name,'email':email,'college_name':college_name,'user_unique_id':user_unique_id,'mobile':mobile,'events':events})
+    else:
+        return render(request,'main_page/profile_complete.html',{'name':name,'email':email})
+
+@login_required   
+def add_registration(request):
+
+        first_name = str(request.user.first_name)
+        last_name = str(request.user.last_name)
+        email = str(request.user.email)
+        college_name = request.POST.get('college_name')
+        mobile = request.POST.get('mobile')
+
+        Registration.objects.create (first_name=first_name, last_name=last_name, email=email, college_name=college_name, events=json.dumps([1]),mobile=mobile,user_unique_id='Z21-'+str(''.join(random.choices(string.digits, k = 5))+str(''.join(random.choices(string.ascii_uppercase, k = 2)))))
+        return redirect('/profile')
 
 @login_required
-def register_for_event(request, event_id):
+def register_for_event(request, event_code):
+    try:
+        email = str(request.user.email)
+        if (Registration.objects.all().count()>0 and Registration.objects.filter(email=email).count()>0):
+            participant = Registration.objects.get(email=email)
+            arr = json.loads(participant.events)
+            arr.append(event_code)
+            participant.events=json.dumps(arr)
+            participant.save()
+        return redirect('/profile')
+    except:
+        return HttpResponseNotFound()
+    
+    
 
+'''
     try:
         event = Event.objects.get(id=event_id)
     except Event.DoesNotExist:
@@ -222,7 +279,7 @@ def register_for_event(request, event_id):
                        'team_form': team_form,
                        'team_member_formset': team_member_formset,
                        })
-
+'''
 
 @login_required
 def pay_for_event(request, event_id):

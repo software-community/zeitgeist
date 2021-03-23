@@ -33,10 +33,12 @@ router.register(r'notification', api.NotificationViewSet)
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
     path('workshop/', views.workshop, name="workshop"),
+    path('profile/', views.profile, name="profile"),
+    path('add_registration/', views.add_registration, name="add_registration"),
     path('register_as_participant/', views.register_as_participant,
          name="register_as_participant"),
     path('events/', views.main_page_events, name="main_page_events"),
-    path('register/<int:event_id>/',
+    path('register/<str:event_code>/',
          views.register_for_event, name="register_for_event"),
     path('data-api/', include(router.urls)),
     path('reach_us/', views.reach_us, name='reach_us'),

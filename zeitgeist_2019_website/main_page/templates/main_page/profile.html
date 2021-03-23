@@ -1,0 +1,30 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class='jumbotron' style="background-color:#39a0ed; color:#fdef8d ">
+	<br><br>
+	<div class='container'>
+	</div>
+</div>
+
+<div>
+	<div class="container">
+    Profile<br>
+    Zeitgeist User Id : {{user_unique_id}}
+    <br>
+    Name : {{name}}
+    <br>
+    Email : {{email}}
+    <br>
+    College Name : {{college_name}}
+    <br>
+    Mobile : {{mobile}}
+    <br>
+    Registered events : {{events}}
+	</div>
+</div>
+
+{% endblock content %}

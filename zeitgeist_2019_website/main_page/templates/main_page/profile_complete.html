@@ -1,0 +1,27 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class='jumbotron' style="background-color:#39a0ed; color:#fdef8d ">
+	<br><br>
+</div>
+
+<div>
+	<div class="container">
+    Profile<br>
+    Name : {{name}}
+    <br>
+    Email : {{email}}
+    <br>
+		<form method="post" action="/add_registration/">
+			{% csrf_token %}
+			Mobile : <input name="mobile">
+    College Name : <input name="college_name">
+		<button onclick="submit">Submit</button>
+		</form>
+	</div>
+</div>
+
+{% endblock content %}

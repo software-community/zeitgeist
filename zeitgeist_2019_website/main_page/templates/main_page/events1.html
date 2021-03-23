@@ -1,0 +1,103 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+	  @font-face {
+      font-family: 'Canterbury';
+      src: url("{% static 'main_page/fonts/Canterbury.ttf' %}");
+    }
+		@font-face {
+      font-family: 'BlackChancery';
+      src: url("{% static 'main_page/fonts/BlackChancery.ttf' %}");
+    }
+		@font-face {
+      font-family: 'CarnevaleeFreakshow';
+      src: url("{% static 'main_page/fonts/CarnevaleeFreakshow.TTF' %}");
+    }
+		.event-wrap{
+			width:90%;
+			background-color:rgba(0,0,0,0.5);
+			padding:10px;
+			border-radius: 5px;
+			box-shadow: 2px 2px 12px 2px rgb(150, 130, 87);
+		}
+		.event-name{
+			text-align:center;
+			color:rgb(219, 204, 166);
+			font-family: 'BlackChancery';
+			font-size:26px;
+		}
+		.event-img{
+			width:70%;
+			display: block;
+			margin:10px auto;
+		}
+		.event-wrap a, .event-wrap a:visited, .event-wrap a:focus{
+			color:rgb(255, 121, 101);
+		}
+		.event-wrap a:hover{
+			color:rgb(211,173,92);
+		}
+		.event-options{
+			font-family:'CarnevaleeFreakshow';
+			font-size:22px;
+			text-align:center;
+		}
+		.event-options div{
+			display:inline;
+			margin:10px;
+			line-height: 50px;
+		}
+</style>
+<div class='jumbotron' style="background-color:rgb(80, 61, 9); color:#fdef8d; margin-bottom:0">
+
+</div>
+
+<div style="background-image: url('{% static 'main_page/img/background.jfif' %}') ; background-repeat:no-repeat; background-attachment:fixed; background-size:100%; padding-top:20px">
+	<div class="container">
+		{% for cat in cats %}
+			<h1 style="font-family:'Canterbury'; color:rgb(105, 0, 0);"><center>{{cat.category}}</center></h1>
+		{% for subcat in subcats %}
+		
+		{% ifequal subcat.category cat %}
+		<div style="margin-top:20px;">
+			<img src="{% static 'main_page/img/paper-parchment.png' %}" style="width:300px; height:150px; margin:auto; display:block;">
+			<div style="display:block; margin:auto; width:200px; text-align:center; margin-top:-95px; margin-bottom: 95px; color:rgb(61, 0, 0); font-family:'BlackChancery'; font-size:28px; font-weight:700">{{subcat.sub_category}}</div>
+		</div>
+		<div class="row">
+			{% for event in events %}
+			{% ifequal event.category subcat %}
+
+				<div class="col-md-4">
+					<div class="event-wrap">
+						<div class="event-name">{{event.name}}</div>
+						<img class="event-img" src="{% static 'main_page/img/events/'|add:event.poster %}">
+
+						<div class="event-options">
+							<div>
+							<a href="{% static 'main_page/files/rulebooks/'|add:event.rulebook %}" target="_blank">Rulebook</a>
+							</div>
+							{% if event.code not in already_registered %}
+							<div>
+							<a href="{% url 'register_for_event' event.code %}">Register</a>
+							</div>
+							{% endif %}
+						</div>
+						
+					</div>
+				</div>
+
+				
+
+			{%endifequal%}
+			{% endfor %}
+		</div>
+			{%endifequal%}
+		{% endfor %}
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock content %}

@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
 
 # Register your models here.
 
@@ -288,6 +290,16 @@ class NotificationAdmin(admin.ModelAdmin):
 class WebCountsAdmin(admin.ModelAdmin):
     list_display = ['count']
 
+class EventsAdmin(admin.ModelAdmin):
+    list_display = ['serial','name','category','code','rulebook']
+
+class RegistrationAdmin(admin.ModelAdmin):
+    list_display = ['first_name','last_name','email','user_unique_id','events','mobile']
+
+class EventCategoryAdmin(admin.ModelAdmin):
+    list_display = ['category','sub_category']
+    
+
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
@@ -319,3 +331,10 @@ admin.site.register(Support)
 # admin.site.register(Notification)
 
 admin.site.register(WebCounts, WebCountsAdmin)
+
+admin.site.register(Events,EventsAdmin)
+admin.site.register(Cat)
+admin.site.register(SubCat)
+
+
+admin.site.register(Registration,RegistrationAdmin)
