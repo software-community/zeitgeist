@@ -90,7 +90,7 @@ body header{
     border: 1px solid rgb(151, 13, 128);
     background:linear-gradient(rgba(255, 128, 128, 0.267),rgba(122, 120, 255, 0.288));
     border-radius:20px;
-    padding: 10px;
+    padding: 15px;
     font-size:18px;
 }
 
@@ -150,8 +150,12 @@ body header{
     transition: opacity .2s, visibility .2s;
     text-align:center;
     letter-spacing:1px;
+    display: flex;
+    align-items:center;
+    justify-content:center;
 
 }
+
 
 .workshop_image_wrap:hover .workshop_image_text{
     visibility:visible;
@@ -239,7 +243,7 @@ body header{
     }
     .workshop_btn{
         
-        padding: 5px;
+        padding: 10px;
         font-size:15px
     }
     .text-box-ca > h6{
@@ -273,7 +277,7 @@ body header{
     }
     .workshop_btn{
         
-        padding: 5px;
+        padding: 10px;
         font-size:15px
     }
     .text-box-ca{
@@ -319,7 +323,7 @@ body header{
     }
     .workshop_btn{
         
-        padding: 3px;
+        padding: 10px;
         font-size:13px
     }
 }

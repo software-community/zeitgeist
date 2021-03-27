@@ -22,6 +22,14 @@
     }
   </style>
   {% endif %}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-53B777HXCF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-53B777HXCF');
+  </script>
 </head>
 
 <body>
@@ -45,7 +53,7 @@
           <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
           <li><a href="{% url 'workshop' %}">Workshops</a></li>
           <li><a href="/#our_sponsors">Sponsors</a></li>
-          <!-- <li><a href="{% url 'TSP:home' %}">TSP</a></li> -->
+          <li><a href="{% url 'TSP:home' %}">TSP</a></li>
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'account_logout' %}">Logout</a></li>
           {% else %}
