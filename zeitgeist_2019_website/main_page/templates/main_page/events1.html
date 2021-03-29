@@ -51,11 +51,58 @@
 			line-height: 50px;
 		}
 </style>
+<style>
+	.ani1{
+		position: fixed;
+		width:500px;
+		opacity: 0.6;
+		animation-duration: 20s;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+		animation-name: mover;
+		animation-timing-function: ease-in-out;
+	}
+	@keyframes mover {
+  0% {
+    transform: translateY(0) rotateZ(0);
+  }
+	50%{
+		transform: translateY(30px) rotateZ(10deg);
+	}
+  100% {
+    transform: translateY(0) rotateZ(0);
+  }
+}
+.ani2{
+		position: fixed;
+		bottom:60px;
+		right:100px;
+		width:200px;
+		opacity: 0.6;
+		animation-duration: 200s;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+		animation-name: rotator;
+		animation-timing-function: linear;
+	}
+	@keyframes rotator {
+  0% {
+    transform: scale(1) rotateZ(0);
+  }
+	50%{
+		transform: scale(1.6) rotateZ(180deg);
+	}
+  100% {
+    transform: scale(1) rotateZ(360deg);
+  }
+</style>
 <div class='jumbotron' style="background-color:rgb(80, 61, 9); color:#fdef8d; margin-bottom:0">
 
 </div>
 
 <div style="background-image: url('{% static 'main_page/img/background.jfif' %}') ; background-repeat:no-repeat; background-attachment:fixed; background-size:100%; padding-top:20px">
+	<img class="ani1" src="{% static 'main_page/img/swords.png' %}">
+	<img class="ani2" src="{% static 'main_page/img/shield.png' %}">
 	<div class="container">
 		{% for cat in cats %}
 			<h1 style="font-family:'Canterbury'; color:rgb(105, 0, 0);"><center>{{cat.category}}</center></h1>
