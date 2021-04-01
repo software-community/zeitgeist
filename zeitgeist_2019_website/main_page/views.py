@@ -26,19 +26,31 @@ def main_page_home(request):
     our_sponsors = Our_Sponsor.objects.all().order_by('id')
     media_partners = Media_Partner.objects.all()
     prev_sponsors = Prev_Sponsor.objects.all()
-    if WebCounts.objects.count()>0:
+    if WebCounts.objects.count() > 0:
         web_counts = WebCounts.increment()
     else:
-        web_counts=0
-    events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
-    events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
-    events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts}
+        web_counts = 0
+    events_11_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-11').order_by('start_date_time')
+    events_12_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-12').order_by('start_date_time')
+    events_13_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-13').order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'media_partners': media_partners, 'prev_sponsors': prev_sponsors,
+               'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts': web_counts}
     return render(request, 'main_page/index.html', context)
 
 
 def workshop(request):
     return render(request, 'main_page/workshop.html')
+
+
+def tech_events(request):
+    return render(request, 'main_page/technical_events.html')
+
+
+def cult_events(request):
+    return render(request, 'main_page/cultural_events.html')
 
 
 def change_account(request):

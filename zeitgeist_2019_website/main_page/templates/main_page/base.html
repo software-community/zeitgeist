@@ -26,7 +26,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-53B777HXCF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-53B777HXCF');
   </script>
@@ -49,7 +49,16 @@
       <nav id="nav">
         <ul class="main-nav nav navbar-nav navbar-right">
           <li><a href="{% url 'main_page_home' %}">Home</a></li>
-          <!-- <li><a href="{% url 'main_page_events' %}">Events</a></li> -->
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Events</a>
+            <ul class="dropdown-menu">
+              <li><a style="color: #0d0b0b;" href="{% url 'tech_events' %}">
+                  Technical</a></li>
+              <!-- <li><a style="color: #0d0b0b;" href="{% url 'cult_events' %}" target="_blank">Cultural</a>
+              </li> -->
+
+            </ul>
+
+          </li>
           <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
           <li><a href="{% url 'workshop' %}">Workshops</a></li>
           <li><a href="/#our_sponsors">Sponsors</a></li>
