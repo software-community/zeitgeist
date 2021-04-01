@@ -1,0 +1,174 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshops-Zeitgeist</title>
+    <link rel="stylesheet" href="{% static 'main_page/css/workshop.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar ">
+            <div class="container workshop_nav">
+
+                <a href="{% url 'main_page_home' %}" class="workshop_btn">Zeitgeist</a>
+
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
+                    class="workshop_btn">Register</a>
+
+            </div>
+        </nav>
+
+    </header>
+    <div class="workshop_main" style="height: 85vh;">
+        <h1>ZEITGEIST 2k'21</h1>
+        <div class="container text-box-ca">
+
+            <h6>
+                Learn and enrich your knowledge base with the modern age technologies at IIT Ropar. Zeitgeist 2021
+                welcomes all the delegates from all across the country in the skill development Bootcamps related to the
+                latest technology trends. Zeitgeist 2021, IIT Ropar in collaboration with Board Programmers is
+                organizing a nationwide 7-Day Technical Bootcamp to be held from 20-27 April 2021.
+            </h6>
+        </div>
+
+        <div class="workshop_links">
+
+            <a href="#workshop_explore_wrapper">
+                <p class="workshop_btn"> Explore the Workshops </p>
+            </a>
+            <a href="#workshop_benifits">
+                <p class="workshop_btn">What you will get !!</p>
+            </a>
+        </div>
+    </div>
+
+
+
+    <div id="workshop_explore_wrapper">
+        <h4>Workshops for you to explore</h4>
+        <div class="container " id="workshop_explore">
+
+
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/ml.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/ml.jpg' %}" alt="">
+                    <p class="workshop_image_text">
+                        Machine Learning
+                        <br>
+                        <br>
+                        Machine learning is the study of computer algorithms that improve automatically through
+                        experience and by the use of data.
+                    </p>
+                </a>
+            </div>
+
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/android.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/Android.jpg' %}" alt="">
+                    <p class="workshop_image_text">
+                        Android Development
+                        <br>
+                        <br>
+                        Android software development is the process by which applications are created for devices
+                        running the Android operating system.
+                    </p>
+                </a>
+            </div>
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/competitive.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/competitive.png' %}" alt="">
+                    <p class="workshop_image_text">
+                        Competitive Programming
+                        <br>
+                        <br>
+                        Competitive programming is a mind sport held over the Internet .Participants trying to program
+                        according to provided specifications.
+                    </p>
+                </a>
+            </div>
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/hacking.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/hacking.jpg' %}" alt="">
+                    <p class="workshop_image_text">
+                        Ethical Hacking
+                        <br>
+                        <br>
+                        Ethical Hacking is a qualification demonstrating knowledge of assessing the security of computer
+                        systems by looking for weaknesses and vulnerabilities in target systems
+                    </p>
+                </a>
+            </div>
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/marketing.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/marketing.jpg' %}" alt="">
+                    <p class="workshop_image_text">
+                        Digital Marketing
+                        <br>
+                        <br>
+                        Digital marketing utilizes internet and online based digital technologies such as desktop
+                        computers, mobile phones and other digital media and platforms to promote products and services
+                    </p>
+                </a>
+            </div>
+            <div class="workshop_image_wrap">
+                <a href="{% static 'main_page/files/python.pdf' %}" target="_blank">
+                    <img class="workshop_logo" src="{% static 'main_page/img/python.jpg' %}" alt="">
+                    <p class="workshop_image_text">
+                        Python programming
+                        <br>
+                        <br>
+                        Python is an interpreted, high-level and general-purpose programming language. Python's design
+                        philosophy emphasizes code readability with its notable use of significant indentation.
+                    </p>
+                </a>
+            </div>
+
+        </div>
+
+        <center class="workshop_links"><a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
+                class="workshop_btn">Register</a></center>
+
+    </div>
+    <div class=" workshop_benifits" id="workshop_benifits">
+        <h4>Benifits that you will get from the workshops !!!</h4>
+        <ul>
+
+            <li>100% practical training with Live Projects from Industry Experts</li>
+            <li>Valuable certification in association Microsoft, HPE, EC-Council, and IIT Ropar, NIT Calicut, IIIT
+                Lucknow, Assam Engg. College</li>
+            <li>
+                <ul>
+                    <p>Free Goodies worth rupee 4,999</p>
+                    <li>Tech goodies</li>
+                    <li>Tshirts</li>
+                    <li>stickers</li>
+                    <li>mock diaries</li>
+                    <li>book</li>
+                    <li>Tech Ebooks</li>
+                </ul>
+            </li>
+            <li>Internship Opportunities & Job Assistance</li>
+            <li>Lifetime access of the study materials</li>
+        </ul>
+    </div>
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'main_page/css/events.css' %}">
+</head>
+
+<body>
+
+    <div class="events_head">
+        <a href="{% url 'main_page_home' %}">
+            <img class="event_logo" src="{% static 'main_page/img/logo-event.png' %}" alt="">
+        </a>
+        <center>
+            <h3>Cultural Events</h3>
+        </center>
+
+        <a href="{% url 'tech_events' %}" class="event_pagelink">
+            <img src="{% static 'main_page/img/TECH EVENTS.svg' %}" alt="">
+
+        </a>
+
+
+
+    </div>
+
+    <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle1" alt="">
+    <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle2" alt="">
+    <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle3" alt="">
+    <div class="events_sidebar">
+        <ul>
+            <li><a href="#">MUSIC</a>
+
+
+            </li>
+            <li><a href="#music">ARTURO</a>
+
+
+            </li>
+            <li><a href="#arturo">FINE ARTS</a>
+
+            </li>
+            <li><a href="#arts">UNDEKHA</a>
+
+            </li>
+            <li><a href="#undekha">ENNARATORS</a>
+
+            </li>
+            <li><a href="#ennarator">ALPHA</a>
+            </li>
+
+
+            <li><a href="#alpha">DCYPHER</a>
+            </li>
+            <li><a href="#dcypher">FILMSKI</a>
+
+            </li>
+            <li><a href="#filmski">EPICURE(COOKING)</a>
+
+            </li>
+            <li><a href="#epicure">ENIGMA</a>
+
+            </li>
+            <li><a href="#enigma">DEBSOC</a>
+
+            </li>
+
+
+            <li><a href="#debsoc">MUN</a>
+
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="events_main">
+        <h3 id="music">Alankar</h3>
+        <div class="event_class">
+
+            <div class="event_card">
+
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Saaz - Funky and Soulful, with its own kind of blues, let the Indian melodies flow throughout,
+                    because those who wish to sing always find a song
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1UBsbX6Eet7X-cz39kSUkpk7a-ghcj2pm/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Adagio - Country Western is the self revelation in popular music. So let’s drive down those lanes
+                    and go singing as far we go, because then, the road will be less tedious.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/121_Bt4duMFSJe6_E3shOoG1LouiuDJBk/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Euphony - Immersing yourself into the melody of a musical instrument is the most peaceful sensation
+                    ever. Reveal the tone of a world far from ours, where the music meets the soul.
+
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1BhWCuGjJWKZs38-bNksW4u2C2X15U68J/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Rapsody - Never mind what the haters say, and ignore ‘em til they fade away. Sing loud, and express
+                    yourself the way you like, because a rapper cannot be caged.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1BhWCuGjJWKZs38-bNksW4u2C2X15U68J/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Polyphony - A true sense wholeheartedness is felt when we do something with everyone. Fly the highs
+                    with your group as you sing, play, and enjoy music together.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1BhWCuGjJWKZs38-bNksW4u2C2X15U68J/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <h3 id="arturo">Arturo</h3>
+        <div class="event_class">
+
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    FOTOPEDIA
+                    Zeitgiest’21 provides all budding photographers to showcase their talent through the photography
+                    competition. Play with the camera and create an image that would leave everyone completely
+                    awestruck. Send us your entries and show everyone what you got. </p>
+                <div class="event_links">
+                    <a
+                        href="https://docs.google.com/presentation/d/1a2idq2pkRAlhaPjOAD6Yaf3IzEEE2XMM/edit?usp=drive_web&ouid=101511359834564382017&rtpof=true">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 id="arts">Vibgyor</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Sketching Geeks: Hatch it, scribble it, shade it or render it. Just grab your tools and let your
+                    inner geeks out.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1J63q8k9VqRMBLbB5yn8HWi5S0wr6MZml/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Doodle Maestro: A shark jumping into a glass of red wine, or a dragon emerging out of a chimney. Let
+                    your imaginations run wild, and show us your mastery in the world of doodle that you create.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1d1_X-k6hlBS1_MZOg1oo7hDriUwznkVK/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Brush War: Replace your grenades, swords and arrows with flat, round and mop brushes and jump right
+                    in the battleground to paint masterpieces with your chosen colors.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1oDKO7MaPuBWfqMF48bnnZiH9u_JqgxU3/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Corte Paper: Heard of the ancient sculptures carved out of a single piece of stone? Let yourself get
+                    a taste of it but with a twist. Cut an art out of a single piece of paper and you are done.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1V0WBopO3EuON9b5iSpLbsBZ6nudGX56K/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+
+                    Face Wizards: Grab your brushes, dip them in the colors and find the perfect faces to bring your
+                    favourite fictional characters to life.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/19vnTwcGB24cqV8DaQY_-QWLp6KXWR2NO/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <h3 id="undekha">Undekha</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Mono Acting(Abhivyakti): Getting on stage and portraying an entire world all by yourself. Drop the
+                    curtains, let your camera be the audience and your room be the stage. Zeitgeist’21 presents
+                    Abhivyakti:Mono Acting by Undekha, The Dramatics Club of IIT Ropar.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1_xXdMVh4xJPUeL4pOHmbt6hGbNzeQnNB/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Spoken Poetry(Ruhaniyat): Taking a sip of tea, writing your hearts out. Choose a “Ruhani Sham” and
+                    let your ink make poetry and your thoughts make changes.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1PRe9qtN3hNgSoOQOA6BEX7uijaBUBcKO/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+
+                    Yatharth(Group Video): Missing those late night practise sessions and rush in your heart when you
+                    grab the stage. It’s time to make Video conferencing your sessions and cameras your stage.
+                    Zeitgeist’21 presents Yatharth:Group Video by Undekha, The Dramatics Club of IIT Ropar.
+
+
+
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/123A7QpAg6XMB0CdAQLNWaVe82nRvWKUX/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Improvisation Theatre(Improv): Doing the uncertain is the best kind of fun, is it? To find out,
+                    Improv is calling you to keep your internet connections steady.
+                    Zeitgeist’21 presents Improvisation Theatre(Improv) by Undekha, The Dramatics Club of IIT Ropar.
+
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1GxfqUmma4YZf6gdTc6TwxSEtmX-ntkWQ/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 id="ennarator">Ennarators</h3>
+        <div class="event_class">
+
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Turncoat: The rules are simple; given a topic on the spot, you have to speak for the motion in a
+                    limited amount of time and the next minute, you’ll have to be as passionate as before to speak
+                    against the motion. Humour and sarcasm is the key, and don’t let the topics catch you off guard;
+                    it’s one hell of a ride.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/open?id=1cEj8DWZEL7e2x5Kt_6MvhjsJiD94qocd&authuser=0">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Extempore: How good are you at expressing your thoughts on a topic given to you as you stand in
+                    front of an audience and daunting judges? Feeling nervous? If not, then come on up and give your
+                    best to showcase your oratory skills in this year’s Zeitgeist, organised by IIT Ropar.
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1sN2kKEX4N_VpcDq_qSHK-le4g75QFvfY/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <h3 id="alpha">Alpha</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    FilmX - Stock footage will be released. A video of 2-4 minutes has to be made using the stock
+                    footage only. The use of external sources will lead to disqualification. Participants are allowed to
+                    use any software they want.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1-VeWiL37wlQ2I12d0DjGLmqs2WYROp5V/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    AdMad - AD MAD is an online advertisement-making competition that offers you to showcase your
+                    marketing and film-making skills. Bring out the creativity inside you and make an outstanding
+                    advertisement for the given product.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1Y4BYCvK8RXQgUEAzDoTqIE7sYKnBl_f7/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <h3 id="dcypher">Dcypher</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    JUNOON:
+                    Turn up the volume, close your eyes and let the music take over your soul. If your countdowns to
+                    everything goes like, 5,6,7,8 then you should know that dance is for you and you are for dance. So
+                    give yourself into it and be a part of the SOLO DANCE competition.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/open?id=1ueQ7cfl81NR1ighFKnXOLoM7vC-Vx3af&authuser=0"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    WALTZ:
+                    Dancing with the feet is one thing but dancing with the heart is another. Every day brings a chance
+                    for you to draw in a breath, kick off your shoes, and dance. Things get merrier when you have a
+                    partner to swing along with, so grab your mates, feel the vibe and participate in the DUET DANCE
+                    competition.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/open?id=1ihPlF00Oc9WllZwl62YddwUvjbzf0qNO&authuser=0"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Banging beats:
+                    Some battles are not fought with lethal weapons. These battles involve lethal moves: POP-LOCK-BREAK.
+                    The tension on the dance floor sparks a clash between the groups. Showcase your moves and show them
+                    all who’s the Real boss. STREET BATTLE on a zoom meet sounds fascinating isn't it. Participate to be
+                    a part of the thrill!
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/open?id=1S2PfocCnUehmDzY_VFYnpVbTmqkqQmoQ&authuser=0"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Calypso:
+                    Dancing with your friends in the fields bestowed by dusk. It gives you nothing back, no manuscripts
+                    to store away, no paintings to show on walls, no poems to be printed, nothing but that single
+                    fleeting moment when you feel alive. So Fasten your shoes, give a call to your amigos and get ready
+                    to rock and roll coz it's time for the GROUP DANCE competition.
+
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1pglQEAsQaYE4REKLeQdJviAK9r7Ek-VA/view?usp=drive_open">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 id="filmski">FILMSKI</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    SCRIBBLE STORY
+                    Be it the Medieval Times or the present time, games have always been there to spice up the mood and
+                    light up the environment. So, for the first time in the history of Zeitgeist, Filmski brings you the
+                    opportunity to win exciting prizes just by participating in a simple game of SCRIBBLE . No
+                    prerequisites, no constraints, all you need is to be imaginative and quick.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/132KsnxwWjT-_sL1jcDxfMXEFL2yuQm8J/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+
+        <br>
+        <h3 id="epicure">Epicure</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+
+                    MISHTANNO : This introduces you to a Sweet dish of any sort.
+
+                    More information is in the Rulebook.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1C2aJBSTsIkB7Br1OPDzVm-rCAE9CfJxY/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+
+                    STREET VAGANZA: This introduces you to street food or fast food of any sort.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1vYv3lwoqBDmX0O_8e5C2WMqdsqibdWz5/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h3 id="enigma">Enigma</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    General Quiz: A quiz for the all-rounders covering every buzzing topic you can think of.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1EsLQ9yddP8V40rFhW589H5sB6PRardle/view?usp=drive_open">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    MELA Quiz: This quiz introduces you to the world of Music, Entertainment, Literature and Arts.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1Am3zJv4tUtSWSkhE71tbtsR0tJVxcoe2/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Biz-Tech Quiz: Questions from the business arena, finance, brand/company and technology.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1Am3zJv4tUtSWSkhE71tbtsR0tJVxcoe2/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <h3 id="debsoc">DebSoc</h3>
+        <div class="event_class">
+
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    JUST A MINUTE
+                    A minute can be intuitive to portray your inflections and ideas on a topic. Words are the means to
+                    traverse fathom deep into different worlds and Zeitgeist 2k21 gives you ample opportunities to
+                    express yourself the best you can in a single minute. With random on spot topics contestants will
+                    verbalise their thoughts and the best one to utilise that single minute will be the winner.
+
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/11JR9K5xdXUNp2C0DawqaaAJFDhcvHDjo/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <h3 id="mun">MUN Society</h3>
+        <div class="event_class">
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+                    Article Writing and Press Release: Want to let people know what’s the talk of the town in your own
+                    unique style? Show ‘em your skills! Write a news/journal article on a topic of global/national
+                    importance and make a video press release on the same.
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1JeO-U0kohooLik_l7S83chBAcMElUpd6/view"> <button
+                            class="btn-sm btn-info"> Rulebook</button></a>
+
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="event_card">
+                <img src="{% static 'main_page/img/logo-event.png' %}" alt="">
+                <p class="event_text">
+
+                    Crisis Solving: Take charge of world affairs and channelise your efforts into making the earth a
+                    better and safer place for all. Put your damage control acumen to test by coming up with a
+                    comprehensive solution and/or action plan to address a crisis situation.
+
+                </p>
+                <div class="event_links">
+                    <a href="https://drive.google.com/file/d/1LC5hevLrOrOj8VLAnXnxKR-qmIXD9uS_/view">
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+    </div>
+    <noscript id="tsNoJsMsg">Javascript on your browser is not enabled.</noscript>
+    <script src="https://www.townscript.com/popup-widget/townscript-widget.nocache.js" type="text/javascript"></script>
+    <script src="{% static 'main_page/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>
