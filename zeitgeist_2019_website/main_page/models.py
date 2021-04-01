@@ -210,3 +210,14 @@ class WebCounts(models.Model):
 
     class Meta:
         verbose_name_plural = 'Website Counts'
+
+class OurTeam(models.Model):
+
+    sequence = models.IntegerField(blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    designation = models.CharField(max_length=50, blank=False, null=False)
+    mobile = models.CharField(max_length=10, blank=False, null=False)
+    photo = models.CharField(max_length=20, blank=False, null=False)
+
+    class Meta:
+        verbose_name_plural = 'Our Team'
