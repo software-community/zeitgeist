@@ -29,15 +29,12 @@ def main_page_home(request):
     if WebCounts.objects.count() > 0:
         web_counts = WebCounts.increment()
     else:
-        web_counts = 0
-    events_11_oct = Event.objects.filter(
-        start_date_time__startswith='2019-10-11').order_by('start_date_time')
-    events_12_oct = Event.objects.filter(
-        start_date_time__startswith='2019-10-12').order_by('start_date_time')
-    events_13_oct = Event.objects.filter(
-        start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners': media_partners, 'prev_sponsors': prev_sponsors,
-               'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts': web_counts}
+        web_counts=0
+    our_team = OurTeam.objects.all().order_by('sequence')
+    events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
+    events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
+    events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team}
     return render(request, 'main_page/index.html', context)
 
 
