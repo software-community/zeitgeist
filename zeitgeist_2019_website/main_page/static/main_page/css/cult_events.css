@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Berkshire+Swash&family=Merienda&display=swap');
 body{
-    background: #02021c;
+    background: #15021c;
     color: white;
     overflow-x: hidden;
 }
@@ -17,8 +17,8 @@ body{
 
     z-index:2;
     font-family: 'Baloo Bhaina 2', cursive;
-    background:rgba(0, 109, 100, 0.61);
-    border-bottom: 1px solid rgb(0, 128, 160);
+    background:rgba(38, 0, 109, 0.61);
+    border-bottom: 1px solid rgb(96, 0, 160);
     backdrop-filter: blur(8px);
 }
 
@@ -45,8 +45,8 @@ body{
 .events_sidebar{
     height: 90vh;
     width: 24vw;
-    border: 3px solid rgb(0, 128, 160);
-    background:rgba(0, 109, 100, 0.26);
+    border: 3px solid rgb(83, 0, 160);
+    background:rgba(38, 0, 109, 0.61);
     position: fixed;
     top: 9%;
     left:1vw;
@@ -67,7 +67,7 @@ body{
 }
 
 .events_sidebar>ul>li{
-    border:2px solid rgb(123, 196, 255);
+    border:2px solid rgb(143, 123, 255);
 
     border-radius: 20px;
     width: 90%;
@@ -120,7 +120,7 @@ body{
     margin: 5px 0;
     display:flex;
     flex-direction: column;
-    border: 2px solid rgb(0, 128, 160);
+    border: 2px solid rgb(109, 0, 160);
     position: relative;
 }
 .event_text{
@@ -129,7 +129,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(1, 0, 36, 0.753);
+    background: rgba(22, 0, 36, 0.753);
     backdrop-filter: blur(7px);
     visibility:hidden;
     text-align:center;
@@ -150,7 +150,7 @@ body{
 }
 .event_links{
     padding: 3%;
-    background: rgba(0, 109, 100, 0.26);
+    background: rgba(74, 0, 109, 0.26);
     width:100%;
     height: 20%;
 
@@ -164,7 +164,7 @@ body{
     
     letter-spacing:1.06px;
     background: transparent;
-    border: 2px solid rgb(123, 196, 255);
+    border: 2px solid rgb(196, 123, 255);
     color: rgb(255, 255, 255);
     font-family: 'Baloo Bhaina 2', cursive !important;
 }
@@ -177,6 +177,8 @@ body{
     width:400px;
     height:400px;
     animation: rotate 15s linear infinite;
+    filter: hue-rotate(45deg);
+   
 }
 
 
@@ -188,6 +190,7 @@ body{
     right:-120px;
     width:600px;
     height:600px;
+    filter: hue-rotate(25deg);
     animation: rotate 12s linear infinite;
 }
 
@@ -199,6 +202,7 @@ body{
     width:200px;
     height:200px;
     animation: rotate 20s linear infinite;
+    filter: hue-rotate(90deg);
 }
 @keyframes rotate{
     from{
