@@ -26,7 +26,7 @@ def main_page_home(request):
     our_sponsors = Our_Sponsor.objects.all().order_by('id')
     media_partners = Media_Partner.objects.all()
     prev_sponsors = Prev_Sponsor.objects.all()
-    if WebCounts.objects.count()>0:
+    if WebCounts.objects.count() > 0:
         web_counts = WebCounts.increment()
     else:
         web_counts=0
@@ -40,6 +40,14 @@ def main_page_home(request):
 
 def workshop(request):
     return render(request, 'main_page/workshop.html')
+
+
+def tech_events(request):
+    return render(request, 'main_page/technical_events.html')
+
+
+def cult_events(request):
+    return render(request, 'main_page/cultural_events.html')
 
 
 def change_account(request):
