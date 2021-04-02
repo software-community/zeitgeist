@@ -1083,6 +1083,7 @@ textarea.input {
   display: block;
   box-shadow: 2px 2px 12px 1px #eee;
   transition: 0.2s ease-in-out;
+  max-width: 250px;
 }
 
 .team-mem .name{

@@ -240,7 +240,7 @@
                 <h3 class="title"><span>Our</span> <span style="color: #dd0a37;">Team</span></h3>
             </div>
             {% for member in our_team %}
-            <div class="col-sm-3">
+            <div class="col-md-3 col-sm-4 col-xs-6">
                 <div class="team-mem">
                     <img src="{% static 'main_page/img/team_members/'|add:member.photo %}">
                     <div class="name">{{member.name}}</div>
