@@ -165,7 +165,7 @@ SITE_ID = 1
 # LOGIN_URL = '/accounts/google/login/'
 LOGIN_URL = 'google_login'
 
-LOGIN_REDIRECT_URL = 'main_page_home'
+LOGIN_REDIRECT_URL = 'verify_user'
 
 LOGOUT_REDIRECT_URL = 'main_page_home'
 

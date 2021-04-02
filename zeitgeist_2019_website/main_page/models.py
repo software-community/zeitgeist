@@ -221,3 +221,15 @@ class OurTeam(models.Model):
 
     class Meta:
         verbose_name_plural = 'Our Team'
+
+class Registrations(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+    email = models.CharField(max_length=100, blank=False, null=False)
+    mobile = models.CharField(max_length=100)
+    organization = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    z_code = models.CharField(max_length=100, blank=False, null=False)
+    events = models.CharField(max_length=5000)
+
+    class Meta:
+        verbose_name_plural = 'Registrations'
