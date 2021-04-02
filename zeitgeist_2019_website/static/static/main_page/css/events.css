@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&family=Berkshire+Swash&family=Merienda&display=swap');
+body{
+    background: #02021c;
+    color: white;
+    overflow-x: hidden;
+}
+.events_head{
+    width: 100vw;
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+
+    position: fixed;
+    top:0;
+
+    z-index:2;
+    font-family: 'Baloo Bhaina 2', cursive;
+    background:rgba(0, 109, 100, 0.61);
+    border-bottom: 1px solid rgb(0, 128, 160);
+    backdrop-filter: blur(8px);
+}
+
+.event_logo{
+    width: 120px;
+    height:80%;
+    margin-left:20px
+ 
+}
+
+
+
+
+.event_pagelink{
+
+ 
+    text-decoration: none;
+    margin-right: 50px;
+    width: 100px;
+    height:90%;
+}
+
+
+.events_sidebar{
+    height: 90vh;
+    width: 24vw;
+    border: 3px solid rgb(0, 128, 160);
+    background:rgba(0, 109, 100, 0.26);
+    position: fixed;
+    top: 9%;
+    left:1vw;
+    font-family: 'Baloo Bhaina 2', cursive;
+    backdrop-filter: blur(5px);
+
+}
+
+.events_sidebar>ul{
+    width: 100%;
+    height: 100%;
+    color: white;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+  align-items: center;
+}
+
+.events_sidebar>ul>li{
+    border:2px solid rgb(123, 196, 255);
+
+    border-radius: 20px;
+    width: 90%;
+    min-height: 40px;
+   justify-content:center;
+   align-items: center;
+    display: flex;
+    margin-right: auto;
+    cursor: pointer;
+    
+}
+.events_sidebar>ul>li:hover{
+    transform:scale(1.1)
+}
+
+.events_sidebar>ul>li>a{
+    color: white;
+}
+
+
+.events_main{
+    width: 70vw;
+    min-height: 70vh;
+    position:absolute;
+    top: 15%;
+    left:28vw;
+
+    
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    font-family: 'Baloo Bhaina 2', cursive;
+    
+}
+.event_class{
+    width: 100%;
+    min-height: 30vh;
+    margin: 1%;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:space-evenly;
+}
+.event_card{
+    width: 30%;
+    min-width: 230px;
+    height:30vh;
+    border: 2px solid black;
+    margin: 5px 0;
+    display:flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 128, 160);
+    position: relative;
+}
+.event_text{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(1, 0, 36, 0.753);
+    backdrop-filter: blur(7px);
+    visibility:hidden;
+    text-align:center;
+    opacity: 0;
+    transition: opacity .2s, visibility .2s;
+}
+
+.event_card:hover{
+    transform: scale(1.08);
+}
+.event_card:hover .event_text{
+    visibility:visible;
+    opacity: 1;
+}
+.event_card>img{
+    width: 100%;
+    height: 80%;
+}
+.event_links{
+    padding: 3%;
+    background: rgba(0, 109, 100, 0.26);
+    width:100%;
+    height: 20%;
+
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    backdrop-filter: blur(5px);
+}
+.event_links button{ 
+    outline:none;
+    
+    letter-spacing:1.06px;
+    background: transparent;
+    border: 2px solid rgb(123, 196, 255);
+    color: rgb(255, 255, 255);
+    font-family: 'Baloo Bhaina 2', cursive !important;
+}
+
+.event_circle1{
+
+    position:fixed;
+    top: 20px;
+    left:-120px;
+    width:400px;
+    height:400px;
+    animation: rotate 15s linear infinite;
+}
+
+
+
+.event_circle2{
+    position:fixed;
+
+    top: 130px;
+    right:-120px;
+    width:600px;
+    height:600px;
+    animation: rotate 12s linear infinite;
+}
+
+.event_circle3{
+
+    position:fixed;
+    bottom: 15px;
+    left:100px;
+    width:200px;
+    height:200px;
+    animation: rotate 20s linear infinite;
+}
+@keyframes rotate{
+    from{
+        transform:rotate(0deg)
+    }
+    to{
+        transform:rotate(360deg)
+    }
+}
+
+@media only screen and (max-width:1180px){
+    .event_links button{ 
+        width:9vw;
+        height:5.5vh;
+
+    }
+    .event_links a button{ 
+        width: 9vw;
+    }
+    h3{
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:1010px){
+    
+.events_sidebar{
+    display: none;
+}
+
+.events_main{
+    width: 94vw;
+    min-height: 70vh;
+    position:absolute;
+    top: 15%;
+    left:3vw;
+
+    
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    font-family: 'Baloo Bhaina 2', cursive;
+    
+}
+
+}
+
+@media only screen and (max-width:1010px){
+    .event_links button{ 
+        width:105px;
+        height:5.5vh;
+
+    }
+    .event_links a button{ 
+        width: 105px;
+    }
+    h3{
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width:480px){
+    .event_card{
+        width: 90vw;
+        height:40vh;
+    }
+
+    
+    .event_pagelink{
+        width: 70px;
+        height: 30px
+    }
+    
+.event_logo{
+    width: 80px;
+  
+ 
+}
+.event_pagelink{
+
+ 
+    text-decoration: none;
+    margin-right: 20px;
+    width: 80px;
+    height:90%;
+}
+
+}
+
+@media only screen and (max-width:800px){
+    
+
+.event_circle1{
+
+    position:fixed;
+    top: 20px;
+    left:-100px;
+    width:300px;
+    height:300px;
+    animation: rotate 15s linear infinite;
+}
+
+
+
+.event_circle2{
+    position:fixed;
+
+    top: 65px;
+    right:-100px;
+    width:450px;
+    height:450px;
+    animation: rotate 12s linear infinite;
+}
+
+.event_circle3{
+
+    position:fixed;
+    bottom: 15px;
+    left:100px;
+    width:200px;
+    height:200px;
+    animation: rotate 20s linear infinite;
+}
+}
