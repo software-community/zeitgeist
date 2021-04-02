@@ -1,0 +1,136 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+  @font-face {
+      font-family: 'Carnevalee Freakshow';
+      src: url("{% static 'main_page/fonts/Carnevalee Freakshow.ttf' %}");
+    }
+  .main{
+    color:#E4F0FB;
+    font-size: 16px;
+    margin-bottom: 100px;
+  }
+  .det-head{
+    color:#7390aa;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .det-det{
+    color:#27e8a7;
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+  .det-det-imp{
+    color:#ff3776;
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+  .big{
+    font-size: 20px;
+  }
+  ol{
+    list-style-type: decimal;
+    padding-left: 20px;
+  }
+  ol li{
+    padding-left:20px;
+  }
+  .sec-head{
+    width:100%;
+    display: block;
+    text-align: center;
+    font-size: 22px;
+    color:#add7ff;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .event-name{
+    font-size: 20px;
+    color: #91b4d5;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .event-det{
+    padding-left:30px;
+  }
+  .reg-button{
+    display: inline-block;
+    margin:auto;
+    border:1px solid #ff3776;
+    padding: 10px;
+    margin:20px;
+  }
+</style>
+
+<div class='jumbotron' style="background-color:rgb(35,41,55); min-height: 80vh;">
+    <br><br><br><br>
+    <div class="container main">
+      Hello <font style="color:#add7ff; font-size:30px; font-family:'Carnevalee Freakshow'">{{request.user.first_name}} {{request.user.last_name}}</font>
+      <div class="row" style="margin-top:20px; padding:20px">
+        <div class="col-md-4">
+          <font class="det-head">Zeitgeist Code</font>
+          <font class="det-det">{{z_code}}</font>
+          <font class="det-head">Email</font>
+          <font class="det-det">{{request.user.email}}</font>
+          {%if details%}
+          <font class="det-head">Mobile</font>
+          <font class="det-det">{{details.mobile}}</font>
+          <font class="det-head">Organization</font>
+          <font class="det-det">{{details.organization}}</font>
+          <font class="det-head">City</font>
+          <font class="det-det">{{details.city}}</font>
+          {%endif%}
+        </div>
+        <div class="col-md-8">
+          <div class="sec-head">
+            REGISTRATION DETAILS
+          </div>
+          {%if details%}
+          <ol>
+            {% for event in details.events %}
+            <font class="event-name"><li>{{event.name}}</li></font>
+            <div class="event-det">
+            <div class="row">
+              <div class="col-md-4">
+                <font class="det-head">Order ID</font>
+                <font class="det-det">{{event.uniqueOrderId}}</font>
+              </div>
+              <div class="col-md-4">
+                <font class="det-head">Date</font>
+                <font class="det-det">{{event.date}}</font>
+              </div>
+              <div class="col-md-4">
+                <font class="det-head">Time</font>
+                <font class="det-det">{{event.time}}</font>
+              </div>
+            </div>
+            <font class="det-head">Amount Paid</font>
+            <font class="det-det-imp">₹ {{event.price}}</font>
+            </div>
+            {% endfor %}
+          </ol>
+          <center><div class="reg-button"><a style="color: #ff3776; cursor:pointer;" onclick="popup('zeitgeist21-113231');">Register for more Events</a></div></center>
+          <hr>
+          <font class="det-head">Total Amount Paid</font>
+          <b><font class="det-det-imp big">₹ {{details.total}}</font></b>
+          {%else%}
+          <font style="color:#91b4d5">No registrations yet !!</font>
+          <br>
+          <center><div class="reg-button"><a style="color: #ff3776; cursor:pointer;" onclick="popup('zeitgeist21-113231');">Register Now</a></div></center>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

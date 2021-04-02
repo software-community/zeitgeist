@@ -14,7 +14,7 @@
   <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
   <link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
-  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}?v=2.0" />
   {% if event %}
   <style>
     .asteriskField {
@@ -75,6 +75,9 @@
           <li><a href="{% url 'workshop' %}">Workshops</a></li>
           <li><a href="/#our_sponsors">Sponsors</a></li>
           <li><a href="{% url 'TSP:home' %}">TSP</a></li>
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'profile' %}">Profile</a></li>
+          {% endif %}
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'account_logout' %}">Logout</a></li>
           {% else %}

@@ -291,6 +291,9 @@ class WebCountsAdmin(admin.ModelAdmin):
 class OurTeamAdmin(admin.ModelAdmin):
     list_display = ['sequence','name','designation','mobile','photo']
 
+class RegistrationsAdmin(admin.ModelAdmin):
+    list_display = ['id','name','email','mobile','organization','city','z_code','total']
+
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
@@ -324,3 +327,5 @@ admin.site.register(Support)
 admin.site.register(WebCounts, WebCountsAdmin)
 
 admin.site.register(OurTeam, OurTeamAdmin)
+
+admin.site.register(Registrations, RegistrationsAdmin)
