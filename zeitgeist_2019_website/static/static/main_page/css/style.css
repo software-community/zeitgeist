@@ -1068,3 +1068,52 @@ textarea.input {
     display: block;
   }
 }
+
+/* Team */
+.team-mem{
+  text-align: center;
+  padding: 5px;
+  margin-bottom:20px;
+}
+
+.team-mem img{
+  width:85%;
+  border-radius: 1000px;
+  margin:auto;
+  display: block;
+  box-shadow: 2px 2px 12px 1px #eee;
+  transition: 0.2s ease-in-out;
+  max-width: 250px;
+}
+
+.team-mem .name{
+  font-size: 20px;
+  font-weight: 600;
+  width:100%;
+  margin: 7px 0px;
+  transition: 0.2s cubic-bezier(.01,.65,.43,1.01);
+}
+
+.team-mem .des{
+  font-size: 16px;
+  width:100%;
+  margin: 7px 0px;
+  color: rgb(253,100,13);
+}
+
+.team-mem a, .team-mem a:visited, .team-mem:focus{
+  color: black;
+  font-size: 18px;
+}
+
+.team-mem a:hover{
+  color: rgb(253,100,13);
+}
+
+.team-mem:hover img{
+  opacity:0.7;
+}
+
+.team-mem:hover .name{
+  transform: scale(1.1);
+}

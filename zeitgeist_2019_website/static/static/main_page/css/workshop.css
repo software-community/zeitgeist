@@ -7,7 +7,7 @@
 body{
     max-width:100vw;
     min-height:100vh;
-    background:linear-gradient(to top left , rgb(0, 69, 126) ,rgb(116, 14, 14));
+    background:linear-gradient(to top left , rgb(0, 69, 126) ,rgb(14, 104, 116));
 
 }
 body header{
@@ -87,8 +87,8 @@ body header{
 
 .workshop_btn{
     color: rgb(255, 255, 255);
-    border: 1px solid rgb(151, 13, 128);
-    background:linear-gradient(rgba(255, 128, 128, 0.267),rgba(122, 120, 255, 0.288));
+    border: 1px solid rgb(13, 151, 128);
+    background:linear-gradient(rgba(128, 255, 156, 0.267),rgba(122, 120, 255, 0.288));
     border-radius:20px;
     padding: 15px;
     font-size:18px;
