@@ -292,7 +292,7 @@ class OurTeamAdmin(admin.ModelAdmin):
     list_display = ['sequence','name','designation','mobile','photo']
 
 class RegistrationsAdmin(admin.ModelAdmin):
-    list_display = ['id','name','email','mobile','organization','city','z_code']
+    list_display = ['id','name','email','mobile','organization','city','z_code','total']
 
 
 # admin.site.register(Category, CategoryAdmin)

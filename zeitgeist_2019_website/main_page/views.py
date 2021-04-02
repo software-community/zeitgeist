@@ -192,6 +192,7 @@ def profile(request):
                 registration.organization = details['organization']
                 registration.city = details['city']
                 registration.events =details['events']
+                registration.total = details['total']
                 registration.save()
                 break
 
