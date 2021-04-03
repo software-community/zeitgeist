@@ -10,3 +10,4 @@ zeitgeist_2019_website/accomodation/
 zeit
 zeitgeist_2019_website/.env
 zeitgeist_2019_website/db.sqlite3
+zeitgeist_2019_website/main_page/token_key.json
