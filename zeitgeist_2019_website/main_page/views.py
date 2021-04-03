@@ -252,6 +252,9 @@ def admin_control(request):
     for sheet in sheets:
         sheet_names . append(sheet['properties']['title'])
 
+    for sheet in sheets:
+        service.spreadsheets( ).values( ).clear( spreadsheetId=SPREADSHEET_ID, range=sheet['properties']['title']+"!A1:O999" ).execute( )
+        
     for reg in Registrations.objects.all():
         if reg.events!="":
             for event in json.loads(reg.events):
@@ -270,22 +273,20 @@ def admin_control(request):
                         }
                     ]}
                     service.spreadsheets().batchUpdate(spreadsheetId=SPREADSHEET_ID,body=add_sheet).execute()
+                    sheet_names.append(event['name'])
 
+                RANGE_NAME = event['name']+'!A2'
+                reg_detail = [[reg.name,reg.z_code, reg.email,reg.mobile,reg.organization,event['date'],event['time']]]
+                service.spreadsheets().values().append(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption='RAW', body={'values':reg_detail}).execute()
+    
     sheets = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()['sheets']
-
+    
     for sheet in sheets:
         sheet_name = sheet['properties']['title']
         sheet_id = sheet['properties']['sheetId']
         RANGE_NAME = sheet_name+'!A1'
-        reg_list = [['Name','Zeitgeist Code','Email','Mobile','College','Date','Time']]
-        for reg in Registrations.objects.all():
-            if reg.events!="":
-                for event in json.loads(reg.events):
-                    if event['name'] == sheet_name:
-                        reg_list.append([reg.name,reg.z_code, reg.email,reg.mobile,reg.organization,event['date'],event['time']])
-                        break
-
-        service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption='RAW', body={'values':reg_list}).execute()
+        head = [['Name','Zeitgeist Code','Email','Mobile','College','Date','Time']]
+        service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption='RAW', body={'values':head}).execute()
 
         format_body={'requests':[
             {
