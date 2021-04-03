@@ -36,6 +36,7 @@ urlpatterns = [
     path('register_as_participant/', views.register_as_participant,
          name="register_as_participant"),
     path('tech_events/', views.tech_events, name="tech_events"),
+    path('merchandise/', views.merchandise, name="merchandise"),
     path('cult_events/', views.cult_events, name="cult_events"),
     path('profile/', views.profile, name="profile"),
     path('verify_user/', views.verify_user, name="verify_user"),
