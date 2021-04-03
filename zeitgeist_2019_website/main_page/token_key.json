@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "zeitgeist-309610",
+  "private_key_id": "dedfee620913401cef70ebfc5f8f9bbeb3b299b7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCYyDV0OZmeD3Kb\nrVCBFhjd3pYlcQSVWFMwyLSIEGDdk5ywpprQX3Ico0rcaBJsUWcWUWL8dgmho+Oy\ndyrrX2PiPMAwWYo29x6pi58N2qj37ESObcN8bhJr3NDwcZYzi12Rc2e3Z9eHiQlg\nGHSHNf67CbFyZnfo3UEXEeKMyEFkfUgTPPz1cq4A+h709FaAaAaYE4ggTHED/1bH\nL8TynMuAR2/UlJzYu79taX4XA3rOCUbaNkEbpHHaKVZ5YwW4VWm82UQI70i4qCVm\nlxuDJesdkcB3uK1r2DlDMn2L5Gvv0aLf1OEy+LECFoswuMxutPSC5KxN7kT49Ge7\nmkupdou3AgMBAAECggEAGo2BLMft+Nh6dK/0c9rhS34p3iv8PfBx1OKs7ZDbJOdI\nrjLmaRyNeoiutAuqWAT1w501dOcW2W7gXd30KaAUffdM95o4OUFNpO3NIN1FzIDV\nkWNmPDPtI63m6kLzddXc1zCVb/yuKrIYXQkjB3TM5rjSjC1e3avGajoDg7AyHUKc\nC01JYmJqYiiAQ+qnWOZwJyYbe/EMMkVDiSb4ydOS+JbHhwa+bLD1P3SVfAyw0Dxk\n0GRUGbOLeWEpzIo4fGT69mUi3KHxPhYMWIIyJAbh993epgg9GmNEV71ZLCe/Ex/v\nppphmZJwwpiIL8p+L+Yo9Wb021qA/xK4r/9xMKnVsQKBgQDHaQM73D/rNTnspDAs\nLgvaGTIoEP3hEMtnyPMI37mLOOXdCib5nYMr00RtlJTTDa4b53fUDZLCq+0TVVx5\nkwqEdYx15/yIpobMyPlrePeIQu7/3eq0d90ULJMK5RN2ju9+ZSmoovn6qAi3B7t9\nMKaAYRCxdWxbtaw7YnjKQyKPhQKBgQDEI7M+S90FT8EKhhpxtw6EvsA7ScbwnIxQ\nH9mHDsn4ZbqqQoh8c2ErWY2OXCylkqh2C3yPiEF8i1Dp35BNJ41ZRJnHeyXz/Uni\nBUMvbYvixRAEtHDlnBeVOGN2NsajDWKkWswe/GrnU2rFdCIrocBl7+79ciqybmWf\nOoQO0MAtCwKBgQCHH7CySnABuSKUKTn/ZgBf/LzRC5qNfSzoGfId7EQ1hAu2+Z8p\nfEObWeC/hHRIg7ecbv/y8HOneIsAk9JDC5GP6nuQle+4xWcIs5LX8bOCYSDEvyLA\nwYxMlFvbgRjsOLUu5+wPusg7wsuNAy9YCLR6v8tpBNG1X2jjILoLDO0JZQKBgQCA\nIYZN0wdvGdvVASgzU0/Dvk0cLiUtOEedbEERrsKYZ/Sal15MVp+KzzTfZC2yeG1e\nuEBGD9AgCW7xaZ/+FzGKuHrxSuzPSI9EfQWX7StuGChPuoTqKp9pVu364uu+xtbC\n4aHpOCKqPd9JYIWWFVP4A9cPcM6dw+rVK0fr2clBYwKBgHxqINI1zeYiI3WJjKR/\nI9Y8wLlsDz0QA0A1jNBKitx0I8tg6jVMCrZ1A06RsvK7xSELXyLD0gvIDqMXvr26\nNjZwWuvM/VmSeBTMs/tK9uDxnmN4kzd8oA8hhdY+BUGffnLpllB0cKuv8B58CB2W\n09FYKMpnPnLvaW/hLPC9Kf1s\n-----END PRIVATE KEY-----\n",
+  "client_email": "admin-284@zeitgeist-309610.iam.gserviceaccount.com",
+  "client_id": "111338966742322170986",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/admin-284%40zeitgeist-309610.iam.gserviceaccount.com"
+}

@@ -78,6 +78,9 @@
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'profile' %}">Profile</a></li>
           {% endif %}
+          {% if request.user.is_superuser %}
+          <li><a href="{% url 'admin_control' %}">Admin</a></li>
+          {% endif %}
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'account_logout' %}">Logout</a></li>
           {% else %}
