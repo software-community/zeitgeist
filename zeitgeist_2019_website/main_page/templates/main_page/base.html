@@ -48,7 +48,8 @@
       </div>
       <nav id="nav">
         <ul class="main-nav nav navbar-nav navbar-right">
-          <li><a href="{% url 'main_page_home' %}">Home</a></li>
+          <li><a href="{% url 'merchandise' %}" style="color: #ff3985; cursor:pointer;">Zeitgeist Merchandise</a>
+          </li>
           <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Events</a>
             <ul class="dropdown-menu">
               {% if request.user.is_authenticated %}
@@ -77,6 +78,9 @@
           <li><a href="{% url 'TSP:home' %}">TSP</a></li>
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'profile' %}">Profile</a></li>
+          {% endif %}
+          {% if request.user.is_superuser %}
+          <li><a href="{% url 'admin_control' %}">Admin</a></li>
           {% endif %}
           {% if request.user.is_authenticated %}
           <li><a href="{% url 'account_logout' %}">Logout</a></li>

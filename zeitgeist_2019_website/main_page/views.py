@@ -10,6 +10,7 @@ from urllib.parse import urlparse
 from .models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from allauth.socialaccount.models import SocialAccount
 from django.core.mail import send_mail
 from django.http import HttpResponseServerError
@@ -20,7 +21,8 @@ import csv
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 import json
-import random,string
+import random
+import string
 # Create your views here.
 
 
@@ -31,12 +33,16 @@ def main_page_home(request):
     if WebCounts.objects.count() > 0:
         web_counts = WebCounts.increment()
     else:
-        web_counts=0
+        web_counts = 0
     our_team = OurTeam.objects.all().order_by('sequence')
-    events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
-    events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
-    events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team}
+    events_11_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-11').order_by('start_date_time')
+    events_12_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-12').order_by('start_date_time')
+    events_13_oct = Event.objects.filter(
+        start_date_time__startswith='2019-10-13').order_by('start_date_time')
+    context = {'our_sponsors': our_sponsors, 'media_partners': media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct,
+               'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts': web_counts, 'our_team': our_team}
     return render(request, 'main_page/index.html', context)
 
 
@@ -50,6 +56,10 @@ def tech_events(request):
 
 def cult_events(request):
     return render(request, 'main_page/cultural_events.html')
+
+
+def merchandise(request):
+    return render(request, 'main_page/merchandise.html')
 
 
 def change_account(request):
@@ -116,87 +126,249 @@ def main_page_events(request):
             events_data[category][subcategory] = subcategory.event_set.all()
     return render(request, 'main_page/events.html', {'events_data': events_data})
 
+
 def unique_z_code(z_code):
     for registration in Registrations.objects.all():
         if registration.z_code == z_code:
             return False
     return True
 
+
 def generate_z_code():
     z_code = False
     while True:
-        z_code = 'Z21-'+str(''.join(random.choices(string.digits, k = 4))+str(''.join(random.choices(['A','B','C','D','E','F'], k = 2))))
+        z_code = 'Z21-'+str(''.join(random.choices(string.digits, k=4)) +
+                            str(''.join(random.choices(['A', 'B', 'C', 'D', 'E', 'F'], k=2))))
         if unique_z_code(z_code):
             break
     return z_code
+
 
 def z_code_handle(request):
     z_code = False
 
     for registration in Registrations.objects.all():
-        if registration.email == request.user.email:
+        if registration.email == email:
             z_code = registration.z_code
 
     if z_code == False:
         z_code = generate_z_code()
-        Registrations.objects.create(name=request.user.first_name+' '+request.user.last_name,email=request.user.email,z_code=z_code)
+        Registrations.objects.create(name=request.user.first_name+' ' +
+                                     request.user.last_name, email=request.user.email, z_code=z_code)
 
     return z_code
+
 
 @login_required
 def verify_user(request):
     z_code_handle(request)
-    
+
     return redirect(main_page_home)
+
 
 @login_required
 def profile(request):
-    z_code=z_code_handle(request)
+    z_code = z_code_handle(request)
 
-    url = 'https://www.townscript.com/api/registration/getRegisteredUsers' 
-    params = {'eventCode':'zeitgeist21-113231'}
-    headers = {'Authorization':'eyJhbGciOiJIUzUxMiJ9.eyJST0xFIjoiUk9MRV9VU0VSIiwic3ViIjoiemVpdGdlaXN0QGlpdHJwci5hYy5pbiIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYxNzI5Mjg5MjA5OCwiVVNFUl9JRCI6MjY2NDIyMCwiZXhwIjoxNjI1MDY4ODkyfQ.JH7G7pj0YexeVC-XEOzomWSaSt--0Z1qdoMlFoKhntGqmPU-NtuF753GwKXFg39ssrtjx2VmOQtozdhlRQq-Mw'}
+    url = 'https://www.townscript.com/api/registration/getRegisteredUsers'
+    params = {'eventCode': 'zeitgeist21-113231'}
+    headers = {'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJST0xFIjoiUk9MRV9VU0VSIiwic3ViIjoiemVpdGdlaXN0QGlpdHJwci5hYy5pbiIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYxNzI5Mjg5MjA5OCwiVVNFUl9JRCI6MjY2NDIyMCwiZXhwIjoxNjI1MDY4ODkyfQ.JH7G7pj0YexeVC-XEOzomWSaSt--0Z1qdoMlFoKhntGqmPU-NtuF753GwKXFg39ssrtjx2VmOQtozdhlRQq-Mw'}
     r = requests.get(url, headers=headers, params=params)
     data = json.loads(str(r.json()['data']))
-    details=False
-    events=[]
-    total=0
-    
+    details = False
+    events = []
+    total = 0
+
     for reg in data:
-        if reg['userEmailId']==request.user.email:
-            details={}
-            dt = datetime.datetime.strptime(reg['registrationTimestamp'], "%d-%m-%Y %H:%M")
-            details['organization']=reg['customQuestion1']
-            details['city']=reg['customQuestion2']
-            details['mobile']=reg['customQuestion3']
-            event={}
-            event['uniqueOrderId']=reg['uniqueOrderId']
-            event['price']=reg['ticketPrice']
-            event['name']=reg['allTicketName']
-            event['dt']=dt
-            event['date']=dt.strftime("%#d %b, %Y")
-            event['time']=dt.strftime("%I:%M %p")
+        if reg['userEmailId'] == request.user.email:
+            details = {}
+            dt = datetime.datetime.strptime(
+                reg['registrationTimestamp'], "%d-%m-%Y %H:%M")
+            details['organization'] = reg['customQuestion1']
+            details['city'] = reg['customQuestion2']
+            details['mobile'] = reg['customQuestion3']
+            event = {}
+            event['uniqueOrderId'] = reg['uniqueOrderId']
+            event['price'] = reg['ticketPrice']
+            event['name'] = reg['allTicketName']
+            event['dt'] = dt
+            event['date'] = dt.strftime("%#d %b, %Y")
+            event['time'] = dt.strftime("%I:%M %p")
             events.append(event)
 
-            total+=reg['ticketPrice']
+            total += reg['ticketPrice']
 
-            details['events']=events
-            details['total']=total
-    
-    if (details!=False):
-        details['events'].sort(key = lambda x:x['dt'])
+            details['events'] = events
+            details['total'] = total
+
+    if (details != False):
+        details['events'].sort(key=lambda x: x['dt'])
 
         for registration in Registrations.objects.all():
             if registration.email == request.user.email:
                 registration.mobile = details['mobile']
                 registration.organization = details['organization']
                 registration.city = details['city']
-                registration.events =details['events']
+                registration.events = details['events']
                 registration.total = details['total']
                 registration.save()
                 break
 
-    return render(request, 'main_page/profile.html',{'details':details,'z_code':z_code})
+    return render(request, 'main_page/profile.html', {'details': details, 'z_code': z_code})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def admin_control(request):
+    data = fetch_reg_data()
+
+    while(len(data) > 0):
+        cur_email = data[0]['userEmailId']
+        z_code_handle(cur_email, data[0]['userName'])
+
+        details = False
+        events = []
+        total = {'total': 0}
+
+        data_copy = copy.deepcopy(data)
+
+        for reg in data_copy:
+            if reg['userEmailId'] == cur_email:
+                details = reg_details(details, events, total, reg)
+                data.remove(reg)
+
+        if (details != False):
+            update_reg_database(details, cur_email)
+
+    SPREADSHEET_ID = '1_7EvZe4K_W2X3_p46inOaxsLgFKlUFKNHJVL1TFq9NY'
+
+    creds = None
+
+    if os.path.exists('main_page/token_key.json'):
+        creds = Credentials.from_service_account_file(
+            'main_page/token_key.json')
+
+    service = build('sheets', 'v4', credentials=creds)
+
+    sheets = service.spreadsheets().get(
+        spreadsheetId=SPREADSHEET_ID).execute()['sheets']
+    sheet_names = []
+    for sheet in sheets:
+        sheet_names . append(sheet['properties']['title'])
+
+    for sheet in sheets:
+        service.spreadsheets().values().clear(spreadsheetId=SPREADSHEET_ID,
+                                              range=sheet['properties']['title']+"!A1:O999").execute()
+
+    for reg in Registrations.objects.all():
+        if reg.events != "":
+            for event in json.loads(reg.events):
+                if event['name'] not in sheet_names:
+                    add_sheet = {'requests': [
+                        {
+                            "addSheet": {
+                                "properties": {
+                                    "title": event['name'],
+                                    "gridProperties": {
+                                        "rowCount": 20,
+                                        "columnCount": 7
+                                    }
+                                }
+                            }
+                        }
+                    ]}
+                    service.spreadsheets().batchUpdate(
+                        spreadsheetId=SPREADSHEET_ID, body=add_sheet).execute()
+                    sheet_names.append(event['name'])
+
+                RANGE_NAME = event['name']+'!A2'
+                reg_detail = [[reg.name, reg.z_code, reg.email, reg.mobile,
+                               reg.organization, event['date'], event['time']]]
+                service.spreadsheets().values().append(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME,
+                                                       valueInputOption='RAW', body={'values': reg_detail}).execute()
+
+    sheets = service.spreadsheets().get(
+        spreadsheetId=SPREADSHEET_ID).execute()['sheets']
+
+    for sheet in sheets:
+        sheet_name = sheet['properties']['title']
+        sheet_id = sheet['properties']['sheetId']
+        RANGE_NAME = sheet_name+'!A1'
+        head = [['Name', 'Zeitgeist Code', 'Email',
+                 'Mobile', 'College', 'Date', 'Time']]
+        service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID,
+                                               range=RANGE_NAME, valueInputOption='RAW', body={'values': head}).execute()
+
+        format_body = {'requests': [
+            {
+                "repeatCell": {
+                    "range": {
+                        "sheetId": sheet_id,
+                        "startRowIndex": 0,
+                        "endRowIndex": 1
+                    },
+                    "cell": {
+                        "userEnteredFormat": {
+                            "horizontalAlignment": "CENTER",
+                            "textFormat": {
+                                "fontSize": 11,
+                                "bold": True,
+                            }
+                        }
+                    },
+                    "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
+                }
+            },
+            {
+                "repeatCell": {
+                    "range": {
+                        "sheetId": sheet_id,
+                        "startRowIndex": 1
+                    },
+                    "cell": {
+                        "userEnteredFormat": {
+                            "horizontalAlignment": "LEFT",
+                            "textFormat": {
+                                "fontSize": 10
+                            }
+                        }
+                    },
+                    "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
+                }
+            },
+            {
+                "autoResizeDimensions": {
+                    "dimensions": {
+                        "sheetId": sheet_id,
+                        "dimension": "COLUMNS",
+                        "startIndex": 0
+                    }
+                }
+            },
+            {
+                "sortRange": {
+                    "range": {
+                        "sheetId": sheet_id,
+                        "startRowIndex": 1,
+                    },
+                    "sortSpecs": [
+                        {
+                            "dimensionIndex": 5,
+                            "sortOrder": "ASCENDING"
+                        },
+                        {
+                            "dimensionIndex": 6,
+                            "sortOrder": "ASCENDING"
+                        }
+                    ]
+                }
+            }
+        ]}
+
+        service.spreadsheets().batchUpdate(
+            spreadsheetId=SPREADSHEET_ID, body=format_body).execute()
+
+    return redirect(main_page_home)
+
 
 @login_required
 def register_for_event(request, event_id):

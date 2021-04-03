@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+{% load static %}
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
+    <link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}?v=2.0" />
+    <link rel="stylesheet" href="{% static 'main_page/css/merchandise.css' %}">
+</head>
+
+
+<body>
+    <header id="header" class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">
+                    <a class="logo" href="{% url 'main_page_home' %}">
+                        <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+                        <img class="logo-alt-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+                    </a>
+                </div>
+                <button class="navbar-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <nav id="nav">
+                <ul class="main-nav nav navbar-nav navbar-right">
+
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Events</a>
+                        <ul class="dropdown-menu">
+                            {% if request.user.is_authenticated %}
+                            <li>
+                                <a style="color: #ff3939; cursor:pointer;"
+                                    onclick="popup('zeitgeist21-113231');">Register</a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a style="color: #ff3939; cursor:pointer;" href="{% url 'account_login' %}">Register</a>
+                            </li>
+
+                            {% endif %}
+                            <li><a style="color: #0d0b0b;" href="{% url 'tech_events' %}">
+                                    Technical</a></li>
+                            <li><a style="color: #0d0b0b;" href="{% url 'cult_events' %}">Cultural</a>
+                            </li>
+
+
+
+                        </ul>
+
+                    </li>
+                    <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
+                    <li><a href="{% url 'workshop' %}">Workshops</a></li>
+                    <li><a href="/#our_sponsors">Sponsors</a></li>
+                    <li><a href="{% url 'TSP:home' %}">TSP</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account_login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class=" container merchandise_main">
+        <center>
+            <h2 style="color: rgb(214, 0, 89); letter-spacing: 1.1px;">Buy Zeitgeist Merchandise !!</h2>
+        </center>
+        <div class="merchandise_text">
+            <center> COMING SOON . . . . . </center>
+            <!-- <center style="margin-top: 50px ;">
+                <a href="#" class="btn-lg btn-info" style="background: rgb(168, 0, 104);margin-right: 20px;"> Buy
+                    Now</a>
+
+                <a href="tel:8279948887" class="btn-lg btn-info"
+                    style="background: rgb(31, 97, 128); margin-left: 20px;">Contact</a>
+            </center> -->
+        </div>
+
+    </div>
+
+
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p style="text-align: center">Made with <i class="fa fa-heart-o"></i> by Software Community, IIT
+                        Ropar</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="footer-brand">
+                        <a class="logo" href="{% url 'main_page_home' %}">
+                            <img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}"
+                                alt="logo" /><br />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-social">
+                        <a href="https://www.facebook.com/zeitgeist.iitrpr/" target="_blank"><i
+                                class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/zeitgeist_rpr" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/zeitgeist_iitrpr/" target="_blank"><i
+                                class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'main_page/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
+    <script src="{% static 'main_page/js/main.js' %}"></script>
+</body>
+
+</html>
