@@ -1,0 +1,13 @@
+.merchandise_main{
+ 
+    min-height: 70vh;
+    margin-top: 10vh;
+    
+}
+
+.merchandise_text{
+    margin-top: 50px;
+    padding:50px 20px;
+    
+    border: 2px solid rgb(31, 97, 128);
+}
