@@ -40,6 +40,7 @@ urlpatterns = [
     path('cult_events/', views.cult_events, name="cult_events"),
     path('profile/', views.profile, name="profile"),
     path('verify_user/', views.verify_user, name="verify_user"),
+    path('admin_control/', views.admin_control, name='admin_control'),
     path('register/<int:event_id>/',
          views.register_for_event, name="register_for_event"),
     path('data-api/', include(router.urls)),
