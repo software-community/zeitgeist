@@ -21,21 +21,30 @@
             <h2 class="mb-4"><strong>About TSP</strong></h2>
             <p style="text-align:justify; font-size:1.3em">
                 Zeitgeist 2021 is proud to announce its second edition of School Outreach Program: <strong>Techno School Program(TSP)</strong>. 
-                It will be a two-phase competition with talented students from prestigious schools participating in two categories namely:
-               <strong> <br>Category 1: Class IX & X<br>
-                Category 2: Class XI & XII<br></strong>
+                It will be a two-phase competition with talented students from prestigious schools participating in three categories namely:
+               <strong>  <br>Category 1: Class VII & VIII<br>
+                Category 2: Class IX & X<br>
+                Category 3: Class XI & XII<br></strong>
 
-                The events organized for school students are as follows:<br>
-                <strong>1. Zeitgeist Open Olympiad:</strong>
+                <center><font style="font-size:20px; font-weight: 600;">TSP Open Olympiad</font></center>
                 
-                <ul style="text-align: justify;">
-                <li>Preliminary test on <strong>18 Jan 2020 (Saturday)</strong> in respective schools</li>
-                <li>The finale on <strong> Feb 2020(Saturday)</strong> at IIT Ropar campus</li>
-                <li>The prizes of the competition are  <strong> worth 25k</strong>.</li>
-                <li>Top 25 participants from each category will be selected for the finale.</li>
-                <li>Registration fee for the Olympiad is INR 50</li>
-                <li>Please register your schools at <a href="{% url 'TSP:home'  %}">www.advitiya/TSP.in</a> </li>
+                <ul style="text-align: justify; font-size: 18px;">
+                    <li>Prize money worth ₹25K will be divided among all three categories</li>
+                    <li>Registration fee = ₹50</li>
+                    <li>Top 10% participants will be choosen for the finale </li>
+                    <li><b>Preliminary test will be conducted in 3rd week of April</b></li>
+                    <li>Tech walk (Technical Fest and a Campus visit by the students) </li>
+                    <li>Junior Scientist Competition (Inviting innovative projects by students)</li>
+                    <li>Exciting cash prizes and goodies for the winners</li>
+                    <li>Certificate of appreciation and vouchers for all students</li>
+                    <li>A special talk regarding career and future by IITIANS and various professionals</li>
+                    <li><b>Exam will be after 3rd week of April</b></li>
                 </ul>
+                <br>
+                <font style="text-align: left; width:100%; display: block; font-size: 18px;">
+                For any queries, contact <b>Sourabh Mittal (93063 59202)</b>
+                </font>
+
                   <!-- <strong>  <p style="text-align:justify; font-size: 20.8px;">2. Techwalk <br></p></strong>
                     <p style="text-align:justify;font-size: 15px;"> 
                         On the days of <strong>Zeitgeist 2020</strong>, all the participating labs in our institute will be open to
@@ -57,6 +66,7 @@
             </p>
 
         </div>
+
     </div>
 
 
@@ -163,7 +173,7 @@
         </div>
         <div class="col-sm-4">
             <div class="card" style="height:100%">
-                <img src="{% static 'TSP/img/register.png' %}" height="160" width="12" class="card-img-top" alt="...">
+                <img onclick="popup('tsp');" src="{% static 'TSP/img/register.png' %}" height="160" width="12" class="card-img-top" alt="..." style="cursor: pointer;">
                 <div class="card-body">
                     <h3 class="card-title">Registration of Students</h3>
                     <p class="card-text">The school shall take the registration fees from the students and register them

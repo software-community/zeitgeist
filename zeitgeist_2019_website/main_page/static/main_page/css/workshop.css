@@ -7,21 +7,22 @@
 body{
     max-width:100vw;
     min-height:100vh;
-    background:linear-gradient(to top left , rgb(0, 69, 126) ,rgb(14, 104, 116));
+  background: linear-gradient(rgba(0, 0, 0, 0.685),rgba(0, 0, 0, 0.562)),  url('../img/Background\ ACCENt.svg');
 
+  background-repeat: no-repeat;
+    background-color: #02021d !important;
+}
+
+.workshop_main_logo{
+    width:500px;
+}
+
+.bg_workshop{
+    width:100vw;
 }
 body header{
     margin-top:20px;
     height:15vh
-}
-
-.workshop_main > h1{
-    font-family: 'Merienda', cursive;
-    letter-spacing: 10px;
-    font-size:90px;
-    text-align: center;
-    color:azure;
-    animation: logo_animation 4s infinite;
 }
 
 .workshop_nav a:hover{
@@ -29,46 +30,30 @@ body header{
     text-decoration: none;
 }
 
-@keyframes logo_animation{
-    0%{
-        color: rgb(255, 253, 158);
-    }
-    25%{
-        color: rgb(255, 187, 0);
-    }
-    75%{
-        color:rgb(255, 170, 121)
-    }
-    100%{
-        color:rgb(255, 253, 158);
-    }
-}
-
 .workshop_btn:hover{
     transform:scale(1.05)
 }
 
 .text-box-ca{
-
+    
     width:84vw;
     min-height:30vh;
     display: flex;
     justify-content:center;
     align-items: center;
-    background: linear-gradient(to top right, rgba(223, 255, 251, 0.103), rgba(215, 255, 209, 0.377));
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
+   
     margin-top:40px;
 
 }
 .text-box-ca > h6{
     width:90%;
-    font-family: 'Baloo Bhaina 2', cursive;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: normal;
     letter-spacing:1.5px;
     line-height: 1.5;
     text-align: center;
-   color: rgb(255, 255, 255);
+
+   color: #AEADD9;
 
 }
 
@@ -80,18 +65,19 @@ body header{
     justify-content:space-evenly
 }
 
+.workshop_links>a>img{
+    width:120px
+}
+
 .workshop_links>a:hover{
     text-decoration: none;
     transform: scale(1.05);
 }
 
 .workshop_btn{
-    color: rgb(255, 255, 255);
-    border: 1px solid rgb(13, 151, 128);
-    background:linear-gradient(rgba(128, 255, 156, 0.267),rgba(122, 120, 255, 0.288));
-    border-radius:20px;
-    padding: 15px;
-    font-size:18px;
+    width: 100px
+   
+   
 }
 
 #workshop_explore_wrapper{
@@ -222,6 +208,9 @@ body header{
         height:250px;
         
     }
+    .workshop_main_logo{
+        width:350px;
+    }
     
     .workshop_logo{
        
@@ -279,6 +268,9 @@ body header{
         
         padding: 10px;
         font-size:15px
+    }
+    .workshop_main_logo{
+        width:200px;
     }
     .text-box-ca{
 
