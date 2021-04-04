@@ -245,8 +245,7 @@ def admin_control(request):
 
     creds=None
 
-    if os.path.exists('main_page/token_key.json'):
-        creds = Credentials.from_service_account_info(token_key)
+    creds = Credentials.from_service_account_info(os.environ['token_key'])
 
     service = build('sheets', 'v4', credentials=creds)
 
@@ -658,9 +657,10 @@ def reach_us(request):
 # --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
-
     return render(request, 'main_page/under_maintainance.html')
 
+def error_404(request,exception):
+    return render(request, 'main_page/error_404.html', status=404)
 
 @staff_member_required
 def send_email_all(request):
