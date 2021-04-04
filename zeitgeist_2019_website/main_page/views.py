@@ -25,8 +25,6 @@ import random,string
 import copy
 from django.core.serializers.json import DjangoJSONEncoder
 
-from main_page.var import eventCode, Authorization
-
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 # Create your views here.
@@ -156,8 +154,8 @@ def z_code_handle(email, name):
 
 def fetch_reg_data():
     url = 'https://www.townscript.com/api/registration/getRegisteredUsers' 
-    params = {'eventCode':eventCode}
-    headers = {'Authorization':Authorization}
+    params = {'eventCode':os.environ['eventCode']}
+    headers = {'Authorization':os.environ['Authorization']}
     r = requests.get(url, headers=headers, params=params)
     data = json.loads(str(r.json()['data']))
     return data
