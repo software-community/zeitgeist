@@ -18,22 +18,28 @@
 </head>
 
 <body>
+
+    <img class="bg-workshop" src="{static 'main_page/img/Background ACCENt.svg'}" alt="">
     <header>
         <nav class="navbar ">
             <div class="container workshop_nav">
 
-                <a href="{% url 'main_page_home' %}" class="workshop_btn">Zeitgeist</a>
+                <a href="{% url 'main_page_home' %}" class="workshop_btn"><img
+                        src="{% static 'main_page/img/Zeitgeist.svg' %}" alt=""></a>
 
 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
-                    class="workshop_btn">Register</a>
+                    class="workshop_btn"> <img src="{% static 'main_page/img/Register BIG.svg' %}" alt=""> </a>
 
             </div>
         </nav>
 
     </header>
+
     <div class="workshop_main" style="height: 85vh;">
-        <h1>ZEITGEIST 2k'21</h1>
+        <center><img src="{% static 'main_page/img/ZEITGEIST CENTRE ORANGE.svg' %}" class="workshop_main_logo" alt="">
+        </center>
+
         <div class="container text-box-ca">
 
             <h6>
@@ -47,10 +53,10 @@
         <div class="workshop_links">
 
             <a href="#workshop_explore_wrapper">
-                <p class="workshop_btn"> Explore the Workshops </p>
+                <img src="{% static 'main_page/img/Explore Workshop.svg' %}" class="workshop_btn">
             </a>
             <a href="#workshop_benifits">
-                <p class="workshop_btn">What you will get !!</p>
+                <img src="{% static 'main_page/img/What will you get.svg' %}" class="workshop_btn">
             </a>
         </div>
     </div>
@@ -140,7 +146,7 @@
 
         <center class="workshop_links"><a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
-                class="workshop_btn">Register</a></center>
+                class="workshop_btn"><img src=" {% static 'main_page/img/Register BIG.svg' %}" alt=""></a></center>
 
     </div>
     <div class=" workshop_benifits" id="workshop_benifits">
