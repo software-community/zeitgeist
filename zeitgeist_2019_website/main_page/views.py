@@ -154,8 +154,8 @@ def z_code_handle(email, name):
 
 def fetch_reg_data():
     url = 'https://www.townscript.com/api/registration/getRegisteredUsers' 
-    params = {'eventCode':'zeitgeist21-113231'}
-    headers = {'Authorization':'eyJhbGciOiJIUzUxMiJ9.eyJST0xFIjoiUk9MRV9VU0VSIiwic3ViIjoiemVpdGdlaXN0QGlpdHJwci5hYy5pbiIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYxNzI5Mjg5MjA5OCwiVVNFUl9JRCI6MjY2NDIyMCwiZXhwIjoxNjI1MDY4ODkyfQ.JH7G7pj0YexeVC-XEOzomWSaSt--0Z1qdoMlFoKhntGqmPU-NtuF753GwKXFg39ssrtjx2VmOQtozdhlRQq-Mw'}
+    params = {'eventCode':os.environ['eventCode']}
+    headers = {'Authorization':os.environ['Authorization']}
     r = requests.get(url, headers=headers, params=params)
     data = json.loads(str(r.json()['data']))
     return data
@@ -245,8 +245,7 @@ def admin_control(request):
 
     creds=None
 
-    if os.path.exists('main_page/token_key.json'):
-        creds = Credentials.from_service_account_file('main_page/token_key.json')
+    creds = Credentials.from_service_account_info(os.environ['token_key'])
 
     service = build('sheets', 'v4', credentials=creds)
 
@@ -658,9 +657,10 @@ def reach_us(request):
 # --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
-
     return render(request, 'main_page/under_maintainance.html')
 
+def error_404(request,exception):
+    return render(request, 'main_page/error_404.html', status=404)
 
 @staff_member_required
 def send_email_all(request):

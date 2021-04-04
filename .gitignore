@@ -11,3 +11,4 @@ zeit
 zeitgeist_2019_website/.env
 zeitgeist_2019_website/db.sqlite3
 zeitgeist_2019_website/main_page/token_key.json
+zeitgeist_2019_website/main_page/var.py
