@@ -245,7 +245,10 @@ def admin_control(request):
 
     creds=None
 
-    creds = Credentials.from_service_account_info(json.loads(os.environ['token_key_json_2']))
+    token_key=json.loads(os.environ['token_key_json_3'])
+    token_key['private_key']=token_key['private_key'].replace('/*/',' ')
+
+    creds = Credentials.from_service_account_info(token_key)
 
     service = build('sheets', 'v4', credentials=creds)
 
