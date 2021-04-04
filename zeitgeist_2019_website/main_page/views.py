@@ -25,8 +25,6 @@ import random,string
 import copy
 from django.core.serializers.json import DjangoJSONEncoder
 
-from main_page.var import eventCode, Authorization, token_key
-
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 # Create your views here.
