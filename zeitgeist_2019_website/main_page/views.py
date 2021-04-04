@@ -154,8 +154,8 @@ def z_code_handle(email, name):
 
 def fetch_reg_data():
     url = 'https://www.townscript.com/api/registration/getRegisteredUsers' 
-    params = {'eventCode':'zeitgeist21-113231'}
-    headers = {'Authorization':'eyJhbGciOiJIUzUxMiJ9.eyJST0xFIjoiUk9MRV9VU0VSIiwic3ViIjoiemVpdGdlaXN0QGlpdHJwci5hYy5pbiIsImF1ZGllbmNlIjoid2ViIiwiY3JlYXRlZCI6MTYxNzI5Mjg5MjA5OCwiVVNFUl9JRCI6MjY2NDIyMCwiZXhwIjoxNjI1MDY4ODkyfQ.JH7G7pj0YexeVC-XEOzomWSaSt--0Z1qdoMlFoKhntGqmPU-NtuF753GwKXFg39ssrtjx2VmOQtozdhlRQq-Mw'}
+    params = {'eventCode':os.environ['eventCode']}
+    headers = {'Authorization':os.environ['Authorization']}
     r = requests.get(url, headers=headers, params=params)
     data = json.loads(str(r.json()['data']))
     return data
