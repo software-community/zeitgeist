@@ -44,66 +44,27 @@ body{
 }
 
 
-.events_sidebar{
-    height: 90vh;
-    width: 24vw;
-    border: 3px solid rgb(0, 128, 160);
-    background:rgba(0, 109, 100, 0.26);
-    position: fixed;
-    top: 9%;
-    left:1vw;
-    font-family: 'Baloo Bhaina 2', cursive;
-    backdrop-filter: blur(5px);
 
-}
 
-.events_sidebar>ul{
-    width: 100%;
-    height: 100%;
-    color: white;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-evenly;
-  align-items: center;
-}
 
-.events_sidebar>ul>li{
-    border:2px solid rgb(123, 196, 255);
 
-    border-radius: 20px;
-    width: 90%;
-    min-height: 40px;
-   justify-content:center;
-   align-items: center;
-    display: flex;
-    margin-right: auto;
-    cursor: pointer;
-    
-}
-.events_sidebar>ul>li:hover{
-    transform:scale(1.1)
-}
-
-.events_sidebar>ul>li>a{
-    color: white;
-}
 
 
 .events_main{
-    width: 70vw;
+    width: 90vw;
     min-height: 70vh;
     position:absolute;
     top: 15%;
-    left:28vw;
+    left:5vw;
 
-    
+
     display: flex;
     flex-direction:column;
     align-items: center;
     font-family: 'Baloo Bhaina 2', cursive;
     
 }
+
 .event_class{
     width: 100%;
     min-height: 30vh;
@@ -115,7 +76,7 @@ body{
     justify-content:space-evenly;
 }
 .event_card{
-    width: 30%;
+    width: 23%;
     min-width: 230px;
     height:30vh;
     border: 2px solid black;

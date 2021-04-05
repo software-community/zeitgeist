@@ -11,3 +11,37 @@
     
     border: 2px solid rgb(31, 97, 128);
 }
+
+.images_merchandise{
+
+   
+    margin-top:60px;
+    display:flex;
+    justify-content:center;
+    flex-wrap: wrap;
+
+
+}
+
+.merchandise_image{
+    width: 220px;
+
+    margin: 0 20px;
+    
+}
+
+.merchandise_image:hover{
+    transform: scale(1.3);
+
+}
+
+@media only screen and (max-width: 650px){
+    h2{
+        font-size:20px;
+    }
+}
+@media only screen and (max-width: 450px){
+    h2{
+        font-size:20px;
+    }
+}
