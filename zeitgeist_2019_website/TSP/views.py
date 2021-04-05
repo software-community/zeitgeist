@@ -206,4 +206,3 @@ def upload_tsp_data(request):
                 failed = failed + ' ' + advitiya_id
     return HttpResponse('Added : ' + str(added) + ' Already : ' + str(already) + 
                         ' Failed : ' + str(failed)) 
-    
