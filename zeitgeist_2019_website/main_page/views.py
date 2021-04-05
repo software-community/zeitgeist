@@ -141,7 +141,6 @@ def main_page_events(request):
             events_data[category][subcategory] = subcategory.event_set.all()
     return render(request, 'main_page/events.html', {'events_data': events_data})
 
-<<<<<<< HEAD
 
 def unique_z_code(z_code):
     for registration in Registrations.objects.all():
@@ -221,8 +220,6 @@ def update_reg_database(details, email):
             break
 
 
-=======
->>>>>>> 46bf893e8fbf55f43fc984b5310d97ff4961427b
 @login_required
 def verify_user(request):
     z_code_handle(request.user.email, request.user.first_name +
@@ -270,7 +267,6 @@ def admin_control(request):
                 details = reg_details(details, events, total, reg)
                 data.remove(reg)
 
-<<<<<<< HEAD
         if (details != False):
             update_reg_database(details, cur_email)
 
@@ -403,11 +399,7 @@ def admin_control(request):
         service.spreadsheets().batchUpdate(
             spreadsheetId=SPREADSHEET_ID, body=format_body).execute()
 
-=======
-    registrationsGoogleSheetsUpdateFun()
->>>>>>> 46bf893e8fbf55f43fc984b5310d97ff4961427b
     return redirect(main_page_home)
-    
 
 
 @login_required
