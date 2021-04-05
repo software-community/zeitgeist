@@ -294,8 +294,8 @@ def registrationsGoogleSheetsUpdateFun():
                         "startRowIndex": 2,
                     },
                     "sortSpecs": [
-                        {"dimensionIndex": 5, "sortOrder": "ASCENDING"},
                         {"dimensionIndex": 6, "sortOrder": "ASCENDING"},
+                        {"dimensionIndex": 7, "sortOrder": "ASCENDING"},
                     ],
                 }
             }
