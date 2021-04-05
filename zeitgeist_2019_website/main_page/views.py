@@ -240,7 +240,7 @@ def admin_control(request):
         if (details!=False):
             update_reg_database(details,cur_email)
 
-    
+
     SPREADSHEET_ID = '1_7EvZe4K_W2X3_p46inOaxsLgFKlUFKNHJVL1TFq9NY'
 
     creds=None
@@ -255,11 +255,17 @@ def admin_control(request):
     sheets = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()['sheets']
     sheet_names = []
     for sheet in sheets:
-        sheet_names . append(sheet['properties']['title'])
+        sheet_names.append(sheet['properties']['title'])
 
-    for sheet in sheets:
-        service.spreadsheets( ).values( ).clear( spreadsheetId=SPREADSHEET_ID, range=sheet['properties']['title']+"!A1:O999" ).execute( )
-        
+    clearAll={'ranges':[]}
+
+    for sheet in sheet_names:
+        clearAll['ranges'].append(sheet+'!A1:O999')
+    service.spreadsheets().values().batchClear(spreadsheetId=SPREADSHEET_ID, body=clearAll).execute()
+
+    addSheetRequest={'requests':[]}
+    writeRequest={'value_input_option':'RAW','data':[{"range":"Summary","values":[['Summary'],['Event Name','Number of Registrations']]}]}
+
     for reg in Registrations.objects.all():
         if reg.events!="":
             for event in json.loads(reg.events):
@@ -271,7 +277,7 @@ def admin_control(request):
                             "title": event['name'],
                             "gridProperties": {
                                 "rowCount": 20,
-                                "columnCount": 7
+                                "columnCount": 9
                             }
                             }
                         }
@@ -280,26 +286,63 @@ def admin_control(request):
                     service.spreadsheets().batchUpdate(spreadsheetId=SPREADSHEET_ID,body=add_sheet).execute()
                     sheet_names.append(event['name'])
 
-                RANGE_NAME = event['name']+'!A2'
-                reg_detail = [[reg.name,reg.z_code, reg.email,reg.mobile,reg.organization,event['date'],event['time']]]
-                service.spreadsheets().values().append(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption='RAW', body={'values':reg_detail}).execute()
-    
+                if not any(writeSheet['range']==event['name'] for writeSheet in writeRequest['data']):
+                    writeRequest['data'].append({"range":event['name'],"values":[[event['name']],['Name','Zeitgeist Code','Email','Mobile','College','City','Date','Time','Paid']]})
+                
+                for sheet in writeRequest['data']:
+                    if (sheet['range']==event['name']):
+                        sheet['values'].append([reg.name,reg.z_code, reg.email,reg.mobile,reg.organization,reg.city,event['date'],event['time'],event['price']])
+
     sheets = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()['sheets']
-    
+
+    formatBodyRequest={'requests':[]}
+
+
     for sheet in sheets:
         sheet_name = sheet['properties']['title']
         sheet_id = sheet['properties']['sheetId']
-        RANGE_NAME = sheet_name+'!A1'
-        head = [['Name','Zeitgeist Code','Email','Mobile','College','Date','Time']]
-        service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption='RAW', body={'values':head}).execute()
 
-        format_body={'requests':[
-            {
+        for sheet in writeRequest['data']:
+            if sheet['range']!='Summary' and sheet['range']==sheet_name:
+                writeRequest['data'][0]['values'].append([sheet_name,len(sheet['values'])-2])
+
+                formatBodyRequest['requests'].append({'mergeCells': {
+                    'mergeType': 'MERGE_ALL',
+                    'range': {
+                        'startColumnIndex': 0,
+                        'startRowIndex': 0,
+                        'endColumnIndex': 9,
+                        'endRowIndex': 1,
+                        'sheetId': sheet_id
+
+                    }
+                }})
+
+        formatBodyRequest['requests'].append({
             "repeatCell": {
                 "range": {
                 "sheetId": sheet_id,
                 "startRowIndex": 0,
                 "endRowIndex": 1
+                },
+                "cell": {
+                "userEnteredFormat": {
+                    "horizontalAlignment" : "CENTER",
+                    "textFormat": {
+                    "fontSize": 14,
+                    "bold": True,
+                    }
+                }
+                },
+                "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
+            }
+            })
+        formatBodyRequest['requests'].append({
+            "repeatCell": {
+                "range": {
+                "sheetId": sheet_id,
+                "startRowIndex": 1,
+                "endRowIndex": 2
                 },
                 "cell": {
                 "userEnteredFormat": {
@@ -312,12 +355,12 @@ def admin_control(request):
                 },
                 "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
             }
-            },
-            {
+            })
+        formatBodyRequest['requests'].append({
             "repeatCell": {
                 "range": {
                 "sheetId": sheet_id,
-                "startRowIndex": 1
+                "startRowIndex": 2
                 },
                 "cell": {
                 "userEnteredFormat": {
@@ -329,8 +372,8 @@ def admin_control(request):
                 },
                 "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
             }
-            },
-            {
+            })
+        formatBodyRequest['requests'].append({
             "autoResizeDimensions": {
                 "dimensions": {
                 "sheetId": sheet_id,
@@ -338,12 +381,12 @@ def admin_control(request):
                 "startIndex": 0
                 }
             }
-            },
-            {
+            })
+        formatBodyRequest['requests'].append({
             "sortRange": {
                 "range": {
                 "sheetId": sheet_id,
-                "startRowIndex": 1,
+                "startRowIndex": 2,
                 },
                 "sortSpecs": [
                 {
@@ -356,11 +399,41 @@ def admin_control(request):
                 }
                 ]
             }
+            })
+
+    formatBodyRequest['requests'].append({
+        "repeatCell": {
+            "range": {
+            "sheetId": sheets[0]['properties']['sheetId'],
+            "startRowIndex": 2,
+            "startColumnIndex": 1,
+            "endColumnIndex": 2
+            },
+            "cell": {
+            "userEnteredFormat": {
+                "horizontalAlignment" : "CENTER"
             }
-        ]}
+            },
+            "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)"
+        }
+        })
+    formatBodyRequest['requests'].append({'mergeCells': {
+        'mergeType': 'MERGE_ALL',
+        'range': {
+            'startColumnIndex': 0,
+            'startRowIndex': 0,
+            'endColumnIndex': 2,
+            'endRowIndex': 1,
+            'sheetId': sheets[0]['properties']['sheetId']
 
-        service.spreadsheets().batchUpdate(spreadsheetId=SPREADSHEET_ID,body=format_body).execute()
+        }
+    }})
 
+    if (len(addSheetRequest['requests'])!=0):
+        service.spreadsheets().batchUpdate(spreadsheetId=SPREADSHEET_ID,body=addSheetRequest).execute()
+    service.spreadsheets().values().batchUpdate(spreadsheetId=SPREADSHEET_ID, body=writeRequest).execute()
+    service.spreadsheets().batchUpdate(spreadsheetId=SPREADSHEET_ID,body=formatBodyRequest).execute()
+    
     return redirect(main_page_home)
 
 @login_required
