@@ -90,11 +90,11 @@ def registrationsGoogleSheetsUpdateFun():
 
     creds = None
 
-    # token_key = json.loads(os.environ["token_key_json_3"])
-    # token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
+    token_key = json.loads(os.environ["token_key_json_3"])
+    token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
 
-    # creds = Credentials.from_service_account_info(token_key)
-    creds = Credentials.from_service_account_file("main_page/token_key.json")
+    creds = Credentials.from_service_account_info(token_key)
+    # creds = Credentials.from_service_account_file("main_page/token_key.json")
 
     service = build("sheets", "v4", credentials=creds)
 
