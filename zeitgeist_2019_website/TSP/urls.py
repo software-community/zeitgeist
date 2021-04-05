@@ -16,4 +16,5 @@ urlpatterns=[
 
     path('result/', views.result_view,name='result'),
     path('load-data/', views.upload_tsp_data,name='load_data'),
+    path('test/', views.test),
 ]

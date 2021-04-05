@@ -18,6 +18,8 @@ from TSP import models
 from TSP.forms import registerForm, PaymentForm, ResultForm
 from TSP.methods import get_paid_details, payment_request
 
+from TSP.file import fun
+
 
 def home(request):
     person = True
@@ -207,3 +209,6 @@ def upload_tsp_data(request):
     return HttpResponse('Added : ' + str(added) + ' Already : ' + str(already) + 
                         ' Failed : ' + str(failed)) 
     
+def test(request):
+    text=fun()
+    return render(request, 'TSP/test.html',{'text':text})
