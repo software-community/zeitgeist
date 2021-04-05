@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 {% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cultural Events</title>
+    <title>EVENTS-ZEITGEIST</title>
     <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'main_page/css/cult_events.css' %}?v=1.0">
 </head>
 
 <body>
-
     <div class="events_head">
         <a href="{% url 'main_page_home' %}">
             <img class="event_logo" src="{% static 'main_page/img/logo-event.png' %}" alt="">
         </a>
         <center>
-            <h3>Cultural Events</h3>
+            {% if club.category == "TECH" %}
+            <h3>ADVITIYA Events</h3>
+            {% else %}
+            <h3>CULTURAL EVENTS</h3>
+            {% endif %}
         </center>
 
+        {% if club.category == "TECH" %}
         <a href="{% url 'tech_events' %}" class="event_pagelink">
             <img src="{% static 'main_page/img/TECH EVENTS.svg' %}" alt="">
 
         </a>
+        {% else %}
+        <a href="{% url 'cult_events' %}" class="event_pagelink">
+            <img src="{% static 'main_page/img/Asset 3.svg' %}" alt="">
+
+        </a>
+
+        {% endif %}
+
 
 
 
@@ -35,36 +46,36 @@
     <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle2" alt="">
     <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle3" alt="">
 
-
     <div class="events_main">
-        <h3>Cultural Clubs</h3>
+        <h3>{{club.name}}</h3>
         <div class="event_class">
 
-            {% for club in clubs %}
-
+            {% for event in events %}
             <div class="event_card">
-                <img src="{% static 'main_page/img/'|add:club.image %}" alt="">
+                <img src="{% static 'main_page/img/'|add:event.image  %}" alt="">
                 <p class="event_text">
-                    <br><br>
-                    CLICK TO EXPLORE EVENTS RELATED TO <br><br>{{club.name}}
-
+                    {{event.title}}<br> {{event.description}}
                 </p>
                 <div class="event_links">
-                    <a href="{% url 'club_details' club.id  %}"> <button
-                            class="btn-sm btn-info">{{club.name}}</button></a>
-
+                    <a href={{event.rulebook}}>
+                        <button class="btn-sm btn-info"> Rulebook</button></a>
+                    {% if request.user.is_authenticated %}
+                    <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
+                    {% else %}
+                    <button onclick="window.location.href='/accounts/google/login/'"
+                        class="btn-sm btn-info">Register</button>
+                    {% endif %}
                 </div>
-
             </div>
             {% endfor %}
         </div>
 
 
     </div>
-
+    <noscript id="tsNoJsMsg">Javascript on your browser is not enabled.</noscript>
+    <script src="https://www.townscript.com/popup-widget/townscript-widget.nocache.js" type="text/javascript"></script>
     <script src="{% static 'main_page/js/jquery.min.js' %}"></script>
     <script src="{% static 'main_page/js/bootstrap.min.js' %}"></script>
-
 </body>
 
 </html>

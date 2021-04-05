@@ -17,6 +17,7 @@ class Our_SponsorAdmin(admin.ModelAdmin):
 
     list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
 
+
 class Media_PartnerAdmin(admin.ModelAdmin):
 
     list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
@@ -103,7 +104,6 @@ class ParticipantHasParticipatedAdmin(admin.ModelAdmin):
 
     get_participant_code.short_description = 'Participant Code'
     get_participant_code.admin_order_field = 'participant__participant_code'
-
 
     def get_participant_name(self, obj):
         return obj.participant.name
@@ -285,14 +285,18 @@ class NotificationAdmin(admin.ModelAdmin):
 
     list_display = [field.name for field in Notification._meta.get_fields()]
 
+
 class WebCountsAdmin(admin.ModelAdmin):
     list_display = ['count']
 
+
 class OurTeamAdmin(admin.ModelAdmin):
-    list_display = ['sequence','name','designation','mobile','photo']
+    list_display = ['sequence', 'name', 'designation', 'mobile', 'photo']
+
 
 class RegistrationsAdmin(admin.ModelAdmin):
-    list_display = ['id','name','email','mobile','organization','city','z_code','total']
+    list_display = ['id', 'name', 'email', 'mobile',
+                    'organization', 'city', 'z_code', 'total']
 
 
 # admin.site.register(Category, CategoryAdmin)
@@ -304,7 +308,8 @@ admin.site.register(Prev_Sponsor, Prev_SponsorAdmin)
 
 admin.site.register(Participant, ParticipantAdmin)
 admin.site.register(ParticipantHasPaid, ParticipantHasPaidAdmin)
-admin.site.register(ParticipantHasParticipated, ParticipantHasParticipatedAdmin)
+admin.site.register(ParticipantHasParticipated,
+                    ParticipantHasParticipatedAdmin)
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamHasMember, TeamHasMemberAdmin)
 # admin.site.register(Support, SupportAdmin)
@@ -329,3 +334,6 @@ admin.site.register(WebCounts, WebCountsAdmin)
 admin.site.register(OurTeam, OurTeamAdmin)
 
 admin.site.register(Registrations, RegistrationsAdmin)
+
+admin.site.register(Clubs)
+admin.site.register(Event_2021)
