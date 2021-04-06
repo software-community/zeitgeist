@@ -185,9 +185,9 @@ def admin_control(request):
 
     registrationsGoogleSheetsUpdateFun()
 
-    cas = RegistrationDetails.objects.all()
-    for ca in cas:
-        update_ca_google_sheet(ca)
+    # cas = RegistrationDetails.objects.all()
+    # for ca in cas:
+    #     update_ca_google_sheet(ca)
 
     return redirect(main_page_home)
     
