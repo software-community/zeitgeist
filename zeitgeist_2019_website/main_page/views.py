@@ -25,6 +25,7 @@ import random,string
 import copy
 from django.core.serializers.json import DjangoJSONEncoder
 from .functions import *
+from campus_ambassador.views import update_ca_google_sheet
 
 # Create your views here.
 
@@ -183,6 +184,11 @@ def admin_control(request):
             update_reg_database(details,cur_email)
 
     registrationsGoogleSheetsUpdateFun()
+
+    cas = RegistrationDetails.objects.all()
+    for ca in cas:
+        update_ca_google_sheet(ca)
+
     return redirect(main_page_home)
     
 
