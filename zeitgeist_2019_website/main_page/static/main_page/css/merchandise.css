@@ -28,10 +28,12 @@
 
     margin: 0 20px;
     
+    transition: transform 0.5s ease;
 }
 
 .merchandise_image:hover{
-    transform: scale(1.3);
+    transform: scale(1.3)
+   
 
 }
 
