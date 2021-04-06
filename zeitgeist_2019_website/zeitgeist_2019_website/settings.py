@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +21,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "*=chpeu7a0#$9k0l1t!a88v^i8mmb#z1#6+k$b8+xc^t%9xulb"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.environ.get('ENV')=='DEVELOPMENT':
+    DEBUG=True
+else:
+    DEBUG=False
 
-ALLOWED_HOSTS = ["zeitgeist.org.in", "www.zeitgeist.org.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost","172.26.140.223", "192.168.1.104",'*']
+ALLOWED_HOSTS = ["www.advitiya.in","advitiya.in","zeitgeist.net.in", "www.zeitgeist.net.in", "192.168.1.1", "192.168.1.2", "192.168.1.3", "localhost"]
 
 
 # Application definition
@@ -98,12 +102,22 @@ WSGI_APPLICATION = 'zeitgeist_2019_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+# else :
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASS'),
     }
-}
+} 
 
 
 # Password validation
@@ -147,7 +161,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_FILES = "static"
+STATIC_FILES = os.getenv('STATIC_FILES')
 STATIC_ROOT = os.path.join(STATIC_FILES, 'static')
 
 AUTHENTICATION_BACKENDS = (
@@ -171,14 +185,16 @@ LOGOUT_REDIRECT_URL = 'main_page_home'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_PORT = "587"
-EMAIL_HOST_USER = "your email"
-EMAIL_HOST_PASSWORD = "your password"
-CRISPY_TEMPLATE_PACK="bootstrap3"
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-os.environ["REGISTRATION_ENABLE"] = "1"
+
+
+
 
 ADMINS = [('Yash Mittal','2019eeb1210@iitrpr.ac.in'),]
 SERVER_EMAIL = 'django@zeitgeist.net.in'
+
