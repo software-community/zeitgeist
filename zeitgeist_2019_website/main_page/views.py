@@ -25,6 +25,7 @@ import random,string
 import copy
 from django.core.serializers.json import DjangoJSONEncoder
 from .functions import *
+from campus_ambassador.views import update_ca_google_sheet
 
 # Create your views here.
 
@@ -183,6 +184,11 @@ def admin_control(request):
             update_reg_database(details,cur_email)
 
     registrationsGoogleSheetsUpdateFun()
+
+    # cas = RegistrationDetails.objects.all()
+    # for ca in cas:
+    #     update_ca_google_sheet(ca)
+
     return redirect(main_page_home)
     
 
@@ -483,9 +489,11 @@ def reach_us(request):
 # --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
-    return render(request, 'main_page/under_maintainance.html')
+    send_mail('Error 500',str(request),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
+    return render(request, 'main_page/under_maintainance.html', {'text':request})
 
 def error_404(request,exception):
+    send_mail('Error 404',str(request)+'\n'+str(exception),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
     return render(request, 'main_page/error_404.html', status=404)
 
 @staff_member_required
