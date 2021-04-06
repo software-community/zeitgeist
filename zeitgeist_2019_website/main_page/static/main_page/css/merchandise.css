@@ -26,7 +26,7 @@
 .merchandise_image{
     width: 220px;
 
-    margin: 0 20px;
+    margin: 40px 120px;
     
     transition: transform 0.5s ease;
 }
