@@ -5,6 +5,8 @@ from .models import *
 from .methods import requests
 import datetime
 from django.core.serializers.json import DjangoJSONEncoder
+import random
+import string
 
 
 def unique_z_code(z_code):
