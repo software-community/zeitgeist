@@ -6,6 +6,8 @@ from .forms import *
 from .models import RegistrationDetails
 from django.core.mail import send_mail
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from googleapiclient.discovery import build
+from google.oauth2.service_account import Credentials
 # Create your views here.
 
 
@@ -50,9 +52,27 @@ def campus_ambassador_register(request):
                 [request.user.email],
                 fail_silently=False,
             )
+            update_google_sheet(new_campus_ambassador_registration)
             return render(request, 'campus_ambassador/success.html')
     else:
         campus_ambassador_registration_details_form = CampusAmbassadorRegistrationDetailsForm()
 
     return render(request, 'campus_ambassador/register.html',
         {'campus_ambassador_registration_details_form': campus_ambassador_registration_details_form})
+
+def update_ca_google_sheet(reg):
+    SPREADSHEET_ID = "1x4oghF-OqNId2Q3h8VmL_gB1idb5miitMR7YYnrzuR4"
+
+    creds = None
+
+    token_key = json.loads(os.environ["token_key_json_3"])
+    token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
+
+    creds = Credentials.from_service_account_info(token_key)
+    # creds = Credentials.from_service_account_file("main_page/token_key.json")
+
+    service = build("sheets", "v4", credentials=creds)
+
+    body = {'values':[[reg.user.first_name + ' ' + reg.user.last_name, reg.user.email, reg.campus_ambassador_code, reg.college, str(reg.mobile_number), reg.why_interested, reg.past_experience]]}
+
+    service.spreadsheets().values().append(spreadsheetId=SPREADSHEET_ID, range="Sheet1!A2", valueInputOption="RAW", body=body).execute()
