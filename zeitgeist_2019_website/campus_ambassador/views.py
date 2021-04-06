@@ -54,7 +54,7 @@ def campus_ambassador_register(request):
                 [request.user.email],
                 fail_silently=False,
             )
-            update_google_sheet(new_campus_ambassador_registration)
+            update_ca_google_sheet(new_campus_ambassador_registration)
             return render(request, 'campus_ambassador/success.html')
     else:
         campus_ambassador_registration_details_form = CampusAmbassadorRegistrationDetailsForm()
