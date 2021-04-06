@@ -179,3 +179,6 @@ EMAIL_HOST_PASSWORD = "your password"
 CRISPY_TEMPLATE_PACK="bootstrap3"
 
 os.environ["REGISTRATION_ENABLE"] = "1"
+
+ADMINS = [('Yash Mittal','2019eeb1210@iitrpr.ac.in'),]
+SERVER_EMAIL = 'django@zeitgeist.net.in'
