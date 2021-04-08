@@ -319,3 +319,13 @@ body header{
         font-size:13px
     }
 }
+
+.text-link, .text-link:visited, .text-link:focus{
+    color:#e7e7ff;
+    text-decoration: none;
+}
+
+.text-link:hover{
+    color: #AEADD9;
+    text-decoration: none;
+}
