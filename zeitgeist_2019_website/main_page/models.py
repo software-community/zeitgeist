@@ -163,7 +163,7 @@ class TeamHasMember(models.Model):
 class Our_Sponsor(models.Model):
 
     name_of_photo_in_static_files = models.CharField(
-        max_length=15, blank=False, null=False)
+        max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
 
     class Meta:
@@ -173,7 +173,7 @@ class Our_Sponsor(models.Model):
 class Media_Partner(models.Model):
 
     name_of_photo_in_static_files = models.CharField(
-        max_length=15, blank=False, null=False)
+        max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
 
     class Meta:
@@ -183,7 +183,7 @@ class Media_Partner(models.Model):
 class Prev_Sponsor(models.Model):
 
     name_of_photo_in_static_files = models.CharField(
-        max_length=15, blank=False, null=False)
+        max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
 
     class Meta:
