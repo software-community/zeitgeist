@@ -18,9 +18,11 @@ from django.urls import path, include
 from . import views
 from . import api
 from django.contrib.auth import views as auth_views
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticViewsSitemap
 
 router = routers.DefaultRouter()
 router.register(r'cats', api.CategoryViewSet)
@@ -29,6 +31,8 @@ router.register(r'events', api.EventViewSet)
 router.register(r'our_sponsor', api.Our_SponsorViewSet)
 router.register(r'prev_sponsor', api.Prev_SponsorViewSet)
 router.register(r'notification', api.NotificationViewSet)
+
+sitemaps = {'static':StaticViewsSitemap}
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
@@ -98,4 +102,7 @@ urlpatterns = [
     # it might occur when accounts/google/login fails and hence redirects to accounts/login
     path('accounts/login/', RedirectView.as_view(pattern_name='google_login',
                                                  permanent=False), name="go_to_google_login"),
+
+    path('robots.txt', TemplateView.as_view(template_name="main_page/robots.txt", content_type='text/plain')),
+    path('sitemap.xml', sitemap, {'sitemaps':sitemaps}),
 ]

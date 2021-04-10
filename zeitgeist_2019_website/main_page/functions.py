@@ -54,9 +54,13 @@ def fetch_reg_data():
 def reg_details(details, events, total, reg):
     details = {}
     dt = datetime.datetime.strptime(reg["registrationTimestamp"], "%d-%m-%Y %H:%M")
-    details["organization"] = reg["customQuestion1"]
-    details["city"] = reg["customQuestion2"]
-    details["mobile"] = reg["customQuestion3"]
+    for i in reg['answerList']:
+        if i['question']=='Organization':
+            details["organization"] = i['answer']
+        if i['question']=='City':
+            details["city"] = i["answer"]
+        if i['question']=='Contact Number':
+            details["mobile"] = i["answer"]
     event = {}
     event["uniqueOrderId"] = reg["uniqueOrderId"]
     event["price"] = reg["ticketPrice"]
@@ -117,7 +121,7 @@ def registrationsGoogleSheetsUpdateFun():
 
     addSheetRequest = {"requests": []}
     writeRequest = {
-        "value_input_option": "RAW",
+        "value_input_option": "USER_ENTERED",
         "data": [
             {
                 "range": "Summary",
