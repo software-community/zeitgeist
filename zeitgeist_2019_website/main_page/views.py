@@ -190,6 +190,61 @@ def admin_control(request):
     #     update_ca_google_sheet(ca)
 
     return redirect(main_page_home)
+
+def schedule_data_extractor(data):
+    date=[]
+    for i in data:
+        event = {}
+        try:
+            event['name'] = i[0]
+        except:
+            event['name'] = "-"
+        if i[1]!='':
+            event['img'] = i[1]
+        else:
+            event['img'] = "logo.png"
+        try:
+            event['hr'] = i[2]
+        except:
+            event['hr'] = "-"
+        try:
+            event['min'] = i[3]
+        except:
+            event['min'] = "-"
+        try:
+            event['det'] = i[4]
+        except:
+            event['det'] = ""
+        try:
+            event['rulebook'] = i[5]
+        except:
+            event['rulebook'] = ""
+        date.append(event)
+    return date
+
+def schedule(request):
+    token_key = json.loads(os.environ["token_key_json_3"])
+    token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
+
+    creds = Credentials.from_service_account_info(token_key)
+    # creds = Credentials.from_service_account_file("main_page/token_key.json")
+
+    service = build('sheets', 'v4', credentials=creds)
+
+    SPREADSHEET_ID="14qbE28jt0-tqmMBd1rPKEvPnLbYrN_LmwjAmXjaRwDY"
+
+    RANGE = "date1!A2:F17"
+    data1 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+    RANGE = "date2!A2:F17"
+    data2 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+    RANGE = "date3!A2:F17"
+    data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+
+    date1 = schedule_data_extractor(data1)
+    date2 = schedule_data_extractor(data2)
+    date3 = schedule_data_extractor(data3)
+
+    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3})
     
 
 @login_required

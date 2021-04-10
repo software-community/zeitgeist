@@ -1,0 +1,490 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Schedule | Zeitgeist</title>
+	<link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/bootstrap/bootstrap.min.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
+	<link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}?v=2.2" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-53B777HXCF"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-53B777HXCF');
+	</script>
+	<style>
+		@font-face {
+			font-family: 'Canterbury';
+			src: url("{% static 'main_page/fonts/Canterbury.ttf' %}");
+		}
+		.head{
+			background-color: rgba(0,0,0,0.3);
+			display: block;
+			padding: 10px;
+			position: fixed;
+			top:0;
+			width:100%;
+			backdrop-filter: blur(5px);
+			z-index: 100;
+		}
+		.logo-img{
+			width:50%;
+			max-width:150px;
+			margin:auto;
+			display: block;
+		}
+
+		.date-wrap{
+			margin:  auto;
+			margin-top:100px;
+			background-color: rgba(255,255,255,0.1);
+			width: 100%;
+			max-width: 600px;
+			font-family: 'Canterbury';
+		}
+
+		.date-wrap .date-cont{
+			text-align: center;
+			font-size: 40px;
+		}
+
+		.date-wrap .date{
+			width: 100%;
+			color:white;
+			padding:5px;
+			transition: 0.1s ease-in-out;
+		}
+
+		.date-wrap .date.active{
+			background-color: white;
+			color:black;
+		}
+
+		.date-wrap .date-link{
+			cursor: pointer;
+		}
+
+		.date-wrap .date-link:hover .date:not(.active){
+			background-color: rgba(255,255,255,0.2);
+		}
+
+		.schedule-box-wrap{
+			width: 100%;
+			max-width: 800px;
+			margin:auto;
+			font-size: 0;
+			/* border: 2px solid red; */
+		}
+
+		.schedule-box{
+			width: 100%;
+			overflow: hidden;
+			transition: 0.4s ease-in-out;
+			/* border:2px solid red; */
+			display: inline-block;
+			vertical-align: top;
+
+		}
+
+		.schedule-wrap{
+			width: 100vw;
+			max-width: 800px;
+			margin:auto;
+			margin-top: 40px;
+			overflow: hidden;
+			display: block;
+		}
+
+		#date2-sch,#date3-sch{
+			width:0;
+		}
+
+		.event-sch{
+			width:100%;
+			/* display: block; */
+			/* background-color: rgba(255,255,255,0.4); */
+			position: relative;
+			padding:0;
+			margin:10px 0px;
+		}
+
+		.event-left{
+			width:170px;
+			height: 170px;
+			position: relative;
+		}
+
+		.event-time{
+			width:170px;
+			height: 170px;
+			background-color: rgba(255,255,255,0.1);
+			padding:30px 5px;
+			position: absolute;
+			top:0;
+			left:0;
+			text-align: center;
+			z-index: 51;
+		}
+
+		.hour{
+			font-size:70px;
+			color:#cae7df;
+			/* border: 2px solid red; */
+			transition: 0.8s ease-in-out;
+		}
+
+		.min{
+			font-size: 20px;
+			color:#e56b1f;
+			/* border: 2px solid red; */
+
+		}
+
+		.img-overlay{
+			display:block;
+			width:170px;
+			height: 170px;
+			background-color: rgb(7,34,34);
+			position: absolute;
+			top:0;
+			left:0;
+			z-index: 50;
+			transition: 0.8s ease-in-out;
+		}
+
+		.event-img{
+			width:170px;
+			height: 170px;
+			position: absolute;
+			top:0;
+			left:0;
+			transition: 0.3s ease-in-out;
+			z-index: 49;
+		}
+
+		.event-sch:hover .event-img{
+			transform: translate(170px);
+		}
+
+		.event-right{
+			/* position:absolute; */
+			top:0;
+			/* left:200px; */
+			transition: 0.3s ease-in-out;
+			/* border:2px solid red; */
+		}
+
+		.event-sch:hover .event-right{
+			transform: translate(170px);
+		}
+		.event-sch:hover .event-name{
+			opacity:0.5;
+		}
+		.event-sch:hover .event-det{
+			opacity:0.5;
+		}
+		.event-sch:hover .but-wrap i{
+			color:#cae7df9a;
+		}
+
+		.event-name{
+			font-size: 30px;
+			font-weight: 700;
+			color:white;
+			margin-top: 10px;
+			transition: 0.4s ease-in-out;
+		}
+		.event-det{
+			font-size: 16px;
+			color:rgba(255,255,255,0.8);
+			margin-top: 10px;
+			transition: 0.4s ease-in-out;
+		}
+
+		.but-wrap{
+			z-index: 100;
+			display: block;
+			width:40px;
+			
+			font-size: 20px;
+			padding: 5px;
+
+		}
+		.but-wrap i{
+			cursor: pointer;
+			color:#cae7df52;
+			transition: 0.4s ease-in-out;
+		}
+
+		@media screen and (max-width:700px){
+			.event-left, .event-img, .event-time, .img-overlay{
+				width:80px;
+				height: 80px;
+			}
+			.event-right{
+				left:90px;
+			}
+			.hour{
+				font-size: 22px;
+			}
+			.min{
+				font-size: 14px;
+			}
+			.event-name{
+				font-size: 18px;
+				margin-top: 5px;
+			}
+			.event-det{
+				font-size: 14px;
+				margin-top:0;
+			}
+			.event-sch:hover .event-img{
+				transform: translate(80px);
+			}
+
+			.event-sch:hover .event-right{
+				transform: translate(80px);
+			}
+			.event-time{
+				padding:25px 1px;
+			}
+		}
+	</style>
+	<style>
+		.back1{
+			position: fixed;
+			width:300px;
+			opacity: 0.6;
+			right: 50px;
+			bottom: -40px;
+			animation-duration: 15s;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;
+			animation-name: mover;
+			animation-timing-function: ease-in-out;
+		}
+		@keyframes mover {
+			0% {
+				transform: translateY(0) rotateZ(0);
+			}
+			50%{
+					transform: translateY(30px) rotateZ(5deg);
+				}
+			100% {
+				transform: translateY(0) rotateZ(0);
+			}
+		}
+		@media screen and (max-width:700px){
+			.back1{
+				width:150px;
+				opacity: 0.6;
+				right: 10px;
+				bottom: -20px;
+			}
+		}
+	</style>
+</head>
+
+<body style="background-color:rgb(7,34,34); transition: 0.8s ease-in-out">
+	<img class="back1" src="{% static 'main_page/img/swords.png' %}">
+	<div class="head">
+		<a href="{% url 'main_page_home' %}">
+			<img class="logo-img" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+		</a>
+	</div>
+
+	<div class="date-wrap">
+		<div class="date-cont">
+			<div class="row" style="margin:0">
+				<div class="col-4 date-link" style="padding:0">
+					<div class="date active" id="date1" >
+						12
+					</div>
+				</div>
+				<div class="col-4 date-link"  style="padding:0">
+					<div class="date" id="date2">
+						13
+					</div>
+				</div>
+				<div class="col-4 date-link"  style="padding:0">
+					<div class="date" id="date3">
+						14
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="schedule-box-wrap">
+		<div class="schedule-box"  id="date1-sch">
+			<div class="schedule-wrap">
+				{% for event in date1 %}
+					<div class="row event-sch" >
+						<div class="event-left col-1 align-self-center">
+							<div class="event-img-wrap">
+								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
+							</div>
+							<div class="img-overlay">
+								
+							</div>
+							<div class="event-time">
+								<font class="hour">
+								{{event.hr}}
+								</font>
+								<font class="min">
+									:{{event.min}}
+								</font>
+							</div>
+						</div>
+						<div class="event-right col">
+							<div class="event-name">
+								{{event.name}}
+							</div>
+							<div class="event-det">
+								{{event.det}}
+							</div>
+						</div>
+						<div class="but-wrap col-3">
+							{% if event.rulebook != "" %}
+								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="schedule-box"  id="date2-sch">
+			<div class="schedule-wrap">
+				{% for event in date2 %}
+					<div class="row event-sch" >
+						<div class="event-left col-1 align-self-center">
+							<div class="event-img-wrap">
+								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
+							</div>
+							<div class="img-overlay">
+								
+							</div>
+							<div class="event-time">
+								<font class="hour">
+								{{event.hr}}
+								</font>
+								<font class="min">
+									:{{event.min}}
+								</font>
+							</div>
+						</div>
+						<div class="event-right col">
+							<div class="event-name">
+								{{event.name}}
+							</div>
+							<div class="event-det">
+								{{event.det}}
+							</div>
+						</div>
+						<div class="but-wrap col-3">
+							{% if event.rulebook != "" %}
+								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="schedule-box"  id="date3-sch">
+			<div class="schedule-wrap">
+				{% for event in date3 %}
+					<div class="row event-sch" >
+						<div class="event-left col-1 align-self-center">
+							<div class="event-img-wrap">
+								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
+							</div>
+							<div class="img-overlay">
+								
+							</div>
+							<div class="event-time">
+								<font class="hour">
+								{{event.hr}}
+								</font>
+								<font class="min">
+									:{{event.min}}
+								</font>
+							</div>
+						</div>
+						<div class="event-right col">
+							<div class="event-name">
+								{{event.name}}
+							</div>
+							<div class="event-det">
+								{{event.det}}
+							</div>
+						</div>
+						<div class="but-wrap col-3">
+							{% if event.rulebook != "" %}
+								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
+							{% endif %}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<noscript id="tsNoJsMsg">Javascript on your browser is not enabled.</noscript>
+	<script src="https://www.townscript.com/popup-widget/townscript-widget.nocache.js" type="text/javascript"></script>
+	<script src="{% static 'main_page/js/jquery.min.js' %}"></script>
+	<script src="{% static 'main_page/bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
+	<script src="{% static 'main_page/js/main.js' %}"></script>
+	<audio id='mySound' src='{% static "main_page/sound/hover.mp3" %}'>
+
+	<script>
+		cur_color=['rgb(7,34,34)','#CAE7DF']
+		colors=[['rgb(0,0,0)','rgb(200,200,200)'],['rgb(73,91,51)','rgb(216,226,203)'],['rgb(47,22,78)','rgb(211,190,237)']]
+		// colors=[['rgb(6,55,4)','rgb(198,250,194)']]
+		$('.date').click(function(){
+			color = colors[Math.floor(Math.random() * colors.length)];
+			colors.push(cur_color)
+			colors = colors.filter(function(e){
+				if (e==color)
+					return false
+				else
+					return true
+			})
+			cur_color = color
+			$('.date').removeClass('active');
+			$(this).addClass('active');
+			$(".schedule-box").css("width","0px");
+			$("#"+$(this).attr('id')+"-sch").css("width","100%");
+
+			$('body').css('background-color',color[0])
+			$('.img-overlay').css('background-color',color[0])
+			$('.hour').css('color',color[1])
+		})
+		function PlaySound(soundobj) {
+    var thissound=document.getElementById(soundobj);
+    thissound.play();
+}
+	$('.date-link').each(function(){
+		$(this).click(function(){
+			PlaySound('mySound');
+		})
+	})
+	</script>
+</body>
+
+</html>
