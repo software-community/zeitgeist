@@ -390,11 +390,9 @@ def registrationsGoogleSheetsUpdateFun():
 def CashlessEligible(request):
     try:
         email = request.user.email
-        # if email[0:4]=="2019" and email[12:]=="iitrpr.ac.in":
-        #     return True
-        # else:
-        #     return False
         if email=="2019eeb1210@iitrpr.ac.in" or email=="2018eeb1174@iitrpr.ac.in":
+            return True
+        elif email[0:4]=="2020" and email[12:]=="iitrpr.ac.in":
             return True
         else:
             return False
