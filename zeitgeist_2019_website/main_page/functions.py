@@ -56,8 +56,7 @@ def fetch_cashless_reg_data():
         new_data = {}
         new_data['userEmailId'] = i.email
         new_data['userName'] = i.name
-        new_data['registrationTimestamp'] = i.dt.strftime("%d-%m-%Y %H:%M")
-        print(i.dt)
+        new_data['registrationTimestamp'] = i.dt.astimezone(datetime.timezone(datetime.timedelta(minutes=30, hours=5))).strftime("%d-%m-%Y %H:%M")
         answerList = []
         answerList.append({'question':'Organization','answer':'IIT Ropar'})
         answerList.append({'question':'City','answer':i.city})

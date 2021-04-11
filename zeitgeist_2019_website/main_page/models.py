@@ -255,7 +255,7 @@ class Registrations(models.Model):
 class CashlessReg(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    mobile = models.CharField(max_length=100, blank=False, null=False)
+    mobile = PhoneNumberField(region='IN', blank=False, null=False)
     city = models.CharField(max_length=100, blank=False, null=False)
     event = models.CharField(max_length=100, blank=True, null=True)
     dt = models.DateTimeField(blank=True, null=True)
