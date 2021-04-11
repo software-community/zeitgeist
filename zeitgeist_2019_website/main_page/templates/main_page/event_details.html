@@ -59,8 +59,11 @@
                 </p>
                 <div class="event_links">
                     <a href={{event.rulebook}} target="_blank">
-                        <button class="btn-sm btn-info"> Rulebook</button></a>
-                    {% if request.user.is_authenticated %}
+                        <button class="btn-sm btn-info"> Rulebook</button>
+                    </a>
+                    {% if cashless %}
+                    <a href="{% url 'cashless_reg_page' event.id %}"><button class="btn-sm btn-info">Register</button></a>
+                    {% elif request.user.is_authenticated %}
                     <button onclick="popup('zeitgeist21-113231');" class="btn-sm btn-info">Register</button>
                     {% else %}
                     <button onclick="window.location.href='/accounts/google/login/'"

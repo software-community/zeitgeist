@@ -65,3 +65,18 @@ class BaseTeamFormSet(BaseFormSet):
             team_members.add(team_member)
 
 
+class CashlessRegForm(forms.ModelForm):
+    class Meta:
+        model = CashlessReg
+        fields = ['name','email','mobile','city']
+        widgets = {
+            'name': forms.TextInput(),
+            'email': forms.TextInput(),
+            'city': forms.TextInput(),
+            'mobile' : forms.TextInput()
+        }
+        
+    def __init__(self, *args, **kwargs): 
+        super(CashlessRegForm, self).__init__(*args, **kwargs)                       
+        self.fields['name'].disabled = True
+        self.fields['email'].disabled = True

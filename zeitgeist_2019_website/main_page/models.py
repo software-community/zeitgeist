@@ -252,6 +252,18 @@ class Registrations(models.Model):
     class Meta:
         verbose_name_plural = 'Registrations'
 
+class CashlessReg(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    mobile = models.CharField(max_length=100, blank=False, null=False)
+    city = models.CharField(max_length=100, blank=False, null=False)
+    event = models.CharField(max_length=100, blank=True, null=True)
+    dt = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Cashless Registrations'
+
+
 
 class Clubs(models.Model):
     name = models.CharField(max_length=50)

@@ -26,6 +26,9 @@ import copy
 from django.core.serializers.json import DjangoJSONEncoder
 from .functions import *
 from campus_ambassador.views import update_ca_google_sheet
+from django.core.mail import EmailMessage
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
 
 # Create your views here.
 
@@ -42,7 +45,7 @@ def main_page_home(request):
     events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
     events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
     events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team}
+    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request)}
     return render(request, 'main_page/index.html', context)
 
 
@@ -62,7 +65,7 @@ def cult_events(request):
 
 
 def merchandise(request):
-    return render(request, 'main_page/merchandise.html')
+    return render(request, 'main_page/merchandise.html', {'cashless':CashlessEligible(request)})
 
 
 def club_details(request, club_id):
@@ -70,7 +73,7 @@ def club_details(request, club_id):
 
     events = Event_2021.objects.filter(parent=club)
 
-    return render(request, 'main_page/event_details.html', {'events': events, 'club': club})
+    return render(request, 'main_page/event_details.html', {'events': events, 'club': club, 'cashless':CashlessEligible(request)})
     
     
 def change_account(request):
@@ -145,41 +148,40 @@ def verify_user(request):
 
 @login_required
 def profile(request):
-    z_code=z_code_handle(request.user.email, request.user.first_name+' '+request.user.last_name)
+    details,z_code = update_reg_profile_page(request)
 
-    data = fetch_reg_data()
-    details=False
-    events=[]
-    total={'total':0}
-    
-    for reg in data:
-        if reg['userEmailId']==request.user.email:
-            details=reg_details(details,events,total,reg)
-    
-    if (details!=False):
-        update_reg_database(details,request.user.email)
-
-    return render(request, 'main_page/profile.html',{'details':details,'z_code':z_code})
+    return render(request, 'main_page/profile.html',{'details':details,'z_code':z_code,'cashless':CashlessEligible(request)})
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_control(request):
     data = fetch_reg_data()
+    cashless_data = fetch_cashless_reg_data()
 
-    while(len(data)>0):
-        cur_email = data[0]['userEmailId']
-        z_code_handle(cur_email, data[0]['userName'])
+    while(len(data)>0 or len(cashless_data)>0):
+        try:
+            cur_email = data[0]['userEmailId']
+            z_code_handle(cur_email, data[0]['userName'])
+        except:
+            cur_email = cashless_data[0]['userEmailId']
+            z_code_handle(cur_email, cashless_data[0]['userName'])
 
         details = False
         events=[]
         total={'total':0}
 
         data_copy = copy.deepcopy(data)
-        
+
         for reg in data_copy:
             if reg['userEmailId']==cur_email:
                 details=reg_details(details,events,total,reg)
                 data.remove(reg)
         
+        cashless_data_copy = copy.deepcopy(cashless_data)
+        for reg in cashless_data_copy:
+            if reg['userEmailId']==cur_email:
+                details=reg_details(details,events,total,reg)
+                cashless_data.remove(reg)
+
         if (details!=False):
             update_reg_database(details,cur_email)
 
@@ -190,6 +192,46 @@ def admin_control(request):
     #     update_ca_google_sheet(ca)
 
     return redirect(main_page_home)
+
+@login_required
+def cashless_reg_page(request, event_id):
+    if not CashlessEligible(request):
+        send_mail(request.user.email + 'tried cashless',str(request),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
+        return render(request, 'main_page/error_404.html', {'text':request, 'cashless':CashlessEligible(request)})
+    try:
+        event_name = Event_2021.objects.get(id=event_id).title
+    except:
+        return render(request, 'main_page/error_404.html', {'text':request, 'cashless':CashlessEligible(request)})
+    
+    details,z_code = update_reg_profile_page(request)
+    try:
+        for i in details['events']:
+            if i['name']==convert_event_name_to_actual_event_name(event_name):
+                return render(request, 'main_page/register_success.html',{'event_name':event_name,'already_reg':True, 'cashless':CashlessEligible(request)})
+    except:
+        pass
+
+    if request.method == "POST":
+        form = CashlessRegForm(request.POST)
+        if form.is_valid():
+            new_cashless_reg = form.save(commit=False)
+            new_cashless_reg.name = request.user.first_name +' '+request.user.last_name
+            new_cashless_reg.email = request.user.email
+            new_cashless_reg.event = event_name
+            new_cashless_reg.dt = datetime.datetime.now()
+            new_cashless_reg.save()
+
+            message = 'Dear ' + new_cashless_reg.name + '<br><br>You have successfully registered for <b><em>' + convert_event_name_to_actual_event_name(new_cashless_reg.event) +'</em></b> on ' + new_cashless_reg.dt.strftime("%#d %b, %Y") + ' at ' + new_cashless_reg.dt.strftime("%I:%M %p") + '. Find more details by visiting your <a href="' + request.build_absolute_uri(reverse('profile')) + '">profile</a> page.<br><br>Regards<br>Zeitgeist 2k21 Event Management Team<br><br><img src="'+request.build_absolute_uri(static('main_page/img/logo/logo_full.png'))+'" style="width:150px">'
+            print(request.build_absolute_uri(static('main_page/img/logo/logo_full.png')))
+
+            msg = EmailMessage('Registration successful for '+ new_cashless_reg.event, message,'zeitgeist.pr@iitrpr.ac.in', [request.user.email])
+            msg.content_subtype = "html"
+            msg.send()
+
+            return render(request, 'main_page/register_success.html',{'event_name':event_name, 'cashless':CashlessEligible(request)})
+
+    return render(request, 'main_page/cashless_reg_page.html', {"event_name":event_name, "form":CashlessRegForm(initial={'name':request.user.first_name +' '+request.user.last_name,'email':request.user.email}), 'cashless':CashlessEligible(request)})
+
 
 def schedule_data_extractor(data):
     date=[]
@@ -538,18 +580,18 @@ def support_payment_redirect(request):
 
 def reach_us(request):
 
-    return render(request, 'main_page/reach_us.html')
+    return render(request, 'main_page/reach_us.html', {'cashless':CashlessEligible(request)})
 
 
 # --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
     send_mail('Error 500',str(request),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
-    return render(request, 'main_page/under_maintainance.html', {'text':request})
+    return render(request, 'main_page/under_maintainance.html', {'text':request, 'cashless':CashlessEligible(request)})
 
 def error_404(request,exception):
     send_mail('Error 404',str(request)+'\n'+str(exception),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
-    return render(request, 'main_page/error_404.html', status=404)
+    return render(request, 'main_page/error_404.html', {'cashless':CashlessEligible(request)}, status=404)
 
 @staff_member_required
 def send_email_all(request):
