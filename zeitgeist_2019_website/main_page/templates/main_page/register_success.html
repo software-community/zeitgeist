@@ -1,0 +1,41 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class='jumbotron' style="background-color:rgb(32, 35, 37)">
+  <br>
+</div>
+
+<style>
+  .cont{
+    padding-top:100px;
+    padding-bottom: 100px;
+    max-width: 600px;
+    font-size: 18px;
+  }
+</style>
+<div class="container cont">
+  {% if already_reg %}
+  You have already registered for <b>{{event_name}}</b>.
+  <br>
+  Check your <a href="{% url 'profile' %}" style="color:blue">profile</a> page for details.
+  <br>
+  Explore more <a href="{% url 'tech_events' %}" style="color:blue">Technical Events</a>.
+  <br>
+  Explore more <a href="{% url 'cult_events' %}" style="color:blue">Cultural Events</a>.
+  <br><br>
+  If you are facing any problem, please contact Ritesh Chaudhary, <a
+  href="tel:9158725099" style="font-weight:bold;color:#17301c">915 8725 099</a>
+  {% else %}
+  You have successfully registered for <b>{{event_name}}</b>.
+  <br>
+  Check your <a href="{% url 'profile' %}" style="color:blue">profile</a> page for more details.
+  <br>
+  Explore more <a href="{% url 'tech_events' %}" style="color:blue">Technical Events</a>.
+  <br>
+  Explore more <a href="{% url 'cult_events' %}" style="color:blue">Cultural Events</a>.
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -41,7 +41,8 @@
 
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Events</a>
                         <ul class="dropdown-menu">
-                            {% if request.user.is_authenticated %}
+                            {% if cashless %}
+                            {% elif request.user.is_authenticated %}
                             <li>
                                 <a style="color: #ff3939; cursor:pointer;"
                                     onclick="popup('zeitgeist21-113231');">Register</a>
