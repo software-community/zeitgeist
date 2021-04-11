@@ -211,14 +211,16 @@ def cashless_reg_page(request, event_id):
     except:
         pass
 
+    form = CashlessRegForm(initial={'name':request.user.first_name +' '+request.user.last_name,'email':request.user.email})
+
     if request.method == "POST":
-        form = CashlessRegForm(request.POST)
+        form = CashlessRegForm(request.POST,initial={'name':request.user.first_name +' '+request.user.last_name,'email':request.user.email})
         if form.is_valid():
             new_cashless_reg = form.save(commit=False)
             new_cashless_reg.name = request.user.first_name +' '+request.user.last_name
             new_cashless_reg.email = request.user.email
             new_cashless_reg.event = event_name
-            new_cashless_reg.dt = datetime.datetime.now()
+            new_cashless_reg.dt = datetime.datetime.utcnow()
             new_cashless_reg.save()
 
             message = 'Dear ' + new_cashless_reg.name + '<br><br>You have successfully registered for <b><em>' + convert_event_name_to_actual_event_name(new_cashless_reg.event) +'</em></b> on ' + new_cashless_reg.dt.strftime("%#d %b, %Y") + ' at ' + new_cashless_reg.dt.strftime("%I:%M %p") + '. Find more details by visiting your <a href="' + request.build_absolute_uri(reverse('profile')) + '">profile</a> page.<br><br>Regards<br>Zeitgeist 2k21 Event Management Team<br><br><img src="'+request.build_absolute_uri(static('main_page/img/logo/logo_full.png'))+'" style="width:150px">'
@@ -230,7 +232,7 @@ def cashless_reg_page(request, event_id):
 
             return render(request, 'main_page/register_success.html',{'event_name':event_name, 'cashless':CashlessEligible(request)})
 
-    return render(request, 'main_page/cashless_reg_page.html', {"event_name":event_name, "form":CashlessRegForm(initial={'name':request.user.first_name +' '+request.user.last_name,'email':request.user.email}), 'cashless':CashlessEligible(request)})
+    return render(request, 'main_page/cashless_reg_page.html', {"event_name":event_name, "form": form, 'cashless':CashlessEligible(request)})
 
 
 def schedule_data_extractor(data):
