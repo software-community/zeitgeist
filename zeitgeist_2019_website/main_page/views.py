@@ -223,7 +223,7 @@ def cashless_reg_page(request, event_id):
             new_cashless_reg.dt = datetime.datetime.utcnow()
             new_cashless_reg.save()
 
-            message = 'Dear ' + new_cashless_reg.name + '<br><br>You have successfully registered for <b><em>' + convert_event_name_to_actual_event_name(new_cashless_reg.event) +'</em></b> on ' + new_cashless_reg.dt.strftime("%#d %b, %Y") + ' at ' + new_cashless_reg.dt.strftime("%I:%M %p") + '. Find more details by visiting your <a href="' + request.build_absolute_uri(reverse('profile')) + '">profile</a> page.<br><br>Regards<br>Zeitgeist 2k21 Event Management Team<br><br><img src="'+request.build_absolute_uri(static('main_page/img/logo/logo_full.png'))+'" style="width:150px">'
+            message = 'Dear ' + new_cashless_reg.name + '<br><br>You have successfully registered for <b><em>' + convert_event_name_to_actual_event_name(new_cashless_reg.event) +'</em></b> on ' + new_cashless_reg.dt.astimezone(datetime.timezone(datetime.timedelta(minutes=30, hours=5))).strftime("%#d %b, %Y") + ' at ' + new_cashless_reg.dt.astimezone(datetime.timezone(datetime.timedelta(minutes=30, hours=5))).strftime("%I:%M %p") + '. Find more details by visiting your <a href="' + request.build_absolute_uri(reverse('profile')) + '">profile</a> page.<br><br>Regards<br>Zeitgeist 2k21 Event Management Team<br><br><img src="'+request.build_absolute_uri(static('main_page/img/logo/logo_full.png'))+'" style="width:150px">'
             print(request.build_absolute_uri(static('main_page/img/logo/logo_full.png')))
 
             msg = EmailMessage('Registration successful for '+ new_cashless_reg.event, message,'zeitgeist.pr@iitrpr.ac.in', [request.user.email])
