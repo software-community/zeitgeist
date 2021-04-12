@@ -49,8 +49,8 @@ def main_page_home(request):
     return render(request, 'main_page/index.html', context)
 
 
-def workshop(request):
-    return render(request, 'main_page/workshop.html')
+def workshop(request,type):
+    return render(request, 'main_page/workshop.html', {'type':type})
 
 
 def tech_events(request):

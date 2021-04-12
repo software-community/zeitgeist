@@ -10,7 +10,8 @@ class StaticViewsSitemap(Sitemap):
         "tech_events": 0.8,
         "cult_events": 0.8,
         "merchandise": 0.8,
-        "workshop": 0.7,
+        "workshop_tech": 0.7,
+        "workshop_cult": 0.7,
         # "TSP:home": 0.6,
         "campus_ambassador_home": 0.6,
     }

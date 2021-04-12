@@ -36,7 +36,8 @@ sitemaps = {'static':StaticViewsSitemap}
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
-    path('workshop/', views.workshop, name="workshop"),
+    path('workshop/tech', views.workshop,  {'type':'tech'}, name="workshop_tech"),
+    path('workshop/cult', views.workshop, {'type':'cult'}, name="workshop_cult"),
     path('register_as_participant/', views.register_as_participant,
          name="register_as_participant"),
     path('tech_events/', views.tech_events, name="tech_events"),
