@@ -28,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main_page.urls")),
     path('campus_ambassador/', include("campus_ambassador.urls")),
-    path('TSP/',include("TSP.urls")),
+    # path('TSP/',include("TSP.urls")),
     path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
     path('apple-touch-icon-precomposed.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
     path('apple-touch-icon.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png')))
