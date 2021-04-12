@@ -27,15 +27,15 @@
                 <a href="{% url 'main_page_home' %}" class="workshop_btn"><img
                         src="{% static 'main_page/img/Zeitgeist.svg' %}" alt=""></a>
 
-
+                {% if type == 'tech' %}
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
                     class="workshop_btn"> <img src="{% static 'main_page/img/Register BIG.svg' %}" alt=""> </a>
-
+                {% endif %}
             </div>
         </nav>
 
     </header>
-
+    {% if type == 'tech' %}
     <div class="workshop_main" style="height: 85vh;">
         <center><img src="{% static 'main_page/img/ZEITGEIST CENTRE ORANGE.svg' %}" class="workshop_main_logo" alt="">
         </center>
@@ -60,9 +60,6 @@
             </a>
         </div>
     </div>
-
-
-
     <div id="workshop_explore_wrapper">
         <h4>Workshops for you to explore</h4>
         <div class="container " id="workshop_explore">
@@ -170,9 +167,50 @@
             <li>Lifetime access of the study materials</li>
         </ul>
     </div>
+    {% endif %}
+    {% if type == 'cult' %}
+    <style>
+        .workshop-box{
+            max-width: 400px;
+            position: relative;
+        }
+        .workshop-box:hover .workshop_image_text{
+            visibility:visible;
+            opacity: 1;
+        }
+        .workshop_image_text{
+            width:100%;
+            height: 100%;
+        }
+        @media screen and (max-width:600px){
+            .workshop_image_text{
+                font-size:12px;
+            }
+        }
+    </style>
+    <div class="workshop_main" style="padding: 100px 0px">
+        <center><img src="{% static 'main_page/img/ZEITGEIST CENTRE ORANGE.svg' %}" class="workshop_main_logo" alt="">
+        </center>
+    </div>
+    <div id="workshop_explore_wrapper">
+        <h4>Cultural Workshops</h4>
+        <div class="container " id="workshop_explore">
+            <a href="http://bit.ly/iitrprcsw" target="_blank" class="workshop-box">
+                <img class="workshop_logo" src="{% static 'main_page/img/charcoal_workshop.jpg' %}" alt="" style="width:100%; height:100%;">
+                <p class="workshop_image_text">
+                    Charcoal Sketching Workshop
+                    <br>
+                    <br>
+                    Covering from the very basics, the Sketching workshop would take you all the way through the journey of making a hyperrealistic portrait.
+                    <br>
+                    <br>
+                    Click here for more info
+                </p>
+            </a>
+        </div>
 
-
-
+    </div>
+    {% endif %}
 </body>
 
 

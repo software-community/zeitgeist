@@ -67,7 +67,12 @@
 
                     </li>
                     <li><a href="{% url 'campus_ambassador_home' %}">CA</a></li>
-                    <li><a href="{% url 'workshop' %}">Workshops</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Workshops</a>
+                        <ul class="dropdown-menu">
+                          <li><a style="color: #0d0b0b;" href="{% url 'workshop_tech' %}">Technical</a></li>
+                          <li><a style="color: #0d0b0b;" href="{% url 'workshop_cult' %}">Cultural</a></li>
+                        </ul>
+                      </li>
                     <li><a href="/#our_sponsors">Sponsors</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' %}">Profile</a></li>
