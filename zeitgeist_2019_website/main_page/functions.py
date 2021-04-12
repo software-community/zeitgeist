@@ -50,21 +50,24 @@ def fetch_reg_data():
     data = json.loads(str(r.json()["data"]))
     return data
 
+
 def fetch_cashless_reg_data():
     cashless_data = []
     for i in CashlessReg.objects.all():
         new_data = {}
-        new_data['userEmailId'] = i.email
-        new_data['userName'] = i.name
-        new_data['registrationTimestamp'] = i.dt.astimezone(datetime.timezone(datetime.timedelta(minutes=30, hours=5))).strftime("%d-%m-%Y %H:%M")
+        new_data["userEmailId"] = i.email
+        new_data["userName"] = i.name
+        new_data["registrationTimestamp"] = i.dt.astimezone(
+            datetime.timezone(datetime.timedelta(minutes=30, hours=5))
+        ).strftime("%d-%m-%Y %H:%M")
         answerList = []
-        answerList.append({'question':'Organization','answer':'IIT Ropar'})
-        answerList.append({'question':'City','answer':i.city})
-        answerList.append({'question':'Contact Number','answer':i.mobile})
-        new_data['answerList']=answerList
-        new_data['uniqueOrderId'] = '-'
-        new_data['ticketPrice'] = 0
-        new_data['allTicketName'] = convert_event_name_to_actual_event_name(i.event)
+        answerList.append({"question": "Organization", "answer": "IIT Ropar"})
+        answerList.append({"question": "City", "answer": i.city})
+        answerList.append({"question": "Contact Number", "answer": i.mobile})
+        new_data["answerList"] = answerList
+        new_data["uniqueOrderId"] = "-"
+        new_data["ticketPrice"] = 0
+        new_data["allTicketName"] = convert_event_name_to_actual_event_name(i.event)
         cashless_data.append(new_data)
     return cashless_data
 
@@ -72,12 +75,12 @@ def fetch_cashless_reg_data():
 def reg_details(details, events, total, reg):
     details = {}
     dt = datetime.datetime.strptime(reg["registrationTimestamp"], "%d-%m-%Y %H:%M")
-    for i in reg['answerList']:
-        if i['question']=='Organization':
-            details["organization"] = i['answer']
-        if i['question']=='City':
+    for i in reg["answerList"]:
+        if i["question"] == "Organization":
+            details["organization"] = i["answer"]
+        if i["question"] == "City":
             details["city"] = i["answer"]
-        if i['question']=='Contact Number':
+        if i["question"] == "Contact Number":
             details["mobile"] = i["answer"]
     event = {}
     event["uniqueOrderId"] = reg["uniqueOrderId"]
@@ -108,27 +111,30 @@ def update_reg_database(details, email):
             registration.save()
             break
 
+
 def update_reg_profile_page(request):
-    z_code=z_code_handle(request.user.email, request.user.first_name+' '+request.user.last_name)
+    z_code = z_code_handle(
+        request.user.email, request.user.first_name + " " + request.user.last_name
+    )
 
     data = fetch_reg_data()
     cashless_data = fetch_cashless_reg_data()
-    details=False
-    events=[]
-    total={'total':0}
-    
-    for reg in data:
-        if reg['userEmailId']==request.user.email:
-            details=reg_details(details,events,total,reg)
-    
-    for reg in cashless_data:
-        if reg['userEmailId']==request.user.email:
-            details=reg_details(details,events,total,reg)
-    
-    if (details!=False):
-        update_reg_database(details,request.user.email)
+    details = False
+    events = []
+    total = {"total": 0}
 
-    return details,z_code
+    for reg in data:
+        if reg["userEmailId"] == request.user.email:
+            details = reg_details(details, events, total, reg)
+
+    for reg in cashless_data:
+        if reg["userEmailId"] == request.user.email:
+            details = reg_details(details, events, total, reg)
+
+    if details != False:
+        update_reg_database(details, request.user.email)
+
+    return details, z_code
 
 
 def registrationsGoogleSheetsUpdateFun():
@@ -387,97 +393,101 @@ def registrationsGoogleSheetsUpdateFun():
         spreadsheetId=SPREADSHEET_ID, body=formatBodyRequest
     ).execute()
 
+
 def CashlessEligible(request):
     try:
         email = request.user.email.lower()
-        if email=="2019eeb1210@iitrpr.ac.in" or email=="2018eeb1174@iitrpr.ac.in" or email=="2018chb1038@iitrpr.ac.in" or email=="2018eeb1152@iitrpr.ac.in":
+        if (
+            email == "2019eeb1210@iitrpr.ac.in"
+            or email == "2018eeb1174@iitrpr.ac.in"
+            or email == "2018chb1038@iitrpr.ac.in"
+            or email == "2018eeb1152@iitrpr.ac.in"
+        ):
             return True
-        elif email[0:7]=="2020ceb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020ceb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020chb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020chb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020csb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020csb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020eeb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020eeb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020mcb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020mcb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020meb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020meb" and email[12:] == "iitrpr.ac.in":
             return True
-        elif email[0:7]=="2020mmb" and email[12:]=="iitrpr.ac.in":
+        elif email[0:7] == "2020mmb" and email[12:] == "iitrpr.ac.in":
             return True
         else:
             return False
     except:
         return False
 
+
 def convert_event_name_to_actual_event_name(event):
-    switcher={
-        "Adagio":"Adagio",
-        "AdMad":"AdMad",
-        "Aero Deli":"Aero Deli",
-        "Aero Quiz":"AeroQuiz",
-        "Age Limit Exceeded":"Age limit exceeded",
-        "Art of Photoshop":"Art of photoshop",
-        "Article Writing and Press Release":"Article Writing and Press Release",
-        "Astrophotography":"Astrophotography",
-        "Astroquiz":"Astroquiz",
-        "AUTOMOTIVE DYC":"Design (Automotive)",
-        "Banging beats":"Banging Beats - Street Battle",
-        "Biz-Tech Quiz":"Biz-Tech Quiz",
-        "Brush War":"Brush War",
-        "Business Quiz":"Business Quiz",
-        "Call of duty mobile":"CODM",
-        "Calypso":"Calypso : Group dance event",
-        "Case Study (Zenith)":"Case Study (Zenith)",
-        "Case Study Competition (Fincom)":"Case Study Competition (Fincom)",
-        "Chem-e-quiz":"Chem Quiz",
-        "Chemiscribble":"Chemiscribble",
-        "Corte Paper":"Courte Paper",
-        "Crisis Solving":"Crisis Solving-Action plan",
-        "CSGO":"CSGO",
-        "DebugIt":"Debugit",
-        "Design Marathon":"Design Marathon",
-        "Doodle Maestro":"Doodle Maestro",
-        "News Up (Ecell)":"News Up (Ecell)",
-        "Energy efficient building":"Energy Efficient Building",
-        "Euphony":"Euphony",
-        "Extempore":"Extempore",
-        "Face Wizards":"Face Wizards",
-        "FilmX":"FilmX",
-        "Foodomark":"Foodomark",
-        "FOTOPEDIA":"Photopedia",
-        "General Quiz":"General Quiz",
-        "Hackathon":"Hackathon",
-        "Improvisation Theatre(Improv)":"Improv",
-        "INVENTO":"Invento",
-        "JUNOON":"Junoon : Solo Dance Event",
-        "JUST A MINUTE":"Just a Minute",
-        "LASHKARA":"Lashkara",
-        "Mechanical Madness":"Mechanical Madness",
-        "MELA Quiz":"Movie Quiz",
-        "Micromouse":"Micromouse",
-        "MISHTANNO":"Mishtanno",
-        "Mono Acting(Abhivyakti)":"Mono Acting",
-        "Mr & Mrs Zeitgeist":"Mr & Mrs Zeitgeist",
-        "P=NP":"P=NP",
-        "Polyphony":"Polyphony",
-        "Quick Type":"Quick Type",
-        "Rapsody":"Rapsody",
-        "RoboCAD":"Robocad",
-        "Rocket League":"Rockect-league",
-        "Saaz":"Saaz",
-        "SCRIBBLE":"Scribble",
-        "Sketching Geeks":"Sketching Geeks",
-        "SpeeDAC":"Speedac",
-        "Spoken Poetry(Ruhaniyat)":"Spoken Poetry",
-        "Stock stalkers":"Stock Stalkers",
-        "STREET VAGANZA":"Street Vaganza",
-        "Turncoat":"Turncoat",
-        "VLSI Analog design":"VLSI Analog Design",
-        "WALTZ":"Waltz : Duet Dance Event",
-        "Valorant":"Valorant",
-        "Weapon Star":"Weapon Star (Mechanical Department)",
-        "Yatharth(Group Video)":"Group Acting",
+    switcher = {
+        "Aero Quiz": "AeroQuiz",
+        "Age Limit Exceeded": "Age limit exceeded",
+        "Art of Photoshop": "Art of photoshop",
+        "Article Writing and Press Release": "Article Writing and Press Release",
+        "Astrophotography": "Astrophotography",
+        "Astroquiz": "Astroquiz",
+        "AUTOMOTIVE DYC": "Automotive DYC",
+        "Banging beats": "Banging Beats - Street Battle",
+        "Biz-Tech Quiz": "Biz-Tech Quiz",
+        "Brush War": "Brush War",
+        "Business Quiz": "Business Quiz",
+        "Call of duty mobile": "CODM",
+        "Calypso": "Calypso : Group dance event",
+        "Case Study (Zenith)": "Case Study (Zenith)",
+        "Case Study Competition (Fincom)": "Case Study Competition (Fincom)",
+        "Chem-e-quiz": "Chem Quiz",
+        "Chemiscribble": "Chemiscribble",
+        "Corte Paper": "Corte Paper",
+        "Crisis Solving": "Crisis Solving-Action plan",
+        "CSGO": "CSGO",
+        "DebugIt": "Debugit",
+        "Design Marathon": "Design Marathon",
+        "Doodle Maestro": "Doodle Maestro",
+        "News Up (Ecell)": "News Up (Ecell)",
+        "Energy efficient building": "Energy Efficient Building",
+        "Euphony": "Euphony",
+        "Extempore": "Extempore",
+        "Face Wizards": "Face Wizards",
+        "FilmX": "FilmX",
+        "Foodomark": "Foodomark",
+        "FOTOPEDIA": "Fotopedia",
+        "General Quiz": "General Quiz",
+        "Hackathon": "Hackathon",
+        "Improvisation Theatre(Improv)": "Improv",
+        "INVENTO": "Invento",
+        "JUNOON": "Junoon : Solo Dance Event",
+        "JUST A MINUTE": "Just a Minute",
+        "LASHKARA": "Lashkara",
+        "Mechanical Madness": "Mechanical Madness",
+        "MELA Quiz": "MELA Quiz",
+        "Micromouse": "Micromouse",
+        "MISHTANNO": "Mishtanno",
+        "Mono Acting(Abhivyakti)": "Mono Acting",
+        "Mr & Mrs Zeitgeist": "Mr & Mrs Zeitgeist",
+        "P=NP": "P=NP",
+        "Polyphony": "Polyphony",
+        "Quick Type": "Quick Type",
+        "Rapsody": "Rapsody",
+        "RoboCAD": "Robocad",
+        "Rocket League": "Rocket-league",
+        "Saaz": "Saaz",
+        "SCRIBBLE": "Scribble",
+        "Sketching Geeks": "Sketching Geeks",
+        "SpeeDAC": "Speedac",
+        "Spoken Poetry(Ruhaniyat)": "Spoken Poetry",
+        "Stock stalkers": "Stock Stalkers",
+        "STREET VAGANZA": "Street Vaganza",
+        "Turncoat": "Turncoat",
+        "VLSI Analog design": "VLSI Analog Design",
+        "WALTZ": "Waltz : Duet Dance Event",
+        "Valorant": "Valorant",
+        "Weapon Star": "Weapon Star (Mechanical Department)",
+        "Yatharth(Group Video)": "Yatharth",
     }
-    return switcher.get(event,event)
+    return switcher.get(event, event)
