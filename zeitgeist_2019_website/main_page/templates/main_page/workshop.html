@@ -29,7 +29,11 @@
 
                 {% if type == 'tech' %}
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6cJVCynmp9YQrXC16ZK0wK0HZ75xpldI2Tqkb_0LtH4lbgw/viewform"
-                    class="workshop_btn"> <img src="{% static 'main_page/img/Register BIG.svg' %}" alt=""> </a>
+                    class="workshop_btn" target="_blank"> <img src="{% static 'main_page/img/Register BIG.svg' %}" alt=""> </a>
+                {% endif %}
+
+                {% if type == 'cult' %}
+                <a href="http://bit.ly/iitrprcsw" class="workshop_btn" target="_blank"> <img src="{% static 'main_page/img/Register BIG.svg' %}" alt=""> </a>
                 {% endif %}
             </div>
         </nav>
@@ -192,7 +196,7 @@
         <center><img src="{% static 'main_page/img/ZEITGEIST CENTRE ORANGE.svg' %}" class="workshop_main_logo" alt="">
         </center>
     </div>
-    <div id="workshop_explore_wrapper">
+    <div id="workshop_explore_wrapper" style="height: auto; min-height: auto;">
         <h4>Cultural Workshops</h4>
         <div class="container " id="workshop_explore">
             <a href="http://bit.ly/iitrprcsw" target="_blank" class="workshop-box">
@@ -209,6 +213,24 @@
             </a>
         </div>
 
+    </div>
+    <div class="container workshop_benifits" id="workshop_benifits" >
+        <h4>Charcoal Sketching Workshop</h4>
+        <br>
+        Covering from the very basics, the Sketching workshop would take you all the way through the journey of making a hyperrealistic portrait.
+        <br><br>
+        <b>Benefits:</b>
+        <ul style="margin:10px 0px 0px 30px">
+            <li>Certificate</li>
+            <li>Experience</li>
+        </ul>
+        <br>
+        Artist: Mr. Amit K Meena<bR>
+        Date: <b>17th & 18th April</b>
+        <br><br>
+        Contact: <br>
+        Sanyukta 9304403561<br>
+        Sahil 9653936498
     </div>
     {% endif %}
 </body>
