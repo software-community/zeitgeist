@@ -36,6 +36,7 @@ sitemaps = {'static':StaticViewsSitemap}
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
+    path('workshop', RedirectView.as_view(url="workshop/tech", permanent=True)),
     path('workshop/tech', views.workshop,  {'type':'tech'}, name="workshop_tech"),
     path('workshop/cult', views.workshop, {'type':'cult'}, name="workshop_cult"),
     path('register_as_participant/', views.register_as_participant,

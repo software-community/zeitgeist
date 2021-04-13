@@ -31,5 +31,7 @@ urlpatterns = [
     # path('TSP/',include("TSP.urls")),
     path('favicon.ico',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
     path('apple-touch-icon-precomposed.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
-    path('apple-touch-icon.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png')))
+    path('apple-touch-icon.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
+    path('apple-touch-icon-120x120-precomposed.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png'))),
+    path('apple-touch-icon-120x120.png',RedirectView.as_view(url=staticfiles_storage.url('main_page/img/logo/favicon.png')))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
