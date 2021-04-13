@@ -4,8 +4,52 @@
 
 {% block content %}
 
-<div class='jumbotron' style="background-color:rgb(32, 35, 37)">
-    <br><br><br><br>
+<style>
+    @font-face {
+        font-family: 'Canterbury';
+        src: url("{% static 'main_page/fonts/Canterbury.ttf' %}");
+    }
+    #home-canvas {
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background-color:rgb(255,199,28);
+    }
+    .fest-name {
+      position: absolute;
+      top:-15%;
+      font-size: 20vw;
+      line-height: 100vh;
+      margin: 0;
+      pointer-events: none;
+      color: rgb(68, 70, 73);
+      font-family: 'Canterbury';
+      text-align: center;
+      width: 100%;
+      font-weight: 700;
+    }
+    .fest-dates {
+      position: absolute;
+      top:20%;
+      font-size: 10vw;
+      line-height: 100vh;
+      margin: 0;
+      pointer-events: none;
+      color: rgb(68, 70, 73);
+      font-family: 'Canterbury';
+      text-align: center;
+      width: 100%;;
+    }
+</style>
+
+<div class="container" style="width:100%; height:100vh; overflow: hidden; margin:0; padding:0; position: relative; background-color: black;">
+    <canvas id="home-canvas"></canvas>
+    <p class="fest-name">Zeitgeist</p>
+    <p class="fest-dates">23-24-25 April</p>
+</div>
+
+<div class='jumbotron' style="background-color:rgb(233, 233, 233); margin-bottom:0">
     <div id="galery">
         <div class="container">
             <div class="row">
@@ -34,7 +78,7 @@
     </div>
 </div>
 
-<div id="about" class="section">
+<!-- <div id="about" class="section">
     <div class="container">
         <div class="row">
             <div class="section-title">
@@ -77,7 +121,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div id="video-cta" class="section">
     <div class="section-bg"
@@ -259,6 +303,108 @@
     setTimeout(function () {
         document.getElementById('modal_btn').click();
     }, 2500)
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+<script>
+  const canvas = document.getElementById("home-canvas");
+  const ctx = canvas.getContext("2d");
+  const cellSize=60;
+  const maxSize=100 ;
+  let mousePos = vec2.fromValues(innerWidth * 0.5, innerHeight * 0.5);
+  let numThingsX;
+  let numThingsY;
+  let things;
+
+  function drawThing(thing) {
+    const { pos, radius } = thing;
+    ctx.fillStyle = "rgb(68, 70, 73)";
+    ctx.beginPath();
+    ctx.arc(pos[0], pos[1], radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    things.forEach((thing) => {
+      const dist = vec2.dist(mousePos, thing.pos);
+      if (screen.width>700)
+          a=0.0002
+      else   
+          a=0.0005
+      // a=screen.width/4000000;
+      thing.radius = clamp(dist * dist * a - 1, 0, maxSize);
+      drawThing(thing);
+    });
+    // For now I'm turning off the RAF loop because
+    // there are no ongoing animations.
+    // window.requestAnimationFrame(loop);
+  }
+
+  function makeThing(x, y) {
+    return {
+      pos: vec2.fromValues(x, y),
+      radius: 2,
+    };
+  }
+
+  function makeThings() {
+    things = [];
+    for (let i = 0; i < numThingsY; i += 1) {
+      for (let j = 0; j < numThingsX; j += 1) {
+        const thing = makeThing(
+          j * cellSize + cellSize * 0.5,
+          i * cellSize + cellSize * 0.5
+        );
+        things.push(thing);
+      }
+    }
+  }
+
+  function sizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const canvasRect = canvas.getBoundingClientRect();
+    canvas.width = canvasRect.width * dpr;
+    canvas.height = canvasRect.height * dpr;
+    ctx.scale(dpr, dpr);
+  }
+
+  function handleResize() {
+
+    sizeCanvas();
+    numThingsX = Math.ceil(innerWidth / cellSize);
+    numThingsY = Math.ceil(innerHeight / cellSize);
+    makeThings();
+  }
+  window.addEventListener("resize", throttled(handleResize));
+
+  function handleMouseMove(event) {
+    vec2.set(mousePos, event.clientX, event.clientY);
+    loop();
+  }
+  window.addEventListener("mousemove", throttled(handleMouseMove));
+
+
+  // Kick it off
+  handleResize();
+  loop();
+
+  // USEFUL FUNCTIONS ----------
+  function throttled(fn) {
+    let didRequest = false;
+    return (param) => {
+      if (!didRequest) {
+        window.requestAnimationFrame(() => {
+          fn(param);
+          didRequest = false;
+        });
+        didRequest = true;
+      }
+    };
+  }
+  function clamp(value, min = 0, max = 1) {
+    return value <= min ? min : value >= max ? max : value;
+  }
+
 </script>
 
 {% endblock %}
