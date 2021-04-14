@@ -36,14 +36,14 @@ sitemaps = {'static':StaticViewsSitemap}
 
 urlpatterns = [
     path('', views.main_page_home, name="main_page_home"),
-    path('workshop', RedirectView.as_view(url="workshop/tech", permanent=True)),
-    path('workshop/tech', views.workshop,  {'type':'tech'}, name="workshop_tech"),
-    path('workshop/cult', views.workshop, {'type':'cult'}, name="workshop_cult"),
+    path('workshop/', RedirectView.as_view(pattern_name="workshop_tech", permanent=True)),
+    path('workshop/tech/', views.workshop,  {'type':'tech'}, name="workshop_tech"),
+    path('workshop/cult/', views.workshop, {'type':'cult'}, name="workshop_cult"),
     path('register_as_participant/', views.register_as_participant,
          name="register_as_participant"),
     path('tech_events/', views.tech_events, name="tech_events"),
     path('club_details/<int:club_id>/', views.club_details, name='club_details'),
-    path('club_details/<int:event_id>/coupon', views.cashless_reg_page, name='cashless_reg_page'),
+    path('club_details/<int:event_id>/coupon/', views.cashless_reg_page, name='cashless_reg_page'),
     path('merchandise/', views.merchandise, name="merchandise"),
     path('cult_events/', views.cult_events, name="cult_events"),
     path('profile/', views.profile, name="profile"),
