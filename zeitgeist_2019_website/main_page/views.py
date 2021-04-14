@@ -588,11 +588,19 @@ def reach_us(request):
 # --------------------------------------------------------------------------------------
 
 def under_maintainance(request):
-    send_mail('Error 500',str(request),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
+    try:
+        email = request.user.email
+    except:
+        email = "not logged in"
+    send_mail('Error 500',email+'\n\n'+str(request),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
     return render(request, 'main_page/under_maintainance.html', {'text':request, 'cashless':CashlessEligible(request)})
 
 def error_404(request,exception):
-    send_mail('Error 404',str(request)+'\n'+str(exception),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
+    try:
+        email = request.user.email
+    except:
+        email = "not logged in"
+    send_mail('Error 404',email+'\n\n'+str(request)+'\n'+str(exception),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
     return render(request, 'main_page/error_404.html', {'cashless':CashlessEligible(request)}, status=404)
 
 @staff_member_required
