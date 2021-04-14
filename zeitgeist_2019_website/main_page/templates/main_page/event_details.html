@@ -56,6 +56,12 @@
                 <img src="{% static 'main_page/img/'|add:event.image  %}" alt="">
                 <p class="event_text">
                     {{event.title}}<br> {{event.description}}
+                    {% if event.title == "Micromouse" %}
+                    <br><br>
+                    <a href="https://drive.google.com/file/d/1iBhkK5lmaedlGryajl59lMdi9AjJ1380/view" target="_blank">
+                        <button class="btn-sm btn-info">Problem Statement</button>
+                    </a>
+                    {% endif %}
                 </p>
                 <div class="event_links">
                     <a href={{event.rulebook}} target="_blank">
