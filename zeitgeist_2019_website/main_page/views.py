@@ -277,11 +277,11 @@ def schedule(request):
 
     SPREADSHEET_ID="14qbE28jt0-tqmMBd1rPKEvPnLbYrN_LmwjAmXjaRwDY"
 
-    RANGE = "date1!A2:F17"
+    RANGE = "date1!A2:F100"
     data1 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date2!A2:F17"
+    RANGE = "date2!A2:F100"
     data2 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date3!A2:F17"
+    RANGE = "date3!A2:F100"
     data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
 
     date1 = schedule_data_extractor(data1)
