@@ -29,6 +29,16 @@
 			font-family: 'Canterbury';
 			src: url("{% static 'main_page/fonts/Canterbury.ttf' %}");
 		}
+		@font-face {
+			font-family: 'segment14';
+			src: url("{% static 'main_page/fonts/segment14.otf' %}");
+		}
+		body{
+			cursor: url("{% static 'main_page/img/cursor/mouse.png' %}"), default;
+		}
+		a{
+			cursor: url("{% static 'main_page/img/cursor/pointer.png' %}"), pointer;
+		}
 		.head{
 			background-color: rgba(0,0,0,0.3);
 			display: block;
@@ -53,11 +63,13 @@
 			width: 100%;
 			max-width: 600px;
 			font-family: 'Canterbury';
+			z-index: 10;
 		}
 
 		.date-wrap .date-cont{
 			text-align: center;
 			font-size: 40px;
+			z-index: 10;
 		}
 
 		.date-wrap .date{
@@ -65,19 +77,23 @@
 			color:white;
 			padding:5px;
 			transition: 0.1s ease-in-out;
+			z-index: 10;
 		}
 
 		.date-wrap .date.active{
 			background-color: white;
 			color:black;
+			z-index: 10;
 		}
 
 		.date-wrap .date-link{
-			cursor: pointer;
+			cursor: url("{% static 'main_page/img/cursor/pointer.png' %}"), pointer;
+			z-index: 10;
 		}
 
 		.date-wrap .date-link:hover .date:not(.active){
 			background-color: rgba(255,255,255,0.2);
+			z-index: 10;
 		}
 
 		.schedule-box-wrap{
@@ -85,6 +101,7 @@
 			max-width: 800px;
 			margin:auto;
 			font-size: 0;
+			z-index: 10;
 			/* border: 2px solid red; */
 		}
 
@@ -95,7 +112,7 @@
 			/* border:2px solid red; */
 			display: inline-block;
 			vertical-align: top;
-
+			z-index: 10;
 		}
 
 		.schedule-wrap{
@@ -105,10 +122,12 @@
 			margin-top: 40px;
 			overflow: hidden;
 			display: block;
+			z-index: 10;
 		}
 
 		#date2-sch,#date3-sch{
 			width:0;
+			z-index: 10;
 		}
 
 		.event-sch{
@@ -118,19 +137,22 @@
 			position: relative;
 			padding:0;
 			margin:10px 0px;
+			z-index: 10;
 		}
 
 		.event-left{
 			width:170px;
 			height: 170px;
 			position: relative;
+			z-index: 10;
+			font-family: 'segment14';
 		}
 
 		.event-time{
 			width:170px;
 			height: 170px;
 			background-color: rgba(255,255,255,0.1);
-			padding:30px 5px;
+			padding:15px 5px;
 			position: absolute;
 			top:0;
 			left:0;
@@ -143,10 +165,12 @@
 			color:#cae7df;
 			/* border: 2px solid red; */
 			transition: 0.8s ease-in-out;
+			z-index: 10;
 		}
 
 		.min{
 			font-size: 20px;
+			z-index: 10;
 			color:#e56b1f;
 			/* border: 2px solid red; */
 
@@ -183,6 +207,7 @@
 			top:0;
 			/* left:200px; */
 			transition: 0.3s ease-in-out;
+			z-index: 10;
 			/* border:2px solid red; */
 		}
 
@@ -204,12 +229,14 @@
 			font-weight: 700;
 			color:white;
 			margin-top: 10px;
+			z-index: 10;
 			transition: 0.4s ease-in-out;
 		}
 		.event-det{
 			font-size: 16px;
 			color:rgba(255,255,255,0.8);
 			margin-top: 10px;
+			z-index: 10;
 			transition: 0.4s ease-in-out;
 		}
 
@@ -217,14 +244,16 @@
 			z-index: 100;
 			display: block;
 			width:40px;
+			z-index: 10;
 			
 			font-size: 20px;
 			padding: 5px;
 
 		}
 		.but-wrap i{
-			cursor: pointer;
+			cursor: url("{% static 'main_page/img/cursor/pointer.png' %}"), pointer;
 			color:#cae7df52;
+			z-index: 10;
 			transition: 0.4s ease-in-out;
 		}
 
@@ -258,7 +287,7 @@
 				transform: translate(80px);
 			}
 			.event-time{
-				padding:25px 1px;
+				padding:15px 1px;
 			}
 		}
 	</style>
@@ -294,10 +323,21 @@
 				bottom: -20px;
 			}
 		}
+
+		#my-canvas{
+			position: fixed;
+			width:100%;
+			height:100%;
+			display:block;
+			top:0;
+			left:0;
+			z-index: 1;
+		}
 	</style>
 </head>
 
 <body style="background-color:rgb(7,34,34); transition: 0.8s ease-in-out">
+	<canvas id="my-canvas"></canvas>
 	<img class="back1" src="{% static 'main_page/img/swords.png' %}">
 	<div class="head">
 		<a href="{% url 'main_page_home' %}">
@@ -344,7 +384,7 @@
 								{{event.hr}}
 								</font>
 								<font class="min">
-									:{{event.min}}
+									<br>-{{event.min}}
 								</font>
 							</div>
 						</div>
@@ -381,7 +421,7 @@
 								{{event.hr}}
 								</font>
 								<font class="min">
-									:{{event.min}}
+									<br>-{{event.min}}
 								</font>
 							</div>
 						</div>
@@ -418,7 +458,7 @@
 								{{event.hr}}
 								</font>
 								<font class="min">
-									:{{event.min}}
+									<br>-{{event.min}}
 								</font>
 							</div>
 						</div>
@@ -484,6 +524,100 @@
 			PlaySound('mySound');
 		})
 	})
+	</script>
+	<script>
+		circles = [];
+		circles2 = [];
+		mouseX = screen.width/2;
+		mouseY = screen.height/2;
+		touch=false;
+
+		function is_touch_device() {  
+			try {  
+				document.createEvent("TouchEvent");  
+				touch=true;
+			} catch (e) {  
+				touch=false;
+			}  
+		}
+		is_touch_device();
+
+		function init () {
+				for (var i=0 ; i<20 ; i++){
+					circles.push({'left':Math.random() * screen.width, 'top':Math.random() * screen.height, 'r':Math.random()*30, 'max':Math.random()*30+10, 'o':1})
+				}
+				for (var i=0 ; i<40 ; i++){
+					circles2.push({'left':Math.random() * screen.width, 'top':Math.random() * screen.height, 'r':Math.random()*70, 'max':Math.random()*70+50, 'o':1})
+				}
+		}
+		init();
+
+		window.addEventListener("mousemove", updatemouse);
+
+		function updatemouse(e){
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		}
+
+		function draw(){
+			for (var i=0 ; i<circles.length ; i++){
+				if (circles[i]['r']>circles[i]['max']){
+					circles[i]['r']=0;
+					if (touch==true){
+						circles[i]['top']=mouseY+Math.random()*1000-500;
+						circles[i]['left']=mouseX+Math.random()*1000-500;
+					}
+					else{
+						circles[i]['top']=mouseY+Math.random()*200-100;
+						circles[i]['left']=mouseX+Math.random()*200-100;
+					}
+				}
+				else{
+					circles[i]['r']+=0.3;
+					circles[i]['o']=1-circles[i]['r']/(circles[i]['max']+1);
+				}
+			}
+			for (var i=0 ; i<circles2.length ; i++){
+				if (circles2[i]['r']<1){
+					circles2[i]['r']=circles2[i]['max'];
+					circles2[i]['o']=0;
+					circles2[i]['top']=Math.random()*screen.height;
+					circles2[i]['left']=Math.random()*screen.width;
+				}
+				else{
+					circles2[i]['r']-=1;
+					circles2[i]['o']=1-circles2[i]['r']/(circles2[i]['max']+0.1);
+				}
+			}
+			var canvas  = document.getElementById('my-canvas');
+			canvas.width = document.getElementById('my-canvas').offsetWidth;
+			canvas.height = document.getElementById('my-canvas').offsetHeight;
+			var ctx = canvas.getContext('2d');
+						
+			for (var i=0 ; i<circles.length ; i++){
+				ctx.globalAlpha=circles[i]['o'];
+				ctx.beginPath();
+				ctx.arc(circles[i]['left'], circles[i]['top'], circles[i]['r'], 0, 2 * Math.PI, false);
+				ctx.fillStyle = 'rgba(220,220,220,0.2)';
+				ctx.fill();
+				ctx.lineWidth = 0;
+				ctx.strokeStyle = 'rgba(220,220,220,0.2)';
+				ctx.stroke();
+			}
+			for (var i=0 ; i<circles2.length ; i++){
+				ctx.globalAlpha=circles2[i]['o'];
+				ctx.beginPath();
+				ctx.arc(circles2[i]['left'], circles2[i]['top'], circles2[i]['r'], 0, 2 * Math.PI, false);
+				ctx.fillStyle = 'rgba(220,220,220,0.05)';
+				ctx.fill();
+				ctx.lineWidth = 0;
+				ctx.strokeStyle = 'rgba(220,220,220,0.05)';
+				ctx.stroke();
+			}
+			window.requestAnimationFrame(draw);
+		}
+		window.requestAnimationFrame(draw);
+
 	</script>
 </body>
 
