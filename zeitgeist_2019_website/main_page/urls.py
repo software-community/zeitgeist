@@ -47,7 +47,7 @@ urlpatterns = [
     path('merchandise/', views.merchandise, name="merchandise"),
     path('cult_events/', views.cult_events, name="cult_events"),
     path('profile/', views.profile, name="profile"),
-    path('temp/', views.schedule, name="schedule"),
+    path('schedule/', views.schedule, name="schedule"),
     path('verify_user/', views.verify_user, name="verify_user"),
     path('admin_control/', views.admin_control, name='admin_control'),
     path('register/<int:event_id>/',
