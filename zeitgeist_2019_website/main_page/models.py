@@ -246,7 +246,7 @@ class Registrations(models.Model):
     organization = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     z_code = models.CharField(max_length=100, blank=False, null=False)
-    events = models.CharField(max_length=5000)
+    events = models.CharField(max_length=50000)
     total = models.IntegerField(null=True)
 
     class Meta:
