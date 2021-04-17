@@ -7,6 +7,7 @@ class StaticViewsSitemap(Sitemap):
     protocol = "https"
     priorities = {
         "main_page_home": 0.9,
+        "schedule": 0.8,
         "tech_events": 0.8,
         "cult_events": 0.8,
         "merchandise": 0.8,
