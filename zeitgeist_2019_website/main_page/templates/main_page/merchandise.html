@@ -38,7 +38,7 @@
             </div>
             <nav id="nav">
                 <ul class="main-nav nav navbar-nav navbar-right">
-
+                    <li><a href="{% url 'schedule' %}">Schedule</a></li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Events</a>
                         <ul class="dropdown-menu">
                             {% if cashless %}
@@ -59,9 +59,6 @@
                             <li><a style="color: #0d0b0b;" href="{% url 'tech_events' %}">
                                     Technical</a></li>
                             <li><a style="color: #0d0b0b;" href="{% url 'cult_events' %}">Cultural</a>
-                            </li>
-                            <li>
-                                <a style="color: #0d0b0b;" href="{% url 'schedule' %}">Schedule</a>
                             </li>
 
 

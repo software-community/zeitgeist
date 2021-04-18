@@ -603,6 +603,9 @@ def error_404(request,exception):
     send_mail('Error 404',email+'\n\n'+str(request)+'\n'+str(exception),'zeitgeist.pr@iitrpr.ac.in',['2019eeb1210@iitrpr.ac.in'],fail_silently=False,)
     return render(request, 'main_page/error_404.html', {'cashless':CashlessEligible(request)}, status=404)
 
+def tnc(request):
+    return render(request, 'main_page/terms_and_conditions.html', {'cashless':CashlessEligible(request)})
+
 @staff_member_required
 def send_email_all(request):
 

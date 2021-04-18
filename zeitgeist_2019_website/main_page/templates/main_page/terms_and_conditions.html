@@ -1,0 +1,51 @@
+{% extends "main_page/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+  a, a:visited, a:focus{
+    color: #ddd;
+    font-weight: 500;
+  }
+  a:hover{
+    color: white;
+  }
+  .tnc{
+    margin-top:40px;
+    list-style-type: decimal;
+    margin-left: 10px;
+  }
+  .tnc li{
+    margin:20px 0px;
+    padding-left: 20px;
+  }
+</style>
+<div class='jumbotron' style="background-color:#292929; color:#fdef8d; margin:0;">
+<br>
+</div>
+<div style="min-height:90vh; background-color:#292929; margin-top:0;">
+<div class="container" style="font-size: 30px; color:#ddd; text-align: center;font-weight: 600;">
+Terms & Conditions
+</div>
+<div class='container' style="min-height: 30vh; color:#bbb;">
+    <ol class="tnc">
+      <li>There are 2 tiers for registration in any event.<br>
+      PAID Registration :<br>
+          Register on <a href="https://zeitgeist.net.in/">https://zeitgeist.net.in/</a><br>
+          Rewards: Cash Prize + Goodies<br><br>
+
+      FREE Registration :<br>
+          Register on D2C<br>
+          Rewards: Goodies Only
+        </li>
+      <li>We will give prizes to 1st, 2nd, and 3rd only when a sufficient number of entries will come. This is a percentage to prize money [ PPM ] for that particular event. For now, this PPM is 30.</li>
+
+      <li>The prize money that would be given is highly dependent on the covid guidelines as received from the government and the OCZ will try its best so that everyone receives their prize money and on time.</li>
+
+      <li>Please expect a delay in receiving the goodies as there are delays from vendors and delivery partners due to previous covid restrictions in some areas. This for everyone including participants and judges.</li>
+    </ol>
+</div>
+</div>
+
+{% endblock %}

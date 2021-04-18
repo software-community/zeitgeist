@@ -10,7 +10,7 @@
     <title>Tech Events</title>
     <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'main_page/css/events.css' %}?v=1.03">
+    <link rel="stylesheet" href="{% static 'main_page/css/events.css' %}?v=1.04">
 </head>
 
 <body>
@@ -39,7 +39,7 @@
 
 
 
-    <div class="events_main">
+    <div class="events_main" style="padding-bottom:20px;">
         <h3> TECHNICAL CLUBS</h3>
 
         <div class="event_class">
@@ -63,6 +63,9 @@
             {% endfor %}
         </div>
 
+        <font style="position:absolute; bottom:0px; right:0px; margin:5px;">
+            <a href="{% url 'tnc' %}" style="color:#ddd">Terms & Conditions</a>
+        </font>
 
     </div>
 

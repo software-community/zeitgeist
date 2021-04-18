@@ -9,7 +9,7 @@
     <title>EVENTS-ZEITGEIST</title>
     <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'main_page/css/cult_events.css' %}?v=1.03">
+    <link rel="stylesheet" href="{% static 'main_page/css/cult_events.css' %}?v=1.04">
 </head>
 
 <body>
@@ -47,7 +47,7 @@
     <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle2" alt="">
     <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle3" alt="">
 
-    <div class="events_main">
+    <div class="events_main"style="padding-bottom:20px;">
         <h3>{{club.name}}</h3>
         <div class="event_class">
 
@@ -80,7 +80,9 @@
             {% endfor %}
         </div>
 
-
+        <font style="position:absolute; bottom:0px; right:0px; margin:5px;">
+            <a href="{% url 'tnc' %}" style="color:#ddd">Terms & Conditions</a>
+        </font>
     </div>
     <noscript id="tsNoJsMsg">Javascript on your browser is not enabled.</noscript>
     <script src="https://www.townscript.com/popup-widget/townscript-widget.nocache.js" type="text/javascript"></script>
