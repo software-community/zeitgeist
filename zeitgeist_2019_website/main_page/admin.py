@@ -301,6 +301,9 @@ class RegistrationsAdmin(admin.ModelAdmin):
 class CashlessRegAdmin(admin.ModelAdmin):
     list_display = ['name','email','mobile','city','event','dt']
 
+class ClubsAdmin(admin.ModelAdmin):
+    list_display = ['id','name', 'image', 'category']
+
 class Event_2021Admin(admin.ModelAdmin):
     list_display = ['id','title','image','rulebook','parent']
 
@@ -342,5 +345,5 @@ admin.site.register(OurTeam, OurTeamAdmin)
 admin.site.register(Registrations, RegistrationsAdmin)
 admin.site.register(CashlessReg, CashlessRegAdmin)
 
-admin.site.register(Clubs)
+admin.site.register(Clubs, ClubsAdmin)
 admin.site.register(Event_2021, Event_2021Admin)
