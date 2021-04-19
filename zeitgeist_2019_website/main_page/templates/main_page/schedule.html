@@ -78,6 +78,8 @@
 			padding:5px;
 			transition: 0.1s ease-in-out;
 			z-index: 10;
+			line-height: 40px;
+			height:100%;
 		}
 
 		.date-wrap .date.active{
@@ -94,6 +96,12 @@
 		.date-wrap .date-link:hover .date:not(.active){
 			background-color: rgba(255,255,255,0.2);
 			z-index: 10;
+		}
+
+		.ongoing{
+			font-family: 'Poppins';
+			font-size: 14px;
+			display: block;
 		}
 
 		.schedule-box-wrap{
@@ -131,13 +139,14 @@
 		}
 
 		.event-sch{
-			width:100%;
+			width:90%;
 			/* display: block; */
 			/* background-color: rgba(255,255,255,0.4); */
 			position: relative;
 			padding:0;
-			margin:10px 0px;
+			margin:10px auto;
 			z-index: 10;
+			overflow:hidden;
 		}
 
 		.event-left{
@@ -222,6 +231,28 @@
 		}
 		.event-sch:hover .but-wrap i{
 			color:#cae7df9a;
+		}
+
+		.event-running{
+			border: 1px solid rgba(255,255,255,0.4);
+			animation-name: blinking;
+			animation-iteration-count: infinite;
+			animation-duration: 2s;
+			-webkit-transition: all 0.9s ease;
+			-moz-transition: all 0.9s ease;
+			-o-transition: all 0.9s ease;
+			transition: all 0.9s ease;
+			animation-direction: alternate;
+		}
+
+		@keyframes blinking {
+			0%{
+				background-color: rgba(255,255,255,0);
+			}
+			100%{
+				background-color: rgba(255,255,255,0.2);
+
+			}
 		}
 
 		.event-name{
@@ -351,16 +382,25 @@
 				<div class="col-4 date-link" style="padding:0">
 					<div class="date active" id="date1" >
 						23
+						{% if run1 %}
+						<font class="ongoing">{{run1}} ongoing</font>
+						{% endif %}
 					</div>
 				</div>
 				<div class="col-4 date-link"  style="padding:0">
 					<div class="date" id="date2">
 						24
+						{% if run2 %}
+						<font class="ongoing">{{run2}} ongoing</font>
+						{% endif %}
 					</div>
 				</div>
 				<div class="col-4 date-link"  style="padding:0">
 					<div class="date" id="date3">
 						25
+						{% if run3 %}
+						<font class="ongoing">{{run3}} ongoing</font>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -371,7 +411,11 @@
 		<div class="schedule-box"  id="date1-sch">
 			<div class="schedule-wrap">
 				{% for event in date1 %}
-					<div class="row event-sch" >
+					{% if event.run %}
+					<div class="row event-sch event-running">
+					{% else %}
+					<div class="row event-sch">
+					{% endif %}
 						<div class="event-left col-1 align-self-center">
 							<div class="event-img-wrap">
 								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
@@ -408,7 +452,11 @@
 		<div class="schedule-box"  id="date2-sch">
 			<div class="schedule-wrap">
 				{% for event in date2 %}
-					<div class="row event-sch" >
+					{% if event.run %}
+					<div class="row event-sch event-running">
+					{% else %}
+					<div class="row event-sch">
+					{% endif %}
 						<div class="event-left col-1 align-self-center">
 							<div class="event-img-wrap">
 								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
@@ -445,7 +493,11 @@
 		<div class="schedule-box"  id="date3-sch">
 			<div class="schedule-wrap">
 				{% for event in date3 %}
-					<div class="row event-sch" >
+					{% if event.run %}
+					<div class="row event-sch event-running">
+					{% else %}
+					<div class="row event-sch">
+					{% endif %}
 						<div class="event-left col-1 align-self-center">
 							<div class="event-img-wrap">
 								<img src="{% static 'main_page/img/schedule/'|add:event.img %}" class="event-img">
@@ -598,10 +650,10 @@
 				ctx.globalAlpha=circles[i]['o'];
 				ctx.beginPath();
 				ctx.arc(circles[i]['left'], circles[i]['top'], circles[i]['r'], 0, 2 * Math.PI, false);
-				ctx.fillStyle = 'rgba(220,220,220,0.2)';
+				ctx.fillStyle = 'rgba(220,220,220,0.4)';
 				ctx.fill();
 				ctx.lineWidth = 0;
-				ctx.strokeStyle = 'rgba(220,220,220,0.2)';
+				ctx.strokeStyle = 'rgba(220,220,220,0.5)';
 				ctx.stroke();
 			}
 			for (var i=0 ; i<circles2.length ; i++){
