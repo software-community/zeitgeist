@@ -284,8 +284,43 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style=" color:rgb(255, 0, 140)">
-                Official Zeitgeist Merchandise
+            <div class="modal-body" style=" color:rgb(214, 0, 89)">
+                <center><font class="modal-head">Official Zeitgeist Merchandise</font></center>
+                <div class="row" style="color:#666; font-size: 24px; text-align: center; font-weight: 600;">
+                    <div class="col-md-7">
+                        <font class = "modal-text-1">
+                            Zeitgeist T-Shirt
+                        </font>
+                        <div class="col-but-wrap">
+                            <div class="col-but black-f-but">
+                                <div class = "t-color" style="background-color: rgb(19,19,19);"></div><br><font class="t-color-text" style="font-weight: 400;">Black<br><font style="font-size: 0.7em">(Front)</font></font>
+                            </div>
+                            <div class="col-but black-b-but">
+                                <div class="t-color" style="background-color: rgb(19,19,19);"></div><br><font class="t-color-text" style="font-weight: 400;">Black<br><font style="font-size: 0.7em">(Back)</font></font>
+                            </div>
+                            <div class="col-but blue-f-but">
+                                <div class="t-color" style="background-color: rgb(47,18,101);"></div><br><font class="t-color-text" style="font-weight: 400;">Navy Blue<br><font style="font-size: 0.7em">(Front)</font></font>
+                            </div>
+                            <div class="col-but blue-b-but">
+                                <div class="t-color" style="background-color: rgb(47,18,101);"></div><br><font class="t-color-text" style="font-weight: 400;">Navy Blue<br><font style="font-size: 0.7em">(Back)</font></font>
+                            </div>
+                        </div>
+
+                        <div class="buy"><a href="{% url 'merchandise' %}">BUY NOW!!</a></div>
+
+                        <a href="{% url 'merchandise' %}"><font class="t-price" style="color:rgb(255, 252, 92); background-color: #333; width:100%; display: block; padding: 10px;">@ ₹440</font></a>   
+                        
+                        <font style="font-size:14px; width:100%; display: block; padding: 10px; text-align: right;">*free shipping pan India</font>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="t-image">
+                            <img class="t-shirt black-f active" src="{% static 'main_page/img/black-f-small.png' %}">
+                            <img class="t-shirt black-b" src="{% static 'main_page/img/black-b-small.png' %}">
+                            <img class="t-shirt blue-f" src="{% static 'main_page/img/blue-f-small.png' %}">
+                            <img class="t-shirt blue-b" src="{% static 'main_page/img/blue-b-small.png' %}">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Will see later</button>
@@ -298,7 +333,7 @@
 <script>
     setTimeout(function () {
         document.getElementById('modal_btn').click();
-    }, 2500)
+    }, 1000)
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
 <script>
