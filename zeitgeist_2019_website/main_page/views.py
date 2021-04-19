@@ -235,8 +235,9 @@ def cashless_reg_page(request, event_id):
     return render(request, 'main_page/cashless_reg_page.html', {"event_name":event_name, "form": form, 'cashless':CashlessEligible(request)})
 
 
-def schedule_data_extractor(data):
+def schedule_data_extractor(data,cur_dt,event_date):
     date=[]
+    run = 0
     for i in data:
         event = {}
         try:
@@ -263,8 +264,19 @@ def schedule_data_extractor(data):
             event['rulebook'] = i[5]
         except:
             event['rulebook'] = ""
+        try:
+            start_dt = datetime.datetime.strptime(str(event_date)+"-04-2021 "+ event['det'].split('-')[0].strip(), "%d-%m-%Y %I:%M %p")
+            end_dt = datetime.datetime.strptime(str(event_date)+"-04-2021 "+ event['det'].split('-')[1].strip(), "%d-%m-%Y %I:%M %p")
+            if start_dt<=cur_dt and end_dt>=cur_dt:
+                event['run']=True
+                run+=1
+            else:
+                event['run']=False
+        except:
+            event['run']=False
+
         date.append(event)
-    return date
+    return date,run
 
 def schedule(request):
     token_key = json.loads(os.environ["token_key_json_3"])
@@ -284,11 +296,39 @@ def schedule(request):
     RANGE = "date3!A2:F100"
     data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
 
-    date1 = schedule_data_extractor(data1)
-    date2 = schedule_data_extractor(data2)
-    date3 = schedule_data_extractor(data3)
+    dt = datetime.datetime.utcnow() + datetime.timedelta(minutes=30, hours=5)
 
-    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3})
+    date1,run1 = schedule_data_extractor(data1,dt,23)
+    date2,run2 = schedule_data_extractor(data2,dt,24)
+    date3,run3 = schedule_data_extractor(data3,dt,25)
+
+    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3, "run1":run1, "run2":run2, "run3":run3})
+
+def schedule2(request):
+    token_key = json.loads(os.environ["token_key_json_3"])
+    token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
+
+    creds = Credentials.from_service_account_info(token_key)
+    # creds = Credentials.from_service_account_file("main_page/token_key.json")
+
+    service = build('sheets', 'v4', credentials=creds)
+
+    SPREADSHEET_ID="14qbE28jt0-tqmMBd1rPKEvPnLbYrN_LmwjAmXjaRwDY"
+
+    RANGE = "date1!A2:F100"
+    data1 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+    RANGE = "date2!A2:F100"
+    data2 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+    RANGE = "date3!A2:F100"
+    data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
+
+    dt = datetime.datetime.utcnow() + datetime.timedelta(minutes=30, hours=5)
+
+    date1,run1 = schedule_data_extractor(data1,dt,19)
+    date2,run2 = schedule_data_extractor(data2,dt,24)
+    date3,run3 = schedule_data_extractor(data3,dt,19)
+
+    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3, "run1":run1, "run2":run2, "run3":run3})
     
 
 @login_required

@@ -49,6 +49,7 @@ urlpatterns = [
     path('terms_and_conditions/', views.tnc, name="tnc"),
     path('profile/', views.profile, name="profile"),
     path('schedule/', views.schedule, name="schedule"),
+    path('temp/', views.schedule2, name="schedule2"),
     path('verify_user/', views.verify_user, name="verify_user"),
     path('admin_control/', views.admin_control, name='admin_control'),
     path('register/<int:event_id>/',
