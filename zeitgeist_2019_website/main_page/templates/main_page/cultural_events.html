@@ -37,8 +37,12 @@
     <img src="{% static 'main_page/img/Asset 2.svg' %}" class="event_circle3" alt="">
 
 
-    <div class="events_main" style="padding-bottom:20px;">
+    <div class="events_main" style="padding-bottom:50px;">
         <h3>Cultural Clubs</h3>
+        <br>
+        <font style="text-align:left;width:100%; font-size: 18px; color:#eee">
+            Register for free on <a href="https://dare2compete.com/f/zeitgeist-2021-indian-institute-of-technology-iit-ropar-11074" style="color:white; font-weight: 600;" target="_blank">D2C</a>. Read <a href="{% url 'tnc' %}" style="color:white; font-weight: 600;" target="_blank">Terms & Conditions</a> for more info.
+        </font>
         <div class="event_class">
 
             {% for club in clubs %}
@@ -60,8 +64,8 @@
             {% endfor %}
         </div>
 
-        <font style="position:absolute; bottom:0px; right:0px; margin:5px;">
-            <a href="{% url 'tnc' %}" style="color:#ddd">Terms & Conditions</a>
+        <font style="position:absolute; bottom:0px; right:0px; margin:5px; margin-bottom: 20px;">
+            <a href="{% url 'tnc' %}" style="color:#ddd" target="_blank">Terms & Conditions</a>
         </font>
 
     </div>
