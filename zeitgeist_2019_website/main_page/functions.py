@@ -440,7 +440,7 @@ def convert_event_name_to_actual_event_name(event):
         "Call of duty mobile": "CODM",
         "Calypso": "Calypso : Group dance event",
         "Case Study (Zenith)": "Case Study (Zenith)",
-        "Case Study Competition (Fincom)": "Case Study Competition (Fincom)",
+        "Case Study Competition (Fincom)": "Case Study (FinCom)",
         "Chem-e-quiz": "Chem Quiz",
         "Chemiscribble": "Chemiscribble",
         "Corte Paper": "Corte Paper",
