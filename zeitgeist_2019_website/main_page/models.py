@@ -161,7 +161,7 @@ class TeamHasMember(models.Model):
 
 
 class Our_Sponsor(models.Model):
-
+    sequence = models.IntegerField(blank=True, null=True)
     name_of_photo_in_static_files = models.CharField(
         max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
@@ -171,7 +171,7 @@ class Our_Sponsor(models.Model):
 
 
 class Media_Partner(models.Model):
-
+    sequence = models.IntegerField(blank=True, null=True)
     name_of_photo_in_static_files = models.CharField(
         max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
@@ -181,7 +181,7 @@ class Media_Partner(models.Model):
 
 
 class Prev_Sponsor(models.Model):
-
+    sequence = models.IntegerField(blank=True, null=True)
     name_of_photo_in_static_files = models.CharField(
         max_length=50, blank=False, null=False)
     link_to_sponsor = models.URLField(max_length=300)
