@@ -307,6 +307,8 @@ class ClubsAdmin(admin.ModelAdmin):
 class Event_2021Admin(admin.ModelAdmin):
     list_display = ['id','title','image','rulebook','parent']
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['id','name','email','mobile','ss','rating','feedback']
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
@@ -347,3 +349,5 @@ admin.site.register(CashlessReg, CashlessRegAdmin)
 
 admin.site.register(Clubs, ClubsAdmin)
 admin.site.register(Event_2021, Event_2021Admin)
+
+admin.site.register(Feedback, FeedbackAdmin)

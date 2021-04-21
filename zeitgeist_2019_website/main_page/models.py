@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from campus_ambassador.models import *
 from main_page.methods import sendNotification
+from django.core.exceptions import ValidationError
+
 
 # Create your models here.
 
@@ -283,3 +285,23 @@ class Event_2021(models.Model):
 
     def __str__(self):
         return self.title
+
+def validate_file_size(value):
+    filesize= value.size
+    
+    if filesize > 10485760:
+        raise ValidationError("The maximum file size that can be uploaded is 10MB")
+    else:
+        return value
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    mobile = models.CharField(max_length=20, blank=True, null=True)
+    ss = models.ImageField(upload_to="feedback_uploads/",blank=True, null=True, validators = [validate_file_size])
+    feedback = models.TextField(max_length=5000, blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Feedbacks'
+

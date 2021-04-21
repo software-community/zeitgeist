@@ -1,0 +1,144 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Schedule | Zeitgeist</title>
+	<link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/bootstrap/bootstrap.min.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
+	<link rel="stylesheet" href="{% static 'main_page/css/font-awesome.min.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'main_page/css/style.css' %}?v=2.2" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-53B777HXCF"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-53B777HXCF');
+	</script>
+
+    <style>
+        .feedback-form{
+            display: block;
+            width: 100%;
+            max-width: 700px;
+            background-color: rgb(40,41,61);
+            border-radius: 40px;
+            font-family: 'Quicksand';
+            font-weight: 500;
+            margin: 20px auto;
+            padding: 40px 20px;
+            color: #aaa;
+        }
+        .title{
+            font-size: 25px;
+            color: rgb(143,144,166);
+            width:100%;
+            display: block;
+            text-align: center;
+        }
+
+        label{
+            color: #aaa;
+        }
+
+        .errorlist{
+            color:rgb(255,92,92);
+        }
+
+        input[type=text], input[type=tel], select, textarea, input[type=file] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid rgb(20,20,40);
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: rgb(20,21,41);
+            color: #ccc;
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: #445;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type=submit]:hover {
+            background-color: #556;
+        }
+        .ON{
+            color: rgb(255,92,92);
+            transition: 0.5s ease-in-out;
+        }
+    </style>
+
+</head>
+<body style="background-color: rgb(28,28,40);">
+    <a href="{% url 'main_page_home' %}">
+        <img style="width: 200px; margin:auto; display: block;" src="{% static 'main_page/img/logo/logo_full.png' %}" alt="logo" />
+    </a>
+    {% if not submit %}
+    <style>
+        .main-content{
+            opacity: 0;
+            display: none;
+            transition: 0.5s ease-in-out;
+        }
+    </style>
+    {% endif %}
+    <div class="container main-content">
+        <div class="feedback-form">
+            {% if submit %}
+            Thanks for sparing time.
+            <br><br>
+            Automatically redirecting to the homepage...
+            <script>
+                setTimeout(function(){
+                    window.location.href = "{% url 'main_page_home' %}";
+                },3000);
+            </script>
+            {% else %}
+            <div class="title">Debugging mode <font class="ON">ON</font><br><font style="font-size:0.8em">Website Feedback Form</font></div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}<br>
+                <input type="submit" value="Submit">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <script src="https://www.townscript.com/popup-widget/townscript-widget.nocache.js" type="text/javascript"></script>
+	<script src="{% static 'main_page/js/jquery.min.js' %}"></script>
+	<script src="{% static 'main_page/bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.waypoints.min.js' %}"></script>
+	<script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
+	<script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
+	<script src="{% static 'main_page/js/main.js' %}"></script>
+	<audio id='mySound' src='{% static "main_page/sound/hover.mp3" %}'>
+    <script>
+        $('.main-content').css("display","block")
+        setTimeout(function(){
+            $('.main-content').css("opacity","1")
+        },100);
+        setTimeout(function(){
+            $('.ON').css("color","rgb(57,217,128)")
+        },2000);
+    </script>
+</body>
+</html>
