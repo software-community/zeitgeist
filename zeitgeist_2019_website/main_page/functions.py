@@ -171,7 +171,7 @@ def registrationsGoogleSheetsUpdateFun():
         "data": [
             {
                 "range": "Summary",
-                "values": [["Summary"], ["Event Name", "Number of Registrations"]],
+                "values": [["Summary"], ["Event Name", "Total Registrations", "Paid Registrations", "Amount received (₹)", "Go to sheet"]],
             }
         ],
     }
@@ -252,8 +252,14 @@ def registrationsGoogleSheetsUpdateFun():
 
         for sheet in writeRequest["data"]:
             if sheet["range"] != "Summary" and sheet["range"] == sheet_name:
+                paid_reg=0
+                amount_received=0
+                for i in range(2,len(sheet["values"])):
+                    if sheet['values'][i][8]!=0:
+                        paid_reg+=1
+                        amount_received+=sheet['values'][i][8]
                 writeRequest["data"][0]["values"].append(
-                    [sheet_name, len(sheet["values"]) - 2]
+                    [sheet_name, len(sheet["values"]) - 2, paid_reg, amount_received, '=hyperlink("#gid='+str(sheet_id)+'range=A1", "Click")']
                 )
 
                 formatBodyRequest["requests"].append(
@@ -360,7 +366,7 @@ def registrationsGoogleSheetsUpdateFun():
                     "sheetId": sheets[0]["properties"]["sheetId"],
                     "startRowIndex": 2,
                     "startColumnIndex": 1,
-                    "endColumnIndex": 2,
+                    "endColumnIndex": 5,
                 },
                 "cell": {"userEnteredFormat": {"horizontalAlignment": "CENTER"}},
                 "fields": "userEnteredFormat(backgroundColor,textFormat,horizontalAlignment)",
@@ -374,10 +380,31 @@ def registrationsGoogleSheetsUpdateFun():
                 "range": {
                     "startColumnIndex": 0,
                     "startRowIndex": 0,
-                    "endColumnIndex": 2,
+                    "endColumnIndex": 5,
                     "endRowIndex": 1,
                     "sheetId": sheets[0]["properties"]["sheetId"],
                 },
+            }
+        }
+    )
+
+    formatBodyRequest["requests"].append(
+        {
+            "repeatCell": {
+                "range": {
+                "sheetId": sheets[0]["properties"]["sheetId"],
+                "startRowIndex": 2,
+                "startColumnIndex": 4,
+                "endColumnIndex": 5
+                },
+                "cell": {
+                "userEnteredFormat": {
+                    "numberFormat": {
+                     "type": "NUMBER"
+                    }
+                }
+                },
+                "fields": "userEnteredFormat.numberFormat"
             }
         }
     )
