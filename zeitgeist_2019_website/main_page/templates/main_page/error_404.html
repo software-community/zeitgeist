@@ -12,7 +12,9 @@
 Error 404
 </div>
 <div class='container' style="min-height: 30vh;">
-    <h3 style="color:#29339b; font-size: larger ; margin:auto; margin-top:60px; line-height: 40px; max-width: 600px;" class='list-group-item'>No such page exists. Return to <a href="{% url 'main_page_home' %}" style="font-weight:bold;color:#17301c">homepage</a></h3>
+    <h3 style="color:#29339b; font-size: larger ; margin:auto; margin-top:60px; line-height: 40px; max-width: 600px;" class='list-group-item'>No such page exists. Return to <a href="{% url 'main_page_home' %}" style="font-weight:bold;color:#17301c">homepage</a>
+    <br>
+    If you are facing any issue, you can mention it <a href="{% url 'feedback_form' %}" style="font-weight:bold;color:#17301c" target="_blank">here</a>. We will get back to you soon.</h3>
 </div>
 
 {% endblock %}

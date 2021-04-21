@@ -311,34 +311,7 @@ def schedule(request):
     date2,run2 = schedule_data_extractor(data2,dt,24)
     date3,run3 = schedule_data_extractor(data3,dt,25)
 
-    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3, "run1":run1, "run2":run2, "run3":run3})
-
-def schedule2(request):
-    token_key = json.loads(os.environ["token_key_json_3"])
-    token_key["private_key"] = token_key["private_key"].replace("/*/", " ")
-
-    creds = Credentials.from_service_account_info(token_key)
-    # creds = Credentials.from_service_account_file("main_page/token_key.json")
-
-    service = build('sheets', 'v4', credentials=creds)
-
-    SPREADSHEET_ID="14qbE28jt0-tqmMBd1rPKEvPnLbYrN_LmwjAmXjaRwDY"
-
-    RANGE = "date1!A2:F100"
-    data1 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date2!A2:F100"
-    data2 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date3!A2:F100"
-    data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-
-    dt = datetime.datetime.utcnow() + datetime.timedelta(minutes=30, hours=5)
-
-    date1,run1 = schedule_data_extractor(data1,dt,19)
-    date2,run2 = schedule_data_extractor(data2,dt,24)
-    date3,run3 = schedule_data_extractor(data3,dt,19)
-
-    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3, "run1":run1, "run2":run2, "run3":run3})
-    
+    return render(request, 'main_page/schedule.html',{"date1":date1, "date2":date2, "date3":date3, "run1":run1, "run2":run2, "run3":run3})    
 
 @login_required
 def register_for_event(request, event_id):
