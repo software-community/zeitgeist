@@ -80,3 +80,14 @@ class CashlessRegForm(forms.ModelForm):
         super(CashlessRegForm, self).__init__(*args, **kwargs)                       
         self.fields['name'].disabled = True
         self.fields['email'].disabled = True
+
+class FeedbackForm(forms.ModelForm):
+    rating = forms.ChoiceField(label="Overall Rating", choices=[('1',1),('2',2),('3',3),('4',4),('5',5)], initial='5')
+    feedback = forms.CharField(label="Feedback/Issue (*)",widget=forms.Textarea(attrs={"rows":5, "cols":20}))
+    name = forms.CharField(label="Name", widget=forms.TextInput(attrs={'placeholder':'Enter your name'}), required=False)
+    email = forms.CharField(label="Email ID", widget=forms.TextInput(attrs={'placeholder':'Enter your email'}),required=False)
+    mobile = forms.CharField(label="Mobile No", widget=forms.TextInput(attrs={'placeholder':'Enter your mobile'}),required=False,error_messages={'invalid': 'your custom error message'})
+    ss = forms.ImageField(label="Screenshot related to the feedback/issue (max 10MB)",required=False)
+    class Meta:
+        model = Feedback
+        fields = ['name','email','mobile','rating','feedback','ss']

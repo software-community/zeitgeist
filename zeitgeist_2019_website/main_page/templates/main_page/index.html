@@ -260,10 +260,18 @@
         </div>
         <hr>
         <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
             <div class="contact">
                 <h3>Website views</h3>
                 <h4 class="counter" data-from="0" data-to="{{web_counts}}" data-speed="1500">0</h4>
             </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="contact">
+                    <a href="{% url 'feedback_form' %}"><h3>Write a feedback for website</h3></a>
+                </div>
+                </div>
         </div>
     </div>
 </div>

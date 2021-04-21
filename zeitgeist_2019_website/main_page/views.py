@@ -75,6 +75,15 @@ def club_details(request, club_id):
 
     return render(request, 'main_page/event_details.html', {'events': events, 'club': club, 'cashless':CashlessEligible(request)})
     
+def feedback_form(request):
+    form = FeedbackForm()
+    if request.method == "POST":
+        form = FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_feedback = form.save(commit=True)
+            return render(request, 'main_page/feedback_form.html',{"submit":True})
+
+    return render(request, 'main_page/feedback_form.html',{"form":form})
     
 def change_account(request):
     '''
