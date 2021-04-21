@@ -34,9 +34,9 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
 def main_page_home(request):
-    our_sponsors = Our_Sponsor.objects.all().order_by('id')
-    media_partners = Media_Partner.objects.all()
-    prev_sponsors = Prev_Sponsor.objects.all()
+    our_sponsors = Our_Sponsor.objects.all().order_by('sequence')
+    media_partners = Media_Partner.objects.all().order_by('sequence')
+    prev_sponsors = Prev_Sponsor.objects.all().order_by('sequence')
     if WebCounts.objects.count() > 0:
         web_counts = WebCounts.increment()
     else:

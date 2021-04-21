@@ -15,17 +15,17 @@ from .models import *
 
 class Our_SponsorAdmin(admin.ModelAdmin):
 
-    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+    list_display = ['sequence', 'name_of_photo_in_static_files', 'link_to_sponsor']
 
 
 class Media_PartnerAdmin(admin.ModelAdmin):
 
-    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+    list_display = ['sequence', 'name_of_photo_in_static_files', 'link_to_sponsor']
 
 
 class Prev_SponsorAdmin(admin.ModelAdmin):
 
-    list_display = ['name_of_photo_in_static_files', 'link_to_sponsor']
+    list_display = ['sequence', 'name_of_photo_in_static_files', 'link_to_sponsor']
 
 
 class ParticipantAdmin(admin.ModelAdmin):
