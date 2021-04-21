@@ -45,7 +45,14 @@ def main_page_home(request):
     events_11_oct = Event.objects.filter(start_date_time__startswith='2019-10-11').order_by('start_date_time')
     events_12_oct = Event.objects.filter(start_date_time__startswith='2019-10-12').order_by('start_date_time')
     events_13_oct = Event.objects.filter(start_date_time__startswith='2019-10-13').order_by('start_date_time')
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request)}
+
+    if request.user.is_authenticated:
+        user_loggedin=True
+    else:
+        user_loggedin=False
+
+    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request),"user_loggedin":user_loggedin}
+    
     return render(request, 'main_page/index.html', context)
 
 

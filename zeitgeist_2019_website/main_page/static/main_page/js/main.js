@@ -117,3 +117,78 @@ $(".blue-b-but").hover(function () {
   });
   $(".blue-b").css("opacity", "1");
 });
+
+// Stage
+cur_pos = 0;
+auto_scroll = false;
+window.addEventListener("scroll", function (e) {
+  if (
+    this.scrollY > cur_pos &&
+    this.scrollY + screen.height >= $(".stage").offset().top &&
+    this.scrollY <= $(".stage").offset().top
+  ) {
+    if (auto_scroll == false) {
+      auto_scroll = true;
+      window.scroll({
+        top: $(".stage").offset().top,
+        behavior: "smooth",
+      });
+    }
+    $(".transparent-navbar").css("opacity", "0");
+  } else if (
+    this.scrollY < cur_pos &&
+    this.scrollY >= $(".stage").offset().top &&
+    this.scrollY <= $(".stage").offset().top + screen.height
+  ) {
+    if (auto_scroll == false) {
+      auto_scroll = true;
+      window.scroll({
+        top: $(".stage").offset().top,
+        behavior: "smooth",
+        speed: 5000,
+      });
+    }
+    $(".transparent-navbar").css("opacity", "0");
+  } else if (
+    this.scrollY < $(".stage").offset().top - 30 ||
+    this.scrollY > $(".stage").offset().top + $(".stage").height()
+  ) {
+    $(".transparent-navbar").css("opacity", "1");
+  }
+  if (this.scrollY == $(".stage").offset().top) {
+    auto_scroll = false;
+  }
+
+  cur_pos = this.scrollY;
+});
+
+function is_touch_device() {
+  try {
+    document.createEvent("TouchEvent");
+    touch = true;
+  } catch (e) {
+    window.addEventListener("mousemove", function (e) {
+      $(".stage-back").css(
+        "transform",
+        "translateX(" +
+          (e.clientX.toString() / screen.width) * 50 +
+          "px)" +
+          " " +
+          "translateY(" +
+          (e.clientY.toString() / screen.height) * 50 +
+          "px)"
+      );
+      $(".stage-front").css(
+        "transform",
+        "translateX(" +
+          (e.clientX.toString() / screen.width) * 100 +
+          "px)" +
+          " " +
+          "translateY(" +
+          (e.clientY.toString() / screen.height) * 100 +
+          "px)"
+      );
+    });
+  }
+}
+is_touch_device();

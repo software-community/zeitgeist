@@ -12,6 +12,8 @@
   <meta name="keywords" content="zeitgeist, festival, fest, iit, ropar, iit ropar, punjab, cult, cultural, tech, technical, technocultural, north, india, cash, prizes, win, compete, competetion, iit ropar fest">
   <link rel="icon" type="image/png" href="{% static 'main_page/img/logo/favicon.png' %}" />
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700,900" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/bootstrap.min.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.carousel.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'main_page/css/owl.theme.default.css' %}" />
@@ -132,7 +134,12 @@
   <script src="{% static 'main_page/js/owl.carousel.min.js' %}"></script>
   <script src="{% static 'main_page/js/jquery.stellar.min.js' %}"></script>
   <script src="{% static 'main_page/js/jquery.countTo.js' %}"></script>
-  <script src="{% static 'main_page/js/main.js' %}?v=1"></script>
+  <script src="{% static 'main_page/js/main.js' %}?v=4.0"></script>
+  {% if user_loggedin %}
+  <script src="{% static 'main_page/js/stage.js' %}?v=3.0"></script>
+  {% else %}
+  <script src="{% static 'main_page/js/fake_stage.js' %}?v=3.0"></script>
+  {% endif %}
 </body>
 
 </html>
