@@ -1268,7 +1268,7 @@ textarea.input {
 .running-event{
   width:80%;
   line-height: 25px;
-  margin:auto;
+  margin:10px auto;
 }
 
 .running-event img{
@@ -1281,4 +1281,36 @@ textarea.input {
 
 .running-event .time{
   font-size: 16px;
+}
+
+.see-all-events{
+  width:100%;
+  margin: auto;
+  text-align:right;
+  font-size:16px;
+}
+
+.see-all-events a{
+  color: rgb(12, 158, 168);
+  font-weight: 600;
+}
+
+.see-all-events a:hover{
+  color: rgb(21, 185, 197);
+}
+
+@media screen and (max-width:1000px){
+  .running-event .title{
+    font-size: 16px;
+  }
+  .running-event .time{
+    font-size: 14px;
+  }
+  .running-event{
+    width:50%;
+    max-width: 300px;
+  }
+  .see-all-events{
+    width:95%;
+  }
 }

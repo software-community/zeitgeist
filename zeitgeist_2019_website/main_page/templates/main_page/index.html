@@ -657,6 +657,8 @@
                     </div>
                     {% endfor %}
                 </div>
+                <div class="see-all-events"><a href="{% url 'schedule' %}">See all events here</a></div>
+                <hr>
                 {% endif %}
                 {% if upcoming_events %}
                 <center><font class="modal-head">Upcoming Events</font></center>
@@ -673,9 +675,11 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% if not ongoing_events %}
+                <div class="see-all-events"><a href="{% url 'schedule' %}">See all events here</a></div>
                 {% endif %}
-            </div>
-            <div class="modal-body" style=" color:rgb(214, 0, 89)">
+                <hr>
+                {% endif %}
                 <center><font class="modal-head">Official Zeitgeist Merchandise</font></center>
                 <div class="row" style="color:#666; font-size: 24px; text-align: center; font-weight: 600;">
                     <div class="col-md-7">
