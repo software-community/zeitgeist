@@ -50,8 +50,18 @@ def main_page_home(request):
         user_loggedin=True
     else:
         user_loggedin=False
+    
+    if len(UpcomingEvents.objects.all())>0:
+        upcoming_events = UpcomingEvents.objects.all()
+    else:
+        upcoming_events = False
 
-    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request),"user_loggedin":user_loggedin}
+    if len(OngoingEvents.objects.all())>0:
+        ongoing_events = OngoingEvents.objects.all()
+    else:
+        ongoing_events = False
+
+    context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request),"user_loggedin":user_loggedin,"upcoming_events":upcoming_events,"ongoing_events":ongoing_events}
     
     return render(request, 'main_page/index.html', context)
 

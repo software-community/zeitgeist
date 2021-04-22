@@ -305,3 +305,15 @@ class Feedback(models.Model):
     class Meta:
         verbose_name_plural = 'Feedbacks'
 
+
+class OngoingEvents(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    image = models.CharField(max_length=100, blank=True, null=True)
+    time = models.CharField(max_length=100, blank=True, null=True)
+    link = models.CharField(max_length=100, blank=True, null=True)
+
+class UpcomingEvents(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    image = models.CharField(max_length=100, blank=True, null=True)
+    time = models.CharField(max_length=100, blank=True, null=True)
+    link = models.CharField(max_length=100, blank=True, null=True)

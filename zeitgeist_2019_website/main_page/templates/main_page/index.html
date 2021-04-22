@@ -339,7 +339,7 @@
     <p class="fest-dates">23-24-25 April</p>
 </div>
 
-<div class="stage">
+<div class="stage" id="stage">
     <div class="stage-back">
     </div>
     <div class="stage-front-wrap">
@@ -642,6 +642,40 @@
                 </button>
             </div>
             <div class="modal-body" style=" color:rgb(214, 0, 89)">
+                {% if ongoing_events %}
+                <center><font class="modal-head">Ongoing Events</font></center>
+                <div class="row" style="color:#666; font-size: 24px; text-align: center; font-weight: 600;">
+                    {% for event in ongoing_events %}
+                    <div class="col-md-3">
+                        <a href="{{event.link}}">
+                        <div class="running-event">
+                            <img src="{% static 'main_page/img'|add:event.image %}">
+                            <div class="title">{{event.name}}</div>
+                            <div class="time">{{event.time}}</div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if upcoming_events %}
+                <center><font class="modal-head">Upcoming Events</font></center>
+                <div class="row" style="color:#666; font-size: 24px; text-align: center; font-weight: 600;">
+                    {% for event in upcoming_events %}
+                    <div class="col-md-3">
+                        <a href="{{event.link}}">
+                        <div class="running-event">
+                            <img src="{% static 'main_page/img'|add:event.image %}">
+                            <div class="title">{{event.name}}</div>
+                            <div class="time">{{event.time}}</div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="modal-body" style=" color:rgb(214, 0, 89)">
                 <center><font class="modal-head">Official Zeitgeist Merchandise</font></center>
                 <div class="row" style="color:#666; font-size: 24px; text-align: center; font-weight: 600;">
                     <div class="col-md-7">
@@ -688,9 +722,6 @@
 </div>
 
 <script>
-    setTimeout(function () {
-        document.getElementById('modal_btn').click();
-    }, 1000)
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
 <script>
