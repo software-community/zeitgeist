@@ -170,11 +170,14 @@
         width:100%;
         height: 100%;
         position: relative;
-        padding: 60px 20px;
+        padding: 80px 20px 100px 20px;
         text-align: center;
-        display: flex;
+        display: grid;
         justify-content: center;
         align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(270px, 1fr));
+        /* grid-template-columns: auto auto auto auto; */
         /* -webkit-animation: glow 1s ease-in-out infinite alternate;
         -moz-animation: glow 1s ease-in-out infinite alternate;
         animation: glow 1s ease-in-out infinite alternate; */
@@ -215,9 +218,18 @@
         left: -100%;
     }
 
+    .but3-cont .but-cont-wrap{
+        padding-top: 100px;
+        display: block;
+        line-height: 70px;
+    }
     .but4-cont{
         top: 0%;
         left: 100%;
+    }
+
+    .but4-cont .but-cont-wrap{
+        padding-left: 30%;
     }
 
     .but-cont-wrap .down{
@@ -284,6 +296,28 @@
         color: #ddd;
     }
 
+    .stage-poster span{
+        font-size: 40px;
+        /* opacity: 0; */
+        transition: 0.2s ease-in-out;
+        color: white;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        left: 0;
+        padding: 10px;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .cont-link{
+        display: flex;
+        margin: 20px 10px;
+        padding: 5px;
+        /* max-width: min(40%,300px); */
+        align-self: center;
+    }
+
     @media screen and (max-width:800px){
         .but-cont-wrap{
             align-items: initial;
@@ -330,6 +364,12 @@
         .stage-poster i{
         font-size: 50px;
         }
+
+        .but-cont-wrap{
+            grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+            padding: 40px 10px 100px 10px;
+        }
     }
 </style>
 
@@ -350,45 +390,67 @@
                 </div>
             </a>
             <div class="but but1">
-                Inauguration
+                Comedy Nights
             </div>
             <div class="but but2">
-                Comedy Nights
+                Talks
             </div>
             <div class="but but3">
                 Events
             </div>
             <div class="but but4">
-                Workshops
+                Exhibitions
             </div>
             {% if user_loggedin %}
             <div class="but-cont but1-cont">
                 <div class="but-cont-wrap">
-                    <!-- Inauguration Link -->
-                    <a href="https://www.airmeet.com/e/2baf0fa0-a218-11eb-92cf-8dceb6528f42" target="_blank">
+                    <!-- Comedy -->
+                    <a class="cont-link" href="https://www.airmeet.com/e/acd63240-a397-11eb-8333-4b153d2640e4" target="_blank">
                         <div class="stage-poster">
-                            <img src="{% static 'main_page/img/stage/inauguration.png' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i></div>
+                            <img src="{% static 'main_page/img/posters/madhav_comedy.jpg' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>3pm</span></div>
                         </div>
                     </a>
                     <i class="fa fa-angle-down arrow down" aria-hidden="true"></i>
-                </div>
+                </div>  
             </div>
             <div class="but-cont but2-cont">
                 <div class="but-cont-wrap">
-                    Comming Soon!!
+                    <!-- Talks -->
+                    <a class="cont-link" href="https://www.airmeet.com/e/c2c83930-a2ee-11eb-a600-95263a1d5a8e" target="_blank">
+                        <div class="stage-poster">
+                            <img src="{% static 'main_page/img/posters/shashi_talk.png' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>10am</span></div>
+                        </div>
+                    </a>
                     <i class="fa fa-angle-up arrow up" aria-hidden="true"></i>
                 </div>
             </div>
             <div class="but-cont but3-cont">
                 <div class="but-cont-wrap">
-                    Comming Soon!!
+                    <!-- Events -->
+                    <a href="https://www.airmeet.com/e/95d33a60-a2e9-11eb-9904-fd729eafe84a" target="_blank">IMPROV (DRAMATICS) - 2pm</a><br>
+                    <a href="https://www.airmeet.com/e/c553c2e0-a2ea-11eb-9904-fd729eafe84a" target="_blank">SCRIBBLE (FILMSKI) - 8pm</a><br>
+                    <a href="https://www.airmeet.com/e/65e5e980-a2ec-11eb-a600-95263a1d5a8e" target="_blank">Energy Efficient Building - 8pm</a>
+                    
                     <i class="fa fa-angle-right arrow right" aria-hidden="true"></i>
                 </div>
             </div>
             <div class="but-cont but4-cont">
                 <div class="but-cont-wrap">
-                    Comming Soon!!
+                    <!-- Exhibitions -->
+                    <a class="cont-link" href="https://www.airmeet.com/e/627eb250-a39f-11eb-8333-4b153d2640e4" target="_blank">
+                        <div class="stage-poster">
+                            <img src="{% static 'main_page/img/posters/mitra.jpg' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>2pm</span></div>
+                        </div>
+                    </a>
+                    <a class="cont-link" href="https://www.airmeet.com/e/325c6b90-a39e-11eb-8333-4b153d2640e4" target="_blank">
+                        <div class="stage-poster">
+                            <img src="{% static 'main_page/img/posters/aeromegh.png' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>11am</span></div>
+                        </div>
+                    </a>
                     <i class="fa fa-angle-left arrow left" aria-hidden="true"></i>
                 </div>
             </div>
