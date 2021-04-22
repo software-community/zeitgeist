@@ -311,10 +311,10 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['id','name','email','mobile','ss','rating','feedback']
 
 class UpcomingEventsAdmin(admin.ModelAdmin):
-    list_display = ['id','name','image','time','link']
+    list_display = ['id','name','image','time','link','start','end']
 
 class OngoingEventsAdmin(admin.ModelAdmin):
-    list_display = ['id','name','image','time','link']
+    list_display = ['id','name','image','time','link','start','end']
 
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
