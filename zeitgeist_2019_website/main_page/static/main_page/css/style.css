@@ -1262,3 +1262,23 @@ textarea.input {
     line-height: 15px;
   }
 }
+
+
+
+.running-event{
+  width:80%;
+  line-height: 25px;
+  margin:auto;
+}
+
+.running-event img{
+  width:100%;
+}
+
+.running-event .title{
+  font-size: 20px;
+}
+
+.running-event .time{
+  font-size: 16px;
+}

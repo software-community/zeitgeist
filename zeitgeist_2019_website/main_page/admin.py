@@ -310,6 +310,12 @@ class Event_2021Admin(admin.ModelAdmin):
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['id','name','email','mobile','ss','rating','feedback']
 
+class UpcomingEventsAdmin(admin.ModelAdmin):
+    list_display = ['id','name','image','time','link']
+
+class OngoingEventsAdmin(admin.ModelAdmin):
+    list_display = ['id','name','image','time','link']
+
 # admin.site.register(Category, CategoryAdmin)
 # admin.site.register(SubCategory, SubCategoryAdmin)
 # admin.site.register(Event, EventAdmin)
@@ -351,3 +357,6 @@ admin.site.register(Clubs, ClubsAdmin)
 admin.site.register(Event_2021, Event_2021Admin)
 
 admin.site.register(Feedback, FeedbackAdmin)
+
+admin.site.register(OngoingEvents, OngoingEventsAdmin)
+admin.site.register(UpcomingEvents, UpcomingEventsAdmin)

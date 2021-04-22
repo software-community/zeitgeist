@@ -203,3 +203,13 @@ function is_touch_device() {
   }
 }
 is_touch_device();
+
+
+// Modal
+setTimeout(function () {
+  document.getElementById('modal_btn').click();
+}, 1000)
+
+$('.running-event').click(function(){
+  $('.close').click()
+})
