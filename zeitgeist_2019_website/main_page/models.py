@@ -4,6 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from campus_ambassador.models import *
 from main_page.methods import sendNotification
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 
 # Create your models here.
@@ -311,9 +312,13 @@ class OngoingEvents(models.Model):
     image = models.CharField(max_length=100, blank=True, null=True)
     time = models.CharField(max_length=100, blank=True, null=True)
     link = models.CharField(max_length=100, blank=True, null=True)
+    start = models.DateTimeField(blank=True,null=True,default=timezone.now)
+    end = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
 class UpcomingEvents(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     image = models.CharField(max_length=100, blank=True, null=True)
     time = models.CharField(max_length=100, blank=True, null=True)
     link = models.CharField(max_length=100, blank=True, null=True)
+    start = models.DateTimeField(blank=True,null=True,default=timezone.now)
+    end = models.DateTimeField(blank=True,null=True,default=timezone.now)

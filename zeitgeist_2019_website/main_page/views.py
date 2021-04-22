@@ -50,16 +50,19 @@ def main_page_home(request):
         user_loggedin=True
     else:
         user_loggedin=False
-    
-    if len(UpcomingEvents.objects.all())>0:
-        upcoming_events = UpcomingEvents.objects.all()
-    else:
-        upcoming_events = False
 
-    if len(OngoingEvents.objects.all())>0:
-        ongoing_events = OngoingEvents.objects.all()
-    else:
-        ongoing_events = False
+    upcoming_events = []
+    ongoing_events = []
+
+    for i in UpcomingEvents.objects.all():
+        now_time = (datetime.datetime.utcnow()+ datetime.timedelta(minutes=30, hours=5)).replace(tzinfo=None)
+        if i.start.replace(tzinfo=None)<=now_time and i.end.replace(tzinfo=None)>=now_time:
+            upcoming_events.append(i)
+    
+    for i in OngoingEvents.objects.all():
+        now_time = (datetime.datetime.utcnow()+ datetime.timedelta(minutes=30, hours=5)).replace(tzinfo=None)
+        if i.start.replace(tzinfo=None)<=now_time and i.end.replace(tzinfo=None)>=now_time:
+            ongoing_events.append(i)
 
     context = {'our_sponsors': our_sponsors, 'media_partners':media_partners, 'prev_sponsors': prev_sponsors, 'events_11_oct': events_11_oct, 'events_12_oct': events_12_oct, 'events_13_oct': events_13_oct, 'web_counts':web_counts, 'our_team':our_team, 'cashless':CashlessEligible(request),"user_loggedin":user_loggedin,"upcoming_events":upcoming_events,"ongoing_events":ongoing_events}
     
