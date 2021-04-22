@@ -119,6 +119,15 @@ $(".blue-b-but").hover(function () {
 });
 
 // Stage
+function detect_touch_device(){
+  try {
+    document.createEvent("TouchEvent");
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 cur_pos = 0;
 auto_scroll = false;
 window.addEventListener("scroll", function (e) {
@@ -129,10 +138,11 @@ window.addEventListener("scroll", function (e) {
   ) {
     if (auto_scroll == false) {
       auto_scroll = true;
-      window.scroll({
-        top: $(".stage").offset().top,
-        behavior: "smooth",
-      });
+      if (!detect_touch_device())
+        window.scroll({
+          top: $(".stage").offset().top,
+          behavior: "smooth",
+        });
     }
     $(".transparent-navbar").css("opacity", "0");
   } else if (
@@ -142,11 +152,12 @@ window.addEventListener("scroll", function (e) {
   ) {
     if (auto_scroll == false) {
       auto_scroll = true;
-      window.scroll({
-        top: $(".stage").offset().top,
-        behavior: "smooth",
-        speed: 5000,
-      });
+      if (!detect_touch_device())
+        window.scroll({
+          top: $(".stage").offset().top,
+          behavior: "smooth",
+          speed: 5000,
+        });
     }
     $(".transparent-navbar").css("opacity", "0");
   } else if (
@@ -181,11 +192,11 @@ function is_touch_device() {
       $(".stage-front").css(
         "transform",
         "translateX(" +
-          (e.clientX.toString() / screen.width) * 100 +
+          ((e.clientX-screen.width/2).toString() / screen.width) * 100 +
           "px)" +
           " " +
           "translateY(" +
-          (e.clientY.toString() / screen.height) * 100 +
+          ((e.clientY-screen.height/2).toString() / screen.height) * 100 +
           "px)"
       );
     });

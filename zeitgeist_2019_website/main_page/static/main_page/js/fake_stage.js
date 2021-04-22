@@ -1,26 +1,11 @@
 var login_but = false;
 
 $(".arrow").click(function () {
-  $(".stage-front").css("margin-top", "-5%");
-  $(".stage-front").css("margin-left", "-10%");
+  $('.stage-front-wrap').css('transform','translateY(0) translateX(0)')
   $(".but-cont").css("opacity", "0");
 });
 
 $(".but").click(function () {
-  $(".stage-front").css("transition", "margin 0.2s ease-in-out");
-  $(".stage-front").css("margin-left", (-0.1*screen.width+25).toString()+'px');
-  setTimeout(function(){
-    $(".stage-front").css("margin-left", (-0.1*screen.width-25).toString()+'px');
-  },200)
-  setTimeout(function(){
-    $(".stage-front").css("margin-left", (-0.1*screen.width+25).toString()+'px');
-  },400)
-  setTimeout(function(){
-    $(".stage-front").css("margin-left", (-0.1*screen.width-25).toString()+'px');
-  },600)
-  setTimeout(function(){
-    $(".stage-front").css("margin-left", (-0.1*screen.width).toString()+'px');
-  },800)
   if (login_but==false){
     login_but=true;
     $('.login-but').css("display","block")
@@ -35,4 +20,18 @@ $(".but").click(function () {
       login_but=false
     },3900)
   }
+  $(".stage-front-wrap").css("transition", "transform 0.1s ease-in-out");
+  $(".stage-front-wrap").css("transform", "translateX("+(25).toString()+'px)');
+  setTimeout(function(){
+    $(".stage-front-wrap").css("transform", "translateX("+(-25).toString()+'px)');
+  },100)
+  setTimeout(function(){
+    $(".stage-front-wrap").css("transform", "translateX("+(25).toString()+'px)');
+  },200)
+  setTimeout(function(){
+    $(".stage-front-wrap").css("transform", "translateX("+(-25).toString()+'px)');
+  },300)
+  setTimeout(function(){
+    $(".stage-front-wrap").css("transform", "translateX("+(0).toString()+'px)');
+  },400)
 });
