@@ -294,6 +294,10 @@ def schedule_data_extractor(data,cur_dt,event_date):
         except:
             event['rulebook'] = ""
         try:
+            event['link'] = i[6]
+        except:
+            event['link'] = False
+        try:
             start_dt = datetime.datetime.strptime(str(event_date)+"-04-2021 "+ event['det'].split('-')[0].strip(), "%d-%m-%Y %I:%M %p")
             end_dt = datetime.datetime.strptime(str(event_date)+"-04-2021 "+ event['det'].split('-')[1].strip(), "%d-%m-%Y %I:%M %p")
             if start_dt<=cur_dt and end_dt>=cur_dt:
@@ -318,11 +322,11 @@ def schedule(request):
 
     SPREADSHEET_ID="14qbE28jt0-tqmMBd1rPKEvPnLbYrN_LmwjAmXjaRwDY"
 
-    RANGE = "date1!A2:F100"
+    RANGE = "date1!A2:G100"
     data1 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date2!A2:F100"
+    RANGE = "date2!A2:G100"
     data2 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
-    RANGE = "date3!A2:F100"
+    RANGE = "date3!A2:G100"
     data3 = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE).execute()['values']
 
     dt = datetime.datetime.utcnow() + datetime.timedelta(minutes=30, hours=5)
