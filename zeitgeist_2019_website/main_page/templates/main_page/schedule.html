@@ -288,6 +288,10 @@
 			transition: 0.4s ease-in-out;
 		}
 
+		.sch-link{
+			text-decoration: none;
+		}
+
 		@media screen and (max-width:700px){
 			.event-left, .event-img, .event-time, .img-overlay{
 				width:80px;
@@ -433,17 +437,26 @@
 							</div>
 						</div>
 						<div class="event-right col">
+							{% if event.link %}
+							<a class="sch-link" href="{{event.link}}" target="_blank">
+							{% endif %}
 							<div class="event-name">
 								{{event.name}}
 							</div>
 							<div class="event-det">
 								{{event.det}}
 							</div>
+							{% if event.link %}
+							</a>
+							{% endif %}
 						</div>
 						<div class="but-wrap col-3">
 							{% if event.rulebook != "" %}
 								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
 							{% endif %}
+							{% if event.link %}
+								<a href="{{event.link}}" target="_blank"><i class="fa fa-mouse-pointer" aria-hidden="true"></i></a>
+							{% endif %}	
 						</div>
 					</div>
 				{% endfor %}
@@ -474,17 +487,26 @@
 							</div>
 						</div>
 						<div class="event-right col">
+							{% if event.link %}
+							<a class="sch-link" href="{{event.link}}" target="_blank">
+							{% endif %}
 							<div class="event-name">
 								{{event.name}}
 							</div>
 							<div class="event-det">
 								{{event.det}}
 							</div>
+							{% if event.link %}
+							</a>
+							{% endif %}
 						</div>
 						<div class="but-wrap col-3">
 							{% if event.rulebook != "" %}
 								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
 							{% endif %}
+							{% if event.link %}
+								<a href="{{event.link}}" target="_blank"><i class="fa fa-mouse-pointer" aria-hidden="true"></i></a>
+							{% endif %}	
 						</div>
 					</div>
 				{% endfor %}
@@ -515,12 +537,21 @@
 							</div>
 						</div>
 						<div class="event-right col">
+							{% if event.link %}
+							<a class="sch-link" href="{{event.link}}" target="_blank">
+							{% endif %}
 							<div class="event-name">
 								{{event.name}}
 							</div>
 							<div class="event-det">
 								{{event.det}}
 							</div>
+							{% if event.link %}
+							</a>
+							{% endif %}
+							{% if event.link %}
+								<a href="{{event.link}}" target="_blank"><i class="fa fa-mouse-pointer" aria-hidden="true"></i></a>
+							{% endif %}	
 						</div>
 						<div class="but-wrap col-3">
 							{% if event.rulebook != "" %}
