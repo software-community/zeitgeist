@@ -311,7 +311,7 @@ class FeedbackAdmin(admin.ModelAdmin):
     list_display = ['id','name','email','mobile','ss','rating','feedback']
 
 class UpcomingEventsAdmin(admin.ModelAdmin):
-    list_display = ['id','name','image','time','link','start','end']
+    list_display = ['id','name','image','time','link','start','end','sequence']
 
 class OngoingEventsAdmin(admin.ModelAdmin):
     list_display = ['id','name','image','time','link','start','end']
