@@ -316,6 +316,7 @@ class OngoingEvents(models.Model):
     end = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
 class UpcomingEvents(models.Model):
+    sequence = models.IntegerField(blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     image = models.CharField(max_length=100, blank=True, null=True)
     time = models.CharField(max_length=100, blank=True, null=True)
