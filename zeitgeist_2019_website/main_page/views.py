@@ -56,7 +56,7 @@ def main_page_home(request):
 
     for i in UpcomingEvents.objects.all().order_by('end'):
         now_time = (datetime.datetime.utcnow()+ datetime.timedelta(minutes=30, hours=5)).replace(tzinfo=None)
-        if i.start.replace(tzinfo=None)<=now_time and i.end.replace(tzinfo=None)>=now_time and len(upcoming_events)<=3:
+        if i.start.replace(tzinfo=None)<=now_time and i.end.replace(tzinfo=None)>=now_time:
             upcoming_events.append(i)
     
     for i in OngoingEvents.objects.all().order_by('start'):
