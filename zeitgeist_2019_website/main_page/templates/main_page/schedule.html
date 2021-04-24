@@ -549,14 +549,14 @@
 							{% if event.link %}
 							</a>
 							{% endif %}
-							{% if event.link %}
-								<a href="{{event.link}}" target="_blank"><i class="fa fa-mouse-pointer" aria-hidden="true"></i></a>
-							{% endif %}	
 						</div>
 						<div class="but-wrap col-3">
 							{% if event.rulebook != "" %}
 								<a href="{{event.rulebook}}" target="_blank"><i class="fa fa-file" aria-hidden="true"></i></a>
 							{% endif %}
+							{% if event.link %}
+								<a href="{{event.link}}" target="_blank"><i class="fa fa-mouse-pointer" aria-hidden="true"></i></a>
+							{% endif %}	
 						</div>
 					</div>
 				{% endfor %}
