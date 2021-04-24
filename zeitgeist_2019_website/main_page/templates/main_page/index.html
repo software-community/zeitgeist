@@ -229,7 +229,7 @@
     }
 
     .but4-cont .but-cont-wrap{
-        padding-left: 30%;
+        /* padding-left: 30%; */
     }
 
     .but-cont-wrap .down{
@@ -362,8 +362,8 @@
         }
 
         .but1-cont .but-cont-wrap{
-            padding-left:30px;
-            padding-right: 30px;
+            padding-left:15%;
+            padding-right:15%;
         }
 
         .but2-cont .but-cont-wrap{
@@ -371,7 +371,7 @@
         }
 
         .but4-cont .but-cont-wrap{
-            padding-left:130px;
+            /* padding-left:130px; */
         }
 
         .but3-cont .but-cont-wrap{
@@ -411,7 +411,7 @@
                 </div>
             </a>
             <div class="but but1">
-                Comedy Shows / Special Events
+                Comedy Shows / EDM Nights
             </div>
             <div class="but but2">
                 Talks
@@ -420,22 +420,22 @@
                 Live Events
             </div>
             <div class="but but4">
-                Sessions
+                Exhibitions
             </div>
             {% if user_loggedin %}
             <div class="but-cont but1-cont">
                 <div class="but-cont-wrap">
-                    <!-- Comedy / Special -->
-                    <a class="cont-link" href="https://iitrpr.webex.com/meet/zeitgeist" target="_blank">
+                    <!-- Comedy / EDM -->
+                    <a class="cont-link" href="https://tribevibe.live/events-detail.php?id=365" target="_blank">
                         <div class="stage-poster">
-                            <img src="{% static 'main_page/img/posters/harsh_comedy.jpg' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>8pm</span></div>
+                            <img src="{% static 'main_page/img/posters/sunburn_edm.png' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>8 pm</span></div>
                         </div>
                     </a>
                     <a class="cont-link" href="https://iitrpr.webex.com/meet/zeitgeist" target="_blank">
                         <div class="stage-poster">
-                            <img src="{% static 'main_page/img/schedule/vivek.jpg' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>9pm</span></div>
+                            <img src="{% static 'main_page/img/schedule/gaurav.jpg' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>8:30 pm</span></div>
                         </div>
                     </a>
                     <i class="fa fa-angle-down arrow down" aria-hidden="true"></i>
@@ -444,22 +444,10 @@
             <div class="but-cont but2-cont">
                 <div class="but-cont-wrap">
                     <!-- Talks -->
-                    <a class="cont-link" href="https://www.airmeet.com/e/f610bba0-a2ee-11eb-a600-95263a1d5a8e" target="_blank">
+                    <a class="cont-link" href="https://www.airmeet.com/e/8b32d560-a2ef-11eb-912f-95a092b96348" target="_blank">
                         <div class="stage-poster">
-                            <img src="{% static 'main_page/img/schedule/praveer.png' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>11am</span></div>
-                        </div>
-                    </a>
-                    <a class="cont-link" href="https://www.airmeet.com/e/4f415fe0-a2ef-11eb-acd4-53e2ec2457db" target="_blank">
-                        <div class="stage-poster">
-                            <img src="{% static 'main_page/img/schedule/ansari.png' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>5pm</span></div>
-                        </div>
-                    </a>
-                    <a class="cont-link" href="https://www.airmeet.com/e/7f129a10-a2e8-11eb-912f-95a092b96348" target="_blank">
-                        <div class="stage-poster">
-                            <img src="{% static 'main_page/img/schedule/akanksha.jpg' %}">
-                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>7pm</span></div>
+                            <img src="{% static 'main_page/img/posters/archana_talk.png' %}">
+                            <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>11 am</span></div>
                         </div>
                     </a>
                     <i class="fa fa-angle-up arrow up" aria-hidden="true"></i>
@@ -468,19 +456,18 @@
             <div class="but-cont but3-cont">
                 <div class="but-cont-wrap">
                     <!-- Events -->
-                    <a href="https://www.airmeet.com/e/e0971390-a448-11eb-991d-1dc6d35f29f1" target="_blank">Poetry Event (DRAMATICS) - 11am</a><br>
-                    <a href="https://www.airmeet.com/e/d4a8dcb0-a2ec-11eb-a600-95263a1d5a8e" target="_blank">NewsUp (Round-1) - 12pm</a><br>
-                    <a href="https://www.airmeet.com/e/aa901410-a2ed-11eb-9904-fd729eafe84a" target="_blank">Aero deli - 1pm</a><br>
-                    <a href="https://www.airmeet.com/e/1bf44610-a44e-11eb-b390-11c5d51ecc55" target="_blank">Monoact Event (Dramatics) - 4pm</a><br>
-                    <a href="https://www.airmeet.com/e/9bb9e160-a463-11eb-9568-7d26d08b9f92" target="_blank">Saaz - Adagio (Music) - 5pm</a><br>
-                    <a href="https://www.airmeet.com/e/7f129a10-a2e8-11eb-912f-95a092b96348" target="_blank">Street Vaganza - 7pm</a>
+                    <a href="https://www.airmeet.com/e/791e3850-a2eb-11eb-acd4-53e2ec2457db" target="_blank">Crisis Solving (MUN) - 10:30 am</a><br>
+                    <a href="https://www.airmeet.com/e/dc53cb40-a2ed-11eb-9904-fd729eafe84a" target="_blank">Aeroquiz (AEROMODELLING) - 11:30 am</a><br>
+                    <a href="https://www.airmeet.com/e/5687eeb0-a2ed-11eb-a600-95263a1d5a8e" target="_blank">Case Study (Fincom) - 1 pm</a><br>
+                    <a href="https://www.airmeet.com/e/95d33a60-a2e9-11eb-9904-fd729eafe84a" target="_blank">Improv (Dramatics) - 4 pm</a><br>
+                    <a href="https://www.airmeet.com/e/b56ca9a0-a2e5-11eb-acd4-53e2ec2457db" target="_blank">Mishtanno (cooking) - 6 pm</a><br>
                     <i class="fa fa-angle-right arrow right" aria-hidden="true"></i>
                 </div>
             </div>
             <div class="but-cont but4-cont">
                 <div class="but-cont-wrap">
-                    <!-- Sessions -->
-                    <a class="cont-link" href="https://www.airmeet.com/e/e4f9b7b0-a4c7-11eb-9aaa-d9f2706c1dfc" target="_blank">
+                    <!-- Exhibitions -->
+                    <!-- <a class="cont-link" href="https://www.airmeet.com/e/e4f9b7b0-a4c7-11eb-9aaa-d9f2706c1dfc" target="_blank">
                         <div class="stage-poster">
                             <img src="{% static 'main_page/img/posters/furhat.png' %}">
                             <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>2pm</span></div>
@@ -497,8 +484,8 @@
                             <img src="{% static 'main_page/img/schedule/alumni8.jpg' %}">
                             <div class="cover"><i class="fa fa-play" aria-hidden="true"></i><span>8pm</span></div>
                         </div>
-                    </a>
-                    
+                    </a> -->
+                    COMING SOON!!
                     <i class="fa fa-angle-left arrow left" aria-hidden="true"></i>
                 </div>
             </div>
