@@ -758,6 +758,22 @@ textarea.input {
   padding:0;
 }
 
+.sponsor-wrap-2{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  padding:0;
+  max-width: 600px;
+  margin: auto;
+}
+
+.sponsor-wrap-1{
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
+  padding:0;
+  max-width: 300px;
+  margin: auto;
+}
+
 .sponsor-col{
   font-size: 0;
   text-align: center;
@@ -785,7 +801,7 @@ textarea.input {
   width: 100%;
   vertical-align: middle;
   transition: 0.15s;
-  max-width: 150px;
+  max-width: 300px;
   margin: auto;
 }
 
@@ -793,8 +809,11 @@ textarea.input {
   .sponsor-wrap{
     grid-template-columns: repeat(2,1fr);
   }
+  .sponsor-wrap-2, .sponsor-wrap-1{
+    grid-template-columns: repeat(1,1fr);
+  }
   .sponsor > img {
-    max-width: 120px;
+    max-width: min(80vw,300px);
   }
 }
 
